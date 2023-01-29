@@ -30,6 +30,7 @@
 		A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1129865BA700F60D1A /* Calendar.storyboard */; };
 		A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1329865BAD00F60D1A /* MyPage.storyboard */; };
 		A2434B1729865C5B00F60D1A /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = A2434B1629865C5B00F60D1A /* Toast */; };
+		A2434B192986869800F60D1A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2434B182986869800F60D1A /* WebKit.framework */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		A2434B0F29865BA000F60D1A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A2434B1129865BA700F60D1A /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		A2434B1329865BAD00F60D1A /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
+		A2434B182986869800F60D1A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2434B192986869800F60D1A /* WebKit.framework in Frameworks */,
 				A2434AE52986523D00F60D1A /* Kingfisher in Frameworks */,
 				A2434ADF2986520E00F60D1A /* Alamofire in Frameworks */,
 				A2434AE22986523000F60D1A /* Tabman in Frameworks */,
@@ -88,6 +91,7 @@
 		68EB6E1D199D39FF76F9CE8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2434B182986869800F60D1A /* WebKit.framework */,
 				2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */,
 			);
 			name = Frameworks;
