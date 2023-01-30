@@ -68,14 +68,14 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWB-Gh-rDd">
                                         <rect key="frame" x="0.0" y="120" width="277" height="50"/>
-                                        <color key="backgroundColor" red="0.011764705882352941" green="0.7803921568627451" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.35294118520000001" green="0.76862752440000004" blue="0.40392160420000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="277" id="240-ny-zYX"/>
                                             <constraint firstAttribute="height" constant="50" id="crg-Rs-x0j"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="네이버로 로그인" titleAlignment="center">
-                                            <directionalEdgeInsets key="contentInsets" top="0.0" leading="20" bottom="0.0" trailing="0.0"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="logo_naver" title="네이버로 로그인" titleAlignment="center">
+                                            <directionalEdgeInsets key="contentInsets" top="0.0" leading="13" bottom="0.0" trailing="0.0"/>
                                             <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -92,7 +92,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="logo_apple" title="Apple로 로그인" titleAlignment="center">
                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20"/>
-                                            <directionalEdgeInsets key="contentInsets" top="0.0" leading="23" bottom="0.0" trailing="0.0"/>
+                                            <directionalEdgeInsets key="contentInsets" top="0.0" leading="22" bottom="0.0" trailing="0.0"/>
                                             <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -231,6 +231,7 @@
         <image name="logo_apple" width="19" height="23.5"/>
         <image name="logo_google" width="20" height="20"/>
         <image name="logo_kakao" width="20" height="19"/>
+        <image name="logo_naver" width="41" height="41"/>
         <image name="mainLogo" width="160.5" height="63"/>
         <image name="mainTextLogo" width="218" height="17"/>
         <image name="sellerIcon" width="107" height="107"/>

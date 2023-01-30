@@ -69,9 +69,9 @@ class LoginViewController: UIViewController {
         ].forEach { $0?.layer.cornerRadius = 25 }
 
         googleLoginButton.configuration?.imagePadding = 53
-        kakaoLoginButton.configuration?.imagePadding = 51
-        naverLoginButton.configuration?.imagePadding = 45
-        appleLoginButton.configuration?.imagePadding = 45 
+        kakaoLoginButton.configuration?.imagePadding = 53
+        naverLoginButton.configuration?.imagePadding = 34
+        appleLoginButton.configuration?.imagePadding = 48
     }
     
     private func setupAuthorityGuidanceViewController() {
