@@ -48,6 +48,7 @@ class BuyerProfileSetViewController: UIViewController {
     
     private func setupLayout() {
         nickNameTextField.borderStyle = .none
+        nickNameTextField.addLeftPadding()
         [nickNameTextField, validateNicknameButton].forEach {
             $0?.layer.masksToBounds = false
             $0?.layer.borderWidth = 0
