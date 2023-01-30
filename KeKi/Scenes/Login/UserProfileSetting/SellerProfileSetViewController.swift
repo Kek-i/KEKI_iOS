@@ -10,6 +10,8 @@ import UIKit
 class SellerProfileSetViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
+    private var placeholder: Dictionary<String, String> = [:]
+    
     @IBOutlet weak var userEmailLabel: UILabel!
     
     @IBOutlet weak var storeNameTextField: UITextField!
@@ -27,6 +29,7 @@ class SellerProfileSetViewController: UIViewController {
     // MARK: - Methods of LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         setupNavigationBarLayout()
         setupLayout()
     }
@@ -37,6 +40,13 @@ class SellerProfileSetViewController: UIViewController {
     
     
     // MARK: - Helper Methods (Setup Method, ...)
+    private func setup() {
+        placeholder["storeIntroTextView"] = "간단히 가게를 소개해주세요. (최대 100자)"
+        placeholder["bAddressTextView"] = "사업자등록증에 표기된 사업자주소를  입력해주세요."
+        storeIntroTextView.delegate = self
+        bAddressTextView.delegate = self
+    }
+    
     private func setupLayout() {
         [
             storeNameTextField,
@@ -53,6 +63,7 @@ class SellerProfileSetViewController: UIViewController {
         }
         
         [ storeIntroTextView, bAddressTextView ].forEach {
+            $0?.textColor = .lightGray
             $0?.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         }
         
@@ -96,3 +107,25 @@ class SellerProfileSetViewController: UIViewController {
 }
 
 // MARK: - Extensions
+extension SellerProfileSetViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .lightGray {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.textColor = .lightGray
+            switch textView {
+            case storeIntroTextView:
+                textView.text = placeholder["storeIntroTextView"]
+            case bAddressTextView:
+                textView.text = placeholder["bAddressTextView"]
+            default:
+                textView.text = ""
+            }
+        }
+    }
+}
