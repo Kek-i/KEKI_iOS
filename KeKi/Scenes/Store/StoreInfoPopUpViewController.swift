@@ -9,21 +9,18 @@ import UIKit
 
 class StoreInfoPopUpViewController: UIViewController {
 
+    @IBOutlet var selfView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+
+                
+        selfView.addGestureRecognizer(tapGesture)
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        self.dismiss(animated: true)
     }
-    */
-
 }

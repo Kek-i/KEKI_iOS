@@ -65,7 +65,7 @@
                                     <fragment content="가게">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Bold"/>
+                                            <font key="NSFont" metaFont="system" size="18"/>
                                             <font key="NSOriginalFont" size="18" name="SFPro-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -80,7 +80,7 @@
                                     <fragment content="이름">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="18" name=".AppleSDGothicNeoI-Bold"/>
+                                            <font key="NSFont" metaFont="system" size="18"/>
                                             <font key="NSOriginalFont" size="18" name="SFPro-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -568,6 +568,9 @@
                             <constraint firstItem="AkF-pk-svz" firstAttribute="top" secondItem="IQ1-Zm-vBC" secondAttribute="top" constant="280" id="yrX-UJ-tU2"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="selfView" destination="SGO-IL-wBB" id="8E0-KJ-v2H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bX0-xW-bZ4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
