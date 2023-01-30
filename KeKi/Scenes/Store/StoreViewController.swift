@@ -37,4 +37,14 @@ class StoreViewController: UIViewController {
         orderButton.layer.shadowOpacity = 1.0
     }
 
+    
+    @IBAction func showInfoPopUp(_ sender: Any) {
+        guard let infoPopUpVC = self.storyboard?.instantiateViewController(withIdentifier: "StoreInfoPopUpViewController") as? StoreInfoPopUpViewController else {return}
+        
+        infoPopUpVC.modalTransitionStyle = .coverVertical
+        infoPopUpVC.modalPresentationStyle = .overCurrentContext
+        
+        self.present(infoPopUpVC, animated: true)
+    }
+    
 }

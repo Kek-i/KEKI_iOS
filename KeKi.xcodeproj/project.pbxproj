@@ -13,6 +13,7 @@
 		738F648229880BE3006BB124 /* StoreImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 738F648029880BE3006BB124 /* StoreImageCell.xib */; };
 		738F648429880CAE006BB124 /* StoreImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F648329880CAE006BB124 /* StoreImageViewController.swift */; };
 		738F648629880CC2006BB124 /* StoreProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F648529880CC2006BB124 /* StoreProductViewController.swift */; };
+		738F64892988328D006BB124 /* StoreInfoPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64872988328D006BB124 /* StoreInfoPopUpViewController.swift */; };
 		A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434AC9298651F500F60D1A /* AppDelegate.swift */; };
 		A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434ACB298651F500F60D1A /* SceneDelegate.swift */; };
 		A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434ACD298651F500F60D1A /* HomeViewController.swift */; };
@@ -47,6 +48,7 @@
 		738F648029880BE3006BB124 /* StoreImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreImageCell.xib; sourceTree = "<group>"; };
 		738F648329880CAE006BB124 /* StoreImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreImageViewController.swift; sourceTree = "<group>"; };
 		738F648529880CC2006BB124 /* StoreProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProductViewController.swift; sourceTree = "<group>"; };
+		738F64872988328D006BB124 /* StoreInfoPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInfoPopUpViewController.swift; sourceTree = "<group>"; };
 		78B388A7669643F3338C197A /* Pods-KeKi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeKi.release.xcconfig"; path = "Target Support Files/Pods-KeKi/Pods-KeKi.release.xcconfig"; sourceTree = "<group>"; };
 		9C943509B2DF89C336174319 /* Pods-KeKi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeKi.debug.xcconfig"; path = "Target Support Files/Pods-KeKi/Pods-KeKi.debug.xcconfig"; sourceTree = "<group>"; };
 		A2434AC6298651F500F60D1A /* KeKi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeKi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -273,12 +275,13 @@
 			isa = PBXGroup;
 			children = (
 				A2434B0929865B8000F60D1A /* Store.storyboard */,
+				738F64792987E104006BB124 /* StoreViewController.swift */,
 				738F648529880CC2006BB124 /* StoreProductViewController.swift */,
 				738F648329880CAE006BB124 /* StoreImageViewController.swift */,
-				738F64792987E104006BB124 /* StoreViewController.swift */,
 				738F647D2987F737006BB124 /* TabViewController.swift */,
-				738F647F29880BE3006BB124 /* StoreImageCell.swift */,
 				738F648029880BE3006BB124 /* StoreImageCell.xib */,
+				738F647F29880BE3006BB124 /* StoreImageCell.swift */,
+				738F64872988328D006BB124 /* StoreInfoPopUpViewController.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */,
 				A2434B0629865B7000F60D1A /* SearchViewController.swift in Sources */,
 				738F648629880CC2006BB124 /* StoreProductViewController.swift in Sources */,
+				738F64892988328D006BB124 /* StoreInfoPopUpViewController.swift in Sources */,
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				738F648429880CAE006BB124 /* StoreImageViewController.swift in Sources */,

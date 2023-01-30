@@ -34,6 +34,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="info"/>
+                                <connections>
+                                    <action selector="showInfoPopUp:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HM9-Tc-4wL"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5A-So-ZFB">
                                 <rect key="frame" x="368" y="53" width="27" height="25"/>
@@ -259,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujg-wS-uaG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="830" y="533"/>
+            <point key="canvasLocation" x="909" y="532"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="y4Q-Nf-Mrv">
@@ -311,13 +314,272 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xge-rM-U8H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="532"/>
+            <point key="canvasLocation" x="1804" y="532"/>
+        </scene>
+        <!--Store Info Pop Up View Controller-->
+        <scene sceneID="N1t-GO-Czp">
+            <objects>
+                <viewController storyboardIdentifier="StoreInfoPopUpViewController" id="p6p-v7-hVz" customClass="StoreInfoPopUpViewController" customModule="KeKi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SGO-IL-wBB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keki-mascot" translatesAutoresizingMaskIntoConstraints="NO" id="T0L-h5-2AP">
+                                <rect key="frame" x="60" y="233" width="120" height="134"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="vDU-kc-Jus"/>
+                                    <constraint firstAttribute="height" constant="134" id="w0d-WR-W7z"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AkF-pk-svz">
+                                <rect key="frame" x="33" y="328" width="349" height="210"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQY-Dd-oXS">
+                                        <rect key="frame" x="114" y="22" width="121" height="23"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="사업자">
+                                                <attributes>
+                                                    <font key="NSFont" size="18" name="AppleSDGothicNeo-Bold"/>
+                                                    <font key="NSOriginalFont" size="18" name="SFPro-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <font key="NSFont" size="18" name="SFPro-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="정보">
+                                                <attributes>
+                                                    <font key="NSFont" size="18" name="AppleSDGothicNeo-Bold"/>
+                                                    <font key="NSOriginalFont" size="18" name="SFPro-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFX-OV-nYg">
+                                        <rect key="frame" x="20" y="62" width="48.5" height="17"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="대표자명">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Bold"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Bold"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZA-xC-GUM">
+                                        <rect key="frame" x="20" y="89" width="36.5" height="17"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="상호명">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Bold"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Bold"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17k-RE-IZF">
+                                        <rect key="frame" x="20" y="116" width="61" height="17"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="사업자주소">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Bold"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Bold"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6K-iv-OuM">
+                                        <rect key="frame" x="20" y="160" width="85" height="17"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="사업자등록번호">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Bold"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Bold"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVr-36-uxO">
+                                        <rect key="frame" x="120.5" y="63" width="24.5" height="17"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="케키">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Zp-55-mW5">
+                                        <rect key="frame" x="120.5" y="90" width="24.5" height="17"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="케키">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fW-7e-vze">
+                                        <rect key="frame" x="120" y="117" width="157" height="35.5"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="서울특별시">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="케키구">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="케키동">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="케">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="키로">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" 23">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="가">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" 107">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="호">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xws-ys-rIW">
+                                        <rect key="frame" x="120" y="162.5" width="24.5" height="17"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="케키">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Regular"/>
+                                                    <font key="NSOriginalFont" size="14" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="AZA-xC-GUM" firstAttribute="leading" secondItem="AkF-pk-svz" secondAttribute="leading" constant="20" id="0D2-QF-BtB"/>
+                                    <constraint firstItem="1Zp-55-mW5" firstAttribute="leading" secondItem="AZA-xC-GUM" secondAttribute="trailing" constant="64" id="1PQ-ji-kQk"/>
+                                    <constraint firstItem="1fW-7e-vze" firstAttribute="top" secondItem="1Zp-55-mW5" secondAttribute="bottom" constant="10" id="5hx-xf-JUe"/>
+                                    <constraint firstItem="xws-ys-rIW" firstAttribute="top" secondItem="1fW-7e-vze" secondAttribute="bottom" constant="10" id="APN-cl-tb5"/>
+                                    <constraint firstItem="YVr-36-uxO" firstAttribute="top" secondItem="OQY-Dd-oXS" secondAttribute="bottom" constant="18" id="DEV-7d-gBA"/>
+                                    <constraint firstItem="OQY-Dd-oXS" firstAttribute="top" secondItem="AkF-pk-svz" secondAttribute="top" constant="22" id="EHv-km-2MB"/>
+                                    <constraint firstItem="YVr-36-uxO" firstAttribute="leading" secondItem="bFX-OV-nYg" secondAttribute="trailing" constant="52" id="Ebi-pV-yNW"/>
+                                    <constraint firstItem="1fW-7e-vze" firstAttribute="leading" secondItem="17k-RE-IZF" secondAttribute="trailing" constant="39" id="KBi-Ax-LqS"/>
+                                    <constraint firstItem="17k-RE-IZF" firstAttribute="leading" secondItem="AkF-pk-svz" secondAttribute="leading" constant="20" id="LdW-Q8-piV"/>
+                                    <constraint firstItem="bFX-OV-nYg" firstAttribute="top" secondItem="AkF-pk-svz" secondAttribute="top" constant="62" id="Mlr-MG-ZsU"/>
+                                    <constraint firstItem="1Zp-55-mW5" firstAttribute="top" secondItem="YVr-36-uxO" secondAttribute="bottom" constant="10" id="Owh-XB-Rof"/>
+                                    <constraint firstItem="OQY-Dd-oXS" firstAttribute="leading" secondItem="AkF-pk-svz" secondAttribute="leading" constant="114" id="XMa-u2-ojq"/>
+                                    <constraint firstItem="17k-RE-IZF" firstAttribute="top" secondItem="AZA-xC-GUM" secondAttribute="bottom" constant="10" id="XVW-n5-26h"/>
+                                    <constraint firstItem="bFX-OV-nYg" firstAttribute="leading" secondItem="AkF-pk-svz" secondAttribute="leading" constant="20" id="jYJ-Ki-yQV"/>
+                                    <constraint firstAttribute="trailing" secondItem="OQY-Dd-oXS" secondAttribute="trailing" constant="114" id="mjW-3A-uim"/>
+                                    <constraint firstItem="B6K-iv-OuM" firstAttribute="top" secondItem="17k-RE-IZF" secondAttribute="bottom" constant="27" id="oRm-xV-RFd"/>
+                                    <constraint firstItem="xws-ys-rIW" firstAttribute="leading" secondItem="B6K-iv-OuM" secondAttribute="trailing" constant="15" id="pms-NU-sVb"/>
+                                    <constraint firstItem="AZA-xC-GUM" firstAttribute="top" secondItem="bFX-OV-nYg" secondAttribute="bottom" constant="10" id="umI-8f-pMq"/>
+                                    <constraint firstItem="B6K-iv-OuM" firstAttribute="leading" secondItem="AkF-pk-svz" secondAttribute="leading" constant="20" id="yBc-SN-YI2"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keki-mascot-arm" translatesAutoresizingMaskIntoConstraints="NO" id="Fea-c6-qhi">
+                                <rect key="frame" x="82" y="322" width="24" height="29.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29.100000000000001" id="Kem-dT-dyQ"/>
+                                    <constraint firstAttribute="width" constant="23.899999999999999" id="fye-bC-L1j"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="IQ1-Zm-vBC"/>
+                        <color key="backgroundColor" white="0.605379263762714" alpha="0.5" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IQ1-Zm-vBC" firstAttribute="trailing" secondItem="AkF-pk-svz" secondAttribute="trailing" constant="32" id="7Gd-Wq-Ino"/>
+                            <constraint firstItem="IQ1-Zm-vBC" firstAttribute="bottom" secondItem="AkF-pk-svz" secondAttribute="bottom" constant="324" id="BeE-PL-IAJ"/>
+                            <constraint firstItem="Fea-c6-qhi" firstAttribute="leading" secondItem="IQ1-Zm-vBC" secondAttribute="leading" constant="82" id="SEx-XR-22L"/>
+                            <constraint firstItem="T0L-h5-2AP" firstAttribute="leading" secondItem="IQ1-Zm-vBC" secondAttribute="leading" constant="60.200000000000003" id="ZtQ-Bf-8Ng"/>
+                            <constraint firstItem="T0L-h5-2AP" firstAttribute="top" secondItem="IQ1-Zm-vBC" secondAttribute="top" constant="184.80000000000001" id="dbF-ZR-2Wh"/>
+                            <constraint firstItem="AkF-pk-svz" firstAttribute="leading" secondItem="IQ1-Zm-vBC" secondAttribute="leading" constant="33" id="w3l-F6-H2J"/>
+                            <constraint firstItem="IQ1-Zm-vBC" firstAttribute="bottom" secondItem="Fea-c6-qhi" secondAttribute="bottom" constant="510.69999999999999" id="xv7-aA-jKx"/>
+                            <constraint firstItem="AkF-pk-svz" firstAttribute="top" secondItem="IQ1-Zm-vBC" secondAttribute="top" constant="280" id="yrX-UJ-tU2"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bX0-xW-bZ4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-183" y="-190"/>
         </scene>
     </scenes>
     <resources>
         <image name="chevron-right" width="12.5" height="22"/>
         <image name="icMessage" width="27" height="25"/>
         <image name="info" width="25" height="25"/>
+        <image name="keki-mascot" width="120" height="133.5"/>
+        <image name="keki-mascot-arm" width="24" height="29.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
