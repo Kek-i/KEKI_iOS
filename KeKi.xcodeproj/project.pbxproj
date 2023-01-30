@@ -34,6 +34,8 @@
 		A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */; };
 		A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */; };
 		A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */; };
+		A2B1CD612987687F00D87570 /* BuyerProfileSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD602987687F00D87570 /* BuyerProfileSetViewController.swift */; };
+		A2B1CD662987797100D87570 /* UserProfileSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthorityGuidance.storyboard; sourceTree = "<group>"; };
 		A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityGuidanceViewController.swift; sourceTree = "<group>"; };
 		A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserCategoryViewController.swift; sourceTree = "<group>"; };
+		A2B1CD602987687F00D87570 /* BuyerProfileSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerProfileSetViewController.swift; sourceTree = "<group>"; };
+		A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserProfileSetting.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +245,7 @@
 		A2434AF3298658E600F60D1A /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A2B1CD642987796400D87570 /* UserProfileSetting */,
 				A2434AFB29865AD700F60D1A /* LoginViewController.swift */,
 				A2434AFD29865AF100F60D1A /* Login.storyboard */,
 				A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */,
@@ -293,6 +298,15 @@
 				A2434B0129865B1A00F60D1A /* AnnouncementViewController.swift */,
 			);
 			path = Announcement;
+			sourceTree = "<group>";
+		};
+		A2B1CD642987796400D87570 /* UserProfileSetting */ = {
+			isa = PBXGroup;
+			children = (
+				A2B1CD602987687F00D87570 /* BuyerProfileSetViewController.swift */,
+				A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */,
+			);
+			path = UserProfileSetting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,6 +389,7 @@
 				A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */,
 				A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */,
 				A2434B0829865B7700F60D1A /* Search.storyboard in Resources */,
+				A2B1CD662987797100D87570 /* UserProfileSetting.storyboard in Resources */,
 				A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */,
 				A2434AD1298651F500F60D1A /* Home.storyboard in Resources */,
 			);
@@ -433,6 +448,7 @@
 				A2434B0C29865B8B00F60D1A /* StoreViewController.swift in Sources */,
 				A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */,
 				A2434B0629865B7000F60D1A /* SearchViewController.swift in Sources */,
+				A2B1CD612987687F00D87570 /* BuyerProfileSetViewController.swift in Sources */,
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
 				A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,

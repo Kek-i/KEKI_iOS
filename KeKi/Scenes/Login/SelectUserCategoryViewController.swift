@@ -22,6 +22,11 @@ class SelectUserCategoryViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     // MARK: - Action Methods (IBAction, ...)
     @IBAction func didTapBuyerButton(_ sender: UIButton) {
         selectedResult = "buyer"
@@ -36,10 +41,13 @@ class SelectUserCategoryViewController: UIViewController {
             print(selectedResult)   // test print
             if selectedResult == "buyer" {
                 // TODO: 구매자 프로필 화면으로 전환 구현
+                let storyboard = UIStoryboard(name: "UserProfileSetting", bundle: nil)
+                guard let buyerProfileSetViewController = storyboard.instantiateViewController(withIdentifier: "BuyerProfileSetViewController") as? BuyerProfileSetViewController else { return }
+                buyerProfileSetViewController.navigationBackItemTitle = "이전"
+                navigationController?.pushViewController(buyerProfileSetViewController, animated: true)
                 
             } else if selectedResult == "seller" {
                 // TODO: 판매자 프로필 화면으로 전환 구현
-                
             }
         }
     }
