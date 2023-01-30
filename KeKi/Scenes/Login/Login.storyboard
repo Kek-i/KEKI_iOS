@@ -17,19 +17,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="THz-D1-th8">
-                                <rect key="frame" x="98" y="294.5" width="218" height="87"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="THz-D1-th8">
+                                <rect key="frame" x="98" y="288" width="218" height="100"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xDh-cW-qMd">
                                         <rect key="frame" x="0.0" y="0.0" width="218" height="63"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainTextLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ruq-H6-3fz">
-                                        <rect key="frame" x="0.0" y="70" width="218" height="17"/>
+                                        <rect key="frame" x="0.0" y="83" width="218" height="17"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EUj-y1-IIr">
-                                <rect key="frame" x="68.5" y="511.5" width="277" height="230"/>
+                                <rect key="frame" x="68.5" y="518" width="277" height="230"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufg-oM-Oc7">
                                         <rect key="frame" x="0.0" y="0.0" width="277" height="50"/>
