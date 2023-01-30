@@ -31,12 +31,23 @@ class TabViewController : TabmanViewController {
         
         self.dataSource = self
         
-        let bar = TMBar.TabBar()
+        let bar = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
+        
+        
         bar.layout.transitionStyle = .snap
+        bar.layout.alignment = .centerDistributed
+        bar.layout.interButtonSpacing = 122
+        
+        bar.buttons.customize { button in
+            button.imageViewSize = CGSize(width: 22, height: 22)
+        }
         
         bar.backgroundView.style = .blur(style: .light)
         
-        bar.indicator.tintColor = UIColor(red: 248, green: 236, blue: 236, alpha: 0)
+        bar.indicator.cornerStyle = .rounded
+        bar.indicator.weight = .custom(value: 2)
+        bar.indicator.tintColor = UIColor(red: 201.0 / 255.0, green: 83.0 / 255.0, blue: 107.0 / 255.0, alpha: 1)
+        
         
         
         addBar(bar, dataSource: self, at: .top)

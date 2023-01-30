@@ -32,7 +32,7 @@ class StoreViewController: UIViewController {
         storeImageView.layer.cornerRadius = 40
         
         orderButton.layer.cornerRadius = 10
-        orderButton.layer.shadowColor = CGColor(red: 152, green: 113, blue: 113, alpha: 0.15)
+        orderButton.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
         orderButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         orderButton.layer.shadowOpacity = 1.0
     }
