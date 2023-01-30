@@ -107,6 +107,208 @@
             </objects>
             <point key="canvasLocation" x="-280" y="-39"/>
         </scene>
+        <!--Seller Profile Set View Controller-->
+        <scene sceneID="jXw-hU-bJ0">
+            <objects>
+                <viewController storyboardIdentifier="SellerProfileSetViewController" id="o2d-QA-mYI" customClass="SellerProfileSetViewController" customModule="KeKi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KJr-Qx-AoY">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="1000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ey-gl-ar1">
+                                <rect key="frame" x="0.0" y="59" width="393" height="858"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykt-Wf-hSu">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="858"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJK-rS-crk">
+                                                <rect key="frame" x="132.66666666666666" y="30" width="127.99999999999997" height="118"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="selectPictureIcon"/>
+                                                <connections>
+                                                    <action selector="didTapSelectPicButton:" destination="o2d-QA-mYI" eventType="touchUpInside" id="xQg-Gp-i3k"/>
+                                                    <action selector="didTapSelectPictureButton:" destination="GDi-4T-dhO" eventType="touchUpInside" id="tjd-ZZ-3HB"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="example@example.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vnj-IT-fUc">
+                                                <rect key="frame" x="135" y="153" width="123.33333333333331" height="13.333333333333343"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="LFN-Ua-zzC">
+                                                <rect key="frame" x="30" y="196.33333333333337" width="333" height="265"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="가게이름을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mlN-dc-Xeh">
+                                                        <rect key="frame" x="0.0" y="0.0" width="333" height="45"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="cMJ-cF-6GS"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="가게주소를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mdz-U8-kX5">
+                                                        <rect key="frame" x="0.0" y="64.999999999999972" width="333" height="45"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="n17-AJ-uyj"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="간단히 가게를 소개해주세요. (최대 100자)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pnq-Ic-MjX">
+                                                        <rect key="frame" x="0.0" y="129.99999999999997" width="333" height="70"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="70" id="38H-Ac-drV"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="주문 링크를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m4R-PO-yXO">
+                                                        <rect key="frame" x="0.0" y="219.99999999999997" width="333" height="45.000000000000028"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="rlF-du-kq9"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="m4R-PO-yXO" firstAttribute="leading" secondItem="LFN-Ua-zzC" secondAttribute="leading" id="3Rr-QH-kzN"/>
+                                                    <constraint firstItem="Mdz-U8-kX5" firstAttribute="leading" secondItem="LFN-Ua-zzC" secondAttribute="leading" id="3ZK-y6-pIw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="m4R-PO-yXO" secondAttribute="trailing" id="R2y-lY-iSD"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Pnq-Ic-MjX" secondAttribute="trailing" id="YxK-Y0-3L5"/>
+                                                    <constraint firstItem="mlN-dc-Xeh" firstAttribute="leading" secondItem="LFN-Ua-zzC" secondAttribute="leading" id="cLE-fC-Xgh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Mdz-U8-kX5" secondAttribute="trailing" id="w00-JU-Ikk"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mlN-dc-Xeh" secondAttribute="trailing" id="yLt-zG-lkH"/>
+                                                </constraints>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사업자정보" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJZ-7G-WWm">
+                                                <rect key="frame" x="29.999999999999993" y="481.33333333333337" width="69.333333333333314" height="19.333333333333314"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uNg-YV-FDb">
+                                                <rect key="frame" x="30" y="520.66666666666663" width="333" height="265"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="가게이름을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="khE-Fe-ghi">
+                                                        <rect key="frame" x="0.0" y="0.0" width="333" height="45"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="dBS-vN-D9N"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="대표자명을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y8F-SS-6xI">
+                                                        <rect key="frame" x="0.0" y="65" width="333" height="45"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="poL-bJ-iDK"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="사업자등록증에 표기된 사업자주소를  입력해주세요." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lrR-bA-L50">
+                                                        <rect key="frame" x="0.0" y="130" width="333" height="70"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="70" id="ash-4l-20l"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="사업자등록번호를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Naw-Qy-bY0">
+                                                        <rect key="frame" x="0.0" y="220" width="333" height="45"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="ZC3-Sq-SEM"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Naw-Qy-bY0" firstAttribute="leading" secondItem="uNg-YV-FDb" secondAttribute="leading" id="78E-4J-CRi"/>
+                                                    <constraint firstItem="khE-Fe-ghi" firstAttribute="leading" secondItem="uNg-YV-FDb" secondAttribute="leading" id="E9B-wC-W5G"/>
+                                                    <constraint firstAttribute="trailing" secondItem="lrR-bA-L50" secondAttribute="trailing" id="G62-Ig-I5x"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Naw-Qy-bY0" secondAttribute="trailing" id="Ub9-G4-6TD"/>
+                                                    <constraint firstAttribute="trailing" secondItem="khE-Fe-ghi" secondAttribute="trailing" id="dlg-jz-7Mw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Y8F-SS-6xI" secondAttribute="trailing" id="eHq-01-Gfg"/>
+                                                    <constraint firstItem="Y8F-SS-6xI" firstAttribute="leading" secondItem="uNg-YV-FDb" secondAttribute="leading" id="hRw-df-tVG"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="EJZ-7G-WWm" firstAttribute="top" secondItem="LFN-Ua-zzC" secondAttribute="bottom" constant="20" id="4gA-40-ZXP"/>
+                                            <constraint firstItem="LFN-Ua-zzC" firstAttribute="top" secondItem="Vnj-IT-fUc" secondAttribute="bottom" constant="30" id="8gq-CC-TRY"/>
+                                            <constraint firstItem="EJZ-7G-WWm" firstAttribute="leading" secondItem="LFN-Ua-zzC" secondAttribute="leading" id="LyE-NH-qCr"/>
+                                            <constraint firstItem="Vnj-IT-fUc" firstAttribute="centerX" secondItem="lJK-rS-crk" secondAttribute="centerX" id="O6F-bo-t7r"/>
+                                            <constraint firstAttribute="trailing" secondItem="LFN-Ua-zzC" secondAttribute="trailing" constant="30" id="SUL-B4-CoU"/>
+                                            <constraint firstItem="LFN-Ua-zzC" firstAttribute="leading" secondItem="ykt-Wf-hSu" secondAttribute="leading" constant="30" id="VId-re-5hf"/>
+                                            <constraint firstAttribute="trailing" secondItem="uNg-YV-FDb" secondAttribute="trailing" constant="30" id="XSx-Fa-2M4"/>
+                                            <constraint firstItem="uNg-YV-FDb" firstAttribute="leading" secondItem="ykt-Wf-hSu" secondAttribute="leading" constant="30" id="Zhv-88-Yf7"/>
+                                            <constraint firstAttribute="height" constant="858" id="cTB-Mx-aAQ"/>
+                                            <constraint firstItem="lJK-rS-crk" firstAttribute="top" secondItem="ykt-Wf-hSu" secondAttribute="top" constant="30" id="cqA-ec-wk8"/>
+                                            <constraint firstItem="Vnj-IT-fUc" firstAttribute="top" secondItem="lJK-rS-crk" secondAttribute="bottom" constant="5" id="dXr-Gq-lfp"/>
+                                            <constraint firstItem="uNg-YV-FDb" firstAttribute="top" secondItem="EJZ-7G-WWm" secondAttribute="bottom" constant="20" id="eCM-0s-R9f"/>
+                                            <constraint firstItem="lJK-rS-crk" firstAttribute="centerX" secondItem="ykt-Wf-hSu" secondAttribute="centerX" id="fHy-nV-KWl"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ykt-Wf-hSu" firstAttribute="trailing" secondItem="e3d-Pm-eLM" secondAttribute="trailing" id="A7E-SY-aQ9"/>
+                                    <constraint firstItem="ykt-Wf-hSu" firstAttribute="height" secondItem="unG-uJ-0Nb" secondAttribute="height" priority="250" id="P4z-Gx-bsJ"/>
+                                    <constraint firstItem="ykt-Wf-hSu" firstAttribute="bottom" secondItem="e3d-Pm-eLM" secondAttribute="bottom" id="a4E-ew-SNp"/>
+                                    <constraint firstItem="ykt-Wf-hSu" firstAttribute="top" secondItem="e3d-Pm-eLM" secondAttribute="top" id="fey-g6-dDp"/>
+                                    <constraint firstItem="e3d-Pm-eLM" firstAttribute="leading" secondItem="ykt-Wf-hSu" secondAttribute="leading" id="j22-ML-79L"/>
+                                    <constraint firstItem="unG-uJ-0Nb" firstAttribute="trailing" secondItem="ykt-Wf-hSu" secondAttribute="trailing" id="skF-oY-PRf"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="e3d-Pm-eLM"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="unG-uJ-0Nb"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2V0-hE-hS2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2V0-hE-hS2" firstAttribute="bottom" secondItem="6Ey-gl-ar1" secondAttribute="bottom" id="AGO-1T-MW6"/>
+                            <constraint firstItem="2V0-hE-hS2" firstAttribute="trailing" secondItem="6Ey-gl-ar1" secondAttribute="trailing" id="Jcv-TP-zce"/>
+                            <constraint firstItem="6Ey-gl-ar1" firstAttribute="leading" secondItem="2V0-hE-hS2" secondAttribute="leading" id="Xnb-UW-yYz"/>
+                            <constraint firstItem="6Ey-gl-ar1" firstAttribute="top" secondItem="2V0-hE-hS2" secondAttribute="top" id="bX4-fX-3G8"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <size key="freeformSize" width="393" height="1000"/>
+                    <connections>
+                        <outlet property="bAddressTextView" destination="lrR-bA-L50" id="1MR-J9-cb8"/>
+                        <outlet property="bCompRegistNumTextField" destination="Naw-Qy-bY0" id="5VQ-tt-own"/>
+                        <outlet property="bRepresentativeNameTextField" destination="Y8F-SS-6xI" id="05c-Ki-VTU"/>
+                        <outlet property="bStoreNameTextField" destination="khE-Fe-ghi" id="uOu-Bt-phA"/>
+                        <outlet property="orderLinkTextField" destination="m4R-PO-yXO" id="B5S-2G-qZ2"/>
+                        <outlet property="storeAddressTextField" destination="Mdz-U8-kX5" id="AqK-MY-G6Q"/>
+                        <outlet property="storeIntroTextView" destination="Pnq-Ic-MjX" id="to1-je-WTE"/>
+                        <outlet property="storeNameTextField" destination="mlN-dc-Xeh" id="Sul-AY-S58"/>
+                        <outlet property="userEmailLabel" destination="Vnj-IT-fUc" id="pZs-9R-bhO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1IV-12-caz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="554.96183206106866" y="-39.436619718309863"/>
+        </scene>
     </scenes>
     <resources>
         <image name="selectPictureIcon" width="104" height="104"/>

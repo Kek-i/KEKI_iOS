@@ -36,6 +36,8 @@
 		A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */; };
 		A2B1CD612987687F00D87570 /* BuyerProfileSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD602987687F00D87570 /* BuyerProfileSetViewController.swift */; };
 		A2B1CD662987797100D87570 /* UserProfileSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */; };
+		A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD672987876800D87570 /* SellerProfileSetViewController.swift */; };
+		A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD692987A29000D87570 /* UITextField+.swift */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,8 @@
 		A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserCategoryViewController.swift; sourceTree = "<group>"; };
 		A2B1CD602987687F00D87570 /* BuyerProfileSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerProfileSetViewController.swift; sourceTree = "<group>"; };
 		A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserProfileSetting.storyboard; sourceTree = "<group>"; };
+		A2B1CD672987876800D87570 /* SellerProfileSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerProfileSetViewController.swift; sourceTree = "<group>"; };
+		A2B1CD692987A29000D87570 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +194,7 @@
 		A2434AEB298657E500F60D1A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				A2B1CD692987A29000D87570 /* UITextField+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 			children = (
 				A2B1CD602987687F00D87570 /* BuyerProfileSetViewController.swift */,
 				A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */,
+				A2B1CD672987876800D87570 /* SellerProfileSetViewController.swift */,
 			);
 			path = UserProfileSetting;
 			sourceTree = "<group>";
@@ -450,6 +456,8 @@
 				A2434B0629865B7000F60D1A /* SearchViewController.swift in Sources */,
 				A2B1CD612987687F00D87570 /* BuyerProfileSetViewController.swift in Sources */,
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
+				A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */,
+				A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */,
 				A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */,
