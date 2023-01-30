@@ -29,6 +29,10 @@ class LoginViewController: UIViewController {
     @IBAction func didTapGoogleLoginButton(_ sender: UIButton) {
         // TODO: 구글 로그인 기능 추가
         print("didTapGoogleLoginButton")
+        
+        // 유저 정보 설정창으로 전환 처리 (임시 구현, 이후 삭제 예정)
+        guard let selectUserCategoryViewController = storyboard?.instantiateViewController(withIdentifier: "SelectUserCategoryViewController") as? SelectUserCategoryViewController else { return }
+        navigationController?.pushViewController(selectUserCategoryViewController, animated: true)
     }
     
     @IBAction func didTapKakaoLoginButton(_ sender: UIButton) {
