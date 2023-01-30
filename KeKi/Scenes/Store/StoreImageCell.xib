@@ -33,7 +33,7 @@
             <connections>
                 <outlet property="storeImageView" destination="TSG-Uf-nBd" id="7bG-OO-h74"/>
             </connections>
-            <point key="canvasLocation" x="131" y="-11"/>
+            <point key="canvasLocation" x="88" y="-67"/>
         </collectionViewCell>
     </objects>
 </document>

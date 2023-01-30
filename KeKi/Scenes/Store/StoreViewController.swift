@@ -25,6 +25,7 @@ class StoreViewController: UIViewController {
         super.viewDidLoad()
         
         UIInit()
+        
     }
     
     func UIInit() {

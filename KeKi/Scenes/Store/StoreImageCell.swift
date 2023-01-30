@@ -16,6 +16,7 @@ class StoreImageCell: UICollectionViewCell {
         super.awakeFromNib()
         
         storeImageView.layer.cornerRadius = 10
+        
     }
 
 }

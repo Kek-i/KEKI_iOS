@@ -38,7 +38,6 @@ class TabViewController : TabmanViewController {
         
         bar.indicator.tintColor = UIColor(red: 248, green: 236, blue: 236, alpha: 0)
         
-    
         
         addBar(bar, dataSource: self, at: .top)
         
