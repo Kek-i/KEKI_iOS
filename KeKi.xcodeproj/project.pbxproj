@@ -31,6 +31,8 @@
 		A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1329865BAD00F60D1A /* MyPage.storyboard */; };
 		A2434B1729865C5B00F60D1A /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = A2434B1629865C5B00F60D1A /* Toast */; };
 		A2434B192986869800F60D1A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2434B182986869800F60D1A /* WebKit.framework */; };
+		A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */; };
+		A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,8 @@
 		A2434B1129865BA700F60D1A /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		A2434B1329865BAD00F60D1A /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		A2434B182986869800F60D1A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthorityGuidance.storyboard; sourceTree = "<group>"; };
+		A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityGuidanceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +241,8 @@
 			children = (
 				A2434AFB29865AD700F60D1A /* LoginViewController.swift */,
 				A2434AFD29865AF100F60D1A /* Login.storyboard */,
+				A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */,
+				A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 				A2434AD3298651F600F60D1A /* Assets.xcassets in Resources */,
 				A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */,
 				A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */,
+				A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */,
 				A2434B0829865B7700F60D1A /* Search.storyboard in Resources */,
 				A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */,
 				A2434AD1298651F500F60D1A /* Home.storyboard in Resources */,
@@ -429,6 +436,7 @@
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */,
+				A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

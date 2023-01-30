@@ -21,6 +21,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         setupButtonLayouts()
+        
+        setupAuthorityGuidanceViewController()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -66,6 +68,14 @@ class LoginViewController: UIViewController {
         kakaoLoginButton.configuration?.imagePadding = 51
         naverLoginButton.configuration?.imagePadding = 45
         appleLoginButton.configuration?.imagePadding = 45 
+    }
+    
+    private func setupAuthorityGuidanceViewController() {
+        let storyboard = UIStoryboard.init(name: "AuthorityGuidance", bundle: nil)
+        guard let authorityGuidanceViewController = storyboard.instantiateViewController(withIdentifier: "AuthorityGuidanceViewController") as? AuthorityGuidanceViewController else { return }
+        authorityGuidanceViewController.modalPresentationStyle = .fullScreen
+        present(authorityGuidanceViewController, animated: true)
+        
     }
 }
 
