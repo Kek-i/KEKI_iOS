@@ -3,10 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		738F647A2987E104006BB124 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64792987E104006BB124 /* StoreViewController.swift */; };
+		738F647E2987F737006BB124 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F647D2987F737006BB124 /* TabViewController.swift */; };
+		738F648129880BE3006BB124 /* StoreImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F647F29880BE3006BB124 /* StoreImageCell.swift */; };
+		738F648229880BE3006BB124 /* StoreImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 738F648029880BE3006BB124 /* StoreImageCell.xib */; };
+		738F648429880CAE006BB124 /* StoreImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F648329880CAE006BB124 /* StoreImageViewController.swift */; };
+		738F648629880CC2006BB124 /* StoreProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F648529880CC2006BB124 /* StoreProductViewController.swift */; };
 		A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434AC9298651F500F60D1A /* AppDelegate.swift */; };
 		A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434ACB298651F500F60D1A /* SceneDelegate.swift */; };
 		A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434ACD298651F500F60D1A /* HomeViewController.swift */; };
@@ -24,7 +30,6 @@
 		A2434B0629865B7000F60D1A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0529865B7000F60D1A /* SearchViewController.swift */; };
 		A2434B0829865B7700F60D1A /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B0729865B7700F60D1A /* Search.storyboard */; };
 		A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B0929865B8000F60D1A /* Store.storyboard */; };
-		A2434B0C29865B8B00F60D1A /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0B29865B8B00F60D1A /* StoreViewController.swift */; };
 		A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0D29865B9600F60D1A /* MyPageViewContoller.swift */; };
 		A2434B1029865BA000F60D1A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0F29865BA000F60D1A /* CalendarViewController.swift */; };
 		A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1129865BA700F60D1A /* Calendar.storyboard */; };
@@ -36,6 +41,12 @@
 
 /* Begin PBXFileReference section */
 		2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeKi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		738F64792987E104006BB124 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		738F647D2987F737006BB124 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		738F647F29880BE3006BB124 /* StoreImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreImageCell.swift; sourceTree = "<group>"; };
+		738F648029880BE3006BB124 /* StoreImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreImageCell.xib; sourceTree = "<group>"; };
+		738F648329880CAE006BB124 /* StoreImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreImageViewController.swift; sourceTree = "<group>"; };
+		738F648529880CC2006BB124 /* StoreProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProductViewController.swift; sourceTree = "<group>"; };
 		78B388A7669643F3338C197A /* Pods-KeKi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeKi.release.xcconfig"; path = "Target Support Files/Pods-KeKi/Pods-KeKi.release.xcconfig"; sourceTree = "<group>"; };
 		9C943509B2DF89C336174319 /* Pods-KeKi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeKi.debug.xcconfig"; path = "Target Support Files/Pods-KeKi/Pods-KeKi.debug.xcconfig"; sourceTree = "<group>"; };
 		A2434AC6298651F500F60D1A /* KeKi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeKi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +65,6 @@
 		A2434B0529865B7000F60D1A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A2434B0729865B7700F60D1A /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		A2434B0929865B8000F60D1A /* Store.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
-		A2434B0B29865B8B00F60D1A /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A2434B0D29865B9600F60D1A /* MyPageViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewContoller.swift; sourceTree = "<group>"; };
 		A2434B0F29865BA000F60D1A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A2434B1129865BA700F60D1A /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
@@ -263,7 +273,12 @@
 			isa = PBXGroup;
 			children = (
 				A2434B0929865B8000F60D1A /* Store.storyboard */,
-				A2434B0B29865B8B00F60D1A /* StoreViewController.swift */,
+				738F648529880CC2006BB124 /* StoreProductViewController.swift */,
+				738F648329880CAE006BB124 /* StoreImageViewController.swift */,
+				738F64792987E104006BB124 /* StoreViewController.swift */,
+				738F647D2987F737006BB124 /* TabViewController.swift */,
+				738F647F29880BE3006BB124 /* StoreImageCell.swift */,
+				738F648029880BE3006BB124 /* StoreImageCell.xib */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -330,7 +345,7 @@
 				};
 			};
 			buildConfigurationList = A2434AC1298651F500F60D1A /* Build configuration list for PBXProject "KeKi" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -365,6 +380,7 @@
 				A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */,
 				A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */,
 				A2434B0829865B7700F60D1A /* Search.storyboard in Resources */,
+				738F648229880BE3006BB124 /* StoreImageCell.xib in Resources */,
 				A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */,
 				A2434AD1298651F500F60D1A /* Home.storyboard in Resources */,
 			);
@@ -419,13 +435,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				738F647A2987E104006BB124 /* StoreViewController.swift in Sources */,
 				A2434B1029865BA000F60D1A /* CalendarViewController.swift in Sources */,
-				A2434B0C29865B8B00F60D1A /* StoreViewController.swift in Sources */,
 				A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */,
 				A2434B0629865B7000F60D1A /* SearchViewController.swift in Sources */,
+				738F648629880CC2006BB124 /* StoreProductViewController.swift in Sources */,
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
+				738F648429880CAE006BB124 /* StoreImageViewController.swift in Sources */,
 				A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */,
+				738F648129880BE3006BB124 /* StoreImageCell.swift in Sources */,
+				738F647E2987F737006BB124 /* TabViewController.swift in Sources */,
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */,
@@ -582,7 +602,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "케키";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Home;
+				INFOPLIST_KEY_UIMainStoryboardFile = Store;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -615,7 +635,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "케키";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Home;
+				INFOPLIST_KEY_UIMainStoryboardFile = Store;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
