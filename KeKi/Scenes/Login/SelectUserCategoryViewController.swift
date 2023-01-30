@@ -41,6 +41,10 @@ class SelectUserCategoryViewController: UIViewController {
     }
     
     @IBAction func didTapConfirmButton(_ sender: UIButton) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "가입자 선택"
+        navigationItem.backBarButtonItem = backItem
+        
         if buyerButton.isSelected {
             // TODO: 구매자 프로필 화면으로 전환 구현
             let storyboard = UIStoryboard(name: "UserProfileSetting", bundle: nil)
