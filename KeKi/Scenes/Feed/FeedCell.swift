@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol AlertDelegate {
+    func showFeedMainAlert()
+    func showFeedDeclarationActionAlert()
+}
+
 class FeedCell: UITableViewCell {
+    
+    var feedAlertDelegate: AlertDelegate!
     
     var imageList: [String] = [
         "a.circle",
@@ -32,13 +39,9 @@ class FeedCell: UITableViewCell {
     }
     
     
-    @IBAction func pageChanged(_ sender: UIPageControl) {
-//        cakeImageView.image = UIImage(systemName: imageList[pageControl.currentPage])
-    }
-    
-    
     @IBAction func didTapViewmoreButton(_ sender: UIButton) {
-        // TODO: popVC 또는 dismiss 처리
+        print("didTapViewmoreButton")
+        feedAlertDelegate.showFeedMainAlert()
     }
     
     func setup() {
@@ -49,20 +52,18 @@ class FeedCell: UITableViewCell {
     }
     
     private func setupPageControl() {
-        //페이지 컨트롤의 전체 페이지를 images 배열의 전체 개수 값으로 설정
         pageControl.numberOfPages = imageList.count
-        // 페이지 컨트롤의 현재 페이지를 0으로 설정
         pageControl.currentPage = 0
-//        cakeImageView.image = UIImage(systemName: imageList[0])
     }
 }
 
 extension FeedCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return imageList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print(indexPath.row)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedImgsCell", for: indexPath) as? FeedImgsCell else { return UICollectionViewCell() }
         return cell
     }
@@ -77,4 +78,11 @@ extension FeedCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        pageControl.currentPage = indexPath.row
+        print(indexPath.row)
+
+    }
 }
+
+
