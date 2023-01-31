@@ -10,7 +10,7 @@ import UIKit
 class AnnouncementViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
-    private var announcementList: [String] = [
+    private var announcementList: [String] = [  // 임시 데이터 (서버연결 후 삭제 예정)
         "새로운 디저트가 등록되었어요!",
         "크리스마스 기념 할인행사",
         "새로운 디저트가 등록되었어요!",
@@ -69,6 +69,8 @@ extension AnnouncementViewController: UITableViewDataSource {
 
 extension AnnouncementViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selected cell --> \(indexPath.row)")
+        guard let detailView = storyboard?.instantiateViewController(withIdentifier: "AnnouncementDetailViewController") as? AnnouncementDetailViewController else { return }
+        navigationController?.pushViewController(detailView, animated: true)
     }
 }
+

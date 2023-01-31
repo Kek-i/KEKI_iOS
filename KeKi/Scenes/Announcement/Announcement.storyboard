@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eUY-BH-tUj">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="632"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="AnnouncementCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnnouncementCell" id="sco-Ch-4iE" customClass="AnnouncementCell" customModule="KeKi" customModuleProvider="target">
@@ -32,7 +32,7 @@
                                 </prototypes>
                             </tableView>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nb6-Up-Fbb">
-                                <rect key="frame" x="0.0" y="769" width="393" height="49"/>
+                                <rect key="frame" x="0.0" y="735" width="393" height="83"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <tabBarItem image="homekit" catalog="system" id="4hU-jm-SqO"/>
@@ -64,6 +64,79 @@
             </objects>
             <point key="canvasLocation" x="188.54961832061068" y="-90.140845070422543"/>
         </scene>
+        <!--Announcement Detail View Controller-->
+        <scene sceneID="v83-N0-xFx">
+            <objects>
+                <viewController storyboardIdentifier="AnnouncementDetailViewController" id="wMY-NZ-omV" customClass="AnnouncementDetailViewController" customModule="KeKi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4y6-vO-ocJ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="acb-qb-tQU">
+                                <rect key="frame" x="0.0" y="769" width="393" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem image="homekit" catalog="system" id="s4c-lE-TCK"/>
+                                    <tabBarItem title="" image="calendar" catalog="system" id="Jgd-77-HVr"/>
+                                    <tabBarItem image="magnifyingglass" catalog="system" id="xWG-uw-XeO"/>
+                                    <tabBarItem image="heart" catalog="system" id="v8U-bc-p7H"/>
+                                    <tabBarItem image="person" catalog="system" id="VGW-H3-dG1"/>
+                                </items>
+                            </tabBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6rc-jc-Sgk">
+                                <rect key="frame" x="30" y="119" width="333" height="620"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새로운 디저트가 등록되었어요! 어서 확인해보세요!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INm-QW-PTb">
+                                        <rect key="frame" x="15" y="10" width="303" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="NJD-Sy-m6Z"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="example announcement detail contents" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BQS-Z4-75k">
+                                        <rect key="frame" x="13" y="80" width="307" height="525"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="INm-QW-PTb" firstAttribute="leading" secondItem="6rc-jc-Sgk" secondAttribute="leading" constant="15" id="4N0-EU-7D6"/>
+                                    <constraint firstAttribute="trailing" secondItem="BQS-Z4-75k" secondAttribute="trailing" constant="13" id="8VI-o1-dGJ"/>
+                                    <constraint firstItem="BQS-Z4-75k" firstAttribute="leading" secondItem="6rc-jc-Sgk" secondAttribute="leading" constant="13" id="E0x-ea-EoE"/>
+                                    <constraint firstAttribute="bottom" secondItem="BQS-Z4-75k" secondAttribute="bottom" constant="15" id="R8r-W1-2c1"/>
+                                    <constraint firstItem="INm-QW-PTb" firstAttribute="top" secondItem="6rc-jc-Sgk" secondAttribute="top" constant="10" id="ZC2-8Y-2On"/>
+                                    <constraint firstAttribute="trailing" secondItem="INm-QW-PTb" secondAttribute="trailing" constant="15" id="gW4-z0-ZCa"/>
+                                    <constraint firstItem="BQS-Z4-75k" firstAttribute="top" secondItem="INm-QW-PTb" secondAttribute="bottom" constant="10" id="qtD-bS-lFT"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3Xb-Da-QEU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3Xb-Da-QEU" firstAttribute="trailing" secondItem="6rc-jc-Sgk" secondAttribute="trailing" constant="30" id="5Nr-Xd-frJ"/>
+                            <constraint firstItem="6rc-jc-Sgk" firstAttribute="leading" secondItem="3Xb-Da-QEU" secondAttribute="leading" constant="30" id="D84-Ls-Bkw"/>
+                            <constraint firstItem="acb-qb-tQU" firstAttribute="trailing" secondItem="3Xb-Da-QEU" secondAttribute="trailing" id="Myj-9L-yzL"/>
+                            <constraint firstItem="acb-qb-tQU" firstAttribute="top" secondItem="6rc-jc-Sgk" secondAttribute="bottom" constant="30" id="P41-DL-gpp"/>
+                            <constraint firstItem="6rc-jc-Sgk" firstAttribute="top" secondItem="3Xb-Da-QEU" secondAttribute="top" constant="60" id="iba-eA-CIQ"/>
+                            <constraint firstItem="acb-qb-tQU" firstAttribute="leading" secondItem="3Xb-Da-QEU" secondAttribute="leading" id="qb1-MD-NPr"/>
+                            <constraint firstItem="acb-qb-tQU" firstAttribute="bottom" secondItem="3Xb-Da-QEU" secondAttribute="bottom" id="sYa-rE-Qxw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="6rc-jc-Sgk" id="JfB-jT-P4S"/>
+                        <outlet property="detailTextView" destination="BQS-Z4-75k" id="01E-P5-bPy"/>
+                        <outlet property="titleLabel" destination="INm-QW-PTb" id="tvY-df-16i"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BxA-eu-B7B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1180.9160305343512" y="-90.140845070422543"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="24A-pR-zTE">
             <objects>
@@ -87,6 +160,9 @@
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="person" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
