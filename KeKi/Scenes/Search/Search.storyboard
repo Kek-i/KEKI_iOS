@@ -1,28 +1,196 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17122"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="Y6W-OH-hqX" customClass="SearchViewController" customModule="KeKi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NbD-2G-VvY">
+                                <rect key="frame" x="20" y="54.5" width="374" height="36"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="EjS-Zw-ElL">
+                                        <rect key="frame" x="15" y="10" width="17" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="17" id="ghv-I1-jov"/>
+                                            <constraint firstAttribute="width" constant="17" id="zs7-5r-xO8"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zH0-90-y4Z">
+                                        <rect key="frame" x="47" y="0.0" width="327" height="36"/>
+                                        <color key="backgroundColor" red="0.98039215686274506" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <attributedString key="attributedText"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="zH0-90-y4Z" firstAttribute="top" secondItem="NbD-2G-VvY" secondAttribute="top" id="49X-yo-3bX"/>
+                                    <constraint firstAttribute="trailing" secondItem="zH0-90-y4Z" secondAttribute="trailing" id="Qz3-XF-VVZ"/>
+                                    <constraint firstItem="zH0-90-y4Z" firstAttribute="leading" secondItem="EjS-Zw-ElL" secondAttribute="trailing" constant="15" id="SbO-Np-ujG"/>
+                                    <constraint firstItem="EjS-Zw-ElL" firstAttribute="leading" secondItem="NbD-2G-VvY" secondAttribute="leading" constant="15" id="e3M-Ak-hvg"/>
+                                    <constraint firstAttribute="height" constant="36" id="fwt-Pe-ZKG"/>
+                                    <constraint firstItem="EjS-Zw-ElL" firstAttribute="top" secondItem="NbD-2G-VvY" secondAttribute="top" constant="10" id="hiu-IZ-amc"/>
+                                    <constraint firstAttribute="bottom" secondItem="EjS-Zw-ElL" secondAttribute="bottom" constant="9" id="oPd-Ta-UNv"/>
+                                    <constraint firstAttribute="bottom" secondItem="zH0-90-y4Z" secondAttribute="bottom" id="rNi-ob-lDh"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최근 검색어" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEd-RN-4bx">
+                                <rect key="frame" x="25" y="110.5" width="77" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="77" id="pCo-cC-YPL"/>
+                                    <constraint firstAttribute="height" constant="24" id="xHd-Xy-aum"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Bold" family="Noto Sans Kannada" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IVP-0u-dQ7">
+                                <rect key="frame" x="0.0" y="144.5" width="414" height="31"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="vca-hV-MqH"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kRh-sT-cBi">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKT-Sa-XT6">
+                                <rect key="frame" x="319" y="115.5" width="75" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="B04-dw-pME"/>
+                                </constraints>
+                                <color key="tintColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="전체">
+                                            <attributes>
+                                                <font key="NSFont" size="11" name="NotoSansKR-Regular"/>
+                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" ">
+                                            <attributes>
+                                                <font key="NSFont" size="11" name="NotoSansKR-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="지우기">
+                                            <attributes>
+                                                <font key="NSFont" size="11" name="NotoSansKR-Regular"/>
+                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sVQ-OD-oU4">
+                                <rect key="frame" x="0.0" y="229.5" width="414" height="31"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="QKA-Xd-hrS"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EQx-Oe-JSc">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yhB-sl-wYR">
+                                <rect key="frame" x="0.0" y="326.5" width="414" height="120"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="JtD-kW-dT9"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wEX-BQ-Sfi">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인기 검색어" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6l-f6-7zr">
+                                <rect key="frame" x="25" y="195.5" width="77" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="HMt-50-gkV"/>
+                                    <constraint firstAttribute="width" constant="77" id="JwI-Ky-ihl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Bold" family="Noto Sans Kannada" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최근 본 케이크" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyI-VQ-xYa">
+                                <rect key="frame" x="25" y="291.5" width="99" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="82I-u6-sjg"/>
+                                    <constraint firstAttribute="width" constant="99" id="SRm-u0-N26"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansKannada-Bold" family="Noto Sans Kannada" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yKT-Sa-XT6" secondAttribute="trailing" constant="20" id="08g-hn-itZ"/>
+                            <constraint firstItem="sVQ-OD-oU4" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="2nm-49-yoZ"/>
+                            <constraint firstItem="yhB-sl-wYR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4eu-UG-cFY"/>
+                            <constraint firstItem="IVP-0u-dQ7" firstAttribute="top" secondItem="FEd-RN-4bx" secondAttribute="bottom" constant="10" id="6ja-Ao-0Hh"/>
+                            <constraint firstItem="PyI-VQ-xYa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="25" id="6jx-eM-SS1"/>
+                            <constraint firstItem="yhB-sl-wYR" firstAttribute="top" secondItem="PyI-VQ-xYa" secondAttribute="bottom" constant="11" id="9KD-UU-lhB"/>
+                            <constraint firstItem="NbD-2G-VvY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="ADb-w0-Oxy"/>
+                            <constraint firstItem="sVQ-OD-oU4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="BeB-E1-npu"/>
+                            <constraint firstItem="NbD-2G-VvY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="6.2999999999999998" id="E93-rK-MCY"/>
+                            <constraint firstItem="sVQ-OD-oU4" firstAttribute="top" secondItem="L6l-f6-7zr" secondAttribute="bottom" constant="10" id="F3J-5I-Z1e"/>
+                            <constraint firstItem="FEd-RN-4bx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="25" id="M7g-A6-4wV"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yhB-sl-wYR" secondAttribute="trailing" id="OKl-Ke-omt"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="NbD-2G-VvY" secondAttribute="trailing" constant="20" id="S08-t8-4TW"/>
+                            <constraint firstItem="PyI-VQ-xYa" firstAttribute="top" secondItem="sVQ-OD-oU4" secondAttribute="bottom" constant="31" id="U15-Mi-f6p"/>
+                            <constraint firstItem="FEd-RN-4bx" firstAttribute="top" secondItem="NbD-2G-VvY" secondAttribute="bottom" constant="20" id="Vo5-oU-KHu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="IVP-0u-dQ7" secondAttribute="trailing" id="any-ld-SpN"/>
+                            <constraint firstItem="yKT-Sa-XT6" firstAttribute="top" secondItem="NbD-2G-VvY" secondAttribute="bottom" constant="25" id="j9s-Jx-CkN"/>
+                            <constraint firstItem="L6l-f6-7zr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="25" id="qzs-2N-2wP"/>
+                            <constraint firstItem="L6l-f6-7zr" firstAttribute="top" secondItem="IVP-0u-dQ7" secondAttribute="bottom" constant="20" id="u6l-hZ-eU3"/>
+                            <constraint firstItem="IVP-0u-dQ7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="yyN-ze-gWP"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="popularSearchCV" destination="sVQ-OD-oU4" id="TqO-60-pqp"/>
+                        <outlet property="recentCakeCV" destination="yhB-sl-wYR" id="jCs-F9-Z9k"/>
+                        <outlet property="recentSearchCV" destination="IVP-0u-dQ7" id="mzp-m1-u9C"/>
+                        <outlet property="searchTextField" destination="zH0-90-y4Z" id="e2p-SL-Jdv"/>
+                        <outlet property="searchView" destination="NbD-2G-VvY" id="jKv-0D-O6Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="132" y="-27"/>
         </scene>
     </scenes>
     <resources>
+        <image name="search" width="17" height="17"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
