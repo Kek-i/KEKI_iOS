@@ -41,7 +41,6 @@
 		A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD6F29888D2800D87570 /* AnnouncementCell.swift */; };
 		A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */; };
 		A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */; };
-		A2B1CD762988AFF600D87570 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD752988AFF600D87570 /* Announcement.swift */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,7 +80,6 @@
 		A2B1CD6F29888D2800D87570 /* AnnouncementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementCell.swift; sourceTree = "<group>"; };
 		A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnouncementCell.xib; sourceTree = "<group>"; };
 		A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailViewController.swift; sourceTree = "<group>"; };
-		A2B1CD752988AFF600D87570 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,7 +310,6 @@
 				A2B1CD6F29888D2800D87570 /* AnnouncementCell.swift */,
 				A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */,
 				A2434B0129865B1A00F60D1A /* AnnouncementViewController.swift */,
-				A2B1CD752988AFF600D87570 /* Announcement.swift */,
 			);
 			path = Announcement;
 			sourceTree = "<group>";
@@ -475,7 +472,6 @@
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */,
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
-				A2B1CD762988AFF600D87570 /* Announcement.swift in Sources */,
 				A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */,
