@@ -28,10 +28,13 @@ class FeedCell: UITableViewCell {
     @IBOutlet weak var imgCollectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var heartButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         imgCollectionView.register(UINib(nibName: "FeedImgsCell", bundle: nil), forCellWithReuseIdentifier: "FeedImgsCell")
+        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        heartButton.setImage(UIImage(systemName: "heart.fill"), for: .selected)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -44,7 +47,14 @@ class FeedCell: UITableViewCell {
         feedAlertDelegate.showFeedMainAlert()
     }
     
+    @IBAction func didTapHeartButton(_ sender: UIButton) {
+        heartButton.isSelected = !heartButton.isSelected
+    }
+    
+    
     func setup() {
+        
+        
         imgCollectionView.isPagingEnabled = true
         imgCollectionView.dataSource = self
         imgCollectionView.delegate = self
