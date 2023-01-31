@@ -10,6 +10,9 @@ import UIKit
 class HomeViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
+    var ddayCountingText: String? = "베이님! \n투리 생일이 3일 남았어요! \n특별한 하루를 준비해요"
+    @IBOutlet weak var ddayCountingLabel: UILabel!
+    
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var middleTagContainerView: UIView!
     @IBOutlet weak var bottomTagContainerView: UIView!
@@ -24,6 +27,7 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         setup()
         setupLayout()
+        setUpDdayCountingLabel()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -50,8 +54,15 @@ class HomeViewController: UIViewController {
             middleTagContainerView,
             bottomTagContainerView
         ].forEach {
-            $0?.layer.cornerRadius = 20
+            $0?.layer.cornerRadius = 18
         }
+    }
+    private func setUpDdayCountingLabel() {
+        let attributedString = NSMutableAttributedString(string: ddayCountingText!)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 8 
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+        ddayCountingLabel.attributedText = attributedString
     }
 }
 
