@@ -10,8 +10,6 @@ import UIKit
 class AnnouncementDetailViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
-    var announcement: Announcement? = nil
-    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailTextView: UITextView!
@@ -21,19 +19,12 @@ class AnnouncementDetailViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
         setupLayout()
-        setup()
     }
     
     // MARK: - Action Methods (IBAction, ...)
 
     
     // MARK: - Helper Methods (Setup Method, ...)
-    private func setup() {
-        if let announcement = announcement {
-            titleLabel.text = announcement.title
-            detailTextView.text = announcement.detail
-        }
-    }
     private func setupLayout() {
         containerView.layer.masksToBounds = false
         containerView.backgroundColor = .white
@@ -45,11 +36,6 @@ class AnnouncementDetailViewController: UIViewController {
         containerView.layer.shadowRadius = 10
         containerView.layer.shadowOffset = CGSize(width: 3, height: 3)
         containerView.layer.shadowOpacity = 0.2
-    }
-    
-    func setupContents(_ announcement: Announcement) {
-        titleLabel.text = announcement.title
-        detailTextView.text = announcement.detail
     }
 }
 
