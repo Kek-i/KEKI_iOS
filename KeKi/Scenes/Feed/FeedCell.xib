@@ -73,22 +73,6 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제품이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRu-g1-Tyd">
-                        <rect key="frame" x="25.999999999999996" y="394" width="55.666666666666657" height="19.333333333333314"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="이 제품은 어쩌구저쩌구 케이크어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구…이 제품은 어쩌구저쩌구 케이크어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구… 근데 이거 높이값 고정인가 아 집가고 싶다 아 초밥 먹고 싶은디 " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="p5c-uC-NH0">
-                        <rect key="frame" x="23" y="423.33333333333331" width="274" height="99.999999999999943"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="100" id="RMM-39-reA"/>
-                        </constraints>
-                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fLN-MI-dcj">
                         <rect key="frame" x="23" y="543.33333333333337" width="108" height="20"/>
                         <subviews>
@@ -145,26 +129,46 @@
                             <constraint firstAttribute="height" constant="0.69999999999999996" id="Nkk-1e-0d8"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e88-AC-HKz">
+                        <rect key="frame" x="16" y="394" width="79.666666666666671" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="KfH-aG-aGG"/>
+                        </constraints>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="제품이름">
+                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                        </buttonConfiguration>
+                    </button>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="이 제품은 어쩌구저쩌구 케이크어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구…이 제품은 어쩌구저쩌구 케이크어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구… 근데 이거 높이값 고정인가 아 집가고 싶다 아 초밥 먹고 싶은디 " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="p5c-uC-NH0">
+                        <rect key="frame" x="23" y="419" width="274" height="100"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="RMM-39-reA"/>
+                        </constraints>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="p5c-uC-NH0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="1aZ-NY-pdg"/>
                     <constraint firstItem="e5N-ye-wT5" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="3pZ-ey-e4h"/>
-                    <constraint firstItem="p5c-uC-NH0" firstAttribute="top" secondItem="vRu-g1-Tyd" secondAttribute="bottom" constant="10" id="4ZV-Wv-FLM"/>
                     <constraint firstItem="Gau-NA-CUj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Eel-RJ-sac"/>
+                    <constraint firstItem="p5c-uC-NH0" firstAttribute="top" secondItem="e88-AC-HKz" secondAttribute="bottom" id="GWy-0T-pfq"/>
+                    <constraint firstItem="e88-AC-HKz" firstAttribute="top" secondItem="e5N-ye-wT5" secondAttribute="bottom" id="HqE-fp-4de"/>
                     <constraint firstItem="e5N-ye-wT5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="IA1-v9-53U"/>
-                    <constraint firstItem="fLN-MI-dcj" firstAttribute="top" secondItem="p5c-uC-NH0" secondAttribute="bottom" constant="20" id="JO3-b1-aWN"/>
                     <constraint firstAttribute="trailing" secondItem="f3U-f8-ueK" secondAttribute="trailing" id="LjV-gC-LIB"/>
                     <constraint firstAttribute="bottom" secondItem="OuS-tT-pVB" secondAttribute="bottom" constant="10" id="Mko-BP-sZO"/>
                     <constraint firstAttribute="trailingMargin" secondItem="e5N-ye-wT5" secondAttribute="trailing" id="Mzz-ga-XHb"/>
                     <constraint firstItem="e5N-ye-wT5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="P1q-7j-Jxp"/>
                     <constraint firstItem="f3U-f8-ueK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SFo-fs-rKY"/>
                     <constraint firstItem="oSK-8L-8m5" firstAttribute="trailing" secondItem="p5c-uC-NH0" secondAttribute="trailing" id="TCl-pE-3JW"/>
-                    <constraint firstItem="p5c-uC-NH0" firstAttribute="leading" secondItem="vRu-g1-Tyd" secondAttribute="leading" constant="-3" id="UBF-LA-1sH"/>
                     <constraint firstItem="fLN-MI-dcj" firstAttribute="leading" secondItem="p5c-uC-NH0" secondAttribute="leading" id="Y6u-8X-qf3"/>
                     <constraint firstItem="f3U-f8-ueK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Zd1-8h-BHd"/>
-                    <constraint firstItem="vRu-g1-Tyd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="aCU-ta-exD"/>
                     <constraint firstAttribute="trailing" secondItem="OuS-tT-pVB" secondAttribute="trailing" constant="10" id="aJo-ac-Iep"/>
-                    <constraint firstItem="oSK-8L-8m5" firstAttribute="top" secondItem="p5c-uC-NH0" secondAttribute="bottom" constant="20" id="c3H-ea-2e7"/>
-                    <constraint firstItem="vRu-g1-Tyd" firstAttribute="top" secondItem="e5N-ye-wT5" secondAttribute="bottom" id="dd8-pd-ydH"/>
+                    <constraint firstItem="fLN-MI-dcj" firstAttribute="top" secondItem="p5c-uC-NH0" secondAttribute="bottom" constant="24.329999999999998" id="awt-2d-7gF"/>
+                    <constraint firstItem="e88-AC-HKz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="f2M-ov-lA2"/>
                     <constraint firstItem="p5c-uC-NH0" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="fh5-dn-sWa"/>
                     <constraint firstItem="oSK-8L-8m5" firstAttribute="height" secondItem="R6h-JA-aYt" secondAttribute="height" id="hvy-ix-A9b"/>
                     <constraint firstAttribute="bottomMargin" secondItem="oSK-8L-8m5" secondAttribute="bottom" constant="25.670000000000002" id="iCF-sL-UOj"/>
