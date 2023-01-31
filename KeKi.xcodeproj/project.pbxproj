@@ -38,6 +38,8 @@
 		A2B1CD662987797100D87570 /* UserProfileSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */; };
 		A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD672987876800D87570 /* SellerProfileSetViewController.swift */; };
 		A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD692987A29000D87570 /* UITextField+.swift */; };
+		A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD6F29888D2800D87570 /* AnnouncementCell.swift */; };
+		A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +76,8 @@
 		A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserProfileSetting.storyboard; sourceTree = "<group>"; };
 		A2B1CD672987876800D87570 /* SellerProfileSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerProfileSetViewController.swift; sourceTree = "<group>"; };
 		A2B1CD692987A29000D87570 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		A2B1CD6F29888D2800D87570 /* AnnouncementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementCell.swift; sourceTree = "<group>"; };
+		A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnouncementCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +304,8 @@
 			isa = PBXGroup;
 			children = (
 				A2434AFF29865B0A00F60D1A /* Announcement.storyboard */,
+				A2B1CD6F29888D2800D87570 /* AnnouncementCell.swift */,
+				A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */,
 				A2434B0129865B1A00F60D1A /* AnnouncementViewController.swift */,
 			);
 			path = Announcement;
@@ -391,6 +397,7 @@
 				A2434AD6298651F600F60D1A /* LaunchScreen.storyboard in Resources */,
 				A2434B0029865B0A00F60D1A /* Announcement.storyboard in Resources */,
 				A2434AD3298651F600F60D1A /* Assets.xcassets in Resources */,
+				A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */,
 				A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */,
 				A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */,
 				A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */,
@@ -462,6 +469,7 @@
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */,
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
+				A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */,
 				A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */,
@@ -618,7 +626,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "케키";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Login;
+				INFOPLIST_KEY_UIMainStoryboardFile = Announcement;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -651,7 +659,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "케키";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Login;
+				INFOPLIST_KEY_UIMainStoryboardFile = Announcement;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
