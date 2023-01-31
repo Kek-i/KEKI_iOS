@@ -81,37 +81,36 @@ extension FeedViewController: AlertDelegate {
             // TODO: 피드 게시자 차단 기능 구현
         }
         
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
         [
             declarationAction,
             notToSeeAction,
-            blockAction
-        ].forEach {
-            alert.addAction($0)
-        }
+            blockAction,
+            cancelAction
+        ].forEach { alert.addAction($0) }
         present(alert, animated: true)
     }
     
     func showFeedDeclarationActionAlert() {
-        var reason: String? = nil   // 신고사유
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "신고 사유 선택", message: "타당한 신고사유를 선택해주세요. \n신고사유에 맞지않는 신고일 경우, 해당신고는 처리되지 않습니다.", preferredStyle: .actionSheet)
         
-        let declarationAction = UIAlertAction(title: "스팸홍보/도배", style: .default) {_ in reason = self.title }
+        let declarationAction = UIAlertAction(title: "스팸홍보/도배", style: .default)
+        let abuseAction = UIAlertAction(title: "욕설/혐오/차별", style: .default)
+        let noxiousAction = UIAlertAction(title: "음란물/유해한 정보", style: .default)
+        let illegalAction = UIAlertAction(title: "사기/불법정보", style: .default)
+        let inappropriatenessAction = UIAlertAction(title: "게시글 성격에 부적절함", style: .default)
         
-        let abuseAction = UIAlertAction(title: "욕설/혐오/차별", style: .default) {_ in reason = self.title }
-        let noxiousAction = UIAlertAction(title: "음란물/유해한 정보", style: .default) {_ in reason = self.title }
-        let illegalAction = UIAlertAction(title: "사기/불법정보", style: .default) {_ in reason = self.title }
-        let inappropriatenessAction = UIAlertAction(title: "게시글 성격에 부적절함", style: .default) {_ in reason = self.title }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         [
             declarationAction,
             abuseAction,
             noxiousAction,
             illegalAction,
-            inappropriatenessAction
-        ].forEach {
-            alert.addAction($0)
-        }
-        
+            inappropriatenessAction,
+            cancelAction
+        ].forEach { alert.addAction($0) }
         present(alert, animated: true)
     }
 }
