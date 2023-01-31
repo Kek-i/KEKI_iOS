@@ -37,6 +37,13 @@
 		A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1329865BAD00F60D1A /* MyPage.storyboard */; };
 		A2434B1729865C5B00F60D1A /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = A2434B1629865C5B00F60D1A /* Toast */; };
 		A2434B192986869800F60D1A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2434B182986869800F60D1A /* WebKit.framework */; };
+		A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */; };
+		A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */; };
+		A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */; };
+		A2B1CD612987687F00D87570 /* BuyerProfileSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD602987687F00D87570 /* BuyerProfileSetViewController.swift */; };
+		A2B1CD662987797100D87570 /* UserProfileSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */; };
+		A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD672987876800D87570 /* SellerProfileSetViewController.swift */; };
+		A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD692987A29000D87570 /* UITextField+.swift */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +79,13 @@
 		A2434B1129865BA700F60D1A /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		A2434B1329865BAD00F60D1A /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		A2434B182986869800F60D1A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthorityGuidance.storyboard; sourceTree = "<group>"; };
+		A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityGuidanceViewController.swift; sourceTree = "<group>"; };
+		A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserCategoryViewController.swift; sourceTree = "<group>"; };
+		A2B1CD602987687F00D87570 /* BuyerProfileSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerProfileSetViewController.swift; sourceTree = "<group>"; };
+		A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserProfileSetting.storyboard; sourceTree = "<group>"; };
+		A2B1CD672987876800D87570 /* SellerProfileSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerProfileSetViewController.swift; sourceTree = "<group>"; };
+		A2B1CD692987A29000D87570 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +206,7 @@
 		A2434AEB298657E500F60D1A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				A2B1CD692987A29000D87570 /* UITextField+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -247,8 +262,12 @@
 		A2434AF3298658E600F60D1A /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A2B1CD642987796400D87570 /* UserProfileSetting */,
 				A2434AFB29865AD700F60D1A /* LoginViewController.swift */,
 				A2434AFD29865AF100F60D1A /* Login.storyboard */,
+				A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */,
+				A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */,
+				A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -302,6 +321,16 @@
 				A2434B0129865B1A00F60D1A /* AnnouncementViewController.swift */,
 			);
 			path = Announcement;
+			sourceTree = "<group>";
+		};
+		A2B1CD642987796400D87570 /* UserProfileSetting */ = {
+			isa = PBXGroup;
+			children = (
+				A2B1CD602987687F00D87570 /* BuyerProfileSetViewController.swift */,
+				A2B1CD652987797100D87570 /* UserProfileSetting.storyboard */,
+				A2B1CD672987876800D87570 /* SellerProfileSetViewController.swift */,
+			);
+			path = UserProfileSetting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,8 +411,13 @@
 				A2434AD3298651F600F60D1A /* Assets.xcassets in Resources */,
 				A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */,
 				A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */,
+				A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */,
 				A2434B0829865B7700F60D1A /* Search.storyboard in Resources */,
+
+				A2B1CD662987797100D87570 /* UserProfileSetting.storyboard in Resources */,
+
 				738F649A2988A9BE006BB124 /* StoreImageCell.xib in Resources */,
+
 				A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */,
 				A2434AD1298651F500F60D1A /* Home.storyboard in Resources */,
 			);
@@ -443,9 +477,16 @@
 				A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */,
 				738F64992988A9BE006BB124 /* TabViewController.swift in Sources */,
 				A2434B0629865B7000F60D1A /* SearchViewController.swift in Sources */,
+				A2B1CD612987687F00D87570 /* BuyerProfileSetViewController.swift in Sources */,
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
+
+				A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */,
+				A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */,
+				A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */,
+
 				738F64962988A9BE006BB124 /* StoreInfoPopUpViewController.swift in Sources */,
 				738F64982988A9BE006BB124 /* StoreImageViewController.swift in Sources */,
+
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */,
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
@@ -453,6 +494,7 @@
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */,
 				A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */,
+				A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,7 +648,9 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "케키";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Store;
+
+				INFOPLIST_KEY_UIMainStoryboardFile = Login;
+        
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -639,7 +683,9 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "케키";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Store;
+
+				INFOPLIST_KEY_UIMainStoryboardFile = Login;
+
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
