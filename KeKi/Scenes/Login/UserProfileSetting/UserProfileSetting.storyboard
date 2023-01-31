@@ -82,6 +82,9 @@
                                     <action selector="didTapSelectPictureButton:" destination="GDi-4T-dhO" eventType="touchUpInside" id="HV4-aa-7ly"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="ajX-ra-n7h">
+                                <rect key="frame" x="216.66666666666666" y="277" width="29" height="29"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qCY-gg-p1r"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -89,8 +92,10 @@
                             <constraint firstItem="JlQ-xa-el0" firstAttribute="top" secondItem="coq-jC-6KM" secondAttribute="bottom" constant="5" id="6AO-d1-gQC"/>
                             <constraint firstItem="coq-jC-6KM" firstAttribute="top" secondItem="qCY-gg-p1r" secondAttribute="top" constant="144" id="8dt-ye-UtY"/>
                             <constraint firstItem="coq-jC-6KM" firstAttribute="centerX" secondItem="NIR-RA-pJo" secondAttribute="centerX" id="Da2-dQ-C3T"/>
+                            <constraint firstItem="ajX-ra-n7h" firstAttribute="bottom" secondItem="coq-jC-6KM" secondAttribute="bottom" constant="-15" id="HCp-t8-ThI"/>
                             <constraint firstItem="HTl-zG-j7V" firstAttribute="top" secondItem="JlQ-xa-el0" secondAttribute="bottom" constant="30" id="NNH-WF-s3N"/>
                             <constraint firstItem="HTl-zG-j7V" firstAttribute="centerX" secondItem="NIR-RA-pJo" secondAttribute="centerX" id="Ph4-EI-S7c"/>
+                            <constraint firstItem="ajX-ra-n7h" firstAttribute="trailing" secondItem="coq-jC-6KM" secondAttribute="trailing" constant="-15" id="T50-Of-EAC"/>
                             <constraint firstItem="JlQ-xa-el0" firstAttribute="centerX" secondItem="coq-jC-6KM" secondAttribute="centerX" id="nxY-3h-NX3"/>
                         </constraints>
                     </view>
@@ -105,7 +110,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G98-ST-9dT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-280" y="-39"/>
+            <point key="canvasLocation" x="-280.15267175572518" y="-39.436619718309863"/>
         </scene>
         <!--Seller Profile Set View Controller-->
         <scene sceneID="jXw-hU-bJ0">
@@ -130,6 +135,9 @@
                                                     <action selector="didTapSelectPictureButton:" destination="GDi-4T-dhO" eventType="touchUpInside" id="tjd-ZZ-3HB"/>
                                                 </connections>
                                             </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="5bg-e5-bbk">
+                                                <rect key="frame" x="216.66666666666666" y="104" width="29" height="29"/>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="example@example.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vnj-IT-fUc">
                                                 <rect key="frame" x="135" y="153" width="123.33333333333331" height="13.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -254,6 +262,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="EJZ-7G-WWm" firstAttribute="top" secondItem="LFN-Ua-zzC" secondAttribute="bottom" constant="20" id="4gA-40-ZXP"/>
+                                            <constraint firstItem="5bg-e5-bbk" firstAttribute="trailing" secondItem="lJK-rS-crk" secondAttribute="trailing" constant="-15" id="7mi-pE-Q64"/>
                                             <constraint firstItem="LFN-Ua-zzC" firstAttribute="top" secondItem="Vnj-IT-fUc" secondAttribute="bottom" constant="30" id="8gq-CC-TRY"/>
                                             <constraint firstItem="EJZ-7G-WWm" firstAttribute="leading" secondItem="LFN-Ua-zzC" secondAttribute="leading" id="LyE-NH-qCr"/>
                                             <constraint firstItem="Vnj-IT-fUc" firstAttribute="centerX" secondItem="lJK-rS-crk" secondAttribute="centerX" id="O6F-bo-t7r"/>
@@ -266,6 +275,7 @@
                                             <constraint firstItem="Vnj-IT-fUc" firstAttribute="top" secondItem="lJK-rS-crk" secondAttribute="bottom" constant="5" id="dXr-Gq-lfp"/>
                                             <constraint firstItem="uNg-YV-FDb" firstAttribute="top" secondItem="EJZ-7G-WWm" secondAttribute="bottom" constant="20" id="eCM-0s-R9f"/>
                                             <constraint firstItem="lJK-rS-crk" firstAttribute="centerX" secondItem="ykt-Wf-hSu" secondAttribute="centerX" id="fHy-nV-KWl"/>
+                                            <constraint firstItem="5bg-e5-bbk" firstAttribute="bottom" secondItem="lJK-rS-crk" secondAttribute="bottom" constant="-15" id="mYC-RG-rcC"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -311,6 +321,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera" width="29" height="29"/>
         <image name="selectPictureIcon" width="104" height="104"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
