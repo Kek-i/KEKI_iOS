@@ -79,6 +79,16 @@ extension FeedCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let width = scrollView.bounds.size.width
+        let x = scrollView.contentOffset.x + (width/2)
+        
+        let newPage = Int(x / width)
+        if pageControl.currentPage != newPage {
+            pageControl.currentPage = newPage
+        }
+    }
 }
 
 
