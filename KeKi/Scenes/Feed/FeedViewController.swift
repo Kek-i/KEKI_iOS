@@ -22,9 +22,6 @@ class FeedViewController: UIViewController {
 
     
     // MARK: - Helper Methods (Setup Method, ...)
-    private func setup() {
-//        tableView.feedAlertDelegate = self
-    }
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.isHidden = false
