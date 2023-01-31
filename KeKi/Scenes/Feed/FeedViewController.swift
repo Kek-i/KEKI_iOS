@@ -29,6 +29,7 @@ class FeedViewController: UIViewController {
     }
     
     private func setupTableView() {
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "FeedCell", bundle: nil), forCellReuseIdentifier: "FeedCell")

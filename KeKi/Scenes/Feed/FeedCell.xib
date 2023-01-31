@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -33,10 +34,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2IJ-Gl-GJa">
-                                <rect key="frame" x="262.33333333333331" y="18.000000000000004" width="47.666666666666686" height="34.333333333333343"/>
+                                <rect key="frame" x="282" y="20" width="28" height="30"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="ellipsis" catalog="system"/>
+                                <buttonConfiguration key="configuration" style="plain" image="ellipsis.vertical"/>
                                 <connections>
                                     <action selector="didTapViewmoreButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6rP-RF-3CT"/>
                                 </connections>
@@ -140,6 +141,13 @@
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="feedHeart"/>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OuS-tT-pVB">
+                        <rect key="frame" x="10" y="589.33333333333337" width="300" height="0.66666666666662877"/>
+                        <color key="backgroundColor" systemColor="systemGray3Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.69999999999999996" id="Nkk-1e-0d8"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="e5N-ye-wT5" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="3pZ-ey-e4h"/>
@@ -148,6 +156,7 @@
                     <constraint firstItem="e5N-ye-wT5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="IA1-v9-53U"/>
                     <constraint firstItem="fLN-MI-dcj" firstAttribute="top" secondItem="p5c-uC-NH0" secondAttribute="bottom" constant="20" id="JO3-b1-aWN"/>
                     <constraint firstAttribute="trailing" secondItem="f3U-f8-ueK" secondAttribute="trailing" id="LjV-gC-LIB"/>
+                    <constraint firstAttribute="bottom" secondItem="OuS-tT-pVB" secondAttribute="bottom" constant="10" id="Mko-BP-sZO"/>
                     <constraint firstAttribute="trailingMargin" secondItem="e5N-ye-wT5" secondAttribute="trailing" id="Mzz-ga-XHb"/>
                     <constraint firstItem="e5N-ye-wT5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="P1q-7j-Jxp"/>
                     <constraint firstItem="f3U-f8-ueK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SFo-fs-rKY"/>
@@ -156,6 +165,7 @@
                     <constraint firstItem="fLN-MI-dcj" firstAttribute="leading" secondItem="p5c-uC-NH0" secondAttribute="leading" id="Y6u-8X-qf3"/>
                     <constraint firstItem="f3U-f8-ueK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Zd1-8h-BHd"/>
                     <constraint firstItem="vRu-g1-Tyd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="aCU-ta-exD"/>
+                    <constraint firstAttribute="trailing" secondItem="OuS-tT-pVB" secondAttribute="trailing" constant="10" id="aJo-ac-Iep"/>
                     <constraint firstItem="oSK-8L-8m5" firstAttribute="top" secondItem="p5c-uC-NH0" secondAttribute="bottom" constant="20" id="c3H-ea-2e7"/>
                     <constraint firstItem="vRu-g1-Tyd" firstAttribute="top" secondItem="e5N-ye-wT5" secondAttribute="bottom" id="dd8-pd-ydH"/>
                     <constraint firstItem="p5c-uC-NH0" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="fh5-dn-sWa"/>
@@ -165,6 +175,7 @@
                     <constraint firstItem="e5N-ye-wT5" firstAttribute="top" secondItem="Gau-NA-CUj" secondAttribute="bottom" id="rdJ-RN-LEl"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Gau-NA-CUj" secondAttribute="trailing" id="riz-dA-vCM"/>
                     <constraint firstItem="e5N-ye-wT5" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="rk7-wX-cr1"/>
+                    <constraint firstItem="OuS-tT-pVB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="twD-yr-6Zl"/>
                     <constraint firstAttribute="bottomMargin" secondItem="fLN-MI-dcj" secondAttribute="bottom" constant="25.670000000000002" id="xlc-gU-Npu"/>
                     <constraint firstItem="e5N-ye-wT5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ylm-Ic-exc"/>
                 </constraints>
@@ -180,8 +191,11 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="ellipsis.vertical" width="4" height="16"/>
         <image name="feedHeart" width="27" height="25"/>
         <image name="sellerIcon" width="107" height="107"/>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
