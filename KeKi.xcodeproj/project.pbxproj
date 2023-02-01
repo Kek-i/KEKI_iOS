@@ -25,7 +25,7 @@
 		A2434B0829865B7700F60D1A /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B0729865B7700F60D1A /* Search.storyboard */; };
 		A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B0929865B8000F60D1A /* Store.storyboard */; };
 		A2434B0C29865B8B00F60D1A /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0B29865B8B00F60D1A /* StoreViewController.swift */; };
-		A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0D29865B9600F60D1A /* MyPageViewContoller.swift */; };
+		A2434B0E29865B9600F60D1A /* UnLoginMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0D29865B9600F60D1A /* UnLoginMyPageViewController.swift */; };
 		A2434B1029865BA000F60D1A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0F29865BA000F60D1A /* CalendarViewController.swift */; };
 		A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1129865BA700F60D1A /* Calendar.storyboard */; };
 		A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1329865BAD00F60D1A /* MyPage.storyboard */; };
@@ -43,6 +43,8 @@
 		A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */; };
 		A2B1CD782988D8C200D87570 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */; };
 		A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F607622989F53A00F4F3DD /* UIViewController+.swift */; };
+		A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */; };
+		A2F60767298A238A00F4F3DD /* AppInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F60766298A238A00F4F3DD /* AppInfoCell.swift */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +69,7 @@
 		A2434B0729865B7700F60D1A /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		A2434B0929865B8000F60D1A /* Store.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
 		A2434B0B29865B8B00F60D1A /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
-		A2434B0D29865B9600F60D1A /* MyPageViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewContoller.swift; sourceTree = "<group>"; };
+		A2434B0D29865B9600F60D1A /* UnLoginMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnLoginMyPageViewController.swift; sourceTree = "<group>"; };
 		A2434B0F29865BA000F60D1A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A2434B1129865BA700F60D1A /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		A2434B1329865BAD00F60D1A /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
@@ -84,6 +86,8 @@
 		A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailViewController.swift; sourceTree = "<group>"; };
 		A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2F607622989F53A00F4F3DD /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMyPageViewController.swift; sourceTree = "<group>"; };
+		A2F60766298A238A00F4F3DD /* AppInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppInfoCell.swift; path = /Users/gimchowon/Desktop/Keki/KEKI_iOS/KeKi/Scenes/MyPage/AppInfoCell.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,8 +279,10 @@
 		A2434AF4298658EB00F60D1A /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				A2434B0D29865B9600F60D1A /* MyPageViewContoller.swift */,
+				A2434B0D29865B9600F60D1A /* UnLoginMyPageViewController.swift */,
+				A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */,
 				A2434B1329865BAD00F60D1A /* MyPage.storyboard */,
+				A2F60766298A238A00F4F3DD /* AppInfoCell.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -475,13 +481,15 @@
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
 				A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */,
 				A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */,
+				A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */,
 				A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
-				A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */,
+				A2434B0E29865B9600F60D1A /* UnLoginMyPageViewController.swift in Sources */,
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
 				A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */,
+				A2F60767298A238A00F4F3DD /* AppInfoCell.swift in Sources */,
 				A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */,
 				A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */,
 				A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */,
