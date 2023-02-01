@@ -47,6 +47,13 @@
 		A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD6F29888D2800D87570 /* AnnouncementCell.swift */; };
 		A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */; };
 		A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */; };
+		A2B1CD782988D8C200D87570 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */; };
+		A2B1CD7D2988EFE900D87570 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD7C2988EFE900D87570 /* FeedViewController.swift */; };
+		A2B1CD7F2988EFFE00D87570 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD7E2988EFFE00D87570 /* Feed.storyboard */; };
+		A2B1CD822988F92C00D87570 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD802988F92C00D87570 /* FeedCell.swift */; };
+		A2B1CD832988F92C00D87570 /* FeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD812988F92C00D87570 /* FeedCell.xib */; };
+		A2F6075529890F8C00F4F3DD /* FeedImgsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6075329890F8C00F4F3DD /* FeedImgsCell.swift */; };
+		A2F6075629890F8C00F4F3DD /* FeedImgsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F6075429890F8C00F4F3DD /* FeedImgsCell.xib */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +99,13 @@
 		A2B1CD6F29888D2800D87570 /* AnnouncementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementCell.swift; sourceTree = "<group>"; };
 		A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnouncementCell.xib; sourceTree = "<group>"; };
 		A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailViewController.swift; sourceTree = "<group>"; };
+		A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		A2B1CD7C2988EFE900D87570 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		A2B1CD7E2988EFFE00D87570 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
+		A2B1CD802988F92C00D87570 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		A2B1CD812988F92C00D87570 /* FeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedCell.xib; sourceTree = "<group>"; };
+		A2F6075329890F8C00F4F3DD /* FeedImgsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImgsCell.swift; sourceTree = "<group>"; };
+		A2F6075429890F8C00F4F3DD /* FeedImgsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedImgsCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +204,7 @@
 		A2434AE9298657B100F60D1A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				A2B1CD7B2988EFD800D87570 /* Feed */,
 				A2434AF3298658E600F60D1A /* Login */,
 				A2434AF2298658D800F60D1A /* Home */,
 				A2434AF82986592B00F60D1A /* Announcement */,
@@ -260,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				A2434ACD298651F500F60D1A /* HomeViewController.swift */,
+				A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */,
 				A2434ACF298651F500F60D1A /* Home.storyboard */,
 			);
 			path = Home;
@@ -342,6 +358,19 @@
 			path = UserProfileSetting;
 			sourceTree = "<group>";
 		};
+		A2B1CD7B2988EFD800D87570 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				A2B1CD802988F92C00D87570 /* FeedCell.swift */,
+				A2B1CD812988F92C00D87570 /* FeedCell.xib */,
+				A2F6075329890F8C00F4F3DD /* FeedImgsCell.swift */,
+				A2F6075429890F8C00F4F3DD /* FeedImgsCell.xib */,
+				A2B1CD7C2988EFE900D87570 /* FeedViewController.swift */,
+				A2B1CD7E2988EFFE00D87570 /* Feed.storyboard */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -414,10 +443,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2F6075629890F8C00F4F3DD /* FeedImgsCell.xib in Resources */,
 				A2434AFE29865AF100F60D1A /* Login.storyboard in Resources */,
+				A2B1CD7F2988EFFE00D87570 /* Feed.storyboard in Resources */,
 				A2434AD6298651F600F60D1A /* LaunchScreen.storyboard in Resources */,
 				A2434B0029865B0A00F60D1A /* Announcement.storyboard in Resources */,
 				A2434AD3298651F600F60D1A /* Assets.xcassets in Resources */,
+				A2B1CD832988F92C00D87570 /* FeedCell.xib in Resources */,
 				A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */,
 				A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */,
 				A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */,
@@ -483,11 +515,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2434B1029865BA000F60D1A /* CalendarViewController.swift in Sources */,
+				A2B1CD822988F92C00D87570 /* FeedCell.swift in Sources */,
 				A2434B0C29865B8B00F60D1A /* StoreViewController.swift in Sources */,
 				A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */,
 				738F64992988A9BE006BB124 /* TabViewController.swift in Sources */,
 				A2434B0629865B7000F60D1A /* SearchViewController.swift in Sources */,
+				A2B1CD7D2988EFE900D87570 /* FeedViewController.swift in Sources */,
 				A2B1CD612987687F00D87570 /* BuyerProfileSetViewController.swift in Sources */,
+				A2F6075529890F8C00F4F3DD /* FeedImgsCell.swift in Sources */,
+				A2B1CD782988D8C200D87570 /* HomeCollectionViewCell.swift in Sources */,
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
 
 				A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */,
@@ -665,7 +701,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 
-				INFOPLIST_KEY_UIMainStoryboardFile = Announcement;
+				INFOPLIST_KEY_UIMainStoryboardFile = Feed;
 
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -700,7 +736,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 
-				INFOPLIST_KEY_UIMainStoryboardFile = Announcement;
+				INFOPLIST_KEY_UIMainStoryboardFile = Feed;
 
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
