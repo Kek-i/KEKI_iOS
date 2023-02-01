@@ -12,7 +12,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var storeImageView: UIImageView!
     @IBOutlet weak var storeNameLabel: UILabel!
     
-    func setupLayout() {        
+    func setupLayout() {
+        storeImageView.layer.cornerRadius = 28
+
         storeImageView.layer.masksToBounds = false
         storeImageView.layer.borderWidth = 0
         storeImageView.layer.borderColor = UIColor.white.cgColor
