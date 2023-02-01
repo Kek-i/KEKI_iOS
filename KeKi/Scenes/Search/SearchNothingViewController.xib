@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchNothingViewController" customModule="KeKi" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController restorationIdentifier="SearchNothingViewController" id="jFQ-bt-h5Z" customClass="SearchNothingViewController" customModule="KeKi" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="Xg2-gF-HFu">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37c-JP-saL">
+                        <rect key="frame" x="25" y="48" width="75" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="75" id="wrX-Kx-foO"/>
+                            <constraint firstAttribute="height" constant="31" id="zZA-Sg-X9K"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <inset key="imageEdgeInsets" minX="14" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <menu key="menu" id="bne-tg-OaK">
+                            <children>
+                                <command title="Item 1" id="zYZ-PK-7vx"/>
+                                <command title="Item 2" id="B0h-oa-Nc3"/>
+                            </children>
+                        </menu>
+                        <state key="normal" title="최신순" image="picker">
+                            <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cake" translatesAutoresizingMaskIntoConstraints="NO" id="5U5-Dh-TgN">
+                        <rect key="frame" x="147" y="242" width="111" height="79"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="79" id="Drz-6b-sbc"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색결과가 없습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aze-2Z-Oef">
+                        <rect key="frame" x="117" y="331" width="180" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="sb1-7n-FdM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <viewLayoutGuide key="safeArea" id="cpf-Yg-FvZ"/>
+                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <constraints>
+                    <constraint firstItem="5U5-Dh-TgN" firstAttribute="leading" secondItem="cpf-Yg-FvZ" secondAttribute="leading" constant="147" id="IXR-r7-e7W"/>
+                    <constraint firstItem="37c-JP-saL" firstAttribute="leading" secondItem="cpf-Yg-FvZ" secondAttribute="leading" constant="25" id="Mq9-vV-EzJ"/>
+                    <constraint firstItem="37c-JP-saL" firstAttribute="top" secondItem="cpf-Yg-FvZ" secondAttribute="top" id="aA1-05-28c"/>
+                    <constraint firstItem="cpf-Yg-FvZ" firstAttribute="trailing" secondItem="Aze-2Z-Oef" secondAttribute="trailing" constant="117" id="aJg-cR-mb6"/>
+                    <constraint firstItem="cpf-Yg-FvZ" firstAttribute="trailing" secondItem="5U5-Dh-TgN" secondAttribute="trailing" constant="156" id="czM-f6-slu"/>
+                    <constraint firstItem="Aze-2Z-Oef" firstAttribute="leading" secondItem="cpf-Yg-FvZ" secondAttribute="leading" constant="117" id="mM4-A5-XxU"/>
+                    <constraint firstItem="5U5-Dh-TgN" firstAttribute="top" secondItem="cpf-Yg-FvZ" secondAttribute="top" constant="194" id="mSZ-vo-JVq"/>
+                    <constraint firstItem="Aze-2Z-Oef" firstAttribute="top" secondItem="5U5-Dh-TgN" secondAttribute="bottom" constant="10" id="zJt-6A-YuY"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="219" y="23"/>
+        </viewController>
+    </objects>
+    <resources>
+        <image name="cake" width="72" height="79"/>
+        <image name="picker" width="11" height="6.5"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -51,6 +51,10 @@ class SearchMainViewController: UIViewController {
                                             CGColor(red: 244.0 / 255.0, green: 219.0 / 255.0, blue: 203.0 / 255.0, alpha: 1),
                                             CGColor(red: 243.0 / 255.0, green: 224.0 / 255.0, blue: 250.0 / 255.0, alpha: 1)]
     
+    
+    var searchText: String?
+    var checkSearch = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,6 +68,30 @@ class SearchMainViewController: UIViewController {
         flowLayout.scrollDirection = .horizontal
         
         cv.collectionViewLayout = flowLayout
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if checkSearch == true {
+            guard let searchDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchDetailViewController") as? SearchDetailViewController else {return}
+            
+            guard let searchNothingVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchNothingViewController") as? SearchNothingViewController else {return}
+            
+            searchDetailVC.modalPresentationStyle = .fullScreen
+            searchNothingVC.modalPresentationStyle = .fullScreen
+            
+            if searchText == nil {
+                self.present(searchNothingVC, animated: false)
+            }else {
+                self.present(searchDetailVC, animated: false)
+            }
+        }
+    }
+    
+    func search(text: String?) {
+        searchText = text
+        checkSearch = true
+        
+        viewDidAppear(true)
     }
     
 }
