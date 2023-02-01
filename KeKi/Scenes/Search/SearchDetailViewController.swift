@@ -26,7 +26,6 @@ class SearchDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
 }
 
 extension SearchDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {

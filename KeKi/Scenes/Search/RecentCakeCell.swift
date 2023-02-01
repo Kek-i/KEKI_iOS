@@ -12,7 +12,6 @@ class RecentCakeCell: UICollectionViewCell {
     @IBOutlet weak var recentCakeImageView: UIImageView!{
         didSet{
             recentCakeImageView.layer.cornerRadius = 10
-            
         }
     }
     

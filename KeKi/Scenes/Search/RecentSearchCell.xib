@@ -38,5 +38,13 @@
             </connections>
             <point key="canvasLocation" x="-2.2900763358778624" y="-2.4647887323943665"/>
         </collectionViewCell>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bsA-M0-6Sz">
+            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+            <nil key="textColor"/>
+            <nil key="highlightedColor"/>
+            <point key="canvasLocation" x="266" y="-3"/>
+        </label>
     </objects>
 </document>

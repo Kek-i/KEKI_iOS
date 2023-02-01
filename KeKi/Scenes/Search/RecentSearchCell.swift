@@ -9,7 +9,6 @@ import UIKit
 
 class RecentSearchCell: UICollectionViewCell {
 
-
     @IBOutlet weak var recentLabel: UILabel!
     
     override func awakeFromNib() {

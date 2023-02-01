@@ -53,7 +53,6 @@ extension SearchViewController: UITextFieldDelegate {
         
         return true
     }
-    
     func search(text: String?){
         // 검색
         

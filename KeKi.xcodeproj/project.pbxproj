@@ -28,6 +28,7 @@
 		739EA520298A26C9008505CB /* SearchDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 739EA51F298A26C9008505CB /* SearchDetailViewController.storyboard */; };
 		739EA522298A26DC008505CB /* SearchMainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 739EA521298A26DC008505CB /* SearchMainViewController.storyboard */; };
 		739EA524298A26EC008505CB /* SearchNothingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 739EA523298A26EC008505CB /* SearchNothingViewController.storyboard */; };
+		739EA528298A37A1008505CB /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EA527298A37A1008505CB /* test.swift */; };
 		A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434AC9298651F500F60D1A /* AppDelegate.swift */; };
 		A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434ACB298651F500F60D1A /* SceneDelegate.swift */; };
 		A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434ACD298651F500F60D1A /* HomeViewController.swift */; };
@@ -77,6 +78,7 @@
 		739EA51F298A26C9008505CB /* SearchDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchDetailViewController.storyboard; sourceTree = "<group>"; };
 		739EA521298A26DC008505CB /* SearchMainViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchMainViewController.storyboard; sourceTree = "<group>"; };
 		739EA523298A26EC008505CB /* SearchNothingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchNothingViewController.storyboard; sourceTree = "<group>"; };
+		739EA527298A37A1008505CB /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		78B388A7669643F3338C197A /* Pods-KeKi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeKi.release.xcconfig"; path = "Target Support Files/Pods-KeKi/Pods-KeKi.release.xcconfig"; sourceTree = "<group>"; };
 		9C943509B2DF89C336174319 /* Pods-KeKi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeKi.debug.xcconfig"; path = "Target Support Files/Pods-KeKi/Pods-KeKi.debug.xcconfig"; sourceTree = "<group>"; };
 		A2434AC6298651F500F60D1A /* KeKi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeKi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -309,6 +311,7 @@
 				738F64A22988D01C006BB124 /* PopularSearchCell.xib */,
 				738F64A52988D02E006BB124 /* RecentCakeCell.swift */,
 				738F64A62988D02E006BB124 /* RecentCakeCell.xib */,
+				739EA527298A37A1008505CB /* test.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */,
 				738F64992988A9BE006BB124 /* TabViewController.swift in Sources */,
 				739A581729891BC7001E9755 /* SearchMainViewController.swift in Sources */,
+				739EA528298A37A1008505CB /* test.swift in Sources */,
 				739A581A29891E97001E9755 /* SearchDetailViewController.swift in Sources */,
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
 				738F64A72988D02E006BB124 /* RecentCakeCell.swift in Sources */,

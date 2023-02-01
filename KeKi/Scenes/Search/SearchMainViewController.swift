@@ -8,8 +8,7 @@
 import UIKit
 
 class SearchMainViewController: UIViewController {
-
-
+    
     @IBOutlet weak var recentSearchCV: UICollectionView!{
         didSet{
             collectionViewInit(cv: recentSearchCV)
