@@ -120,10 +120,6 @@ extension LoginMyPageViewController: UITableViewDataSource {
 
 extension LoginMyPageViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30.0
-    }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
     }
@@ -135,5 +131,10 @@ extension LoginMyPageViewController: UITableViewDelegate {
         header.textLabel?.frame = header.bounds
         header.textLabel?.textAlignment = .left
     }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 35.0
+    }
+    
     
 }

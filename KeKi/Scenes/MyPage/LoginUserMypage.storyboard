@@ -52,7 +52,7 @@
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="30" estimatedSectionHeaderHeight="-1" sectionFooterHeight="20" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="htJ-aM-yF4">
-                                                <rect key="frame" x="0.0" y="110" width="393" height="790"/>
+                                                <rect key="frame" x="0.0" y="135" width="393" height="765"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="separatorColor" red="0.98039215690000003" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <prototypes>
@@ -111,7 +111,7 @@
                                             <constraint firstItem="96F-pD-DkM" firstAttribute="top" secondItem="lAZ-ky-MTE" secondAttribute="top" constant="10" id="PIM-Bp-G9b"/>
                                             <constraint firstAttribute="trailing" secondItem="96F-pD-DkM" secondAttribute="trailing" id="Y3h-Dn-3dm"/>
                                             <constraint firstAttribute="trailing" secondItem="htJ-aM-yF4" secondAttribute="trailing" id="aaM-aP-Rsm"/>
-                                            <constraint firstItem="htJ-aM-yF4" firstAttribute="top" secondItem="96F-pD-DkM" secondAttribute="bottom" id="iHt-3Y-yN1"/>
+                                            <constraint firstItem="htJ-aM-yF4" firstAttribute="top" secondItem="96F-pD-DkM" secondAttribute="bottom" constant="25" id="iHt-3Y-yN1"/>
                                         </constraints>
                                     </view>
                                 </subviews>
