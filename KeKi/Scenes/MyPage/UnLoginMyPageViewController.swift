@@ -88,6 +88,15 @@ extension UnLoginMyPageViewController: UITableViewDelegate {
         case 0:
             // TODO: 공지 목록 화면으로 이동
             print("TODO: 공지 목록 화면으로 이동")
+            let storyboard = UIStoryboard.init(name: "Announcement", bundle: nil)
+            guard let announcementViewController = storyboard.instantiateViewController(withIdentifier: "AnnouncementViewController") as? AnnouncementViewController else { return }
+            
+            let backItem = UIBarButtonItem()
+            backItem.title = "내 정보"
+            navigationItem.backBarButtonItem = backItem
+            
+            navigationController?.pushViewController(announcementViewController, animated: true)
+
         case 1:
             // TODO: 약관 안내
             print("TODO: 약관 안내")
