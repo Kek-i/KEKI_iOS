@@ -7,7 +7,12 @@
 
 import UIKit
 
-enum ESectionModel {
+enum UserKind {
+    case buyer
+    case seller
+}
+
+enum SectionModel {
     case accountSetting(titleList: [String])
     case nofiticationSetting(titleList: [String])
     case appInfo(titleList: [String])
@@ -16,6 +21,8 @@ enum ESectionModel {
 class LoginMyPageViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
+    var userKind: UserKind? = .buyer
+    
     private var sections = [ "계정 설정", "알림 설정", "앱 정보" ]
     
     private var accountSettingTitles = [ "프로필 편집", "로그아웃", "회원탈퇴" ]
@@ -34,7 +41,9 @@ class LoginMyPageViewController: UIViewController {
     }
     
     // MARK: - Action Methods (IBAction, ...)
-
+    @IBAction func changedNotificationSwitchValue(_ sender: UISwitch) {
+        // TODO: switch 값에 따라 푸시 알림 설정 값 변경하기
+    }
     
     // MARK: - Helper Methods (Setup Method, ...)
     private func setupNavigationBar() {
@@ -69,6 +78,70 @@ class LoginMyPageViewController: UIViewController {
         tableView.layer.shadowOpacity = 0.2
         tableView.layer.shadowRadius = 11
         tableView.layer.shadowOffset = CGSize(width: 6, height: 6)
+    }
+    
+    
+    ///
+    ///
+    /// cell did tap action methods
+    ///
+    ///
+    private func editProfile() {
+        let storyboard = UIStoryboard.init(name: "UserProfileSetting", bundle: nil)
+        let next: UIViewController?
+        switch userKind {
+        case .buyer:
+            next = storyboard.instantiateViewController(withIdentifier: "BuyerProfileSetViewController") as? BuyerProfileSetViewController
+
+        case .seller:
+            next = storyboard.instantiateViewController(withIdentifier: "SellerProfileSetViewController") as? SellerProfileSetViewController
+        default:
+            next = UIViewController()
+        }
+        if let next = next {
+            let backItem = UIBarButtonItem()
+            backItem.title = "마이페이지"
+            navigationItem.backBarButtonItem = backItem
+            navigationController?.pushViewController(next, animated: true)
+
+        }
+    }
+    
+    private func logout() {
+        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+        alertViewController.config(todo: .logout)
+        alertViewController.modalPresentationStyle = .fullScreen
+        present(alertViewController, animated: true)
+    }
+    
+    private func secession() {
+        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+        alertViewController.config(todo: .secession)
+        alertViewController.modalPresentationStyle = .fullScreen
+        present(alertViewController, animated: true)
+    }
+    
+    private func showAnnouncement() {
+        let storyboard = UIStoryboard.init(name: "Announcement", bundle: nil)
+        guard let announcementViewController = storyboard.instantiateViewController(withIdentifier: "AnnouncementViewController") as? AnnouncementViewController else { return }
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "마이페이지"
+        navigationItem.backBarButtonItem = backItem
+        
+        navigationController?.pushViewController(announcementViewController, animated: true)
+    }
+    
+    private func loadTermsInfo() {
+        // TODO: 약관안내 웹뷰 구현
+    }
+    
+    private func loadPrivacyPolicy() {
+        let storyboard = UIStoryboard.init(name: "PolicyWebView", bundle: nil)
+        guard let policyWebViewController = storyboard.instantiateViewController(withIdentifier: "PolicyWebViewController") as? PolicyWebViewController else { return }
+        navigationController?.pushViewController(policyWebViewController, animated: true)
     }
     
 }
@@ -136,5 +209,35 @@ extension LoginMyPageViewController: UITableViewDelegate {
         return 35.0
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                editProfile()
+            case 1:
+                logout()
+                return
+            case 2:
+                secession()
+                return
+            default:
+                return
+            }
+        case 2:
+            switch indexPath.row {
+            case 0:
+                showAnnouncement()
+            case 1:
+                loadTermsInfo()
+                return
+            case 2:
+                loadPrivacyPolicy()
+            default:
+                return
+            }
+        default:
+            return
+        }
+    }
 }

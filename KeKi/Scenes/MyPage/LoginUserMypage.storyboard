@@ -81,6 +81,9 @@
                                                                     <rect key="frame" x="294" y="6.3333333333333321" width="51" height="30.999999999999996"/>
                                                                     <color key="onTintColor" red="0.98039215690000003" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <color key="thumbTintColor" red="0.85098039219999999" green="0.28235294119999998" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <connections>
+                                                                        <action selector="changedNotificationSwitchValue:" destination="ggc-4D-FcP" eventType="valueChanged" id="1Yo-BS-v2l"/>
+                                                                    </connections>
                                                                 </switch>
                                                             </subviews>
                                                             <constraints>

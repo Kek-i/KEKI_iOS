@@ -60,6 +60,23 @@ class UnLoginMyPageViewController: UIViewController {
         appInfoTableView.layer.shadowRadius = 11
         appInfoTableView.layer.shadowOffset = CGSize(width: 6, height: 6)
     }
+    
+    private func loadAnnouncement() {
+        let storyboard = UIStoryboard.init(name: "Announcement", bundle: nil)
+        guard let announcementViewController = storyboard.instantiateViewController(withIdentifier: "AnnouncementViewController") as? AnnouncementViewController else { return }
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "내 정보"
+        navigationItem.backBarButtonItem = backItem
+        
+        navigationController?.pushViewController(announcementViewController, animated: true)
+    }
+    
+    private func loadPrivatePolicy() {
+        let storyboard = UIStoryboard.init(name: "PolicyWebView", bundle: nil)
+        guard let policyWebViewController = storyboard.instantiateViewController(withIdentifier: "PolicyWebViewController") as? PolicyWebViewController else { return }
+        navigationController?.pushViewController(policyWebViewController, animated: true)
+    }
 }
 
 // MARK: - Extensions
@@ -86,25 +103,14 @@ extension UnLoginMyPageViewController: UITableViewDelegate {
         print(indexPath.row)
         switch indexPath.row {
         case 0:
-            // TODO: 공지 목록 화면으로 이동
-            print("TODO: 공지 목록 화면으로 이동")
-            let storyboard = UIStoryboard.init(name: "Announcement", bundle: nil)
-            guard let announcementViewController = storyboard.instantiateViewController(withIdentifier: "AnnouncementViewController") as? AnnouncementViewController else { return }
-            
-            let backItem = UIBarButtonItem()
-            backItem.title = "내 정보"
-            navigationItem.backBarButtonItem = backItem
-            
-            navigationController?.pushViewController(announcementViewController, animated: true)
-
+            loadAnnouncement()
         case 1:
-            // TODO: 약관 안내
-            print("TODO: 약관 안내")
+            // TODO: 약관 안내 웹뷰 띄우기
+            return
         case 2:
-            // TODO: 개인정보처리방침으로 이동
-            print("TODO: 개인정보처리방침으로 이동")
+            loadPrivatePolicy()
         default:
-            print("None")
+            return
         }
     }
 }
