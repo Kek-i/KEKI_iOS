@@ -44,7 +44,7 @@
 		A2B1CD782988D8C200D87570 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */; };
 		A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F607622989F53A00F4F3DD /* UIViewController+.swift */; };
 		A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */; };
-		A2F60767298A238A00F4F3DD /* AppInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F60766298A238A00F4F3DD /* AppInfoCell.swift */; };
+		A2F60767298A238A00F4F3DD /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F60766298A238A00F4F3DD /* SettingTableViewCell.swift */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,7 +87,7 @@
 		A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2F607622989F53A00F4F3DD /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMyPageViewController.swift; sourceTree = "<group>"; };
-		A2F60766298A238A00F4F3DD /* AppInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppInfoCell.swift; path = /Users/gimchowon/Desktop/Keki/KEKI_iOS/KeKi/Scenes/MyPage/AppInfoCell.swift; sourceTree = "<absolute>"; };
+		A2F60766298A238A00F4F3DD /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingTableViewCell.swift; path = /Users/gimchowon/Desktop/Keki/KEKI_iOS/KeKi/Scenes/MyPage/SettingTableViewCell.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,7 +282,7 @@
 				A2434B0D29865B9600F60D1A /* UnLoginMyPageViewController.swift */,
 				A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */,
 				A2434B1329865BAD00F60D1A /* MyPage.storyboard */,
-				A2F60766298A238A00F4F3DD /* AppInfoCell.swift */,
+				A2F60766298A238A00F4F3DD /* SettingTableViewCell.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 				A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */,
-				A2F60767298A238A00F4F3DD /* AppInfoCell.swift in Sources */,
+				A2F60767298A238A00F4F3DD /* SettingTableViewCell.swift in Sources */,
 				A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */,
 				A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */,
 				A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */,

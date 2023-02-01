@@ -69,8 +69,8 @@ extension UnLoginMyPageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AppInfoCell", for: indexPath) as? AppInfoCell else { return UITableViewCell() }
-        cell.noticeLabel.text = appInfoTitleList[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell() }
+        cell.titleLabel.text = appInfoTitleList[indexPath.row]
         if indexPath.row != 0 { cell.viewmoreImageView.isHidden = true }
         return cell
     }
