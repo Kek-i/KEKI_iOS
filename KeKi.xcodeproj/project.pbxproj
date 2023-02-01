@@ -54,6 +54,10 @@
 		A2B1CD832988F92C00D87570 /* FeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD812988F92C00D87570 /* FeedCell.xib */; };
 		A2F6075529890F8C00F4F3DD /* FeedImgsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6075329890F8C00F4F3DD /* FeedImgsCell.swift */; };
 		A2F6075629890F8C00F4F3DD /* FeedImgsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F6075429890F8C00F4F3DD /* FeedImgsCell.xib */; };
+		A2F607592989632700F4F3DD /* ProductDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2F607582989632700F4F3DD /* ProductDetail.storyboard */; };
+		A2F6075B2989633400F4F3DD /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6075A2989633400F4F3DD /* ProductDetailViewController.swift */; };
+		A2F607602989DCB000F4F3DD /* ProductImgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6075E2989DCB000F4F3DD /* ProductImgCell.swift */; };
+		A2F607612989DCB000F4F3DD /* ProductImgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F6075F2989DCB000F4F3DD /* ProductImgCell.xib */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +110,10 @@
 		A2B1CD812988F92C00D87570 /* FeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedCell.xib; sourceTree = "<group>"; };
 		A2F6075329890F8C00F4F3DD /* FeedImgsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImgsCell.swift; sourceTree = "<group>"; };
 		A2F6075429890F8C00F4F3DD /* FeedImgsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedImgsCell.xib; sourceTree = "<group>"; };
+		A2F607582989632700F4F3DD /* ProductDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductDetail.storyboard; sourceTree = "<group>"; };
+		A2F6075A2989633400F4F3DD /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		A2F6075E2989DCB000F4F3DD /* ProductImgCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImgCell.swift; sourceTree = "<group>"; };
+		A2F6075F2989DCB000F4F3DD /* ProductImgCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductImgCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +212,7 @@
 		A2434AE9298657B100F60D1A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				A2F60757298962F900F4F3DD /* Product */,
 				A2B1CD7B2988EFD800D87570 /* Feed */,
 				A2434AF3298658E600F60D1A /* Login */,
 				A2434AF2298658D800F60D1A /* Home */,
@@ -371,6 +380,18 @@
 			path = Feed;
 			sourceTree = "<group>";
 		};
+		A2F60757298962F900F4F3DD /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				A2F607582989632700F4F3DD /* ProductDetail.storyboard */,
+				A2F6075E2989DCB000F4F3DD /* ProductImgCell.swift */,
+				A2F6075F2989DCB000F4F3DD /* ProductImgCell.xib */,
+				A2F6075A2989633400F4F3DD /* ProductDetailViewController.swift */,
+			);
+			name = Product;
+			path = KeKi/Scenes/Product;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -449,10 +470,12 @@
 				A2434AD6298651F600F60D1A /* LaunchScreen.storyboard in Resources */,
 				A2434B0029865B0A00F60D1A /* Announcement.storyboard in Resources */,
 				A2434AD3298651F600F60D1A /* Assets.xcassets in Resources */,
+				A2F607612989DCB000F4F3DD /* ProductImgCell.xib in Resources */,
 				A2B1CD832988F92C00D87570 /* FeedCell.xib in Resources */,
 				A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */,
 				A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */,
 				A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */,
+				A2F607592989632700F4F3DD /* ProductDetail.storyboard in Resources */,
 				A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */,
 				A2434B0829865B7700F60D1A /* Search.storyboard in Resources */,
 
@@ -534,6 +557,8 @@
 				738F64982988A9BE006BB124 /* StoreImageViewController.swift in Sources */,
 
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
+				A2F607602989DCB000F4F3DD /* ProductImgCell.swift in Sources */,
+				A2F6075B2989633400F4F3DD /* ProductDetailViewController.swift in Sources */,
 				A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */,
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
 
@@ -701,7 +726,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 
-				INFOPLIST_KEY_UIMainStoryboardFile = Feed;
+
+				INFOPLIST_KEY_UIMainStoryboardFile = ProductDetail;
+
 
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -736,7 +763,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 
-				INFOPLIST_KEY_UIMainStoryboardFile = Feed;
+				INFOPLIST_KEY_UIMainStoryboardFile = ProductDetail;
+
 
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
