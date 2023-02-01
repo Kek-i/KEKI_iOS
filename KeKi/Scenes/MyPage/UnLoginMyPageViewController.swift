@@ -56,8 +56,8 @@ class UnLoginMyPageViewController: UIViewController {
         appInfoTableView.layer.cornerRadius = 10
         
         appInfoTableView.layer.shadowColor = UIColor(red: 152/255, green: 113/255, blue: 113/255, alpha: 1).cgColor
-        appInfoTableView.layer.shadowOpacity = 0.3
-        appInfoTableView.layer.shadowRadius = 10
+        appInfoTableView.layer.shadowOpacity = 0.2
+        appInfoTableView.layer.shadowRadius = 11
         appInfoTableView.layer.shadowOffset = CGSize(width: 6, height: 6)
     }
 }

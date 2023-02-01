@@ -66,8 +66,8 @@ class LoginMyPageViewController: UIViewController {
         tableView.layer.cornerRadius = 10
         
         tableView.layer.shadowColor = UIColor(red: 152/255, green: 113/255, blue: 113/255, alpha: 1).cgColor
-        tableView.layer.shadowOpacity = 0.3
-        tableView.layer.shadowRadius = 10
+        tableView.layer.shadowOpacity = 0.2
+        tableView.layer.shadowRadius = 11
         tableView.layer.shadowOffset = CGSize(width: 6, height: 6)
     }
     
