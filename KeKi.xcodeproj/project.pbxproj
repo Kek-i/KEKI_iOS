@@ -42,6 +42,7 @@
 		A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */; };
 		A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */; };
 		A2B1CD782988D8C200D87570 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */; };
+		A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F607622989F53A00F4F3DD /* UIViewController+.swift */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnouncementCell.xib; sourceTree = "<group>"; };
 		A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailViewController.swift; sourceTree = "<group>"; };
 		A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		A2F607622989F53A00F4F3DD /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				A2B1CD692987A29000D87570 /* UITextField+.swift */,
+				A2F607622989F53A00F4F3DD /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */,
 				A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */,
+				A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */,
 				A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

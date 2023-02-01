@@ -10,7 +10,8 @@ import UIKit
 class HomeViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
-    var ddayCountingText: String? = "베이님! \n투리 생일이 3일 남았어요! \n특별한 하루를 준비해요"
+    var ddayCountingText: String? = "베이님! \n개강이 3일 남았어요! \n특별한 하루를 준비해요"
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var ddayCountingLabel: UILabel!
     
     @IBOutlet weak var tagContainerView: UIView!
@@ -24,6 +25,7 @@ class HomeViewController: UIViewController {
     // MARK: - Methods of LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        statusBarView?.backgroundColor = UIColor(red: 250/255, green: 236/255, blue: 236/255, alpha: 1)
         navigationController?.navigationBar.isHidden = true
         setup()
         setupLayout()
@@ -60,9 +62,17 @@ class HomeViewController: UIViewController {
     private func setUpDdayCountingLabel() {
         let attributedString = NSMutableAttributedString(string: ddayCountingText!)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 8 
+        paragraphStyle.lineSpacing = 8
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
         ddayCountingLabel.attributedText = attributedString
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            view.endEditing(true) // todo...
+            print("test")
+        }
+        sender.cancelsTouchesInView = false
     }
 }
 
@@ -80,5 +90,19 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+}
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+    }
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        return true     // 스크린 맨 위를 누르면 가장 상단으로 이동
+    }
 }
