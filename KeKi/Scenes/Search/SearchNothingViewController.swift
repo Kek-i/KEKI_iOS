@@ -9,7 +9,7 @@ import UIKit
 
 class SearchNothingViewController: UIViewController {
 
-    override func viewDidLoad() {
+    override func viewDidLoad() { 
         super.viewDidLoad()
     }
 }

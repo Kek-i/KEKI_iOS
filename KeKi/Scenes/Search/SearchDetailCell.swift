@@ -13,7 +13,7 @@ class SearchDetailCell: UICollectionViewCell {
     
     @IBOutlet weak var productTitleLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
-    
+     
     override func awakeFromNib() {
         super.awakeFromNib()
         

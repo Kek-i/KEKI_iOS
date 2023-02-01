@@ -27,7 +27,7 @@ class SearchDetailViewController: UIViewController {
         super.viewDidLoad()
     }
 }
-
+ 
 extension SearchDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10

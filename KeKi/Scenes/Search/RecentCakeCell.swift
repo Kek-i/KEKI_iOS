@@ -14,7 +14,7 @@ class RecentCakeCell: UICollectionViewCell {
             recentCakeImageView.layer.cornerRadius = 10
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         

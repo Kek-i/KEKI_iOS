@@ -16,7 +16,7 @@ class PopularSearchCell: UICollectionViewCell {
         
         self.layer.cornerRadius = 13.0
     }
-
+ 
     func setBackgroundColor(color: CGColor) {
         self.layer.backgroundColor = color
     }
