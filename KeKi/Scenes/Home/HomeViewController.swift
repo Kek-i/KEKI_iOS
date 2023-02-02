@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
 
     var ddayCountingText: String? = "베이님! \n투리 생일이 3일 남았어요! \n특별한 하루를 준비해요"
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var ddayCountingLabel: UILabel!
     
     @IBOutlet weak var tagContainerView: UIView!
