@@ -18,20 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="1150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oev-wJ-9C6">
-                                <rect key="frame" x="0.0" y="1033" width="393" height="83"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <tabBarItem image="homekit" catalog="system" id="ONN-wK-eNj" userLabel="home"/>
-                                    <tabBarItem image="calendar" catalog="system" id="ttg-dm-dFW" userLabel="calendar"/>
-                                    <tabBarItem image="magnifyingglass" catalog="system" id="t0y-Ee-xkp" userLabel="search"/>
-                                    <tabBarItem image="heart" catalog="system" id="vSq-mJ-Neo" userLabel="heart"/>
-                                    <tabBarItem image="person" catalog="system" id="j6N-Dz-2fp" userLabel="mypage"/>
-                                </items>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tabBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FIj-os-iIg">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="1050"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIj-os-iIg">
+                                <rect key="frame" x="0.0" y="103" width="393" height="1013"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vpN-R7-Hb9">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1050"/>
@@ -477,13 +465,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Oev-wJ-9C6" firstAttribute="top" secondItem="FIj-os-iIg" secondAttribute="bottom" id="3Eh-e4-R01"/>
-                            <constraint firstItem="Oev-wJ-9C6" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Bbo-Of-398"/>
                             <constraint firstItem="FIj-os-iIg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="GEo-pb-3ix"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FIj-os-iIg" secondAttribute="trailing" id="H1L-cc-kES"/>
                             <constraint firstItem="FIj-os-iIg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Oao-h0-CpU"/>
-                            <constraint firstItem="Oev-wJ-9C6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kv8-cz-s8J"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Oev-wJ-9C6" secondAttribute="bottom" id="yqL-tn-AYq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FIj-os-iIg" secondAttribute="bottom" id="ZJA-8A-FGv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pmX-An-5GA"/>
@@ -522,16 +507,11 @@
     </scenes>
     <resources>
         <image name="birthday.cake" catalog="system" width="128" height="115"/>
-        <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="countBackImg" width="375" height="265"/>
-        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="homeTitleLogo" width="59" height="24"/>
-        <image name="homekit" catalog="system" width="128" height="104"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="messageIcon" width="27" height="25"/>
         <image name="notificationIcon" width="22" height="23"/>
-        <image name="person" catalog="system" width="128" height="121"/>
         <image name="titleCharacterImg" width="131.66667175292969" height="115.66666412353516"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
