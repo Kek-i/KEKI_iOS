@@ -9,7 +9,7 @@ import UIKit
 
 class DefaultTabBarController: UITabBarController {
 
-    private let homeTab = UITabBarItem(title: nil, image: UIImage(named: "homeTab"), selectedImage: UIImage(named: "homeTab.fill"))
+    private let homeTab = UITabBarItem(title: nil, image: UIImage(named: "home"), selectedImage: UIImage(named: "home.fill"))
     private let calendarTab = UITabBarItem(title: nil, image: UIImage(named: "calendar"), selectedImage: UIImage(named: "calendar.fill"))
     private let searchTab = UITabBarItem(title: nil, image: UIImage(named: "search"), selectedImage: UIImage(named: "search.fill"))
     private let heartTab = UITabBarItem(title: nil, image: UIImage(named: "heart"), selectedImage: UIImage(named: "heart.fill"))
@@ -18,16 +18,22 @@ class DefaultTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
-        tabBar.barTintColor = .white
     }
     
     override func viewDidLayoutSubviews() {
-        var tabFrame = self.tabBar.frame
+        var tabFrame = tabBar.frame
         tabFrame.size.height = 100
         tabFrame.origin.y = self.view.frame.size.height - 100
-        self.tabBar.frame = tabFrame
+        tabBar.frame = tabFrame
+        
+        setLayoutTabBar()
     }
     
+    private func setLayoutTabBar() {
+        tabBar.unselectedItemTintColor = UIColor(red: 224/255, green: 187/255, blue: 187/255, alpha: 1)
+        tabBar.tintColor = UIColor(red: 217/255, green: 72/255, blue: 106/255, alpha: 1)
+        tabBar.barTintColor = .white
+    }
     
     private func configureTabBar() {
         

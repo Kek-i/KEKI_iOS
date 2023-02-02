@@ -65,7 +65,7 @@
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXU-Hl-QiM">
-                                                <rect key="frame" x="0.0" y="980" width="393" height="70"/>
+                                                <rect key="frame" x="0.0" y="965" width="393" height="70"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zFo-W7-3NA">
                                                         <rect key="frame" x="30.000000000000014" y="17.666666666666742" width="248.33333333333337" height="35"/>
@@ -437,7 +437,7 @@
                                             <constraint firstItem="OuH-Hm-tl2" firstAttribute="leading" secondItem="vpN-R7-Hb9" secondAttribute="leading" constant="20" id="doI-Kd-yG4"/>
                                             <constraint firstItem="jr9-wR-Jga" firstAttribute="centerY" secondItem="OuH-Hm-tl2" secondAttribute="centerY" id="fvC-S8-lny"/>
                                             <constraint firstAttribute="trailing" secondItem="dtf-KB-4Ls" secondAttribute="trailing" constant="20" id="gR6-qW-WNA"/>
-                                            <constraint firstAttribute="bottom" secondItem="QXU-Hl-QiM" secondAttribute="bottom" id="gXo-29-FjR"/>
+                                            <constraint firstAttribute="bottom" secondItem="QXU-Hl-QiM" secondAttribute="bottom" constant="15" id="gXo-29-FjR"/>
                                             <constraint firstItem="Da2-2i-bpa" firstAttribute="leading" secondItem="vpN-R7-Hb9" secondAttribute="leading" id="hNy-gJ-HuK"/>
                                             <constraint firstItem="OuH-Hm-tl2" firstAttribute="top" secondItem="vpN-R7-Hb9" secondAttribute="top" constant="20" id="i87-kG-BIx"/>
                                             <constraint firstItem="dtf-KB-4Ls" firstAttribute="top" secondItem="jr9-wR-Jga" secondAttribute="bottom" constant="20" id="jZ9-8Z-IQt"/>
