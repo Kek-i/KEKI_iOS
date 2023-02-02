@@ -31,13 +31,21 @@
 		A2434B0829865B7700F60D1A /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B0729865B7700F60D1A /* Search.storyboard */; };
 		A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B0929865B8000F60D1A /* Store.storyboard */; };
 		A2434B0C29865B8B00F60D1A /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0B29865B8B00F60D1A /* StoreViewController.swift */; };
-		A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0D29865B9600F60D1A /* MyPageViewContoller.swift */; };
+		A2434B0E29865B9600F60D1A /* UnLoginMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0D29865B9600F60D1A /* UnLoginMyPageViewController.swift */; };
 		A2434B1029865BA000F60D1A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0F29865BA000F60D1A /* CalendarViewController.swift */; };
 		A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1129865BA700F60D1A /* Calendar.storyboard */; };
-		A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1329865BAD00F60D1A /* MyPage.storyboard */; };
+		A2434B1429865BAD00F60D1A /* UnLoginUserMypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1329865BAD00F60D1A /* UnLoginUserMypage.storyboard */; };
 		A2434B1729865C5B00F60D1A /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = A2434B1629865C5B00F60D1A /* Toast */; };
 		A2434B192986869800F60D1A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2434B182986869800F60D1A /* WebKit.framework */; };
+
 		A2504B9D298B513100FF3CAC /* DefaultTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2504B9C298B513100FF3CAC /* DefaultTabBarController.swift */; };
+
+		A2784AD9298A979700FE23DF /* LoginUserMypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2784AD8298A979700FE23DF /* LoginUserMypage.storyboard */; };
+		A2784ADB298A9E0F00FE23DF /* PolicyWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784ADA298A9E0F00FE23DF /* PolicyWebViewController.swift */; };
+		A2784ADD298AA9C700FE23DF /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2784ADC298AA9C700FE23DF /* Alert.storyboard */; };
+		A2784ADF298AA9D800FE23DF /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784ADE298AA9D800FE23DF /* AlertViewController.swift */; };
+		A2784AE2298AB50100FE23DF /* PolicyWebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2784AE1298AB50100FE23DF /* PolicyWebView.storyboard */; };
+
 		A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */; };
 		A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */; };
 		A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */; };
@@ -49,6 +57,15 @@
 		A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */; };
 		A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */; };
 		A2B1CD782988D8C200D87570 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */; };
+
+
+		A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F607622989F53A00F4F3DD /* UIViewController+.swift */; };
+
+		A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */; };
+		A2F60767298A238A00F4F3DD /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F60766298A238A00F4F3DD /* SettingTableViewCell.swift */; };
+
+
+
 		A2B1CD7D2988EFE900D87570 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD7C2988EFE900D87570 /* FeedViewController.swift */; };
 		A2B1CD7F2988EFFE00D87570 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD7E2988EFFE00D87570 /* Feed.storyboard */; };
 		A2B1CD822988F92C00D87570 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD802988F92C00D87570 /* FeedCell.swift */; };
@@ -59,7 +76,12 @@
 		A2F6075B2989633400F4F3DD /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6075A2989633400F4F3DD /* ProductDetailViewController.swift */; };
 		A2F607602989DCB000F4F3DD /* ProductImgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6075E2989DCB000F4F3DD /* ProductImgCell.swift */; };
 		A2F607612989DCB000F4F3DD /* ProductImgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F6075F2989DCB000F4F3DD /* ProductImgCell.xib */; };
+
 		A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F607622989F53A00F4F3DD /* UIViewController+.swift */; };
+
+
+
+
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,12 +112,20 @@
 		A2434B0729865B7700F60D1A /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		A2434B0929865B8000F60D1A /* Store.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
 		A2434B0B29865B8B00F60D1A /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
-		A2434B0D29865B9600F60D1A /* MyPageViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewContoller.swift; sourceTree = "<group>"; };
+		A2434B0D29865B9600F60D1A /* UnLoginMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnLoginMyPageViewController.swift; sourceTree = "<group>"; };
 		A2434B0F29865BA000F60D1A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A2434B1129865BA700F60D1A /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
-		A2434B1329865BAD00F60D1A /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
+		A2434B1329865BAD00F60D1A /* UnLoginUserMypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnLoginUserMypage.storyboard; sourceTree = "<group>"; };
 		A2434B182986869800F60D1A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+
 		A2504B9C298B513100FF3CAC /* DefaultTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabBarController.swift; sourceTree = "<group>"; };
+
+		A2784AD8298A979700FE23DF /* LoginUserMypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginUserMypage.storyboard; sourceTree = "<group>"; };
+		A2784ADA298A9E0F00FE23DF /* PolicyWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyWebViewController.swift; sourceTree = "<group>"; };
+		A2784ADC298AA9C700FE23DF /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
+		A2784ADE298AA9D800FE23DF /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		A2784AE1298AB50100FE23DF /* PolicyWebView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PolicyWebView.storyboard; sourceTree = "<group>"; };
+
 		A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthorityGuidance.storyboard; sourceTree = "<group>"; };
 		A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityGuidanceViewController.swift; sourceTree = "<group>"; };
 		A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserCategoryViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +137,14 @@
 		A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnouncementCell.xib; sourceTree = "<group>"; };
 		A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailViewController.swift; sourceTree = "<group>"; };
 		A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+
+		A2F607622989F53A00F4F3DD /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+
+		A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMyPageViewController.swift; sourceTree = "<group>"; };
+		A2F60766298A238A00F4F3DD /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingTableViewCell.swift; path = /Users/gimchowon/Desktop/Keki/KEKI_iOS/KeKi/Scenes/MyPage/SettingTableViewCell.swift; sourceTree = "<absolute>"; };
+
+
+
 		A2B1CD7C2988EFE900D87570 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		A2B1CD7E2988EFFE00D87570 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		A2B1CD802988F92C00D87570 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -117,7 +155,12 @@
 		A2F6075A2989633400F4F3DD /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		A2F6075E2989DCB000F4F3DD /* ProductImgCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImgCell.swift; sourceTree = "<group>"; };
 		A2F6075F2989DCB000F4F3DD /* ProductImgCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductImgCell.xib; sourceTree = "<group>"; };
+
 		A2F607622989F53A00F4F3DD /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+
+
+
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,8 +355,13 @@
 		A2434AF4298658EB00F60D1A /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				A2434B0D29865B9600F60D1A /* MyPageViewContoller.swift */,
-				A2434B1329865BAD00F60D1A /* MyPage.storyboard */,
+				A2434B0D29865B9600F60D1A /* UnLoginMyPageViewController.swift */,
+				A2434B1329865BAD00F60D1A /* UnLoginUserMypage.storyboard */,
+				A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */,
+				A2784AD8298A979700FE23DF /* LoginUserMypage.storyboard */,
+				A2F60766298A238A00F4F3DD /* SettingTableViewCell.swift */,
+				A2784AE3298AB65300FE23DF /* Policy */,
+				A2784AE0298AA9DE00FE23DF /* Alert */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -361,6 +409,24 @@
 				A2434B0129865B1A00F60D1A /* AnnouncementViewController.swift */,
 			);
 			path = Announcement;
+			sourceTree = "<group>";
+		};
+		A2784AE0298AA9DE00FE23DF /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				A2784ADC298AA9C700FE23DF /* Alert.storyboard */,
+				A2784ADE298AA9D800FE23DF /* AlertViewController.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		A2784AE3298AB65300FE23DF /* Policy */ = {
+			isa = PBXGroup;
+			children = (
+				A2784ADA298A9E0F00FE23DF /* PolicyWebViewController.swift */,
+				A2784AE1298AB50100FE23DF /* PolicyWebView.storyboard */,
+			);
+			path = Policy;
 			sourceTree = "<group>";
 		};
 		A2B1CD642987796400D87570 /* UserProfileSetting */ = {
@@ -470,16 +536,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
+				A2784AD9298A979700FE23DF /* LoginUserMypage.storyboard in Resources */,
+				A2434AFE29865AF100F60D1A /* Login.storyboard in Resources */,
+				A2784ADD298AA9C700FE23DF /* Alert.storyboard in Resources */,
+
 				A2F6075629890F8C00F4F3DD /* FeedImgsCell.xib in Resources */,
 				A2434AFE29865AF100F60D1A /* Login.storyboard in Resources */,
 				A2B1CD7F2988EFFE00D87570 /* Feed.storyboard in Resources */,
+
 				A2434AD6298651F600F60D1A /* LaunchScreen.storyboard in Resources */,
 				A2434B0029865B0A00F60D1A /* Announcement.storyboard in Resources */,
 				A2434AD3298651F600F60D1A /* Assets.xcassets in Resources */,
 				A2F607612989DCB000F4F3DD /* ProductImgCell.xib in Resources */,
 				A2B1CD832988F92C00D87570 /* FeedCell.xib in Resources */,
 				A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */,
-				A2434B1429865BAD00F60D1A /* MyPage.storyboard in Resources */,
+				A2784AE2298AB50100FE23DF /* PolicyWebView.storyboard in Resources */,
+				A2434B1429865BAD00F60D1A /* UnLoginUserMypage.storyboard in Resources */,
 				A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */,
 				A2F607592989632700F4F3DD /* ProductDetail.storyboard in Resources */,
 				A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */,
@@ -553,20 +626,41 @@
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
 				A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */,
 				A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */,
+				A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */,
 				A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */,
+
+				A2784ADF298AA9D800FE23DF /* AlertViewController.swift in Sources */,
+				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
+				A2434B0E29865B9600F60D1A /* UnLoginMyPageViewController.swift in Sources */,
+
+
 				738F64962988A9BE006BB124 /* StoreInfoPopUpViewController.swift in Sources */,
 				738F64982988A9BE006BB124 /* StoreImageViewController.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				A2F607602989DCB000F4F3DD /* ProductImgCell.swift in Sources */,
 				A2F6075B2989633400F4F3DD /* ProductDetailViewController.swift in Sources */,
 				A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */,
+
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
 				A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */,
+
 				738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */,
+
+
+				A2784ADB298A9E0F00FE23DF /* PolicyWebViewController.swift in Sources */,
+				A2F60767298A238A00F4F3DD /* SettingTableViewCell.swift in Sources */,
+
+
+				738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */,
+				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
+				738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */,
+
+
+
 				A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */,
 				A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */,
 				A2504B9D298B513100FF3CAC /* DefaultTabBarController.swift in Sources */,
@@ -725,6 +819,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Home;
+
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -757,7 +852,9 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "케키";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+
 				INFOPLIST_KEY_UIMainStoryboardFile = Home;
+
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
