@@ -41,7 +41,7 @@ class DefaultTabBarController: UITabBarController {
         guard let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
         homeViewController.tabBarItem = homeTab
         
-        let calendarViewController = UIViewController()
+        guard let calendarViewController = UIStoryboard(name: "Calendar", bundle: nil).instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController else {return}
         calendarViewController.tabBarItem = calendarTab
         
         let searchViewController = UIViewController()
