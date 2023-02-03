@@ -396,11 +396,6 @@
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                 </collectionView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JzY-RX-4bo">
-                                    <rect key="frame" x="0.0" y="547.33333333333348" width="469" height="889.66666666666652"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
@@ -413,16 +408,12 @@
                                 <constraint firstAttribute="trailing" secondItem="zgB-jI-Rhj" secondAttribute="trailing" constant="151" id="Cxr-S0-TuF"/>
                                 <constraint firstAttribute="trailing" secondItem="dZY-K1-u4i" secondAttribute="trailing" constant="19" id="E7p-ou-Wao"/>
                                 <constraint firstItem="FL4-hc-BI1" firstAttribute="leading" secondItem="Aaw-6L-cxY" secondAttribute="leading" constant="123" id="FJz-WI-Vyk"/>
-                                <constraint firstItem="JzY-RX-4bo" firstAttribute="top" secondItem="ryx-XT-wfe" secondAttribute="bottom" constant="8" symbolic="YES" id="FTJ-uT-byA"/>
-                                <constraint firstAttribute="trailing" secondItem="JzY-RX-4bo" secondAttribute="trailing" id="G4B-pI-bgj"/>
                                 <constraint firstAttribute="trailing" secondItem="QQr-op-Vre" secondAttribute="trailing" constant="19" id="L9w-Ya-qDK"/>
                                 <constraint firstItem="mzM-tc-fFu" firstAttribute="leading" secondItem="Aaw-6L-cxY" secondAttribute="leading" constant="20" id="LLg-Um-yBE"/>
                                 <constraint firstItem="Pva-tZ-tis" firstAttribute="top" secondItem="UWL-NC-q0X" secondAttribute="bottom" constant="8" id="Odz-Ie-ar7"/>
                                 <constraint firstItem="UWL-NC-q0X" firstAttribute="leading" secondItem="Aaw-6L-cxY" secondAttribute="leading" constant="32" id="OfA-3D-lW4"/>
                                 <constraint firstItem="QQr-op-Vre" firstAttribute="leading" secondItem="Aaw-6L-cxY" secondAttribute="leading" constant="20" id="PMo-HW-4Nr"/>
-                                <constraint firstItem="JzY-RX-4bo" firstAttribute="leading" secondItem="Aaw-6L-cxY" secondAttribute="leading" id="RFf-2m-jrn"/>
                                 <constraint firstAttribute="trailing" secondItem="ryx-XT-wfe" secondAttribute="trailing" id="Y31-2N-Lx7"/>
-                                <constraint firstAttribute="bottom" secondItem="JzY-RX-4bo" secondAttribute="bottom" constant="10" id="YNC-Zi-5NB"/>
                                 <constraint firstItem="mzM-tc-fFu" firstAttribute="top" secondItem="dZY-K1-u4i" secondAttribute="bottom" constant="14" id="aDh-jh-7Nv"/>
                                 <constraint firstItem="dZY-K1-u4i" firstAttribute="top" secondItem="QQr-op-Vre" secondAttribute="bottom" constant="14" id="iJ3-ug-SOw"/>
                                 <constraint firstAttribute="trailing" secondItem="Pva-tZ-tis" secondAttribute="trailing" constant="141" id="iV4-4H-Lyq"/>

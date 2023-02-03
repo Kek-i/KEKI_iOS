@@ -25,6 +25,9 @@ class DayAddViewController: UIViewController {
     @IBOutlet weak var selectButtonViewHeight: NSLayoutConstraint!
     @IBOutlet weak var datePickerViewHeight: NSLayoutConstraint!
     
+    var isSelectViewOpen = false
+    var isDatePickerViewOpen = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +35,25 @@ class DayAddViewController: UIViewController {
 
     
     @IBAction func selectDayType(_ sender: Any) {
-        selectButtonViewHeight.priority = UILayoutPriority(100)
+        if isSelectViewOpen == false {
+            selectButtonViewHeight.priority = UILayoutPriority(100)
+        }else {
+            selectButtonViewHeight.priority = UILayoutPriority(1000)
+        }
+        
+        
+        isSelectViewOpen.toggle()
     }
     
     
     @IBAction func selectDate(_ sender: Any) {
-        datePickerViewHeight.priority = UILayoutPriority(240)
+        if isDatePickerViewOpen == false {
+            datePickerViewHeight.priority = UILayoutPriority(240)
+        }else {
+            datePickerViewHeight.priority = UILayoutPriority(1000)
+        }
+        
+        isDatePickerViewOpen.toggle()
     }
     
 
