@@ -48,11 +48,9 @@ class CalendarViewController: UIViewController {
     }
     
     @IBAction func addDay(_ sender: Any) {
-        guard let dayAddVC = UIStoryboard(name: "DayAdd", bundle: nil).instantiateViewController(withIdentifier: "DayAddViewController") as? DayAddViewController else {return}
-        
-        dayAddVC.modalTransitionStyle = .coverVertical
-        dayAddVC.modalPresentationStyle = .fullScreen
+        let dayAddVC = DayAddViewController(nibName: "DayAddViewController", bundle: nil)
         
         self.present(dayAddVC, animated: true)
+                
     }
 }
