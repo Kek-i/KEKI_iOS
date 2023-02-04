@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		731AA68F298D00C0008A9A1B /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA68E298D00C0008A9A1B /* SettingTableViewCell.swift */; };
+		731AA69E298D016D008A9A1B /* DayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA691298D016C008A9A1B /* DayTableViewController.swift */; };
+		731AA69F298D016D008A9A1B /* HashTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA692298D016C008A9A1B /* HashTagCell.swift */; };
+		731AA6A0298D016D008A9A1B /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA693298D016C008A9A1B /* DayCell.swift */; };
+		731AA6A1298D016D008A9A1B /* HashTagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 731AA694298D016D008A9A1B /* HashTagCell.xib */; };
+		731AA6A3298D016D008A9A1B /* DayNothingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731AA696298D016D008A9A1B /* DayNothingViewController.storyboard */; };
+		731AA6A4298D016D008A9A1B /* DayDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731AA697298D016D008A9A1B /* DayDetail.storyboard */; };
+		731AA6A6298D016D008A9A1B /* DayDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA699298D016D008A9A1B /* DayDetailViewController.swift */; };
+		731AA6A7298D016D008A9A1B /* DayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 731AA69A298D016D008A9A1B /* DayCell.xib */; };
+		731AA6A8298D016D008A9A1B /* DayTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731AA69B298D016D008A9A1B /* DayTableViewController.storyboard */; };
+		735AC112298D03390099B549 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735AC110298D03390099B549 /* Calendar.storyboard */; };
+		735AC113298D03390099B549 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC111298D03390099B549 /* CalendarViewController.swift */; };
+		735AC116298D04570099B549 /* DayAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC114298D04570099B549 /* DayAddViewController.swift */; };
+		735AC117298D04570099B549 /* DayAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735AC115298D04570099B549 /* DayAddViewController.xib */; };
 		738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F648F2988A9B3006BB124 /* StoreProductViewController.swift */; };
 		738F64962988A9BE006BB124 /* StoreInfoPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */; };
 		738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64922988A9BE006BB124 /* StoreImageCell.swift */; };
@@ -32,20 +46,15 @@
 		A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B0929865B8000F60D1A /* Store.storyboard */; };
 		A2434B0C29865B8B00F60D1A /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0B29865B8B00F60D1A /* StoreViewController.swift */; };
 		A2434B0E29865B9600F60D1A /* UnLoginMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0D29865B9600F60D1A /* UnLoginMyPageViewController.swift */; };
-		A2434B1029865BA000F60D1A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434B0F29865BA000F60D1A /* CalendarViewController.swift */; };
-		A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1129865BA700F60D1A /* Calendar.storyboard */; };
 		A2434B1429865BAD00F60D1A /* UnLoginUserMypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2434B1329865BAD00F60D1A /* UnLoginUserMypage.storyboard */; };
 		A2434B1729865C5B00F60D1A /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = A2434B1629865C5B00F60D1A /* Toast */; };
 		A2434B192986869800F60D1A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2434B182986869800F60D1A /* WebKit.framework */; };
-
 		A2504B9D298B513100FF3CAC /* DefaultTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2504B9C298B513100FF3CAC /* DefaultTabBarController.swift */; };
-
 		A2784AD9298A979700FE23DF /* LoginUserMypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2784AD8298A979700FE23DF /* LoginUserMypage.storyboard */; };
 		A2784ADB298A9E0F00FE23DF /* PolicyWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784ADA298A9E0F00FE23DF /* PolicyWebViewController.swift */; };
 		A2784ADD298AA9C700FE23DF /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2784ADC298AA9C700FE23DF /* Alert.storyboard */; };
 		A2784ADF298AA9D800FE23DF /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784ADE298AA9D800FE23DF /* AlertViewController.swift */; };
 		A2784AE2298AB50100FE23DF /* PolicyWebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2784AE1298AB50100FE23DF /* PolicyWebView.storyboard */; };
-
 		A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */; };
 		A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */; };
 		A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */; };
@@ -57,15 +66,6 @@
 		A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */; };
 		A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */; };
 		A2B1CD782988D8C200D87570 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */; };
-
-
-		A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F607622989F53A00F4F3DD /* UIViewController+.swift */; };
-
-		A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */; };
-		A2F60767298A238A00F4F3DD /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F60766298A238A00F4F3DD /* SettingTableViewCell.swift */; };
-
-
-
 		A2B1CD7D2988EFE900D87570 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD7C2988EFE900D87570 /* FeedViewController.swift */; };
 		A2B1CD7F2988EFFE00D87570 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD7E2988EFFE00D87570 /* Feed.storyboard */; };
 		A2B1CD822988F92C00D87570 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD802988F92C00D87570 /* FeedCell.swift */; };
@@ -76,17 +76,27 @@
 		A2F6075B2989633400F4F3DD /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6075A2989633400F4F3DD /* ProductDetailViewController.swift */; };
 		A2F607602989DCB000F4F3DD /* ProductImgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6075E2989DCB000F4F3DD /* ProductImgCell.swift */; };
 		A2F607612989DCB000F4F3DD /* ProductImgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F6075F2989DCB000F4F3DD /* ProductImgCell.xib */; };
-
 		A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F607622989F53A00F4F3DD /* UIViewController+.swift */; };
-
-
-
-
+		A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */; };
 		F7B56377554ABA0CA2B370C4 /* Pods_KeKi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeKi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		731AA68E298D00C0008A9A1B /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		731AA691298D016C008A9A1B /* DayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayTableViewController.swift; sourceTree = "<group>"; };
+		731AA692298D016C008A9A1B /* HashTagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagCell.swift; sourceTree = "<group>"; };
+		731AA693298D016C008A9A1B /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		731AA694298D016D008A9A1B /* HashTagCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HashTagCell.xib; sourceTree = "<group>"; };
+		731AA696298D016D008A9A1B /* DayNothingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DayNothingViewController.storyboard; sourceTree = "<group>"; };
+		731AA697298D016D008A9A1B /* DayDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DayDetail.storyboard; sourceTree = "<group>"; };
+		731AA699298D016D008A9A1B /* DayDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayDetailViewController.swift; sourceTree = "<group>"; };
+		731AA69A298D016D008A9A1B /* DayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayCell.xib; sourceTree = "<group>"; };
+		731AA69B298D016D008A9A1B /* DayTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DayTableViewController.storyboard; sourceTree = "<group>"; };
+		735AC110298D03390099B549 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
+		735AC111298D03390099B549 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		735AC114298D04570099B549 /* DayAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAddViewController.swift; sourceTree = "<group>"; };
+		735AC115298D04570099B549 /* DayAddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayAddViewController.xib; sourceTree = "<group>"; };
 		738F648F2988A9B3006BB124 /* StoreProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreProductViewController.swift; sourceTree = "<group>"; };
 		738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreInfoPopUpViewController.swift; sourceTree = "<group>"; };
 		738F64922988A9BE006BB124 /* StoreImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageCell.swift; sourceTree = "<group>"; };
@@ -113,19 +123,14 @@
 		A2434B0929865B8000F60D1A /* Store.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
 		A2434B0B29865B8B00F60D1A /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A2434B0D29865B9600F60D1A /* UnLoginMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnLoginMyPageViewController.swift; sourceTree = "<group>"; };
-		A2434B0F29865BA000F60D1A /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		A2434B1129865BA700F60D1A /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		A2434B1329865BAD00F60D1A /* UnLoginUserMypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnLoginUserMypage.storyboard; sourceTree = "<group>"; };
 		A2434B182986869800F60D1A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-
 		A2504B9C298B513100FF3CAC /* DefaultTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabBarController.swift; sourceTree = "<group>"; };
-
 		A2784AD8298A979700FE23DF /* LoginUserMypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginUserMypage.storyboard; sourceTree = "<group>"; };
 		A2784ADA298A9E0F00FE23DF /* PolicyWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyWebViewController.swift; sourceTree = "<group>"; };
 		A2784ADC298AA9C700FE23DF /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		A2784ADE298AA9D800FE23DF /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A2784AE1298AB50100FE23DF /* PolicyWebView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PolicyWebView.storyboard; sourceTree = "<group>"; };
-
 		A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthorityGuidance.storyboard; sourceTree = "<group>"; };
 		A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityGuidanceViewController.swift; sourceTree = "<group>"; };
 		A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserCategoryViewController.swift; sourceTree = "<group>"; };
@@ -137,14 +142,6 @@
 		A2B1CD7029888D2800D87570 /* AnnouncementCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnouncementCell.xib; sourceTree = "<group>"; };
 		A2B1CD732988A9FE00D87570 /* AnnouncementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailViewController.swift; sourceTree = "<group>"; };
 		A2B1CD772988D8C200D87570 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
-
-		A2F607622989F53A00F4F3DD /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
-
-		A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMyPageViewController.swift; sourceTree = "<group>"; };
-		A2F60766298A238A00F4F3DD /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingTableViewCell.swift; path = /Users/gimchowon/Desktop/Keki/KEKI_iOS/KeKi/Scenes/MyPage/SettingTableViewCell.swift; sourceTree = "<absolute>"; };
-
-
-
 		A2B1CD7C2988EFE900D87570 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		A2B1CD7E2988EFFE00D87570 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		A2B1CD802988F92C00D87570 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -155,12 +152,8 @@
 		A2F6075A2989633400F4F3DD /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		A2F6075E2989DCB000F4F3DD /* ProductImgCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImgCell.swift; sourceTree = "<group>"; };
 		A2F6075F2989DCB000F4F3DD /* ProductImgCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductImgCell.xib; sourceTree = "<group>"; };
-
 		A2F607622989F53A00F4F3DD /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
-
-
-
-
+		A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMyPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,7 +352,7 @@
 				A2434B1329865BAD00F60D1A /* UnLoginUserMypage.storyboard */,
 				A2F60764298A1BC800F4F3DD /* LoginMyPageViewController.swift */,
 				A2784AD8298A979700FE23DF /* LoginUserMypage.storyboard */,
-				A2F60766298A238A00F4F3DD /* SettingTableViewCell.swift */,
+				731AA68E298D00C0008A9A1B /* SettingTableViewCell.swift */,
 				A2784AE3298AB65300FE23DF /* Policy */,
 				A2784AE0298AA9DE00FE23DF /* Alert */,
 			);
@@ -393,8 +386,19 @@
 		A2434AF72986590600F60D1A /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				A2434B0F29865BA000F60D1A /* CalendarViewController.swift */,
-				A2434B1129865BA700F60D1A /* Calendar.storyboard */,
+				735AC111298D03390099B549 /* CalendarViewController.swift */,
+				735AC110298D03390099B549 /* Calendar.storyboard */,
+				735AC114298D04570099B549 /* DayAddViewController.swift */,
+				735AC115298D04570099B549 /* DayAddViewController.xib */,
+				731AA699298D016D008A9A1B /* DayDetailViewController.swift */,
+				731AA697298D016D008A9A1B /* DayDetail.storyboard */,
+				731AA696298D016D008A9A1B /* DayNothingViewController.storyboard */,
+				731AA691298D016C008A9A1B /* DayTableViewController.swift */,
+				731AA69B298D016D008A9A1B /* DayTableViewController.storyboard */,
+				731AA693298D016C008A9A1B /* DayCell.swift */,
+				731AA69A298D016D008A9A1B /* DayCell.xib */,
+				731AA692298D016C008A9A1B /* HashTagCell.swift */,
+				731AA694298D016D008A9A1B /* HashTagCell.xib */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -536,30 +540,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 				A2784AD9298A979700FE23DF /* LoginUserMypage.storyboard in Resources */,
 				A2434AFE29865AF100F60D1A /* Login.storyboard in Resources */,
 				A2784ADD298AA9C700FE23DF /* Alert.storyboard in Resources */,
-
 				A2F6075629890F8C00F4F3DD /* FeedImgsCell.xib in Resources */,
 				A2434AFE29865AF100F60D1A /* Login.storyboard in Resources */,
 				A2B1CD7F2988EFFE00D87570 /* Feed.storyboard in Resources */,
-
 				A2434AD6298651F600F60D1A /* LaunchScreen.storyboard in Resources */,
 				A2434B0029865B0A00F60D1A /* Announcement.storyboard in Resources */,
+				735AC117298D04570099B549 /* DayAddViewController.xib in Resources */,
+				731AA6A3298D016D008A9A1B /* DayNothingViewController.storyboard in Resources */,
 				A2434AD3298651F600F60D1A /* Assets.xcassets in Resources */,
 				A2F607612989DCB000F4F3DD /* ProductImgCell.xib in Resources */,
 				A2B1CD832988F92C00D87570 /* FeedCell.xib in Resources */,
 				A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */,
 				A2784AE2298AB50100FE23DF /* PolicyWebView.storyboard in Resources */,
 				A2434B1429865BAD00F60D1A /* UnLoginUserMypage.storyboard in Resources */,
-				A2434B1229865BA700F60D1A /* Calendar.storyboard in Resources */,
 				A2F607592989632700F4F3DD /* ProductDetail.storyboard in Resources */,
 				A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */,
+				731AA6A7298D016D008A9A1B /* DayCell.xib in Resources */,
 				A2434B0829865B7700F60D1A /* Search.storyboard in Resources */,
+				735AC112298D03390099B549 /* Calendar.storyboard in Resources */,
 				A2B1CD662987797100D87570 /* UserProfileSetting.storyboard in Resources */,
 				738F649A2988A9BE006BB124 /* StoreImageCell.xib in Resources */,
+				731AA6A8298D016D008A9A1B /* DayTableViewController.storyboard in Resources */,
 				A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */,
+				731AA6A1298D016D008A9A1B /* HashTagCell.xib in Resources */,
+				731AA6A4298D016D008A9A1B /* DayDetail.storyboard in Resources */,
 				A2434AD1298651F500F60D1A /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -613,54 +620,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2434B1029865BA000F60D1A /* CalendarViewController.swift in Sources */,
 				A2B1CD822988F92C00D87570 /* FeedCell.swift in Sources */,
 				A2434B0C29865B8B00F60D1A /* StoreViewController.swift in Sources */,
 				A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */,
 				738F64992988A9BE006BB124 /* TabViewController.swift in Sources */,
 				A2434B0629865B7000F60D1A /* SearchViewController.swift in Sources */,
+				731AA68F298D00C0008A9A1B /* SettingTableViewCell.swift in Sources */,
 				A2B1CD7D2988EFE900D87570 /* FeedViewController.swift in Sources */,
 				A2B1CD612987687F00D87570 /* BuyerProfileSetViewController.swift in Sources */,
 				A2F6075529890F8C00F4F3DD /* FeedImgsCell.swift in Sources */,
+				731AA6A0298D016D008A9A1B /* DayCell.swift in Sources */,
 				A2B1CD782988D8C200D87570 /* HomeCollectionViewCell.swift in Sources */,
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
 				A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */,
+				731AA6A6298D016D008A9A1B /* DayDetailViewController.swift in Sources */,
+				731AA69F298D016D008A9A1B /* HashTagCell.swift in Sources */,
+				735AC113298D03390099B549 /* CalendarViewController.swift in Sources */,
 				A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */,
 				A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */,
 				A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */,
-
 				A2784ADF298AA9D800FE23DF /* AlertViewController.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				A2434B0E29865B9600F60D1A /* UnLoginMyPageViewController.swift in Sources */,
-
-
 				738F64962988A9BE006BB124 /* StoreInfoPopUpViewController.swift in Sources */,
 				738F64982988A9BE006BB124 /* StoreImageViewController.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				A2F607602989DCB000F4F3DD /* ProductImgCell.swift in Sources */,
 				A2F6075B2989633400F4F3DD /* ProductDetailViewController.swift in Sources */,
-				A2434B0E29865B9600F60D1A /* MyPageViewContoller.swift in Sources */,
-
+				A2434B0E29865B9600F60D1A /* UnLoginMyPageViewController.swift in Sources */,
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
 				A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */,
-
 				738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */,
-
-
+				731AA69E298D016D008A9A1B /* DayTableViewController.swift in Sources */,
 				A2784ADB298A9E0F00FE23DF /* PolicyWebViewController.swift in Sources */,
-				A2F60767298A238A00F4F3DD /* SettingTableViewCell.swift in Sources */,
-
-
+				735AC116298D04570099B549 /* DayAddViewController.swift in Sources */,
 				738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */,
-
-
-
 				A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */,
 				A2F607632989F53A00F4F3DD /* UIViewController+.swift in Sources */,
 				A2504B9D298B513100FF3CAC /* DefaultTabBarController.swift in Sources */,
@@ -819,7 +819,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Home;
-
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -852,9 +851,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "케키";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-
 				INFOPLIST_KEY_UIMainStoryboardFile = Home;
-
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
