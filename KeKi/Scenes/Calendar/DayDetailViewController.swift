@@ -77,7 +77,7 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
         
         if let hashTagCell = cell as? HashTagCell {
             hashTagCell.backgroundColor = colorList[indexPath.row % 3]
-            hashTagCell.sethasTagLabel(hashTag: "# " + hashTagList[indexPath.row])
+            hashTagCell.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row])
         }
         
         
@@ -86,7 +86,7 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let labelTmp = UILabel()
-        labelTmp.text = hashTagList[indexPath.row]
+        labelTmp.text = "# " + hashTagList[indexPath.row]
         
         totalWidth = totalWidth + labelTmp.intrinsicContentSize.width
         
@@ -105,7 +105,7 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
         let leftInset = (collectionView.layer.frame.size.width - (totalWidth + totalSpacingWidth)) / 2
         let rightInset = leftInset
 
-        return UIEdgeInsets(top: 0, left: leftInset - 40, bottom: 0, right: rightInset - 40)
+        return UIEdgeInsets(top: 0, left: leftInset-20, bottom: 0, right: rightInset-20)
 
     }
 

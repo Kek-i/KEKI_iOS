@@ -23,6 +23,7 @@
                             <fragment content="Label">
                                 <attributes>
                                     <font key="NSFont" size="11" name="SFPro-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
                         </attributedString>

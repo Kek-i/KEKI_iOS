@@ -11,6 +11,8 @@ class HashTagCell: UICollectionViewCell {
     
     @IBOutlet weak var hashTagLabel: UILabel!
     
+    var isSelect: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -21,7 +23,7 @@ class HashTagCell: UICollectionViewCell {
         self.layer.cornerRadius = 13
     }
     
-    func sethasTagLabel(hashTag: String) {
+    func setHashTagLabel(hashTag: String) {
         hashTagLabel.text = hashTag
     }
 }
