@@ -28,9 +28,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        statusBarView?.backgroundColor = UIColor(red: 250/255, green: 236/255, blue: 236/255, alpha: 1)
-
         navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = false
         setup()
         setupLayout()
         setUpDdayCountingLabel()

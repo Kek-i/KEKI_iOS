@@ -11,7 +11,7 @@ class UnLoginMyPageViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
     private var appInfoTitleList: [String] = [
-        "공지사항", "약관안내", "개인정보처리방침"
+        "회원가입", "공지사항", "약관안내", "개인정보처리방침"
     ]
     
     
@@ -32,6 +32,7 @@ class UnLoginMyPageViewController: UIViewController {
     // MARK: - Helper Methods (Setup Method, ...)
     private func setupNavigationBar() {
         navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.tintColor = .black
         
         let title = UILabel()
         title.text = "내 정보"
@@ -61,6 +62,12 @@ class UnLoginMyPageViewController: UIViewController {
         appInfoTableView.layer.shadowOffset = CGSize(width: 6, height: 6)
     }
     
+    private func loadSignup() {
+        let storyboard = UIStoryboard.init(name: "Login", bundle: nil)
+        guard let signupViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
+        navigationController?.pushViewController(signupViewController, animated: true)
+    }
+    
     private func loadAnnouncement() {
         let storyboard = UIStoryboard.init(name: "Announcement", bundle: nil)
         guard let announcementViewController = storyboard.instantiateViewController(withIdentifier: "AnnouncementViewController") as? AnnouncementViewController else { return }
@@ -82,13 +89,13 @@ class UnLoginMyPageViewController: UIViewController {
 // MARK: - Extensions
 extension UnLoginMyPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3    // default numOfRows
+        return appInfoTitleList.count    // default numOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell", for: indexPath) as? SettingTableViewCell else { return UITableViewCell() }
         cell.titleLabel.text = appInfoTitleList[indexPath.row]
-        if indexPath.row != 0 { cell.viewmoreImageView.isHidden = true }
+        if indexPath.row != 1 { cell.viewmoreImageView.isHidden = true }
         return cell
     }
     
@@ -103,11 +110,13 @@ extension UnLoginMyPageViewController: UITableViewDelegate {
         print(indexPath.row)
         switch indexPath.row {
         case 0:
-            loadAnnouncement()
+            loadSignup()
         case 1:
+            loadAnnouncement()
+        case 2:
             // TODO: 약관 안내 웹뷰 띄우기
             return
-        case 2:
+        case 3:
             loadPrivatePolicy()
         default:
             return

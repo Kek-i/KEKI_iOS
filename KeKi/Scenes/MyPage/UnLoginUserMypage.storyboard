@@ -46,10 +46,10 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dPr-qC-Tlc">
-                                <rect key="frame" x="25" y="264" width="343" height="180"/>
+                                <rect key="frame" x="25" y="264" width="343" height="240"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="alf-l4-FDz"/>
+                                    <constraint firstAttribute="height" constant="240" id="alf-l4-FDz"/>
                                 </constraints>
                                 <color key="separatorColor" red="0.98039215690000003" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
