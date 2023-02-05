@@ -37,7 +37,7 @@ class DefaultTabBarController: UITabBarController {
     
     private func configureTabBar() {
         
-        let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
+        var storyboard = UIStoryboard.init(name: "Home", bundle: nil)
         guard let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
         homeViewController.tabBarItem = homeTab
         
@@ -50,8 +50,10 @@ class DefaultTabBarController: UITabBarController {
         let heartViewController = UIViewController()
         heartViewController.tabBarItem = heartTab
 
-        let mypageViewController = UIViewController()
-        mypageViewController.tabBarItem = mypageTab
+        storyboard = UIStoryboard.init(name: "UnLoginUserMypage", bundle: nil)
+        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "UnLoginMyPageViewController") as? UnLoginMyPageViewController else { return }
+        let mypage = UINavigationController(rootViewController: mypageViewController)
+        mypage.tabBarItem = mypageTab
 
         
         viewControllers = [
@@ -59,7 +61,7 @@ class DefaultTabBarController: UITabBarController {
             calendarViewController,
             searchViewController,
             heartViewController,
-            mypageViewController
+            mypage
         ]
     }
 

@@ -25,6 +25,11 @@ class LoginViewController: UIViewController {
         setupAuthorityGuidanceViewController()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
     // MARK: - Action Methods (IBAction, ...)
     @IBAction func didTapGoogleLoginButton(_ sender: UIButton) {
         // TODO: 구글 로그인 기능 추가
