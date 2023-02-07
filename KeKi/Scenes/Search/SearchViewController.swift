@@ -21,7 +21,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        UIInit()
+        setupLayout()
     }
     
     func setup() {
@@ -36,7 +36,7 @@ class SearchViewController: UIViewController {
         self.searchMainVC = searchMainVC
     }
     
-    func UIInit() {
+    func setupLayout() {
         searchView.layer.cornerRadius = 23
         searchTextField.layer.cornerRadius = 23
         

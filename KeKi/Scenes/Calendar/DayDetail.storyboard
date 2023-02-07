@@ -148,6 +148,10 @@
                             <constraint firstItem="bMC-x0-CS4" firstAttribute="top" secondItem="Z1U-gn-XBz" secondAttribute="bottom" constant="9" id="was-yT-rUz"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="AHo-9H-Xqv">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="g5O-dV-8to"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="edit" id="psq-g0-Q6Q"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="dDayLabel" destination="bMC-x0-CS4" id="Hva-br-lMw"/>
                         <outlet property="dateTextButton" destination="Sqn-xT-lWD" id="pA3-fh-mVJ"/>
@@ -159,12 +163,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125" y="3"/>
+            <point key="canvasLocation" x="872" y="-4"/>
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="12.5" height="22"/>
         <image name="buttonIcon" width="9.5" height="15"/>
         <image name="cake" width="71" height="65"/>
+        <image name="edit" width="24" height="27"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

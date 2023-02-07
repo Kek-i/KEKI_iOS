@@ -23,6 +23,11 @@ class CalendarViewController: UIViewController {
         
         setup()
         setupLayout()
+        setupNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
     }
     
     func setup() {
@@ -47,13 +52,14 @@ class CalendarViewController: UIViewController {
         addDayButton.layer.cornerRadius = addDayButton.frame.width / 2
     }
     
+    func setupNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     @IBAction func addDay(_ sender: Any) {
-        let dayAddVC = DayAddViewController(nibName: "DayAddViewController", bundle: nil)
-        
-        dayAddVC.modalPresentationStyle = .fullScreen
-        dayAddVC.modalTransitionStyle = .coverVertical
-        
-        self.present(dayAddVC, animated: true)
+        guard let dayAddVC = UIStoryboard(name: "DayAddViewController", bundle: nil).instantiateViewController(withIdentifier: "DayAddViewController") as? DayAddViewController else {return}
+                
+        self.navigationController?.pushViewController(dayAddVC, animated: true)
                 
     }
 }

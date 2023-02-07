@@ -53,13 +53,14 @@
                         <viewLayoutGuide key="safeArea" id="dm3-h5-NrG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dm3-h5-NrG" firstAttribute="bottom" secondItem="v0K-7w-K1Q" secondAttribute="bottom" id="3NE-DT-leT"/>
-                            <constraint firstItem="dm3-h5-NrG" firstAttribute="trailing" secondItem="v0K-7w-K1Q" secondAttribute="trailing" id="HZN-ds-M0j"/>
+                            <constraint firstItem="v0K-7w-K1Q" firstAttribute="trailing" secondItem="dm3-h5-NrG" secondAttribute="trailing" id="18f-gL-ttX"/>
+                            <constraint firstItem="v0K-7w-K1Q" firstAttribute="leading" secondItem="dm3-h5-NrG" secondAttribute="leading" id="ROl-LL-Nxf"/>
                             <constraint firstItem="zdu-Rh-n3p" firstAttribute="top" secondItem="dm3-h5-NrG" secondAttribute="top" constant="6.2999999999999998" id="RdX-hB-jbk"/>
-                            <constraint firstItem="v0K-7w-K1Q" firstAttribute="top" secondItem="zdu-Rh-n3p" secondAttribute="bottom" constant="20" id="aCk-gt-OG5"/>
-                            <constraint firstItem="v0K-7w-K1Q" firstAttribute="leading" secondItem="dm3-h5-NrG" secondAttribute="leading" id="g9f-7e-em9"/>
+                            <constraint firstItem="v0K-7w-K1Q" firstAttribute="top" secondItem="zdu-Rh-n3p" secondAttribute="bottom" constant="20" id="ZCs-fZ-Yc5"/>
+                            <constraint firstItem="v0K-7w-K1Q" firstAttribute="bottom" secondItem="dm3-h5-NrG" secondAttribute="bottom" id="jiA-m1-4or"/>
                             <constraint firstItem="dm3-h5-NrG" firstAttribute="trailing" secondItem="zdu-Rh-n3p" secondAttribute="trailing" constant="20" id="pdi-KO-SZU"/>
                             <constraint firstItem="zdu-Rh-n3p" firstAttribute="leading" secondItem="dm3-h5-NrG" secondAttribute="leading" constant="20" id="wCd-IS-g8p"/>
+                            <constraint firstItem="v0K-7w-K1Q" firstAttribute="centerX" secondItem="99p-W9-D6S" secondAttribute="centerX" id="yYO-q9-CuT"/>
                         </constraints>
                     </view>
                     <connections>
@@ -74,7 +75,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="search" width="17" height="17"/>
+        <image name="search" width="23.5" height="22.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

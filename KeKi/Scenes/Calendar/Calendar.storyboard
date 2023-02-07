@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2M-qY-Wy3">
-                                <rect key="frame" x="20" y="51.5" width="52" height="24"/>
+                                <rect key="frame" x="20" y="95.5" width="52" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="0cX-Xx-LF2"/>
                                     <constraint firstAttribute="width" constant="52" id="qkK-J6-F6F"/>
@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jz5-PS-4jb">
-                                <rect key="frame" x="0.0" y="90.5" width="414" height="771.5"/>
+                                <rect key="frame" x="0.0" y="134.5" width="414" height="727.5"/>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJp-Fb-4Si">
                                 <rect key="frame" x="326" y="774" width="68" height="68"/>
@@ -53,16 +53,18 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="jz5-PS-4jb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="3Ly-2x-bcV"/>
+                            <constraint firstItem="jz5-PS-4jb" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="3Vc-7o-Sc8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jz5-PS-4jb" secondAttribute="bottom" id="D2y-fH-M0M"/>
                             <constraint firstItem="J2M-qY-Wy3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="E9i-sw-cY0"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eJp-Fb-4Si" secondAttribute="bottom" constant="20" id="TXJ-IV-dm7"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jz5-PS-4jb" secondAttribute="trailing" id="UMk-cw-Y2j"/>
-                            <constraint firstItem="jz5-PS-4jb" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="YtM-Jp-B8T"/>
+                            <constraint firstItem="jz5-PS-4jb" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="YZi-8E-i1y"/>
                             <constraint firstItem="jz5-PS-4jb" firstAttribute="top" secondItem="J2M-qY-Wy3" secondAttribute="bottom" constant="15" id="Zlh-o2-7ez"/>
                             <constraint firstItem="J2M-qY-Wy3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="3.2999999999999998" id="go0-fO-EAj"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eJp-Fb-4Si" secondAttribute="trailing" constant="20" id="ux3-SC-wbV"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="xje-dg-V2D"/>
                     <connections>
                         <outlet property="addDayButton" destination="eJp-Fb-4Si" id="A02-VB-6Y2"/>
                         <outlet property="containerView" destination="jz5-PS-4jb" id="WCR-I3-GZR"/>
@@ -70,7 +72,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="194" y="-34"/>
+            <point key="canvasLocation" x="1102.8985507246377" y="-34.151785714285715"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3rs-Y7-Gwl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ur4-K0-wMV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uKE-RV-89I">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="InK-Ie-rRS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEy-BN-gAC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="192.75362318840581" y="-34.151785714285715"/>
         </scene>
     </scenes>
     <resources>

@@ -64,7 +64,7 @@ class DayAddViewController: UIViewController {
         
         setup()
         setupLayer()
-        
+        setupNavigationBar()
     }
     
     // 데이터 연결 할 때 모델 만들어 편집 구현 -> 모델 넘김 받을 시 해당 데이터 모두 표시 / 없다면 지금 이대로 표시
@@ -126,6 +126,37 @@ class DayAddViewController: UIViewController {
         dateSelectButton.setTitle(dateFromat.string(from: dateSelectPicker.date), for: .normal)
         
         date = dateSelectPicker.date
+    }
+    
+    func setupNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = false
+        
+        let title = UILabel()
+        title.text = "기념일 추가"
+        title.font = .systemFont(ofSize: 20, weight: .bold)
+        title.textAlignment = .left
+        title.sizeToFit()
+
+        let titleItem = UIBarButtonItem(customView: title)
+        
+        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .done, target: self, action: #selector(moveToCalendar))
+        backButton.tintColor = .black
+        
+        self.navigationItem.leftBarButtonItems = [backButton, titleItem]
+        
+        // action에 addDay 추가 (서버 연결 후)
+        let addButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(addDay))
+        addButton.tintColor = .black
+        
+        self.navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc func moveToCalendar() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func addDay() {
+        // 서버에 기념일 저장
     }
 
     

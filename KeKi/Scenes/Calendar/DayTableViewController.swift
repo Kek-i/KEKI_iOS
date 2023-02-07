@@ -52,14 +52,9 @@ extension DayTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let dayDetailVC = UIStoryboard(name: "DayDetail", bundle: nil).instantiateViewController(withIdentifier: "DayDetailViewController") as? DayDetailViewController else {return}
-        
-        // 서버 연결 시 데이터도 전달
-        
-        dayDetailVC.modalTransitionStyle = .coverVertical
-        dayDetailVC.modalPresentationStyle = .fullScreen
-        
+                
         // 네비게이션 사용 시 Fix
-        self.present(dayDetailVC, animated: true)
+        self.navigationController?.pushViewController(dayDetailVC, animated: true)
     }
     
     

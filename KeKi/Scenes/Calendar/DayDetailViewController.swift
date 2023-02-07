@@ -35,6 +35,7 @@ class DayDetailViewController: UIViewController {
         
         setup()
         setupLayout()
+        setupNavigationBar()
     }
     
     func setup() {
@@ -56,11 +57,31 @@ class DayDetailViewController: UIViewController {
             btn.layer.shadowRadius = 4
             btn.layer.shadowOpacity = 1.0
         }
-        
-
-        
-        
     }
+    
+    func setupNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = false
+        
+        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .done, target: self, action: #selector(moveToCalendar))
+        backButton.tintColor = .black
+        
+        let editButton = UIBarButtonItem(image: UIImage(named: "edit"), style: .done, target: self, action: #selector(moveToEdit))
+        editButton.tintColor = .black
+        
+        self.navigationItem.leftBarButtonItem = backButton
+        self.navigationItem.rightBarButtonItem = editButton
+    }
+    
+    @objc func moveToCalendar() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func moveToEdit() {
+        guard let editVC = UIStoryboard(name: "DayAddViewController", bundle: nil).instantiateViewController(withIdentifier: "DayAddViewController") as? DayAddViewController else {return}
+        
+        self.navigationController?.pushViewController(editVC, animated: true)
+    }
+    
     
     @IBAction func findCake(_ sender: Any) {
     }
