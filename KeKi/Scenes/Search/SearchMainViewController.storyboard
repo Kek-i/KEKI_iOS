@@ -38,20 +38,20 @@
                                     <attributedString key="attributedTitle">
                                         <fragment content="전체">
                                             <attributes>
-                                                <font key="NSFont" size="11" name="NotoSansKR-Regular"/>
+                                                <font key="NSFont" metaFont="smallSystem"/>
                                                 <font key="NSOriginalFont" size="12" name="Helvetica"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content=" ">
                                             <attributes>
-                                                <font key="NSFont" size="11" name="NotoSansKR-Regular"/>
+                                                <font key="NSFont" metaFont="smallSystem"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="지우기">
                                             <attributes>
-                                                <font key="NSFont" size="11" name="NotoSansKR-Regular"/>
+                                                <font key="NSFont" metaFont="smallSystem"/>
                                                 <font key="NSOriginalFont" size="12" name="Helvetica"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>

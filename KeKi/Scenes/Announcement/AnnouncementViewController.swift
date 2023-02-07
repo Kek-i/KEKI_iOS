@@ -70,6 +70,9 @@ extension AnnouncementViewController: UITableViewDataSource {
 extension AnnouncementViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let detailView = storyboard?.instantiateViewController(withIdentifier: "AnnouncementDetailViewController") as? AnnouncementDetailViewController else { return }
+        let backItem = UIBarButtonItem()
+        backItem.title = "공지사항"
+        navigationItem.backBarButtonItem = backItem
         navigationController?.pushViewController(detailView, animated: true)
     }
 }
