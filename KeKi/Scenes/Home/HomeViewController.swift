@@ -29,6 +29,10 @@ class HomeViewController: UIViewController {
         setupTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.selectedIndex = 0
+    }
+    
     // MARK: - Action Methods (IBAction, ...)
     
     
