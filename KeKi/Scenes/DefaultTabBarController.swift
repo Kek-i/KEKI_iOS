@@ -39,7 +39,8 @@ class DefaultTabBarController: UITabBarController {
         
         var storyboard = UIStoryboard.init(name: "Home", bundle: nil)
         guard let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
-        homeViewController.tabBarItem = homeTab
+        let home = UINavigationController(rootViewController: homeViewController)
+        home.tabBarItem = homeTab
         
         guard let calendarViewController = UIStoryboard(name: "Calendar", bundle: nil).instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController else {return}
         calendarViewController.tabBarItem = calendarTab
@@ -50,14 +51,16 @@ class DefaultTabBarController: UITabBarController {
         let heartViewController = UIViewController()
         heartViewController.tabBarItem = heartTab
 
-        storyboard = UIStoryboard.init(name: "LoginUserMypage", bundle: nil)
-        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "LoginMyPageViewController") as? LoginMyPageViewController else { return }
+        storyboard = UIStoryboard.init(name: "UnLoginUserMypage", bundle: nil)
+        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "UnLoginMyPageViewController") as? UnLoginMyPageViewController else { return }
         let mypage = UINavigationController(rootViewController: mypageViewController)
         mypage.tabBarItem = mypageTab
 
+
+        
         
         viewControllers = [
-            homeViewController,
+            home,
             calendarViewController,
             searchViewController,
             heartViewController,

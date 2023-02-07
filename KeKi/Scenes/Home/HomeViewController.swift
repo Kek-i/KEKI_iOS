@@ -35,6 +35,11 @@ class HomeViewController: UIViewController {
         setUpDdayCountingLabel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.selectedIndex = 0
+    }
+    
     // MARK: - Action Methods (IBAction, ...)
     @IBAction func didTapViewMoreButton(_ sender: UIButton) {
     }
