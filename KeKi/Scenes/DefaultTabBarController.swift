@@ -50,8 +50,8 @@ class DefaultTabBarController: UITabBarController {
         let heartViewController = UIViewController()
         heartViewController.tabBarItem = heartTab
 
-        storyboard = UIStoryboard.init(name: "UnLoginUserMypage", bundle: nil)
-        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "UnLoginMyPageViewController") as? UnLoginMyPageViewController else { return }
+        storyboard = UIStoryboard.init(name: "LoginUserMypage", bundle: nil)
+        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "LoginMyPageViewController") as? LoginMyPageViewController else { return }
         let mypage = UINavigationController(rootViewController: mypageViewController)
         mypage.tabBarItem = mypageTab
 

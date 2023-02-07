@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum PolicyKind: String {
+    case tosPolicy = "https://sites.google.com/view/keki-tos/홈"
+    case privatePolicy = "https://sites.google.com/view/keki-privacy-policy/%ED%99%88"
+}
+
 class UnLoginMyPageViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
@@ -79,11 +84,22 @@ class UnLoginMyPageViewController: UIViewController {
         navigationController?.pushViewController(announcementViewController, animated: true)
     }
     
-    private func loadPrivatePolicy() {
+    private func loadPolicyWebView(pollicyKind: PolicyKind) {
         let storyboard = UIStoryboard.init(name: "PolicyWebView", bundle: nil)
         guard let policyWebViewController = storyboard.instantiateViewController(withIdentifier: "PolicyWebViewController") as? PolicyWebViewController else { return }
+        
+        switch pollicyKind {
+        case .tosPolicy:
+            let encodedTosUrlString = PolicyKind.tosPolicy.rawValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            policyWebViewController.setUrlString(urlString: encodedTosUrlString!)
+        case .privatePolicy:
+            policyWebViewController.setUrlString(urlString: PolicyKind.privatePolicy.rawValue)
+        }
+        
         navigationController?.pushViewController(policyWebViewController, animated: true)
+
     }
+
 }
 
 // MARK: - Extensions
@@ -114,10 +130,10 @@ extension UnLoginMyPageViewController: UITableViewDelegate {
         case 1:
             loadAnnouncement()
         case 2:
-            // TODO: 약관 안내 웹뷰 띄우기
+            loadPolicyWebView(pollicyKind: .tosPolicy)
             return
         case 3:
-            loadPrivatePolicy()
+            loadPolicyWebView(pollicyKind: .privatePolicy)
         default:
             return
         }

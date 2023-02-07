@@ -11,34 +11,38 @@ import WebKit
 class PolicyWebViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
-    private var urlString: String? = "https://sites.google.com/view/keki-privacy-policy/%ED%99%88"
-//    private var urlString: String? = "https://www.naver.com/" // url for test
+    private var urlString: String? = nil
+    
     @IBOutlet var weViewGroup: UIView!
-    
     @IBOutlet weak var webView: WKWebView!
-    
+
     // MARK: - Methods of LifeCycle
     override func loadView() {
         super.loadView()
-        
-        webView = WKWebView(frame: self.view.frame)
-        webView.uiDelegate = self
-        webView.navigationDelegate = self
-        self.view = self.webView
+        if urlString != nil {
+            webView = WKWebView(frame: self.view.frame)
+            webView.uiDelegate = self
+            webView.navigationDelegate = self
+            self.view = self.webView
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = URL(string: urlString!)
+        if let urlString = urlString {
+            print(urlString)
+            let url = URL(string: urlString)
             let request = URLRequest(url: url!)
             webView.configuration.preferences.javaScriptEnabled = true  //자바스크립트 활성화
             webView.load(request)
+        }
     }
 
     // MARK: - Helper Methods (Setup Method, ...)
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() } //모달창 닫힐때 앱 종료현상 방지.
     
+    public func setUrlString(urlString: String) { self.urlString = urlString }
     
 
 }

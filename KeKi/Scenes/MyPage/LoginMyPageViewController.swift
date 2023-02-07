@@ -134,14 +134,30 @@ class LoginMyPageViewController: UIViewController {
         navigationController?.pushViewController(announcementViewController, animated: true)
     }
     
-    private func loadTermsInfo() {
-        // TODO: 약관안내 웹뷰 구현
-    }
+//    private func loadTermsInfo() {
+//        // TODO: 약관안내 웹뷰 구현
+//    }
+//    
+//    private func loadPrivacyPolicy() {
+//        let storyboard = UIStoryboard.init(name: "PolicyWebView", bundle: nil)
+//        guard let policyWebViewController = storyboard.instantiateViewController(withIdentifier: "PolicyWebViewController") as? PolicyWebViewController else { return }
+//        navigationController?.pushViewController(policyWebViewController, animated: true)
+//    }
     
-    private func loadPrivacyPolicy() {
+    private func loadPolicyWebView(pollicyKind: PolicyKind) {
         let storyboard = UIStoryboard.init(name: "PolicyWebView", bundle: nil)
         guard let policyWebViewController = storyboard.instantiateViewController(withIdentifier: "PolicyWebViewController") as? PolicyWebViewController else { return }
+        
+        switch pollicyKind {
+        case .tosPolicy:
+            let encodedTosUrlString = PolicyKind.tosPolicy.rawValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            policyWebViewController.setUrlString(urlString: encodedTosUrlString!)
+        case .privatePolicy:
+            policyWebViewController.setUrlString(urlString: PolicyKind.privatePolicy.rawValue)
+        }
+        
         navigationController?.pushViewController(policyWebViewController, animated: true)
+
     }
     
 }
@@ -229,10 +245,10 @@ extension LoginMyPageViewController: UITableViewDelegate {
             case 0:
                 showAnnouncement()
             case 1:
-                loadTermsInfo()
+                loadPolicyWebView(pollicyKind: .tosPolicy)
                 return
             case 2:
-                loadPrivacyPolicy()
+                loadPolicyWebView(pollicyKind: .privatePolicy)
             default:
                 return
             }
