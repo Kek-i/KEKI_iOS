@@ -19,6 +19,7 @@ class PolicyWebViewController: UIViewController {
     // MARK: - Methods of LifeCycle
     override func loadView() {
         super.loadView()
+        tabBarController?.tabBar.isHidden = true
         if urlString != nil {
             webView = WKWebView(frame: self.view.frame)
             webView.uiDelegate = self
