@@ -56,6 +56,7 @@ class UnLoginMyPageViewController: UIViewController {
         appInfoTableView.dataSource = self
         appInfoTableView.delegate = self
         
+        appInfoTableView.isScrollEnabled = false
         appInfoTableView.layer.masksToBounds = false
         appInfoTableView.layer.borderWidth = 0
         appInfoTableView.layer.borderColor = UIColor.white.cgColor

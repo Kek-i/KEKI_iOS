@@ -48,7 +48,8 @@ class LoginMyPageViewController: UIViewController {
     // MARK: - Helper Methods (Setup Method, ...)
     private func setupNavigationBar() {
         navigationController?.navigationBar.isHidden = false
-        
+        navigationController?.navigationBar.tintColor = .black
+
         let title = UILabel()
         title.text = "내 정보"
         title.font = .systemFont(ofSize: 22, weight: .bold)
@@ -133,17 +134,7 @@ class LoginMyPageViewController: UIViewController {
         
         navigationController?.pushViewController(announcementViewController, animated: true)
     }
-    
-//    private func loadTermsInfo() {
-//        // TODO: 약관안내 웹뷰 구현
-//    }
-//    
-//    private func loadPrivacyPolicy() {
-//        let storyboard = UIStoryboard.init(name: "PolicyWebView", bundle: nil)
-//        guard let policyWebViewController = storyboard.instantiateViewController(withIdentifier: "PolicyWebViewController") as? PolicyWebViewController else { return }
-//        navigationController?.pushViewController(policyWebViewController, animated: true)
-//    }
-    
+
     private func loadPolicyWebView(pollicyKind: PolicyKind) {
         let storyboard = UIStoryboard.init(name: "PolicyWebView", bundle: nil)
         guard let policyWebViewController = storyboard.instantiateViewController(withIdentifier: "PolicyWebViewController") as? PolicyWebViewController else { return }
