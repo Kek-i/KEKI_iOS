@@ -22,8 +22,13 @@ class DefaultTabBarController: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         var tabFrame = tabBar.frame
-        tabFrame.size.height = 100
-        tabFrame.origin.y = self.view.frame.size.height - 100
+        if UIDevice.hasNotch {
+            tabFrame.size.height = 100
+            tabFrame.origin.y = self.view.frame.size.height - 100
+        } else {
+            tabFrame.size.height = 60
+            tabFrame.origin.y = self.view.frame.size.height - 60
+        }
         tabBar.frame = tabFrame
         
         setLayoutTabBar()
