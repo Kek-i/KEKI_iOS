@@ -131,81 +131,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="H2j-v7-NAI">
-                                <rect key="frame" x="127" y="193" width="160.5" height="100"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="90" translatesAutoresizingMaskIntoConstraints="NO" id="Kum-sT-rQE">
+                                <rect key="frame" x="85" y="220" width="244" height="456.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Bsm-he-Bc7">
-                                        <rect key="frame" x="0.0" y="0.0" width="160.5" height="63"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="titleTextLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Wlm-Zy-TDS">
-                                        <rect key="frame" x="0.0" y="83" width="160.5" height="17"/>
-                                    </imageView>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="QEF-jG-sRP">
-                                <rect key="frame" x="85" y="385" width="244" height="126.5"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuS-Rk-wux">
-                                        <rect key="frame" x="0.0" y="0.0" width="107" height="126.5"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="buyerIcon" imagePlacement="top" title="구매자">
-                                            <backgroundConfiguration key="background">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="H2j-v7-NAI">
+                                        <rect key="frame" x="42" y="0.0" width="160.5" height="100"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Bsm-he-Bc7">
+                                                <rect key="frame" x="0.0" y="0.0" width="160.5" height="63"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="titleTextLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Wlm-Zy-TDS">
+                                                <rect key="frame" x="0.0" y="83" width="160.5" height="17"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="QEF-jG-sRP">
+                                        <rect key="frame" x="0.0" y="190" width="244" height="126.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuS-Rk-wux">
+                                                <rect key="frame" x="0.0" y="0.0" width="107" height="126.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </backgroundConfiguration>
-                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
-                                            <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
-                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="buyerIcon" imagePlacement="top" title="구매자">
+                                                    <backgroundConfiguration key="background">
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </backgroundConfiguration>
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                                                    <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="didTapBuyerButton:" destination="ztv-ur-oNJ" eventType="touchUpInside" id="VEC-5U-HQQ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OnW-Xv-Gnn">
+                                                <rect key="frame" x="137" y="0.0" width="107" height="126.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="sellerIcon" imagePlacement="top" title="판매자">
+                                                    <backgroundConfiguration key="background">
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </backgroundConfiguration>
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                                                    <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="didTapSellerButton:" destination="ztv-ur-oNJ" eventType="touchUpInside" id="Jiw-cl-b3d"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLw-WP-aGM">
+                                        <rect key="frame" x="47" y="406.5" width="150" height="50"/>
+                                        <color key="backgroundColor" red="0.85098039219999999" green="0.28235294119999998" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="Fhe-L4-Gwb"/>
+                                            <constraint firstAttribute="height" constant="50" id="Gqu-2M-EZZ"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="완료">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="didTapBuyerButton:" destination="ztv-ur-oNJ" eventType="touchUpInside" id="VEC-5U-HQQ"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OnW-Xv-Gnn">
-                                        <rect key="frame" x="137" y="0.0" width="107" height="126.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="sellerIcon" imagePlacement="top" title="판매자">
-                                            <backgroundConfiguration key="background">
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </backgroundConfiguration>
-                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
-                                            <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="didTapSellerButton:" destination="ztv-ur-oNJ" eventType="touchUpInside" id="Jiw-cl-b3d"/>
+                                            <action selector="didTapConfirmButton:" destination="ztv-ur-oNJ" eventType="touchUpInside" id="EkZ-gW-Sww"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLw-WP-aGM">
-                                <rect key="frame" x="132" y="672" width="150" height="50"/>
-                                <color key="backgroundColor" red="0.85098039219999999" green="0.28235294119999998" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="Fhe-L4-Gwb"/>
-                                    <constraint firstAttribute="height" constant="50" id="Gqu-2M-EZZ"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="완료">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="didTapConfirmButton:" destination="ztv-ur-oNJ" eventType="touchUpInside" id="EkZ-gW-Sww"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="r5J-pS-an8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="r5J-pS-an8" firstAttribute="bottom" secondItem="wLw-WP-aGM" secondAttribute="bottom" constant="140" id="1Pq-o9-XNw"/>
-                            <constraint firstItem="wLw-WP-aGM" firstAttribute="centerX" secondItem="xe5-yF-ehy" secondAttribute="centerX" id="BTU-eM-Fr0"/>
-                            <constraint firstItem="H2j-v7-NAI" firstAttribute="centerX" secondItem="xe5-yF-ehy" secondAttribute="centerX" id="fZa-cH-gqj"/>
-                            <constraint firstItem="H2j-v7-NAI" firstAttribute="top" secondItem="r5J-pS-an8" secondAttribute="top" constant="145" id="h43-si-qgM"/>
-                            <constraint firstItem="QEF-jG-sRP" firstAttribute="centerX" secondItem="xe5-yF-ehy" secondAttribute="centerX" id="nii-te-ARI"/>
-                            <constraint firstItem="QEF-jG-sRP" firstAttribute="centerY" secondItem="xe5-yF-ehy" secondAttribute="centerY" id="pTT-DA-i5o"/>
+                            <constraint firstItem="Kum-sT-rQE" firstAttribute="centerX" secondItem="xe5-yF-ehy" secondAttribute="centerX" id="4wM-ZL-WaQ"/>
+                            <constraint firstItem="Kum-sT-rQE" firstAttribute="centerY" secondItem="xe5-yF-ehy" secondAttribute="centerY" id="r2W-QJ-6eD"/>
                         </constraints>
                     </view>
                     <connections>
