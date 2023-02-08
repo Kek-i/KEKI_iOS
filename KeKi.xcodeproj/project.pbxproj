@@ -8,13 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		731AA68F298D00C0008A9A1B /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA68E298D00C0008A9A1B /* SettingTableViewCell.swift */; };
-		731AA69E298D016D008A9A1B /* DayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA691298D016C008A9A1B /* DayTableViewController.swift */; };
 		731AA69F298D016D008A9A1B /* HashTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA692298D016C008A9A1B /* HashTagCell.swift */; };
 		731AA6A0298D016D008A9A1B /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA693298D016C008A9A1B /* DayCell.swift */; };
-		731AA6A3298D016D008A9A1B /* DayNothingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731AA696298D016D008A9A1B /* DayNothingViewController.storyboard */; };
 		731AA6A4298D016D008A9A1B /* DayDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731AA697298D016D008A9A1B /* DayDetail.storyboard */; };
 		731AA6A6298D016D008A9A1B /* DayDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA699298D016D008A9A1B /* DayDetailViewController.swift */; };
-		731AA6A8298D016D008A9A1B /* DayTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731AA69B298D016D008A9A1B /* DayTableViewController.storyboard */; };
 		735AC112298D03390099B549 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735AC110298D03390099B549 /* Calendar.storyboard */; };
 		735AC113298D03390099B549 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC111298D03390099B549 /* CalendarViewController.swift */; };
 		735AC116298D04570099B549 /* DayAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC114298D04570099B549 /* DayAddViewController.swift */; };
@@ -23,7 +20,6 @@
 		738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64922988A9BE006BB124 /* StoreImageCell.swift */; };
 		738F64982988A9BE006BB124 /* StoreImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64932988A9BE006BB124 /* StoreImageViewController.swift */; };
 		738F64992988A9BE006BB124 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64942988A9BE006BB124 /* TabViewController.swift */; };
-		738F649A2988A9BE006BB124 /* StoreImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 738F64952988A9BE006BB124 /* StoreImageCell.xib */; };
 		73FE8B9D298FEDAE00264B44 /* RecentCakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8B8D298FEDAD00264B44 /* RecentCakeCell.swift */; };
 		73FE8B9E298FEDAE00264B44 /* SearchDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE8B8E298FEDAD00264B44 /* SearchDetailCell.xib */; };
 		73FE8B9F298FEDAE00264B44 /* PopularSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE8B8F298FEDAD00264B44 /* PopularSearchCell.xib */; };
@@ -100,13 +96,10 @@
 /* Begin PBXFileReference section */
 		2D976EA6FCEB12A3327E501F /* Pods_KeKi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeKi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		731AA68E298D00C0008A9A1B /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		731AA691298D016C008A9A1B /* DayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayTableViewController.swift; sourceTree = "<group>"; };
 		731AA692298D016C008A9A1B /* HashTagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagCell.swift; sourceTree = "<group>"; };
 		731AA693298D016C008A9A1B /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
-		731AA696298D016D008A9A1B /* DayNothingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DayNothingViewController.storyboard; sourceTree = "<group>"; };
 		731AA697298D016D008A9A1B /* DayDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DayDetail.storyboard; sourceTree = "<group>"; };
 		731AA699298D016D008A9A1B /* DayDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayDetailViewController.swift; sourceTree = "<group>"; };
-		731AA69B298D016D008A9A1B /* DayTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DayTableViewController.storyboard; sourceTree = "<group>"; };
 		735AC110298D03390099B549 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		735AC111298D03390099B549 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		735AC114298D04570099B549 /* DayAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAddViewController.swift; sourceTree = "<group>"; };
@@ -115,7 +108,6 @@
 		738F64922988A9BE006BB124 /* StoreImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageCell.swift; sourceTree = "<group>"; };
 		738F64932988A9BE006BB124 /* StoreImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageViewController.swift; sourceTree = "<group>"; };
 		738F64942988A9BE006BB124 /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
-		738F64952988A9BE006BB124 /* StoreImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreImageCell.xib; sourceTree = "<group>"; };
 		73FE8B8D298FEDAD00264B44 /* RecentCakeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentCakeCell.swift; sourceTree = "<group>"; };
 		73FE8B8E298FEDAD00264B44 /* SearchDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchDetailCell.xib; sourceTree = "<group>"; };
 		73FE8B8F298FEDAD00264B44 /* PopularSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopularSearchCell.xib; sourceTree = "<group>"; };
@@ -427,7 +419,6 @@
 				738F64942988A9BE006BB124 /* TabViewController.swift */,
 				738F648F2988A9B3006BB124 /* StoreProductViewController.swift */,
 				738F64922988A9BE006BB124 /* StoreImageCell.swift */,
-				738F64952988A9BE006BB124 /* StoreImageCell.xib */,
 				738F64932988A9BE006BB124 /* StoreImageViewController.swift */,
 			);
 			path = Store;
@@ -442,9 +433,6 @@
 				73FE8BAF299251CA00264B44 /* DayAddViewController.storyboard */,
 				731AA699298D016D008A9A1B /* DayDetailViewController.swift */,
 				731AA697298D016D008A9A1B /* DayDetail.storyboard */,
-				731AA696298D016D008A9A1B /* DayNothingViewController.storyboard */,
-				731AA691298D016C008A9A1B /* DayTableViewController.swift */,
-				731AA69B298D016D008A9A1B /* DayTableViewController.storyboard */,
 				731AA693298D016C008A9A1B /* DayCell.swift */,
 				731AA692298D016C008A9A1B /* HashTagCell.swift */,
 			);
@@ -600,7 +588,6 @@
 				A2434AD6298651F600F60D1A /* LaunchScreen.storyboard in Resources */,
 				A2434B0029865B0A00F60D1A /* Announcement.storyboard in Resources */,
 				A2E0150E2992A2FE00EBACF0 /* HomeTableViewCell.xib in Resources */,
-				731AA6A3298D016D008A9A1B /* DayNothingViewController.storyboard in Resources */,
 				A2434AD3298651F600F60D1A /* Assets.xcassets in Resources */,
 				A2F607612989DCB000F4F3DD /* ProductImgCell.xib in Resources */,
 				A2B1CD832988F92C00D87570 /* FeedCell.xib in Resources */,
@@ -613,8 +600,6 @@
 				A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */,
 				735AC112298D03390099B549 /* Calendar.storyboard in Resources */,
 				A2B1CD662987797100D87570 /* UserProfileSetting.storyboard in Resources */,
-				738F649A2988A9BE006BB124 /* StoreImageCell.xib in Resources */,
-				731AA6A8298D016D008A9A1B /* DayTableViewController.storyboard in Resources */,
 				73FE8BB0299251CB00264B44 /* DayAddViewController.storyboard in Resources */,
 				A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */,
 				73FE8BA7298FEDAE00264B44 /* RecentSearchCell.xib in Resources */,
@@ -718,7 +703,6 @@
 				73FE8BA3298FEDAE00264B44 /* SearchMainViewController.swift in Sources */,
 				738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */,
 				73FE8BA2298FEDAE00264B44 /* SearchDetailViewController.swift in Sources */,
-				731AA69E298D016D008A9A1B /* DayTableViewController.swift in Sources */,
 				A2784ADB298A9E0F00FE23DF /* PolicyWebViewController.swift in Sources */,
 				735AC116298D04570099B549 /* DayAddViewController.swift in Sources */,
 				738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */,
