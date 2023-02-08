@@ -48,7 +48,8 @@ class DefaultTabBarController: UITabBarController {
         home.tabBarItem = homeTab
         
         guard let calendarViewController = UIStoryboard(name: "Calendar", bundle: nil).instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController else {return}
-        calendarViewController.tabBarItem = calendarTab
+        let calendar = UINavigationController(rootViewController: calendarViewController)
+        calendar.tabBarItem = calendarTab
         
         guard let searchViewController = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else {return}
         searchViewController.tabBarItem = searchTab
@@ -66,7 +67,7 @@ class DefaultTabBarController: UITabBarController {
         
         viewControllers = [
             home,
-            calendarViewController,
+            calendar,
             searchViewController,
             heartViewController,
             mypage

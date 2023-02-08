@@ -14,6 +14,10 @@ class RecentSearchCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib() 
         
+        setupLayout()
+    }
+    
+    func setupLayout(){
         self.layer.cornerRadius = 13.0
         self.layer.borderWidth = 1.5
         self.layer.borderColor = CGColor(red: 227.0 / 255.0, green: 227.0 / 255.0, blue: 227.0 / 255.0, alpha: 1)

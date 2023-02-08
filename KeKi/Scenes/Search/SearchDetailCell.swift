@@ -17,10 +17,10 @@ class SearchDetailCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
          
-        UIInit()
+        setupLayout()
     }
 
-    func UIInit() {
+    func setupLayout() {
         productImageView.layer.cornerRadius = 10
     }
 }

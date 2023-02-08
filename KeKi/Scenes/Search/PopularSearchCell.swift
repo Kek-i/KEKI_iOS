@@ -14,6 +14,10 @@ class PopularSearchCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib() 
         
+        setupLayout()
+    }
+    
+    func setupLayout() {
         self.layer.cornerRadius = 13.0
     }
  
