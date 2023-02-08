@@ -22,8 +22,13 @@ class DefaultTabBarController: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         var tabFrame = tabBar.frame
-        tabFrame.size.height = 100
-        tabFrame.origin.y = self.view.frame.size.height - 100
+        if UIDevice.hasNotch {
+            tabFrame.size.height = 100
+            tabFrame.origin.y = self.view.frame.size.height - 100
+        } else {
+            tabFrame.size.height = 60
+            tabFrame.origin.y = self.view.frame.size.height - 60
+        }
         tabBar.frame = tabFrame
         
         setLayoutTabBar()
@@ -39,7 +44,8 @@ class DefaultTabBarController: UITabBarController {
         
         var storyboard = UIStoryboard.init(name: "Home", bundle: nil)
         guard let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
-        homeViewController.tabBarItem = homeTab
+        let home = UINavigationController(rootViewController: homeViewController)
+        home.tabBarItem = homeTab
         
         guard let calendarViewController = UIStoryboard(name: "Calendar", bundle: nil).instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController else {return}
         calendarViewController.tabBarItem = calendarTab
@@ -55,9 +61,11 @@ class DefaultTabBarController: UITabBarController {
         let mypage = UINavigationController(rootViewController: mypageViewController)
         mypage.tabBarItem = mypageTab
 
+
+        
         
         viewControllers = [
-            homeViewController,
+            home,
             calendarViewController,
             searchViewController,
             heartViewController,

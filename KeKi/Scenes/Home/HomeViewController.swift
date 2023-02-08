@@ -15,14 +15,8 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var ddayCountingLabel: UILabel!
-    
-    @IBOutlet weak var tagContainerView: UIView!
-    @IBOutlet weak var middleTagContainerView: UIView!
-    @IBOutlet weak var bottomTagContainerView: UIView!
-    
-    @IBOutlet weak var topCollectionView: UICollectionView!
-    @IBOutlet weak var middleCollectionView: UICollectionView!
-    @IBOutlet weak var bottomCollectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
+
     
     // MARK: - Methods of LifeCycle
     override func viewDidLoad() {
@@ -30,76 +24,66 @@ class HomeViewController: UIViewController {
 
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
-        setup()
-        setupLayout()
         setUpDdayCountingLabel()
+        
+        setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.selectedIndex = 0
     }
     
     // MARK: - Action Methods (IBAction, ...)
-    @IBAction func didTapViewMoreButton(_ sender: UIButton) {
-    }
     
     
     // MARK: - Helper Methods (Setup Method, ...)
-    private func setup() {
-        [
-            topCollectionView,
-            middleCollectionView,
-            bottomCollectionView
-            
-        ].forEach {
-            $0?.indicatorStyle = .white
-            $0?.dataSource = self
-            $0?.delegate = self
-        }
-    }
-    private func setupLayout() {
-        [
-            tagContainerView,
-            middleTagContainerView,
-            bottomTagContainerView
-        ].forEach {
-            $0?.layer.cornerRadius = 18
-        }
-    }
     private func setUpDdayCountingLabel() {
         let attributedString = NSMutableAttributedString(string: ddayCountingText!)
         let paragraphStyle = NSMutableParagraphStyle()
 
-        paragraphStyle.lineSpacing = 8 
+        paragraphStyle.lineSpacing = 8
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
         ddayCountingLabel.attributedText = attributedString
+    }
+    
+    private func setupTableView() {
+        tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeTableViewCell")
+        
     }
 
 }
 
 // MARK: - Extensions
-extension HomeViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5 // default number
+extension HomeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
-        cell.setupLayout()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell", for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
         return cell
     }
+
 }
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+extension HomeViewController: UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 260
+    }
+
 }
 
 extension HomeViewController: UIScrollViewDelegate {
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
-    }
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
-    }
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {}
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {}
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         return true     // 스크린 맨 위를 누르면 가장 상단으로 이동
     }

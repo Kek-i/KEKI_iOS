@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HomeCollectionViewCell" customModule="KeKi" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="160"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="160"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSs-ff-Evs">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="160"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xn0-ck-kuH">
+                                <rect key="frame" x="10" y="3" width="130" height="154.33333333333334"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="birthday.cake" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xBn-NW-LUf">
+                                        <rect key="frame" x="0.0" y="-0.3333333333333286" width="130" height="130.66666666666669"/>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                        <color key="tintColor" red="0.85098039219999999" green="0.28235294119999998" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="130" id="PlD-yA-Jem"/>
+                                            <constraint firstAttribute="width" secondItem="xBn-NW-LUf" secondAttribute="height" multiplier="1:1" id="T8u-0u-LZB"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가게이름 가게이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYL-m0-S0D">
+                                        <rect key="frame" x="0.0" y="140" width="130" height="14.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xn0-ck-kuH" firstAttribute="centerY" secondItem="eSs-ff-Evs" secondAttribute="centerY" id="JPh-4N-Izf"/>
+                            <constraint firstItem="xn0-ck-kuH" firstAttribute="centerX" secondItem="eSs-ff-Evs" secondAttribute="centerX" id="PGj-mX-4e5"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="eSs-ff-Evs" secondAttribute="trailing" id="OuX-cM-q6p"/>
+                <constraint firstItem="eSs-ff-Evs" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="eRl-eF-muL"/>
+                <constraint firstAttribute="bottom" secondItem="eSs-ff-Evs" secondAttribute="bottom" id="kR1-IY-mkL"/>
+                <constraint firstItem="eSs-ff-Evs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ncQ-fm-9LC"/>
+            </constraints>
+            <connections>
+                <outlet property="storeImageView" destination="xBn-NW-LUf" id="jJi-IM-IQG"/>
+                <outlet property="storeNameLabel" destination="uYL-m0-S0D" id="pJQ-SC-TVu"/>
+            </connections>
+            <point key="canvasLocation" x="-21.374045801526716" y="20.422535211267608"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="birthday.cake" catalog="system" width="128" height="115"/>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
