@@ -7,25 +7,28 @@
 
 import UIKit
 
+private let URL_ENDPOINT_STR = "/cs/notice"
+
 class AnnouncementViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
-    private var announcementList: [String] = [  // 임시 데이터 (서버연결 후 삭제 예정)
-        "새로운 디저트가 등록되었어요!",
-        "크리스마스 기념 할인행사",
-        "새로운 디저트가 등록되었어요!",
-        "새로운 디저트가 등록되었어요! 어서 확인해보세요",
-        "새로운 디저트가 등록되었어요!",
-        "새로운 디저트가 등록되었어요!",
-        "새로운 디저트가 등록되었어요!",
-        "새로운 디저트가 등록되었어요!",
-        "새로운 디저트가 등록되었어요!",
-        "새로운 디저트가 등록되었어요!",
-        "새로운 디저트가 등록되었어요!",
-        "새로운 디저트가 등록되었어요!",
-        "새로운 디저트가 등록되었어요!",
-        "새로운 디저트가 등록되었어요!",
-    ]
+    private var announcementList: [AnnouncementListResponse.Result] = []
+//    private var announcementList: [String] = [  // 임시 데이터 (서버연결 후 삭제 예정)
+//        "새로운 디저트가 등록되었어요!",
+//        "크리스마스 기념 할인행사",
+//        "새로운 디저트가 등록되었어요!",
+//        "새로운 디저트가 등록되었어요! 어서 확인해보세요",
+//        "새로운 디저트가 등록되었어요!",
+//        "새로운 디저트가 등록되었어요!",
+//        "새로운 디저트가 등록되었어요!",
+//        "새로운 디저트가 등록되었어요!",
+//        "새로운 디저트가 등록되었어요!",
+//        "새로운 디저트가 등록되었어요!",
+//        "새로운 디저트가 등록되었어요!",
+//        "새로운 디저트가 등록되었어요!",
+//        "새로운 디저트가 등록되었어요!",
+//        "새로운 디저트가 등록되었어요!",
+//    ]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -34,6 +37,7 @@ class AnnouncementViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
         setupTableView()
+        fetchData()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -57,7 +61,7 @@ extension AnnouncementViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AnnouncementCell", for: indexPath)
                 as? AnnouncementCell else { return UITableViewCell() }
-        cell.titleLabel.text = announcementList[indexPath.row]
+        cell.titleLabel.text = announcementList[indexPath.row].noticeTitle
         cell.setupLayout()
         return cell
     }
@@ -73,7 +77,17 @@ extension AnnouncementViewController: UITableViewDelegate {
         let backItem = UIBarButtonItem()
         backItem.title = "공지사항"
         navigationItem.backBarButtonItem = backItem
+        let index = announcementList[indexPath.row].noticeIdx
+        detailView.setIndex(index: index)
         navigationController?.pushViewController(detailView, animated: true)
     }
 }
 
+extension AnnouncementViewController {
+    private func fetchData() {
+        APIManeger.apiManager.getData(urlEndpointString: URL_ENDPOINT_STR, dataType: AnnouncementListResponse.self, header: nil, completionHandler: { [weak self] response in
+            self?.announcementList = response.result
+            self?.tableView.reloadData()
+        })
+    }
+}

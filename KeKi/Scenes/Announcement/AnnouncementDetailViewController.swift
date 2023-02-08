@@ -7,9 +7,13 @@
 
 import UIKit
 
+private var URL_ENDPOINT_STR = "/cs/notice/"
+
 class AnnouncementDetailViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
+    private var index: String!
+
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailTextView: UITextView!
@@ -19,6 +23,7 @@ class AnnouncementDetailViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
         setupLayout()
+        fetchData()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -40,3 +45,14 @@ class AnnouncementDetailViewController: UIViewController {
 }
 
 // MARK: - Extensions
+extension AnnouncementDetailViewController {
+    func setIndex(index: Int) { self.index = String(index) }
+    
+    private func fetchData(){
+        APIManeger.apiManager.getData(urlEndpointString: URL_ENDPOINT_STR + index, dataType: AnnouncementResponse.self, header: nil, completionHandler: { [weak self] response in
+            print(response)
+            self?.titleLabel.text = response.result.noticeTitle
+            self?.detailTextView.text = response.result.noticeContent
+        })
+    }
+}
