@@ -74,8 +74,6 @@ class DayAddViewController: UIViewController {
         
         dateSelectPicker.addTarget(self, action: #selector(selectDate), for: .valueChanged)
         
-        let hashTagNib = UINib(nibName: "HashTagCell", bundle: nil)
-        hashTagCV.register(hashTagNib, forCellWithReuseIdentifier: "HashTagCell")
     }
     
     func setupLayer() {

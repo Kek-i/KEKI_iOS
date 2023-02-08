@@ -22,9 +22,6 @@ class DayTableViewController: UIViewController {
     func setup() {
         dayTableView.delegate = self
         dayTableView.dataSource = self
-        
-        let dayCellNib = UINib(nibName: "DayCell", bundle: nil)
-        dayTableView.register(dayCellNib, forCellReuseIdentifier: "DayCell")
     }
     
 

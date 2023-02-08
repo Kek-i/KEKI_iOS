@@ -43,9 +43,6 @@ class DayDetailViewController: UIViewController {
         hashTagCV.dataSource = self
         
         hashTagCV.showsHorizontalScrollIndicator = true
-        
-        let hashTagCellNib = UINib(nibName: "HashTagCell", bundle: nil)
-        hashTagCV.register(hashTagCellNib, forCellWithReuseIdentifier: "HashTagCell")
     }
     
     func setupLayout() {

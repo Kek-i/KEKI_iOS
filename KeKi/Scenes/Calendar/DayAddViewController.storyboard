@@ -272,6 +272,41 @@
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="HashTagCell" reuseIdentifier="HashTagCell" id="eBT-CF-TaY" customClass="HashTagCell" customModule="KeKi" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="162" height="94"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                            <rect key="frame" x="0.0" y="0.0" width="162" height="94"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awI-eN-VVu">
+                                                                    <rect key="frame" x="14" y="7" width="134" height="80"/>
+                                                                    <attributedString key="attributedText">
+                                                                        <fragment content="Label">
+                                                                            <attributes>
+                                                                                <font key="NSFont" size="11" name="SFPro-Regular"/>
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                            </attributes>
+                                                                        </fragment>
+                                                                    </attributedString>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </view>
+                                                        <viewLayoutGuide key="safeArea" id="QVk-yl-rwu"/>
+                                                        <constraints>
+                                                            <constraint firstItem="awI-eN-VVu" firstAttribute="leading" secondItem="eBT-CF-TaY" secondAttribute="leading" constant="14" id="IBW-vx-fkh"/>
+                                                            <constraint firstAttribute="trailing" secondItem="awI-eN-VVu" secondAttribute="trailing" constant="14" id="Mf3-9R-aza"/>
+                                                            <constraint firstItem="awI-eN-VVu" firstAttribute="top" secondItem="eBT-CF-TaY" secondAttribute="top" constant="7" id="WUu-Jh-inK"/>
+                                                            <constraint firstAttribute="bottom" secondItem="awI-eN-VVu" secondAttribute="bottom" constant="7" id="qi0-Bb-92v"/>
+                                                        </constraints>
+                                                        <size key="customSize" width="162" height="94"/>
+                                                        <connections>
+                                                            <outlet property="hashTagLabel" destination="awI-eN-VVu" id="lAa-pg-r5n"/>
+                                                        </connections>
+                                                    </collectionViewCell>
+                                                </cells>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwJ-V4-meW">
                                                 <rect key="frame" x="24" y="304.33333333333331" width="99" height="0.0"/>

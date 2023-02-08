@@ -11,8 +11,6 @@ class HashTagCell: UICollectionViewCell {
     
     @IBOutlet weak var hashTagLabel: UILabel!
     
-    var isSelect: Bool = false
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
