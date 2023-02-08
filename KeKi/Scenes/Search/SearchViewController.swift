@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var mainView: UIView!
     
+    @IBOutlet weak var recentDeleteButton: UIButton!
     @IBOutlet weak var recentCV: UICollectionView!
     @IBOutlet weak var popularCV: UICollectionView!
     @IBOutlet weak var recentCakeCV: UICollectionView!
@@ -75,6 +76,18 @@ class SearchViewController: UIViewController {
     func setupLayout() {
         searchView.layer.cornerRadius = 23
         searchTextField.layer.cornerRadius = 23
+        
+        
+        let buttonTitleAttributes: [NSAttributedString.Key: Any] = [
+              .font: UIFont.systemFont(ofSize: 11),
+              .foregroundColor: UIColor.gray,
+              .underlineStyle: NSUnderlineStyle.single.rawValue
+          ]
+        
+        let attributeString = NSMutableAttributedString(string: "전체 지우기", attributes: buttonTitleAttributes)
+        
+        recentDeleteButton.setAttributedTitle(attributeString, for: .normal)
+       
         
         searchTextField.attributedPlaceholder = NSAttributedString(string: "검색어를 입력해주세요.", attributes: [.foregroundColor: UIColor(red: 224.0 / 255.0, green: 187.0 / 255.0, blue: 187.0 / 255.0, alpha: 1)])
     }
