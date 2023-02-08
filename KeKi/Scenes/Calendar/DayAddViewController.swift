@@ -15,6 +15,7 @@ enum DayType: String {
     case none = "기념일 종류"
 }
 
+
 class DayAddViewController: UIViewController {
     
     @IBOutlet weak var dayTypeLabel: UILabel!
@@ -51,14 +52,12 @@ class DayAddViewController: UIViewController {
     ]
     
     // 서버 연결 후 삭제 - 임시 데이터
-    var hashTagList: Array<String> = ["친구", "기념일", "가족", "졸업전시", "기념일", "졸업전시", "가족", "친구"]
+    var hashTagList: Array<(String, Bool)> = [("친구1", false), ("기념일2" , false), ("가족3", false), ("졸업전시4", false), ("기념일5", false), ("졸업전시6", false), ("가족7", false), ("친구8", false)]
+    
+    var selectHashTagCount = 0
     
     var date:Date?
-    
-    var hashTagCount = 0
-    var hashTagCellList: Array<HashTagCell> = []
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -239,7 +238,7 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if let hashTag = cell as? HashTagCell {
             
             
-            hashTag.backgroundColor = colorList[indexPath.row % 3]
+            hashTag.backgroundColor = .gray
             
             hashTag.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
             hashTag.layer.shadowOffset = CGSize(width: 0, height: 3)
@@ -247,14 +246,17 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
             hashTag.layer.shadowOpacity = 1.0
             hashTag.layer.masksToBounds = false
             
-            if hashTag.isSelect == true {
-                hashTag.backgroundColor = UIColor.clear
-            }
             
             if indexPath.section == 0 {
-                hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row])
+                if hashTagList[indexPath.row].1 {
+                    hashTag.backgroundColor = colorList[indexPath.row % 3]
+                }
+                hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row].0)
             }else {
-                hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row+4])
+                if hashTagList[indexPath.row+4].1 {
+                    hashTag.backgroundColor = colorList[indexPath.row % 3]
+                }
+                hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row+4].0)
             }
         }
         
@@ -265,9 +267,9 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let labelTmp = UILabel()
         if indexPath.section == 0 {
-            labelTmp.text = "# " + hashTagList[indexPath.row]
+            labelTmp.text = "# " + hashTagList[indexPath.row].0
         }else {
-            labelTmp.text = "# " + hashTagList[indexPath.row+4]
+            labelTmp.text = "# " + hashTagList[indexPath.row+4].0
         }
         
         return CGSize(width: labelTmp.intrinsicContentSize.width + 15, height: 26)
@@ -283,31 +285,37 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     // 일단 앞으로 오게 구현은 했는데 좀 더 다듬어야 할듯..
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HashTagCell", for: indexPath) as? HashTagCell else{return}
         
-        if hashTagCount > 3 || cell.isSelect {
-            var removeCell: HashTagCell
-            if cell.isSelect {
-                let index = hashTagCellList.firstIndex(of: cell)
-                removeCell = hashTagCellList.remove(at: index!)
+        if indexPath.section == 0 {
+            if hashTagList[indexPath.row].1 {
+                selectHashTagCount -= 1
+                hashTagList[indexPath.row].1.toggle()
             }else {
-                removeCell = hashTagCellList.removeLast()
+                if selectHashTagCount > 2 {
+                    return
+                }
+                
+                selectHashTagCount += 1
+                hashTagList[indexPath.row].1.toggle()
             }
-            
-            removeCell.isSelect.toggle()
+        }else {
+            if hashTagList[indexPath.row+4].1 {
+                selectHashTagCount -= 1
+                hashTagList[indexPath.row+4].1.toggle()
+            }else {
+                if selectHashTagCount > 2 {
+                    return
+                }
+                
+                selectHashTagCount += 1
+                hashTagList[indexPath.row+4].1.toggle()
+            }
         }
 
-        let selectHashTag: String
-        if indexPath.section == 0 {
-            selectHashTag = hashTagList.remove(at: indexPath.row)
-        }else {
-            selectHashTag = hashTagList.remove(at: indexPath.row + 4)
+        hashTagList.sort {
+            $0.1 && !$1.1
         }
         
-        cell.isSelect = true
-        hashTagCellList.append(cell)
-        hashTagList.insert(selectHashTag, at: 0)
-        hashTagCount += 1
         collectionView.reloadData()
     }
 }
