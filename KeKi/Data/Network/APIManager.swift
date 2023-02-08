@@ -84,7 +84,7 @@ class APIManeger {
     }
     
     
-    // MARK: 제네릭을 활용한 서버와의 POST 통신 메소드 - Response에 대한 nil 이슈 있음 (수정 예정)
+    // MARK: 제네릭을 활용한 서버와의 POST 통신 메소드
     func postData<T: Codable>(urlEndpointString: String,
                               dataType: T.Type,
                               header: HTTPHeaders?,
@@ -96,6 +96,7 @@ class APIManeger {
             .request(url,
                      method: .post,
                      parameters: parameter,
+                     encoder: .json,
                      headers: header)
             .responseDecodable(of: GeneralResponseModel.self) { response in
                 print(parameter)
