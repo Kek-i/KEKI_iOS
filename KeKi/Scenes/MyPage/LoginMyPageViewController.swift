@@ -40,6 +40,11 @@ class LoginMyPageViewController: UIViewController {
         setupTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: - Action Methods (IBAction, ...)
     @IBAction func changedNotificationSwitchValue(_ sender: UISwitch) {
         // TODO: switch 값에 따라 푸시 알림 설정 값 변경하기
