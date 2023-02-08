@@ -66,7 +66,7 @@ class DefaultTabBarController: UITabBarController {
         
         
         viewControllers = [
-            homeViewController,
+            home,
             calendar,
             searchViewController,
             heartViewController,
