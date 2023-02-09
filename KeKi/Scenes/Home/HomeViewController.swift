@@ -75,7 +75,7 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell", for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
-        if homeData != nil {
+        if (homeData != nil) && (homeStoreDataList.count > indexPath.section) {
             cell.setData(sectionData: homeStoreDataList[indexPath.section])
             cell.reloadCell()
         }

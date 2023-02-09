@@ -66,8 +66,8 @@ extension HomeTableViewCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
-        if storePostList.count > 0 {
-            cell.setData(storeData: storePostList[indexPath.section])
+        if (storePostList.count > 0) && (storePostList.count > indexPath.row){
+            cell.setData(storeData: storePostList[indexPath.row])
         }
         cell.setupLayout()
         return cell
