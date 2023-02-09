@@ -24,15 +24,27 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xn0-ck-kuH">
                                 <rect key="frame" x="10" y="3" width="130" height="154.33333333333334"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="birthday.cake" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xBn-NW-LUf">
-                                        <rect key="frame" x="0.0" y="-0.3333333333333286" width="130" height="130.66666666666669"/>
-                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
-                                        <color key="tintColor" red="0.85098039219999999" green="0.28235294119999998" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4p-Rt-66d">
+                                        <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="birthday.cake" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xBn-NW-LUf">
+                                                <rect key="frame" x="0.0" y="-0.3333333333333286" width="130" height="130.66666666666669"/>
+                                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                <color key="tintColor" red="0.85098039219999999" green="0.28235294119999998" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="xBn-NW-LUf" secondAttribute="height" multiplier="1:1" id="1Qr-ob-Jbg"/>
+                                                    <constraint firstAttribute="width" constant="130" id="PlD-yA-Jem"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="130" id="PlD-yA-Jem"/>
-                                            <constraint firstAttribute="width" secondItem="xBn-NW-LUf" secondAttribute="height" multiplier="1:1" id="T8u-0u-LZB"/>
+                                            <constraint firstAttribute="trailing" secondItem="xBn-NW-LUf" secondAttribute="trailing" id="FLO-8z-zyS"/>
+                                            <constraint firstAttribute="bottom" secondItem="xBn-NW-LUf" secondAttribute="bottom" id="GXi-tq-CT2"/>
+                                            <constraint firstItem="xBn-NW-LUf" firstAttribute="top" secondItem="U4p-Rt-66d" secondAttribute="top" id="JS2-LL-nwf"/>
+                                            <constraint firstItem="xBn-NW-LUf" firstAttribute="leading" secondItem="U4p-Rt-66d" secondAttribute="leading" id="LFb-tW-v6G"/>
                                         </constraints>
-                                    </imageView>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="준비중" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYL-m0-S0D">
                                         <rect key="frame" x="0.0" y="140" width="130" height="14.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -58,6 +70,7 @@
                 <constraint firstItem="eSs-ff-Evs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ncQ-fm-9LC"/>
             </constraints>
             <connections>
+                <outlet property="imgContainerView" destination="U4p-Rt-66d" id="Mf4-WH-Rwx"/>
                 <outlet property="storeImageView" destination="xBn-NW-LUf" id="jJi-IM-IQG"/>
                 <outlet property="storeNameLabel" destination="uYL-m0-S0D" id="pJQ-SC-TVu"/>
             </connections>
@@ -66,6 +79,9 @@
     </objects>
     <resources>
         <image name="birthday.cake" catalog="system" width="128" height="115"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

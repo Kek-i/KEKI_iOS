@@ -10,19 +10,22 @@ import Kingfisher
 
 class HomeCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var imgContainerView: UIView!
     @IBOutlet weak var storeImageView: UIImageView!
     @IBOutlet weak var storeNameLabel: UILabel!
    
     func setupLayout() {
-        storeImageView.layer.masksToBounds = false
-        storeImageView.layer.borderWidth = 0
-        storeImageView.layer.borderColor = UIColor.white.cgColor
+        storeImageView.layer.masksToBounds = true
         storeImageView.layer.cornerRadius = 12
+        
+        imgContainerView.layer.borderWidth = 0
+        imgContainerView.layer.borderColor = UIColor.white.cgColor
+        imgContainerView.layer.cornerRadius = 12
 
-        storeImageView.layer.shadowColor = UIColor(red: 152/255, green: 113/255, blue: 113/255, alpha: 1).cgColor
-        storeImageView.layer.shadowRadius = 4
-        storeImageView.layer.shadowOffset = CGSize(width: 4, height: 3.5)
-        storeImageView.layer.shadowOpacity = 0.7
+        imgContainerView.layer.shadowColor = UIColor(red: 152/255, green: 113/255, blue: 113/255, alpha: 1).cgColor
+        imgContainerView.layer.shadowRadius = 4
+        imgContainerView.layer.shadowOffset = CGSize(width: 4, height: 4)
+        imgContainerView.layer.shadowOpacity = 0.7
     }
     
     func setData(storeData: HomePostRes) {
