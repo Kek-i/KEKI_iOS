@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeCollectionViewCell: UICollectionViewCell {
     
@@ -13,7 +14,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var storeNameLabel: UILabel!
    
     func setupLayout() {
-
         storeImageView.layer.masksToBounds = false
         storeImageView.layer.borderWidth = 0
         storeImageView.layer.borderColor = UIColor.white.cgColor
@@ -25,4 +25,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
         storeImageView.layer.shadowOpacity = 0.7
     }
     
+    func setData(storeData: HomePostRes) {
+        storeImageView.kf.setImage(with: URL(string: storeData.postImgUrl))
+        storeNameLabel.text = storeData.storeTitle
+    }
 }

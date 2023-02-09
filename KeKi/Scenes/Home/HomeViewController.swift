@@ -7,11 +7,15 @@
 
 import UIKit
 
+private let URL_ENDPOINT_STR = "/calendars/home"
+
 class HomeViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
 
-    var ddayCountingText: String? = "베이님! \n투리 생일이 3일 남았어요! \n특별한 하루를 준비해요"
+    private var ddayCountingText: String? = "베이님! \n투리 생일이 3일 남았어요! \n특별한 하루를 준비해요"
+    private var homeData: HomeResponse? = nil
+    private var homeStoreDataList: [HomeTagRes] = []
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var ddayCountingLabel: UILabel!
@@ -22,6 +26,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        fetchData()
+        
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
         setUpDdayCountingLabel()
@@ -52,9 +58,7 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeTableViewCell")
-        
     }
-
 }
 
 // MARK: - Extensions
@@ -65,6 +69,10 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell", for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
+        if homeData != nil {
+            cell.setData(sectionData: homeStoreDataList[indexPath.section])
+            cell.reloadCell()
+        }
         return cell
     }
 
@@ -86,5 +94,19 @@ extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {}
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         return true     // 스크린 맨 위를 누르면 가장 상단으로 이동
+    }
+}
+
+// MARK: 네트워크 통신 관련 extension
+extension HomeViewController {
+    private func fetchData(){
+        APIManeger.shared.getData(urlEndpointString: URL_ENDPOINT_STR,
+                                  dataType: HomeResponse.self,
+                                  header: nil,
+                                  completionHandler: { [weak self] response in
+            self?.homeData = response.self
+            self?.homeStoreDataList = response.result.homeTagResList
+            self?.tableView.reloadData()
+        })
     }
 }

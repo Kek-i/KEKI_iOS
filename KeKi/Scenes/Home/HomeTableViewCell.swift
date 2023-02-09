@@ -8,6 +8,8 @@
 import UIKit
 
 class HomeTableViewCell: UITableViewCell {
+    
+    private var storePostList: [HomePostRes] = []
 
     @IBOutlet weak var tagContainerView: UIView!
     @IBOutlet weak var tagTitleLabel: UILabel!
@@ -26,7 +28,8 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     @IBAction func didTapViewMoreButton(_ sender: UIButton) {
-        
+        // TODO: 태그별 더보기 버튼 탭 이벤트 처리 메소드 정의 필요
+        print("did tap view more button")
     }
     
     func configure() {
@@ -44,6 +47,15 @@ class HomeTableViewCell: UITableViewCell {
     private func setupLayout() {
         tagContainerView.layer.cornerRadius = 18
     }
+    
+    func setData(sectionData: HomeTagRes) {
+        tagTitleLabel.text = "# " + sectionData.tagName
+        storePostList = sectionData.homePostRes
+    }
+    
+    func reloadCell() {
+        collectionView.reloadData()
+    }
 }
 
 extension HomeTableViewCell: UICollectionViewDataSource {
@@ -54,15 +66,17 @@ extension HomeTableViewCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
+        if storePostList.count > 0 {
+            cell.setData(storeData: storePostList[indexPath.section])
+        }
         cell.setupLayout()
         return cell
     }
 }
 
 extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
-
+        // TODO: 각 태그별 스토어 게시물 탭 이벤트 처리 메소드 정의 필요
+        print("tapped store post :: indexPath --> \(indexPath)")
     }
 }
