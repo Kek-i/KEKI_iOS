@@ -27,9 +27,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4p-Rt-66d">
                                         <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="birthday.cake" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xBn-NW-LUf">
-                                                <rect key="frame" x="0.0" y="-0.3333333333333286" width="130" height="130.66666666666669"/>
-                                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="buyerIcon" translatesAutoresizingMaskIntoConstraints="NO" id="xBn-NW-LUf">
+                                                <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <color key="tintColor" red="0.85098039219999999" green="0.28235294119999998" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="xBn-NW-LUf" secondAttribute="height" multiplier="1:1" id="1Qr-ob-Jbg"/>
@@ -37,7 +37,7 @@
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="xBn-NW-LUf" secondAttribute="trailing" id="FLO-8z-zyS"/>
                                             <constraint firstAttribute="bottom" secondItem="xBn-NW-LUf" secondAttribute="bottom" id="GXi-tq-CT2"/>
@@ -78,12 +78,9 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="birthday.cake" catalog="system" width="128" height="115"/>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="buyerIcon" width="107" height="107"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
