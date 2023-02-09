@@ -49,7 +49,7 @@ extension AnnouncementDetailViewController {
     func setIndex(index: Int) { self.index = String(index) }
     
     private func fetchData(){
-        APIManeger.apiManager.getData(urlEndpointString: URL_ENDPOINT_STR + index, dataType: AnnouncementResponse.self, header: nil, completionHandler: { [weak self] response in
+        APIManeger.shared.getData(urlEndpointString: URL_ENDPOINT_STR + index, dataType: AnnouncementResponse.self, header: nil, completionHandler: { [weak self] response in
             print(response)
             self?.titleLabel.text = response.result.noticeTitle
             self?.detailTextView.text = response.result.noticeContent

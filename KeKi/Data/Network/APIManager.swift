@@ -16,10 +16,10 @@ private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoxLCJzdWIiOi
 class APIManeger {
     
     // 임시 액세스 토큰 (구매자,판매자)
-    private let buyerTokenHeader = HTTPHeaders(["Authorization": buyerAccessToken])
-    private let sellerTokenHeader = HTTPHeaders(["Authorization": buyerAccessToken])
+    static let buyerTokenHeader = HTTPHeaders(["Authorization": buyerAccessToken])
+    static let sellerTokenHeader = HTTPHeaders(["Authorization": buyerAccessToken])
     
-    static let apiManager = APIManeger()    // 과한 객체 생성으로 인한 메모리 낭비를 줄이기 위함
+    static let shared = APIManeger()    // 과한 객체 생성으로 인한 메모리 낭비를 줄이기 위함
     
     // MARK: 제네릭을 활용한 서버와의 GET 통신 메소드
     // ---
@@ -50,38 +50,38 @@ class APIManeger {
             .resume()
     }
 
-    // MARK: 제네릭을 사용하지 않았을 경우의 get 통신 메소드 (회의 후 삭제 예정)
-    func getAnnouncementList(completionHandler: @escaping ([AnnouncementListResponse.Result])->Void) {
-        guard let url = URL(string: DEV_BASE_URL + "/cs/notice") else { return }
-        
-        AF
-            .request(url, method: .get)
-            .responseDecodable(of: AnnouncementListResponse.self) { response in
-                switch response.result {
-                case .success(let success):
-                    completionHandler(success.result)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            .resume()
-    }
-    
-    func getAnnouncement(index: Int, completionHandler: @escaping (AnnouncementResponse.Announcement)->Void) {
-        guard let url = URL(string: DEV_BASE_URL + "/cs/notice/\(index)") else { return }
-
-        AF
-            .request(url, method: .get)
-            .responseDecodable(of: AnnouncementResponse.self) { response in
-                switch response.result {
-                case .success(let success):
-                    completionHandler(success.result)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            .resume()
-    }
+//    // MARK: 제네릭을 사용하지 않았을 경우의 get 통신 메소드 (회의 후 삭제 예정)
+//    func getAnnouncementList(completionHandler: @escaping ([AnnouncementListResponse.Result])->Void) {
+//        guard let url = URL(string: DEV_BASE_URL + "/cs/notice") else { return }
+//
+//        AF
+//            .request(url, method: .get)
+//            .responseDecodable(of: AnnouncementListResponse.self) { response in
+//                switch response.result {
+//                case .success(let success):
+//                    completionHandler(success.result)
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//            }
+//            .resume()
+//    }
+//
+//    func getAnnouncement(index: Int, completionHandler: @escaping (AnnouncementResponse.Announcement)->Void) {
+//        guard let url = URL(string: DEV_BASE_URL + "/cs/notice/\(index)") else { return }
+//
+//        AF
+//            .request(url, method: .get)
+//            .responseDecodable(of: AnnouncementResponse.self) { response in
+//                switch response.result {
+//                case .success(let success):
+//                    completionHandler(success.result)
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//            }
+//            .resume()
+//    }
     
     
     // MARK: 제네릭을 활용한 서버와의 POST 통신 메소드
