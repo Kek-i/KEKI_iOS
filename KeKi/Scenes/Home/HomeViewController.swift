@@ -13,7 +13,13 @@ class HomeViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
 
+    // TODO: 기본 멘트로 ddayCountingText 재설정 필요 -> 논의 후 설정할 예정
     private var ddayCountingText: String? = "베이님! \n투리 생일이 3일 남았어요! \n특별한 하루를 준비해요"
+    
+    private var nickname: String? = nil
+    private var calendarTitle: String? = nil
+    private var calendarDate: Int? = -1
+    
     private var homeData: HomeResponse? = nil
     private var homeStoreDataList: [HomeTagRes] = []
 
@@ -102,11 +108,18 @@ extension HomeViewController {
     private func fetchData(){
         APIManeger.shared.getData(urlEndpointString: URL_ENDPOINT_STR,
                                   dataType: HomeResponse.self,
-                                  header: nil,
+                                  header: APIManeger.buyerTokenHeader,
                                   completionHandler: { [weak self] response in
             self?.homeData = response.self
             self?.homeStoreDataList = response.result.homeTagResList
             self?.tableView.reloadData()
+            
+            if let nickname = response.result.nickname,
+               let calendarTitle = response.result.calendarTitle,
+               let calendarDate = response.result.calendarDate {
+                self?.ddayCountingLabel.text = "\(nickname)님! \n\(calendarTitle)이 \(calendarDate)일 남았어요! \n특별한 하루를 준비해요"
+            }
+            
         })
     }
 }
