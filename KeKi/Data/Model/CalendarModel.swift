@@ -31,7 +31,7 @@ struct CalendarResponse: Codable {
 
 struct Calendar: Codable {
     let kindOfCalendar, title, date, calDate: String
-    let hashTags: [HashTag]
+    let hashTags: [CalendarHashTag]
 }
 
 struct CalendarHashTag: Codable {

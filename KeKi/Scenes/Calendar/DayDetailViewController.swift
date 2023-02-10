@@ -19,16 +19,18 @@ class DayDetailViewController: UIViewController {
     
     @IBOutlet weak var findCakeButton: UIButton!
     
+    var totalWidth: CGFloat = 0
+    
     let colorList: Array<UIColor> = [
         UIColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
         UIColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
         UIColor(red: 244.0 / 255.0, green: 203.0 / 255.0, blue: 203.0 / 255.0, alpha: 1)
     ]
-    
     // 서버 연결 후 삭제 - 임시 데이터
     let hashTagList: Array<String> = ["친구", "기념일", "가족"]
     
-    var totalWidth: CGFloat = 0
+    
+    private var calendar: Calendar?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,7 @@ class DayDetailViewController: UIViewController {
         setup()
         setupLayout()
         setupNavigationBar()
+        
     }
     
     func setup() {
@@ -56,6 +59,13 @@ class DayDetailViewController: UIViewController {
         }
     }
     
+    func setupText() {
+        titleLabel.text = calendar?.title
+        dDayLabel.text = calendar?.calDate
+        dayTypeLabel.text = calendar?.kindOfCalendar
+        dateTextButton.setTitle(calendar?.date, for: .normal)
+    }
+    
     func setupNavigationBar() {
         self.navigationController?.isNavigationBarHidden = false
         
@@ -69,6 +79,7 @@ class DayDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = editButton
     }
     
+
     @objc func moveToCalendar() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -87,7 +98,7 @@ class DayDetailViewController: UIViewController {
 
 extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hashTagList.count
+        return calendar?.hashTags.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,7 +106,7 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
         
         if let hashTagCell = cell as? HashTagCell {
             hashTagCell.backgroundColor = colorList[indexPath.row % 3]
-            hashTagCell.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row])
+            hashTagCell.setHashTagLabel(hashTag: "# " + (calendar?.hashTags[indexPath.row].calendarHashTag ?? ""))
         }
         
         
@@ -104,10 +115,9 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let labelTmp = UILabel()
-        labelTmp.text = "# " + hashTagList[indexPath.row]
+        labelTmp.text = "# " + (calendar?.hashTags[indexPath.row].calendarHashTag ?? "")
         
         totalWidth = totalWidth + labelTmp.intrinsicContentSize.width
-        
         return CGSize(width: labelTmp.intrinsicContentSize.width, height: 26)
     }
     
@@ -118,15 +128,25 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
     // collection view 가운데 정렬
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
-        let totalSpacingWidth = CGFloat(10 * (hashTagList.count - 1))
+        let totalSpacingWidth = CGFloat(10 * (calendar?.hashTags.count ?? 0))
 
         let leftInset = (collectionView.layer.frame.size.width - (totalWidth + totalSpacingWidth)) / 2
         let rightInset = leftInset
 
-        return UIEdgeInsets(top: 0, left: leftInset-20, bottom: 0, right: rightInset-20)
+        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
 
     }
 
 }
 
-
+// 서버 통신 api
+extension DayDetailViewController{
+    func fetchCalendar(calendarIdx: Int) {
+        APIManeger.shared.getData(urlEndpointString: "/calendars/\(calendarIdx)", dataType: CalendarResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+            self?.calendar = response.result
+            self?.setupText()
+            self?.hashTagCV.reloadData()
+            
+        }
+    }
+}

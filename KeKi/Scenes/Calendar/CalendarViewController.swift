@@ -96,14 +96,17 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         
         let calendar = calendarList[indexPath.section]
         
-        cell.setup(title: calendar.title, date: calendar.date, dDay: calendar.calDate)
+        cell.setupText(title: calendar.title, date: calendar.date, dDay: calendar.calDate)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let dayDetailVC = UIStoryboard(name: "DayDetail", bundle: nil).instantiateViewController(withIdentifier: "DayDetailViewController") as? DayDetailViewController else {return}
-                
+        
+        let calendar = calendarList[indexPath.section]
+        dayDetailVC.fetchCalendar(calendarIdx: calendar.calendarIdx)
+
         self.navigationController?.pushViewController(dayDetailVC, animated: true)
     }
     

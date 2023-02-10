@@ -24,7 +24,7 @@ class DayCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    func setup(title: String, date: String, dDay: String){
+    func setupText(title: String, date: String, dDay: String){
         titleLabel.text = title
         dateLabel.text = date
         dDayLabel.text = dDay
