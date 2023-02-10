@@ -111,12 +111,15 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let action = UIContextualAction(style: .normal, title: nil) { (action, view,  completion) in
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-             completion(true)
+            let removeCalendar = self.calendarList.remove(at: indexPath.section)
+            self.deleteCalendar(calendarIdx: removeCalendar.calendarIdx)
+            let indexSet = IndexSet(arrayLiteral: indexPath.section)
+            tableView.deleteSections(indexSet, with: .automatic)
+            completion(true)
         }
         
         action.backgroundColor = UIColor(red: 253.0 / 255.0, green: 238.0 / 255.0, blue: 198.0 / 255.0, alpha: 1)
-        action.title = "삭제"
+        action.image = UIImage(named: "calendarDelete")
 
 
         let configuration = UISwipeActionsConfiguration(actions: [action])
@@ -135,6 +138,14 @@ extension CalendarViewController {
             self?.calendarList = response.result
             self?.dayTableView.reloadData()
             self?.setupDisplay()
+        }
+    }
+    func deleteCalendar(calendarIdx: Int) {
+        APIManeger.shared.patchData(urlEndpointString: "/calendars/\(calendarIdx)", dataType: GeneralResponseModel.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+            if response.isSuccess == true {
+                print("삭제 성공")
+                self?.fetchCalendarList()
+            }
         }
     }
 }
