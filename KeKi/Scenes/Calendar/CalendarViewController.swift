@@ -24,14 +24,16 @@ class CalendarViewController: UIViewController {
     
     
     // 서버 연결 후 삭제 - 임시 데이터
-    var dDayList: Array<String> = ["1", "2", "3", "4"]
+    var calendarList: Array<CalendarList> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
         setupLayout()
+        setupDisplay()
         setupNavigationBar()
+        fetchCalendarList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,21 +43,6 @@ class CalendarViewController: UIViewController {
     func setup() {
         dayTableView.delegate = self
         dayTableView.dataSource = self
-        
-        //임시로 만들어 개수로 기념일 있을 시와 없을 시 구분 -> 데이터 연결 시 삭제
-        if dDayList.count == 3 {
-            cherryImageView.isHidden = true
-            dayTableView.isHidden = true
-            
-            noDayCherryImageView.isHidden = false
-            noDayLabel.isHidden = false
-        } else if dDayList.count == 4 {
-            noDayCherryImageView.isHidden = true
-            noDayLabel.isHidden = true
-            
-            cherryImageView.isHidden = false
-            dayTableView.isHidden = false
-        }
     }
     
     func setupLayout() {
@@ -64,6 +51,22 @@ class CalendarViewController: UIViewController {
     
     func setupNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    func setupDisplay() {
+        if calendarList.count == 0 {
+            cherryImageView.isHidden = true
+            dayTableView.isHidden = true
+            
+            noDayCherryImageView.isHidden = false
+            noDayLabel.isHidden = false
+        } else {
+            noDayCherryImageView.isHidden = true
+            noDayLabel.isHidden = true
+            
+            cherryImageView.isHidden = false
+            dayTableView.isHidden = false
+        }
     }
     
     @IBAction func addDay(_ sender: Any) {
@@ -81,7 +84,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return calendarList.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -89,7 +92,11 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath) as! DayCell
+        
+        let calendar = calendarList[indexPath.section]
+        
+        cell.setup(title: calendar.title, date: calendar.date, dDay: calendar.calDate)
         
         return cell
     }
@@ -97,7 +104,6 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let dayDetailVC = UIStoryboard(name: "DayDetail", bundle: nil).instantiateViewController(withIdentifier: "DayDetailViewController") as? DayDetailViewController else {return}
                 
-        // 네비게이션 사용 시 Fix
         self.navigationController?.pushViewController(dayDetailVC, animated: true)
     }
     
@@ -120,4 +126,15 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
      }
     
     
+}
+
+// 서버 통신 api
+extension CalendarViewController {
+    func fetchCalendarList() {
+        APIManeger.shared.getData(urlEndpointString: "/calendars", dataType: CalendarListResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+            self?.calendarList = response.result
+            self?.dayTableView.reloadData()
+            self?.setupDisplay()
+        }
+    }
 }
