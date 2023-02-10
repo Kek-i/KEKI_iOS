@@ -29,6 +29,7 @@ class DayDetailViewController: UIViewController {
     // 서버 연결 후 삭제 - 임시 데이터
     let hashTagList: Array<String> = ["친구", "기념일", "가족"]
     
+    var calendarIdx: Int?
     
     private var calendar: Calendar?
     
@@ -38,7 +39,10 @@ class DayDetailViewController: UIViewController {
         setup()
         setupLayout()
         setupNavigationBar()
-        
+        fetchCalendar()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        fetchCalendar()
     }
     
     func setup() {
@@ -87,6 +91,9 @@ class DayDetailViewController: UIViewController {
     @objc func moveToEdit() {
         guard let editVC = UIStoryboard(name: "DayAddViewController", bundle: nil).instantiateViewController(withIdentifier: "DayAddViewController") as? DayAddViewController else {return}
         
+        editVC.calendar = calendar
+        editVC.calendarIdx = calendarIdx
+        
         self.navigationController?.pushViewController(editVC, animated: true)
     }
     
@@ -125,15 +132,15 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
         return 10
     }
     
-    // collection view 가운데 정렬
+    // collection view 가운데 정렬 --> 다듬어야 할듯....
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
         let totalSpacingWidth = CGFloat(10 * (calendar?.hashTags.count ?? 0))
 
-        let leftInset = (collectionView.layer.frame.size.width - (totalWidth + totalSpacingWidth)) / 2
+        let leftInset = Int((collectionView.layer.frame.size.width - (totalWidth + totalSpacingWidth))) / 2 - (10 * (calendar?.hashTags.count ?? 0))
         let rightInset = leftInset
 
-        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
+        return UIEdgeInsets(top: 0, left: CGFloat(leftInset), bottom: 0, right: CGFloat(rightInset))
 
     }
 
@@ -141,8 +148,8 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
 
 // 서버 통신 api
 extension DayDetailViewController{
-    func fetchCalendar(calendarIdx: Int) {
-        APIManeger.shared.getData(urlEndpointString: "/calendars/\(calendarIdx)", dataType: CalendarResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+    func fetchCalendar() {
+        APIManeger.shared.getData(urlEndpointString: "/calendars/\(calendarIdx ?? -1)", dataType: CalendarResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
             self?.calendar = response.result
             self?.setupText()
             self?.hashTagCV.reloadData()

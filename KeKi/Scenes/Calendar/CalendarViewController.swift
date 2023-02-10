@@ -38,6 +38,7 @@ class CalendarViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
+        fetchCalendarList()
     }
     
     func setup() {
@@ -105,7 +106,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         guard let dayDetailVC = UIStoryboard(name: "DayDetail", bundle: nil).instantiateViewController(withIdentifier: "DayDetailViewController") as? DayDetailViewController else {return}
         
         let calendar = calendarList[indexPath.section]
-        dayDetailVC.fetchCalendar(calendarIdx: calendar.calendarIdx)
+        dayDetailVC.calendarIdx = calendar.calendarIdx
 
         self.navigationController?.pushViewController(dayDetailVC, animated: true)
     }
