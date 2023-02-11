@@ -21,13 +21,14 @@ class DayDetailViewController: UIViewController {
     
     var totalWidth: CGFloat = 0
     
+    var centerWidth: [CGFloat] = []
+    
     let colorList: Array<UIColor> = [
         UIColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
         UIColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
         UIColor(red: 244.0 / 255.0, green: 203.0 / 255.0, blue: 203.0 / 255.0, alpha: 1)
     ]
-    // 서버 연결 후 삭제 - 임시 데이터
-    let hashTagList: Array<String> = ["친구", "기념일", "가족"]
+
     
     var calendarIdx: Int?
     
@@ -48,8 +49,7 @@ class DayDetailViewController: UIViewController {
     func setup() {
         hashTagCV.delegate = self
         hashTagCV.dataSource = self
-        
-        hashTagCV.showsHorizontalScrollIndicator = true
+        hashTagCV.isScrollEnabled = false
     }
     
     func setupLayout() {
@@ -124,6 +124,10 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
         let labelTmp = UILabel()
         labelTmp.text = "# " + (calendar?.hashTags[indexPath.row].calendarHashTag ?? "")
         
+        if calendar?.hashTags.count == 3  {
+            centerWidth.append(labelTmp.intrinsicContentSize.width)
+        }
+        
         totalWidth = totalWidth + labelTmp.intrinsicContentSize.width
         return CGSize(width: labelTmp.intrinsicContentSize.width, height: 26)
     }
@@ -132,15 +136,20 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
         return 10
     }
     
-    // collection view 가운데 정렬 --> 다듬어야 할듯....
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
-        let totalSpacingWidth = CGFloat(10 * (calendar?.hashTags.count ?? 0))
+        let totalSpacingWidth = CGFloat(10 * ((calendar?.hashTags.count ?? 0)-1))
 
-        let leftInset = Int((collectionView.layer.frame.size.width - (totalWidth + totalSpacingWidth))) / 2 - (10 * (calendar?.hashTags.count ?? 0))
-        let rightInset = leftInset
+        var leftInset:CGFloat = (collectionView.layer.frame.size.width - (totalWidth + totalSpacingWidth)) / 2
+        var rightInset = leftInset
+        
+        if calendar?.hashTags.count == 3 {
+            leftInset = ((collectionView.layer.frame.size.width - centerWidth[1]) / 2) - (centerWidth[0] +  10)
+            rightInset = ((collectionView.layer.frame.size.width - centerWidth[1]) / 2) - (centerWidth[2] + 10)
+        }
+        
 
-        return UIEdgeInsets(top: 0, left: CGFloat(leftInset), bottom: 0, right: CGFloat(rightInset))
+        return UIEdgeInsets(top: 0, left: leftInset-20, bottom: 0, right: rightInset-20)
 
     }
 
@@ -152,6 +161,8 @@ extension DayDetailViewController{
         APIManeger.shared.getData(urlEndpointString: "/calendars/\(calendarIdx ?? -1)", dataType: CalendarResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
             self?.calendar = response.result
             self?.setupText()
+            self?.totalWidth = 0
+            self?.centerWidth.removeAll()
             self?.hashTagCV.reloadData()
             
         }
