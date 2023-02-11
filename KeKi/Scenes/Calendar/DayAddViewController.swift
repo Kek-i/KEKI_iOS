@@ -32,15 +32,19 @@ class DayAddViewController: UIViewController {
     @IBOutlet weak var dateSelectPicker: UIDatePicker!
     @IBOutlet weak var datePickerView: UIView!
     
+    @IBOutlet weak var waringView: UIView!
+    @IBOutlet weak var waringTextField: UILabel!
+    
     @IBOutlet weak var hashTagCV: UICollectionView!
     
     @IBOutlet weak var selectButtonViewHeight: NSLayoutConstraint!
     @IBOutlet weak var datePickerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var waringViewHeight: NSLayoutConstraint!
     // 네비게이션 연결 시 완료 버튼 추가하여 titleLabel 비어있을 시 priority 값 줄여서 나타내기
-    @IBOutlet weak var warningTitleLabelHeight: NSLayoutConstraint!
     
     var isSelectViewOpen = false
     var isDatePickerViewOpen = false
+    var isTitleTextWrite = false
     
     var dayType: DayType = .none
     
@@ -139,8 +143,11 @@ class DayAddViewController: UIViewController {
             $0?.isHidden = true
         }
         
+        waringTextField.isHidden = true
+        
         selectButtonView.layer.masksToBounds = false
         datePickerView.layer.masksToBounds = false
+        waringView.layer.masksToBounds = false
     }
     
     @objc func selectDate() {
@@ -192,6 +199,13 @@ class DayAddViewController: UIViewController {
         
         let calendarRequest = CalendarRequest(kindOfCalendar: dayType.rawValue, title: titleTextField.text ?? "", date: dateText, hashTags: hashTags)
         
+        if titleTextField.text == nil || titleTextField.text == "" {
+            isTitleTextWrite = true
+            waringViewHeight.priority = UILayoutPriority(100)
+            waringTextField.isHidden = false
+            waringView.layer.masksToBounds = false
+            
+        }
         
         
         if calendar != nil {
