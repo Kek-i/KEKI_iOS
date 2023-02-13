@@ -65,8 +65,8 @@ struct SearchResultResponse: Codable {
 }
 
 struct SearchResult: Codable {
-    let feeds: [Feed]
-    let cursorIdx: Int
+    let feeds: [Feed]?
+    let cursorIdx: Int?
     let cursorPrice, cursorPopularNum: Int?
     let hasNext: Bool
     let numOfRows: Int

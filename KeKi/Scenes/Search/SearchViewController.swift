@@ -66,6 +66,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchResultCV: UICollectionView!
  
     
+    private var searchText:String?
     private var sortType:SortType = .Recent
     
     private var isSortOpen = false
@@ -220,6 +221,8 @@ class SearchViewController: UIViewController {
         }else if sender.currentTitle == SortType.LowPrice.rawValue{
             sortType = .LowPrice
         }
+        openSortButtonView(self)
+        fetchSearchResult(searchText: searchText ?? "", sortType: sortType.getRequestType())
 
         setHideButtonTitle()
     }
@@ -230,17 +233,19 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
-        let searchText: String = textField.text!
+        searchText = textField.text
         
-        fetchSearchResult(searchText: searchText, sortType: sortType.getRequestType())
+        fetchSearchResult(searchText: searchText ?? "", sortType: sortType.getRequestType())
         
         return true
     }
-//    func textFieldDidChangeSelection(_ textField: UITextField) {
-//        if textField.text == nil || textField.text == ""{
-//            showMainView()
-//        }
-//    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.text == nil || textField.text == ""{
+            fetchSearchMain()
+            showMainView()
+        }
+    }
 }
 
 
@@ -253,7 +258,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }else if collectionView.tag == 3 {
             return recentCakeList.count
         }else  {
-            return searchResult?.feeds.count ?? 0
+            return searchResult?.feeds?.count ?? 0
         }
     }
     
@@ -280,12 +285,12 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
         }else {
             if let searchDetailCell = cell as? SearchDetailCell {
-                guard let imageUrl = URL(string: searchResult?.feeds[indexPath.row].postImgUrls[0] ?? "") else {return cell}
+                guard let imageUrl = URL(string: searchResult?.feeds?[indexPath.row].postImgUrls[0] ?? "") else {return cell}
                 guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
                 
                 searchDetailCell.productImageView.image = UIImage(data: imageData)
-                searchDetailCell.productTitleLabel.text = searchResult?.feeds[indexPath.row].dessertName
-                searchDetailCell.productPriceLabel.text = searchResult?.feeds[indexPath.row].dessertPrice.description
+                searchDetailCell.productTitleLabel.text = searchResult?.feeds?[indexPath.row].dessertName
+                searchDetailCell.productPriceLabel.text = searchResult?.feeds?[indexPath.row].dessertPrice.description
             }
         }
         
@@ -333,12 +338,11 @@ extension SearchViewController {
     func fetchSearchMain() {
         // MARK: 로그인 토큰 있을 시 검색 메인 화면
         APIManeger.shared.getData(urlEndpointString: "/histories", dataType: SearchMainResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
-            print(response)
-
+            
             self?.recentTextList = response.result.recentSearches
             self?.popularTextList = response.result.popularSearches
             self?.recentCakeList = response.result.recentPostSearches
-
+            
             self?.recentCV.reloadData()
             self?.popularCV.reloadData()
             self?.recentCakeCV.reloadData()
@@ -375,9 +379,7 @@ extension SearchViewController {
             ]
         
         APIManeger.shared.getData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
-            print(response)
-            
-            if response.result.feeds.count != 0 {
+            if response.result.feeds?.count != 0 {
                 self?.searchResult = response.result
                 self?.showResultView()
             }else {
