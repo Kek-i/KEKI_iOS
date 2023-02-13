@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// MARK: 로그인 O 검색 메인 화면 (최근 검색어, 인기 검색어, 최근 본 케이크)
 struct SearchMainResponse: Codable {
     let isSuccess: Bool
     let code: Int
@@ -20,13 +20,27 @@ struct SearchMainResult: Codable {
     let recentPostSearches: [RecentPostSearch]
 }
 
+// MARK: 로그인 X 검색 메인 화면 (최근 검색어 X, 인기 검색어, 최근 본 케이크 X)
+struct NoLoginSearchMainResponse: Codable {
+    let isSuccess: Bool
+    let code: Int
+    let message: String
+    let result: NoLoginSearchMainResult
+}
+
+struct NoLoginSearchMainResult: Codable {
+    let recentSearches: [Search]?
+    let popularSearches: [Search]
+    let recentPostSearches: [RecentPostSearch]?
+}
+
+// MARK: 최근 검색어
 struct RecentSearchesResponse: Codable {
     let isSuccess: Bool
     let code: Int
     let message: String
     let result: [Search]
 }
-
 
 struct Search: Codable {
     let searchWord: String
@@ -42,40 +56,33 @@ struct RecentPostSearch: Codable {
     }
 }
 
-struct NoLoginSearchMainResponse: Codable {
+// MARK: 검색 결과
+struct SearchResultResponse: Codable {
     let isSuccess: Bool
     let code: Int
     let message: String
-    let result: NoLoginSearchMainResult
+    let result: SearchResult
 }
 
-struct NoLoginSearchMainResult: Codable {
-    let recentSearches: JSONNull?
-    let popularSearches: [Search]
-    let recentPostSearches: JSONNull?
+struct SearchResult: Codable {
+    let feeds: [Feed]
+    let cursorIdx: Int
+    let cursorPrice, cursorPopularNum: Int?
+    let hasNext: Bool
+    let numOfRows: Int
 }
 
-class JSONNull: Codable, Hashable {
-
-    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-        return true
-    }
-
-    public var hashValue: Int {
-        return 0
-    }
-
-    public init() {}
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if !container.decodeNil() {
-            throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-        }
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encodeNil()
-    }
+struct Feed: Codable {
+    let postIdx: Int
+    let dessertName: String
+    let dessertPrice: Int
+    let description: String
+    let postImgUrls: [String]
+    let tags: [String]
+    let storeIdx: Int
+    let storeName, storeProfileImg: String
+    let like: Bool
 }
+
+
+

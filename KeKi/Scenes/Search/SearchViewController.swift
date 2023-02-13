@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 enum SortType: String {
     case Recent = "최신순"
@@ -24,7 +25,7 @@ extension SortType {
         }
     }
         
-    func getPostType() -> String {
+    func getRequestType() -> String {
         switch self {
         case .Recent:
             return "최신순"
@@ -74,6 +75,8 @@ class SearchViewController: UIViewController {
     var popularTextList: Array<Search> = []
     var recentCakeList: Array<RecentPostSearch> = []
     
+    var searchResult: SearchResult?
+    
     var popularColorList: Array<CGColor> = [CGColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
                                             CGColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
                                             CGColor(red: 244.0 / 255.0, green: 203.0 / 255.0, blue: 203.0 / 255.0, alpha: 1),
@@ -81,7 +84,6 @@ class SearchViewController: UIViewController {
                                             CGColor(red: 243.0 / 255.0, green: 224.0 / 255.0, blue: 250.0 / 255.0, alpha: 1)]
     
     
-    var searchText: String?
     var checkSearch = false
     
     
@@ -177,6 +179,7 @@ class SearchViewController: UIViewController {
         
         noResultImageView.isHidden = true
         noResultLabel.isHidden = true
+        searchResultCV.reloadData()
         searchResultCV.isHidden = false
     }
     
@@ -227,23 +230,17 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
-        search(text: textField.text)
+        let searchText: String = textField.text!
+        
+        fetchSearchResult(searchText: searchText, sortType: sortType.getRequestType())
         
         return true
     }
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField.text == nil || textField.text == ""{
-            showMainView()
-        }
-    }
-    // 검색
-    func search(text: String?){
-        if text == nil || text == "" {
-           showNoResultView()
-        }else {
-            showResultView()
-        }
-    }
+//    func textFieldDidChangeSelection(_ textField: UITextField) {
+//        if textField.text == nil || textField.text == ""{
+//            showMainView()
+//        }
+//    }
 }
 
 
@@ -256,7 +253,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }else if collectionView.tag == 3 {
             return recentCakeList.count
         }else  {
-            return 10
+            return searchResult?.feeds.count ?? 0
         }
     }
     
@@ -280,6 +277,15 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
                 
                 recentCakeCell.recentCakeImageView.image = UIImage(data: imageData)
+            }
+        }else {
+            if let searchDetailCell = cell as? SearchDetailCell {
+                guard let imageUrl = URL(string: searchResult?.feeds[indexPath.row].postImgUrls[0] ?? "") else {return cell}
+                guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
+                
+                searchDetailCell.productImageView.image = UIImage(data: imageData)
+                searchDetailCell.productTitleLabel.text = searchResult?.feeds[indexPath.row].dessertName
+                searchDetailCell.productPriceLabel.text = searchResult?.feeds[indexPath.row].dessertPrice.description
             }
         }
         
@@ -326,7 +332,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController {
     func fetchSearchMain() {
         // MARK: 로그인 토큰 있을 시 검색 메인 화면
-        APIManeger.shared.getData(urlEndpointString: "/histories", dataType: SearchMainResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+        APIManeger.shared.getData(urlEndpointString: "/histories", dataType: SearchMainResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
             print(response)
 
             self?.recentTextList = response.result.recentSearches
@@ -340,12 +346,14 @@ extension SearchViewController {
         
         // MARK: 로그인 토큰 없을 시 검색 메인 화면
 //        APIManeger.shared.getData(urlEndpointString: "/histories", dataType: NoLoginSearchMainResponse.self, header: nil) { [weak self] response in
+//            print(response)
 //            self?.popularTextList = response.result.popularSearches
 //            self?.popularCV.reloadData()
 //        }
     }
+    
     func fetchRecnetSearches() {
-        APIManeger.shared.getData(urlEndpointString: "/histories/recent-searches", dataType: RecentSearchesResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+        APIManeger.shared.getData(urlEndpointString: "/histories/recent-searches", dataType: RecentSearchesResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
             self?.recentTextList = response.result
             self?.recentCV.reloadData()
         }
@@ -359,4 +367,26 @@ extension SearchViewController {
             }
         }
     }
+    
+    func fetchSearchResult(searchText: String, sortType: String) {
+        let queryParam: Parameters = [
+                "searchWord" : searchText,
+                 "sortType" : sortType
+            ]
+        
+        APIManeger.shared.getData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
+            print(response)
+            
+            if response.result.feeds.count != 0 {
+                self?.searchResult = response.result
+                self?.showResultView()
+            }else {
+                self?.showNoResultView()
+            }
+        }
+        
+        
+    }
+    
+    
 }
