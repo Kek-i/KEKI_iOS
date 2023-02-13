@@ -13,22 +13,6 @@ class AnnouncementViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
     private var announcementList: [AnnouncementListResponse.Result] = []
-//    private var announcementList: [String] = [  // 임시 데이터 (서버연결 후 삭제 예정)
-//        "새로운 디저트가 등록되었어요!",
-//        "크리스마스 기념 할인행사",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요! 어서 확인해보세요",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//    ]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -85,7 +69,11 @@ extension AnnouncementViewController: UITableViewDelegate {
 
 extension AnnouncementViewController {
     private func fetchData() {
-        APIManeger.shared.getData(urlEndpointString: URL_ENDPOINT_STR, dataType: AnnouncementListResponse.self, header: nil, completionHandler: { [weak self] response in
+        APIManeger.shared.getData(urlEndpointString: URL_ENDPOINT_STR,
+                                  dataType: AnnouncementListResponse.self,
+                                  header: nil,
+                                  parameter: nil,
+                                  completionHandler: { [weak self] response in
             self?.announcementList = response.result
             self?.tableView.reloadData()
         })

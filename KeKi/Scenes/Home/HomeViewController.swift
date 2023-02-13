@@ -109,6 +109,7 @@ extension HomeViewController {
         APIManeger.shared.getData(urlEndpointString: URL_ENDPOINT_STR,
                                   dataType: HomeResponse.self,
                                   header: APIManeger.buyerTokenHeader,
+                                  parameter: nil,
                                   completionHandler: { [weak self] response in
             self?.homeData = response.self
             self?.homeStoreDataList = response.result.homeTagResList

@@ -45,6 +45,7 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     private func setupLayout() {
+        selectionStyle = .none
         tagContainerView.layer.cornerRadius = 18
     }
     

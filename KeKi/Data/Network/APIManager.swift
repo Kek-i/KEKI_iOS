@@ -10,7 +10,7 @@ import Alamofire
 
 private let DEV_BASE_URL = "https://keki-dev.store" // 개발용 
 
-private let buyerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiIyIiwiZXhwIjoxNjc1NjkzODU4fQ.UHvkEhWXzpyVt7FfyLT5fYiifEm42yJmhKi1ru4zqk0"    // 임시 구매자 액세스 토큰
+private let buyerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiIyIiwiZXhwIjoxNjc2NDc1MzE1fQ.pxcUfHZC87QPk3NrwIOk3t6K_aqdplUMzIFS330I6uk"    // 임시 구매자 액세스 토큰
 private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoxLCJzdWIiOiIxIiwiZXhwIjoxNjc1NjkzODMzfQ.4o2Lc_tMUvQJY1PP_dPQOxeOaeRVkT-HyUciBR_659s"    // 임시 판매자 액세스 토큰
 
 class APIManeger {
@@ -33,12 +33,17 @@ class APIManeger {
     func getData<T: Decodable>(urlEndpointString: String,
                                dataType: T.Type,
                                header: HTTPHeaders?,
+                               parameter: Parameters?,
                                completionHandler: @escaping (T)->Void) {
         
         guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
         
+        
         AF
-            .request(url, method: .get, headers: header ?? nil)
+            .request(url, method: .get,
+                     parameters: parameter ?? nil,
+                     encoding: URLEncoding.queryString,
+                     headers: header ?? nil)
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let success):
@@ -49,39 +54,6 @@ class APIManeger {
             }
             .resume()
     }
-
-//    // MARK: 제네릭을 사용하지 않았을 경우의 get 통신 메소드 (회의 후 삭제 예정)
-//    func getAnnouncementList(completionHandler: @escaping ([AnnouncementListResponse.Result])->Void) {
-//        guard let url = URL(string: DEV_BASE_URL + "/cs/notice") else { return }
-//
-//        AF
-//            .request(url, method: .get)
-//            .responseDecodable(of: AnnouncementListResponse.self) { response in
-//                switch response.result {
-//                case .success(let success):
-//                    completionHandler(success.result)
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                }
-//            }
-//            .resume()
-//    }
-//
-//    func getAnnouncement(index: Int, completionHandler: @escaping (AnnouncementResponse.Announcement)->Void) {
-//        guard let url = URL(string: DEV_BASE_URL + "/cs/notice/\(index)") else { return }
-//
-//        AF
-//            .request(url, method: .get)
-//            .responseDecodable(of: AnnouncementResponse.self) { response in
-//                switch response.result {
-//                case .success(let success):
-//                    completionHandler(success.result)
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                }
-//            }
-//            .resume()
-//    }
     
     
     // MARK: 제네릭을 활용한 서버와의 POST 통신 메소드
