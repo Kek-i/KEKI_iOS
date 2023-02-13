@@ -31,28 +31,28 @@ class APIManeger {
     // 제네릭을 사용하였기 때문에, 성공적으로 데이터를 가져온다면 서버에서 주는 JSON 데이터를 통째로 받아옴 (switch문의 .success 케이스)
     // 때문에 VC에서 필요한 부분만 추출하여 사용하는 것에 유의
     func getData<T: Decodable>(urlEndpointString: String,
-                               dataType: T.Type,
-                               header: HTTPHeaders?,
-                               parameter: Parameters?,
-                               completionHandler: @escaping (T)->Void) {
-        
-        guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
-        
-        
-        AF
-            .request(url, method: .get,
-                     parameters: parameter ?? nil,
-                     encoding: URLEncoding.queryString,
-                     headers: header ?? nil)
-            .responseDecodable(of: T.self) { response in
-                switch response.result {
-                case .success(let success):
-                    completionHandler(success)
-                case .failure(let error):
-                    print(error.localizedDescription)
+                                   dataType: T.Type,
+                                   header: HTTPHeaders?,
+                                   queryParameter: Parameters?,
+                                   completionHandler: @escaping (T)->Void) {
+            
+            guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
+            
+            
+            AF
+                .request(url, method: .get,
+                         parameters: queryParameter ?? nil,
+                         encoding: URLEncoding.queryString,
+                         headers: header ?? nil)
+                .responseDecodable(of: T.self) { response in
+                    switch response.result {
+                    case .success(let success):
+                        completionHandler(success)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
                 }
-            }
-            .resume()
+                .resume()
     }
     
     
