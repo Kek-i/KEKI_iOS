@@ -15,18 +15,23 @@ struct SearchMainResponse: Codable {
     let result: SearchMainResult
 }
 
-// MARK: - Result
 struct SearchMainResult: Codable {
     let recentSearches, popularSearches: [Search]
     let recentPostSearches: [RecentPostSearch]
 }
 
-// MARK: - Search
+struct RecentSearchesResponse: Codable {
+    let isSuccess: Bool
+    let code: Int
+    let message: String
+    let result: [Search]
+}
+
+
 struct Search: Codable {
     let searchWord: String
 }
 
-// MARK: - RecentPostSearch
 struct RecentPostSearch: Codable {
     let postIdx: Int
     let postImgURL: String
@@ -37,8 +42,6 @@ struct RecentPostSearch: Codable {
     }
 }
 
-
-
 struct NoLoginSearchMainResponse: Codable {
     let isSuccess: Bool
     let code: Int
@@ -46,14 +49,11 @@ struct NoLoginSearchMainResponse: Codable {
     let result: NoLoginSearchMainResult
 }
 
-// MARK: - Result
 struct NoLoginSearchMainResult: Codable {
     let recentSearches: JSONNull?
     let popularSearches: [Search]
     let recentPostSearches: JSONNull?
 }
-
-// MARK: - Encode/decode helpers
 
 class JSONNull: Codable, Hashable {
 

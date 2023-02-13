@@ -182,8 +182,7 @@ class SearchViewController: UIViewController {
     
     
     @IBAction func deleteRecent(_ sender: Any) {
-        recentTextList.removeAll()
-        recentCV.reloadData()
+        deleteRecentSearches()
     }
     
     
@@ -239,8 +238,6 @@ extension SearchViewController: UITextFieldDelegate {
     }
     // 검색
     func search(text: String?){
-        
-        // 임시로 text가 비어있으면 검색결과 없음으로 표시
         if text == nil || text == "" {
            showNoResultView()
         }else {
@@ -346,5 +343,20 @@ extension SearchViewController {
 //            self?.popularTextList = response.result.popularSearches
 //            self?.popularCV.reloadData()
 //        }
+    }
+    func fetchRecnetSearches() {
+        APIManeger.shared.getData(urlEndpointString: "/histories/recent-searches", dataType: RecentSearchesResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+            self?.recentTextList = response.result
+            self?.recentCV.reloadData()
+        }
+    }
+    
+    
+    func deleteRecentSearches() {
+        APIManeger.shared.patchData(urlEndpointString: "/histories", dataType: SearchMainResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+            if response.isSuccess == true {
+                self?.fetchRecnetSearches()
+            }
+        }
     }
 }
