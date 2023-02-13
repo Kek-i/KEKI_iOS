@@ -69,9 +69,10 @@ class SearchViewController: UIViewController {
     
     private var isSortOpen = false
     
-    // 임시 데이터
-    var recentTextList: Array<String> = ["생일케이크", "합격 축하" , "크리스마스" , "딸기 케이크 맛집", "초코 케이크 맛집"]
-    var popularTextList: Array<String> = ["친구", "가족" , "기념일" , "1주년", "생일파티"]
+    
+    var recentTextList: Array<Search> = []
+    var popularTextList: Array<Search> = []
+    var recentCakeList: Array<RecentPostSearch> = []
     
     var popularColorList: Array<CGColor> = [CGColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
                                             CGColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
@@ -89,6 +90,7 @@ class SearchViewController: UIViewController {
         
         setup()
         setupLayout()
+        fetchSearchMain()
     }
     
     func setup() {
@@ -254,10 +256,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return recentTextList.count
         }else if collectionView.tag == 2{
             return popularTextList.count
-        }else if collectionView.tag == 4 {
+        }else if collectionView.tag == 3 {
+            return recentCakeList.count
+        }else  {
             return 10
-        }else {
-            return 5
         }
     }
     
@@ -267,13 +269,20 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         if collectionView.tag == 1 {
             if let recentSearchCell = cell as? RecentSearchCell {
-                recentSearchCell.recentLabel.text = recentTextList[indexPath.row]
+                recentSearchCell.recentLabel.text = recentTextList[indexPath.row].searchWord
             }
             
         }else if collectionView.tag == 2 {
             if let popluarSearchCell = cell as? PopularSearchCell {
-                popluarSearchCell.popularLabel.text = "# " + popularTextList[indexPath.row]
+                popluarSearchCell.popularLabel.text = "# " + popularTextList[indexPath.row].searchWord
                 popluarSearchCell.setBackgroundColor(color: popularColorList[indexPath.row % 5])
+            }
+        }else if collectionView.tag == 3 {
+            if let recentCakeCell = cell as? RecentCakeCell {
+                guard let imageUrl = URL(string: recentCakeList[indexPath.row].postImgURL) else {return cell}
+                guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
+                
+                recentCakeCell.recentCakeImageView.image = UIImage(data: imageData)
             }
         }
         
@@ -291,16 +300,14 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.tag == 1 {
             let tmpLabel = UILabel()
-            tmpLabel.text = recentTextList[indexPath.row]
-            return CGSize(width: tmpLabel.intrinsicContentSize.width+13, height: 26)
+            tmpLabel.text = recentTextList[indexPath.row].searchWord
+            return CGSize(width: tmpLabel.intrinsicContentSize.width+20, height: 26)
         }else if collectionView.tag == 2 {
             let tmpLabel = UILabel()
-            tmpLabel.text = "# " + popularTextList[indexPath.row]
+            tmpLabel.text = "# " + popularTextList[indexPath.row].searchWord
             return CGSize(width: tmpLabel.intrinsicContentSize.width+20, height: 26)
         }else if collectionView.tag == 3{
             return CGSize(width: 100, height: 100)
@@ -318,4 +325,26 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// 서버 통신 api
+extension SearchViewController {
+    func fetchSearchMain() {
+        // MARK: 로그인 토큰 있을 시 검색 메인 화면
+        APIManeger.shared.getData(urlEndpointString: "/histories", dataType: SearchMainResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+            print(response)
 
+            self?.recentTextList = response.result.recentSearches
+            self?.popularTextList = response.result.popularSearches
+            self?.recentCakeList = response.result.recentPostSearches
+
+            self?.recentCV.reloadData()
+            self?.popularCV.reloadData()
+            self?.recentCakeCV.reloadData()
+        }
+        
+        // MARK: 로그인 토큰 없을 시 검색 메인 화면
+//        APIManeger.shared.getData(urlEndpointString: "/histories", dataType: NoLoginSearchMainResponse.self, header: nil) { [weak self] response in
+//            self?.popularTextList = response.result.popularSearches
+//            self?.popularCV.reloadData()
+//        }
+    }
+}
