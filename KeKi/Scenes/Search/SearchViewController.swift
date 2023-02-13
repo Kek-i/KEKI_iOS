@@ -7,6 +7,36 @@
 
 import UIKit
 
+enum SortType: String {
+    case Recent = "최신순"
+    case Popular = "인기순"
+    case LowPrice = "낮은 가격순"
+}
+extension SortType {
+    func getHideTitle() -> [String] {
+        switch self {
+        case .Recent:
+            return [SortType.Popular.rawValue, SortType.LowPrice.rawValue]
+        case .Popular:
+            return [SortType.Recent.rawValue, SortType.LowPrice.rawValue]
+        case .LowPrice:
+            return [SortType.Recent.rawValue, SortType.Popular.rawValue]
+        }
+    }
+        
+    func getPostType() -> String {
+        switch self {
+        case .Recent:
+            return "최신순"
+        case .Popular:
+            return "인기순"
+        case .LowPrice:
+            return "가격낮은순"
+        }
+    }
+    
+}
+
 class SearchViewController: UIViewController { 
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -20,13 +50,24 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var resultView: UIView!
     
-    @IBOutlet weak var searchTypeButton: UIButton!
+    
+    @IBOutlet weak var sortTypeButtonView: UIView!
+    
+    @IBOutlet weak var sortTypeButton: UIButton!
+    @IBOutlet weak var hideSortTypeButton1: UIButton!
+    @IBOutlet weak var hideSortTypeButton2: UIButton!
+    
+    @IBOutlet weak var sortTypeButtonViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var noResultImageView: UIImageView!
     @IBOutlet weak var noResultLabel: UILabel!
     
     @IBOutlet weak var searchResultCV: UICollectionView!
  
+    
+    private var sortType:SortType = .Recent
+    
+    private var isSortOpen = false
     
     // 임시 데이터
     var recentTextList: Array<String> = ["생일케이크", "합격 축하" , "크리스마스" , "딸기 케이크 맛집", "초코 케이크 맛집"]
@@ -90,6 +131,28 @@ class SearchViewController: UIViewController {
        
         
         searchTextField.attributedPlaceholder = NSAttributedString(string: "검색어를 입력해주세요.", attributes: [.foregroundColor: UIColor(red: 224.0 / 255.0, green: 187.0 / 255.0, blue: 187.0 / 255.0, alpha: 1)])
+        
+        sortTypeButtonView.layer.cornerRadius = 16
+        sortTypeButtonView.layer.borderWidth = 1.5
+        sortTypeButtonView.layer.borderColor = CGColor(red: 227 / 255, green: 227 / 255, blue: 227 / 255, alpha: 1)
+        
+        setHideButtonTitle()
+        [hideSortTypeButton1, hideSortTypeButton2].forEach { btn in
+            btn?.isHidden = true
+        }
+        
+        self.sortTypeButtonViewHeight.priority = UILayoutPriority(1000)
+        sortTypeButtonView.layer.masksToBounds = false
+    }
+    
+    func setHideButtonTitle() {
+        sortTypeButton.setTitle(sortType.rawValue, for: .normal)
+        var index = 0
+        [hideSortTypeButton1, hideSortTypeButton2].forEach { btn in
+            let hideTitleList = sortType.getHideTitle()
+            btn?.setTitle(hideTitleList[index], for: .normal)
+            index += 1
+        }
     }
     
     func showMainView() {
@@ -121,6 +184,41 @@ class SearchViewController: UIViewController {
         recentCV.reloadData()
     }
     
+    
+    
+    @IBAction func openSortButtonView(_ sender: Any) {
+        UIView.animate(withDuration: 0.5) {
+            if self.isSortOpen == false {
+                self.sortTypeButtonView.layer.masksToBounds = false
+                self.sortTypeButtonViewHeight.priority = UILayoutPriority(250)
+                [self.hideSortTypeButton1, self.hideSortTypeButton2].forEach {
+                $0?.isHidden = false
+            }
+        }else {
+            self.sortTypeButtonView.layer.masksToBounds = true
+            self.sortTypeButtonViewHeight.priority = UILayoutPriority(1000)
+            [self.hideSortTypeButton1, self.hideSortTypeButton2].forEach {
+                $0?.isHidden = true
+            }
+        }
+        }
+        self.view.layoutIfNeeded()
+        
+        isSortOpen.toggle()
+    }
+    
+    
+    @IBAction func selectSortType(_ sender: UIButton) {
+        if sender.currentTitle == SortType.Recent.rawValue{
+            sortType = .Recent
+        }else if sender.currentTitle == SortType.Popular.rawValue{
+            sortType = .Popular
+        }else if sender.currentTitle == SortType.LowPrice.rawValue{
+            sortType = .LowPrice
+        }
+
+        setHideButtonTitle()
+    }
     
 }
 
