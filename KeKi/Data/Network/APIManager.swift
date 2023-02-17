@@ -10,7 +10,7 @@ import Alamofire
 
 private let DEV_BASE_URL = "https://keki-dev.store" // 개발용 
 
-private let buyerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiIyIiwiZXhwIjoxNjc1NjkzODU4fQ.UHvkEhWXzpyVt7FfyLT5fYiifEm42yJmhKi1ru4zqk0"    // 임시 구매자 액세스 토큰
+private let buyerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiIyIiwiZXhwIjoxNjc2NDc1MzE1fQ.pxcUfHZC87QPk3NrwIOk3t6K_aqdplUMzIFS330I6uk"    // 임시 구매자 액세스 토큰
 private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoxLCJzdWIiOiIxIiwiZXhwIjoxNjc1NjkzODMzfQ.4o2Lc_tMUvQJY1PP_dPQOxeOaeRVkT-HyUciBR_659s"    // 임시 판매자 액세스 토큰
 
 class APIManeger {
@@ -114,7 +114,7 @@ class APIManeger {
     func patchData<T: Codable>(urlEndpointString: String,
                                dataType: T.Type,
                                header: HTTPHeaders?,
-                               parameter: T,
+                               parameter: T?,
                                completionHandler: @escaping (GeneralResponseModel) -> Void) {
         
         guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
