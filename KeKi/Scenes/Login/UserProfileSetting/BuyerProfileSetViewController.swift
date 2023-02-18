@@ -13,10 +13,15 @@ private let SIGNUP_ENDPOINT = "/users/signup"
 class BuyerProfileSetViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
-    var navigationBackItemTitle: String? = nil
+    private var navigationBackItemTitle: String? = nil
     private var isValidNickname: Bool = false
     private var validNickname: String? = nil
+    private var selectedProfileImg: UIImage? = nil
+    private var savedProfileImgUrl: String? = nil
     
+    let imagePickerController = UIImagePickerController()
+    
+    @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var userEmailLabel: UILabel!
     @IBOutlet weak var nickNameTextField: UITextField!
     @IBOutlet weak var validateNicknameButton: UIButton!
@@ -27,22 +32,29 @@ class BuyerProfileSetViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBarLayout()
         setupLayout()
+        configure()
         setup()
     }
     
     // MARK: - Action Methods (IBAction, ...)
     @IBAction func didTapSelectPictureButton(_ sender: UIButton) {
         // TODO: 사진 저장공간으로 접근 처리 (임시 구현)
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true)
     }
     
     @IBAction func didTapvVlidateNicknameButton(_ sender: UIButton) { checkNicknameValidation() }
     
     // MARK: - Helper Methods (Setup Method, ...)
-    private func setup() {
+    private func configure() {
         // TODO: 소셜로그인을 통해 받아온 유저의 이메일을 label값으로 보이기
         let email = UserDefaults.standard.value(forKey: "socialEmail") as! String
         userEmailLabel.text = email
-
+    }
+    
+    private func setup() {
+        imagePickerController.delegate = self
     }
     
     private func setupNavigationBarLayout() {
@@ -53,6 +65,7 @@ class BuyerProfileSetViewController: UIViewController {
     }
     
     private func setupLayout() {
+        profileImageButton.layer.cornerRadius = profileImageButton.frame.width / 2
         nickNameTextField.borderStyle = .none
         nickNameTextField.addLeftPadding()
         [nickNameTextField, validateNicknameButton].forEach {
@@ -68,14 +81,38 @@ class BuyerProfileSetViewController: UIViewController {
         }
     }
     
-    @objc private func confirmProfileSetting() {
-        print("완료 버튼 탭함")
-        signup()
+    @objc private func confirmProfileSetting() { signup() }
+}
+
+// MARK: - Extensions
+extension BuyerProfileSetViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        // 사진 선택
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage { selectedProfileImg = editedImage }
+        else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage { selectedProfileImg = originalImage }
+        
+        // 버튼의 이미지를 선택된 이미지로 변경
+        selectedProfileImg = selectedProfileImg?.resized(toWidth: profileImageButton.frame.width)
+        profileImageButton.setImage(selectedProfileImg, for: .normal)
+        
+        picker.dismiss(animated: true)
     }
 }
 
 // MARK: - Extensions
+extension BuyerProfileSetViewController {
+    private func uploadProfileImage(image: UIImage) {
+        if let userEmail = UserDefaults.standard.value(forKey: "socialEmail") {
+            FirebaseStorageManager.uploadImage(image: image, pathRoot: userEmail as! String,
+                                               completion: { [weak self] url in
+                if let url = url { self?.savedProfileImgUrl = url.absoluteString }
+            })
+        }
+    }
+}
+
+// MARK: - Network관련 Extensions
 extension BuyerProfileSetViewController {
     private func checkNicknameValidation() {
         let inputNickname = NicknameValid(nickname: nickNameTextField.text ?? "")
@@ -105,8 +142,9 @@ extension BuyerProfileSetViewController {
     
     private func signup() {
         if let nickname = nickNameTextField.text {
-            let imgUrl = "" // 임시
-            let signupInfo = Signup(nickname: nickname, profileImg: imgUrl)
+            
+            if selectedProfileImg != nil { uploadProfileImage(image: selectedProfileImg!) }
+            let signupInfo = Signup(nickname: nickname, profileImg: savedProfileImgUrl ?? "")
             signupRequest(param: signupInfo)
             
         } else { showAlert(message: "닉네임을 입력해주세요") }
