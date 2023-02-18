@@ -58,7 +58,7 @@ class DefaultTabBarController: UITabBarController {
         heartViewController.tabBarItem = heartTab
 
         // TODO: 분기 처리 리팩토링 필요
-        if APIManeger.shared.header != nil {
+        if APIManeger.shared.getHeader() != nil {
             storyboard = UIStoryboard.init(name: "LoginUserMypage", bundle: nil)
             guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "LoginMyPageViewController") as? LoginMyPageViewController else { return }
             let mypage = UINavigationController(rootViewController: mypageViewController)

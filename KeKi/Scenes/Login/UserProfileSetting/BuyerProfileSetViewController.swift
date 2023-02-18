@@ -83,7 +83,7 @@ class BuyerProfileSetViewController: UIViewController {
     }
     
     @objc private func confirmProfileSetting() {
-        if APIManeger.shared.header != nil { editProfile() }
+        if APIManeger.shared.getHeader() != nil { editProfile() }
         else { signup() }
     }
 }
@@ -183,12 +183,8 @@ extension BuyerProfileSetViewController {
     }
     
     private func signupRequest(param: Signup) {
-        let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
-        let headers = APIManeger.shared.getHeaderByToken(accessToken: accessToken)
-        
         APIManeger.shared.postSignup(urlEndpointString: SIGNUP_ENDPOINT,
                                    dataType: Signup.self,
-                                   header: headers,
                                    parameter: param,
                                    completionHandler: { [weak self] response in
             switch response.code {
