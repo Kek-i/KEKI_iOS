@@ -154,10 +154,10 @@ extension BuyerProfileSetViewController {
         } else { showAlert(message: "닉네임을 입력해주세요") }
     }
     
+    // MARK: 기본 구성 헤더를 사용한 Request 메소드 사용 예시
     private func editProfileRequest(param: Signup) {
-        APIManeger.shared.patchData(urlEndpointString: BUYER_EDIT_PROFILE_ENDPOINT,
+        APIManeger.shared.testPatchData(urlEndpointString: BUYER_EDIT_PROFILE_ENDPOINT,
                                    dataType: Signup.self,
-                                   header: APIManeger.shared.header,
                                    parameter: param,
                                    completionHandler: { [weak self] response in
             switch response.code {
