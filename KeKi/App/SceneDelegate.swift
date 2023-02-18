@@ -14,12 +14,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        // MARK: Setting UserInfo (token , role)
+        if let _ = UserDefaults.standard.object(forKey: "userInfo") {
+            if let data = UserDefaults.standard.value(forKey: "userInfo") as? Data {
+                let decodedUserInfo = try? PropertyListDecoder().decode(AuthResponse.Result.self, from: data)
+                APIManeger.shared.setUserInfo(userInfo: decodedUserInfo!)
+            }
+        }
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = DefaultTabBarController()
         window?.backgroundColor = .systemBackground
         window?.makeKeyAndVisible()
-        
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

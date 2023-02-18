@@ -12,13 +12,13 @@ struct SocialLoginRequest: Codable {
     var provider: String
 }
 
-struct AuthResponse: Decodable {
+struct AuthResponse: Codable {
     var isSuccess: Bool
     var code: Int
     var message: String
     var result: Result
     
-    struct Result: Decodable {
+    struct Result: Codable {
         var accessToken: String
         var refreshToken: String
         var role: String

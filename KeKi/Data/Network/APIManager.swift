@@ -14,12 +14,25 @@ private let buyerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiI
 private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoxLCJzdWIiOiIxIiwiZXhwIjoxNjc1NjkzODMzfQ.4o2Lc_tMUvQJY1PP_dPQOxeOaeRVkT-HyUciBR_659s"    // 임시 판매자 액세스 토큰
 
 class APIManeger {
-    
     // 임시 액세스 토큰 (구매자,판매자)
     static let buyerTokenHeader = HTTPHeaders(["Authorization": buyerAccessToken])
     static let sellerTokenHeader = HTTPHeaders(["Authorization": buyerAccessToken])
     
+    
+    private var userInfo: AuthResponse.Result? = nil
+    var header: HTTPHeaders? = nil
+    
+    func setUserInfo(userInfo: AuthResponse.Result) {
+        self.userInfo = userInfo
+        self.header = HTTPHeaders(["Authorization": userInfo.accessToken])
+        print(self.header)  // for test
+    }
+    
     static let shared = APIManeger()    // 과한 객체 생성으로 인한 메모리 낭비를 줄이기 위함
+    
+    func getHeaderByToken(accessToken: String) -> HTTPHeaders {
+        return HTTPHeaders(["Authorization": accessToken])
+    }
     
     // MARK: 제네릭을 활용한 서버와의 GET 통신 메소드
     // ---
@@ -137,7 +150,7 @@ class APIManeger {
     }
     
     // MARK: 소셜 로그인 용 임시 메소드
-    func postLogin<T: Codable>(urlEndpointString: String,
+    func postSignup<T: Codable>(urlEndpointString: String,
                               dataType: T.Type,
                               header: HTTPHeaders?,
                               parameter: T,
