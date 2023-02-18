@@ -32,18 +32,24 @@ class DayAddViewController: UIViewController {
     @IBOutlet weak var dateSelectPicker: UIDatePicker!
     @IBOutlet weak var datePickerView: UIView!
     
+    @IBOutlet weak var waringView: UIView!
+    @IBOutlet weak var waringTextField: UILabel!
+    
     @IBOutlet weak var hashTagCV: UICollectionView!
     
     @IBOutlet weak var selectButtonViewHeight: NSLayoutConstraint!
     @IBOutlet weak var datePickerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var waringViewHeight: NSLayoutConstraint!
     // 네비게이션 연결 시 완료 버튼 추가하여 titleLabel 비어있을 시 priority 값 줄여서 나타내기
-    @IBOutlet weak var warningTitleLabelHeight: NSLayoutConstraint!
     
     var isSelectViewOpen = false
     var isDatePickerViewOpen = false
+    var isTitleTextWrite = false
     
     var dayType: DayType = .none
     
+    var calendar: Calendar?
+    var calendarIdx: Int?
     
     let colorList: Array<UIColor> = [
         UIColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
@@ -51,8 +57,7 @@ class DayAddViewController: UIViewController {
         UIColor(red: 244.0 / 255.0, green: 203.0 / 255.0, blue: 203.0 / 255.0, alpha: 1)
     ]
     
-    // 서버 연결 후 삭제 - 임시 데이터
-    var hashTagList: Array<(String, Bool)> = [("친구1", false), ("기념일2" , false), ("가족3", false), ("졸업전시4", false), ("기념일5", false), ("졸업전시6", false), ("가족7", false), ("친구8", false)]
+    var hashTagList: Array<(String, Bool)> = []
     
     var selectHashTagCount = 0
     
@@ -61,20 +66,51 @@ class DayAddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchHashTagList()
         setup()
         setupLayer()
         setupNavigationBar()
     }
     
     // 데이터 연결 할 때 모델 만들어 편집 구현 -> 모델 넘김 받을 시 해당 데이터 모두 표시 / 없다면 지금 이대로 표시
-    // collection view는 데이터 받아야지 무슨 말인지 알거 같음 ...
     func setup() {
         hashTagCV.dataSource = self
         hashTagCV.delegate = self
         
-        dateSelectPicker.addTarget(self, action: #selector(selectDate), for: .valueChanged)
+        if calendar == nil {
+            titleTextField.attributedPlaceholder = NSAttributedString(string: "기념일 제목을 입력해주세요.", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 128.0 / 250.0, green: 128.0 / 250.0, blue: 128.0 / 250.0, alpha: 1)])
+            dateSelectButton.setTitle("날짜를 선택해주세요.", for: .normal)
+        }else {
+            titleTextField.text = calendar?.title
+            dateSelectButton.setTitle(calendar?.date, for: .normal)
+            
+            print(hashTagList.count)
+            
+            switch calendar?.kindOfCalendar {
+                case DayType.dDay.rawValue:
+                    dayType = .dDay
+                case DayType.numDay.rawValue:
+                    dayType = .numDay
+                case DayType.repeatDay.rawValue:
+                    dayType = .repeatDay
+                default:
+                    return
+            }
+            
+            selectHashTagCount = calendar?.hashTags.count ?? 0
+            
+            
+            let dateFromat = DateFormatter()
+            dateFromat.dateFormat = "yyyy-MM-dd"
+            
+            date = dateFromat.date(from: calendar?.date ?? "")
+            dateSelectPicker.date = date ?? Date()
+        }
         
+        
+        dateSelectPicker.addTarget(self, action: #selector(selectDate), for: .valueChanged)
     }
+    
     
     func setupLayer() {
         [dayTypeSelectButton, dDayButton, dayNumButton, dayRepeatButton, titleTextField].forEach {
@@ -88,20 +124,17 @@ class DayAddViewController: UIViewController {
             $0?.layer.shadowOpacity = 1.0
             $0?.layer.cornerRadius = 10
         }
-        dayTypeSelectButton.setTitle(DayType.none.rawValue, for: .normal)
+        dayTypeSelectButton.setTitle(dayType.rawValue, for: .normal)
         dayTypeSelectButton.setImage(UIImage(named: "downButton"), for: .normal)
         dDayButton.setTitle(DayType.dDay.rawValue, for: .normal)
         dayNumButton.setTitle(DayType.numDay.rawValue, for: .normal)
         dayRepeatButton.setTitle(DayType.repeatDay.rawValue, for: .normal)
         
         titleTextField.layer.borderWidth = 0
-        titleTextField.attributedPlaceholder = NSAttributedString(string: "기념일 제목을 입력해주세요.", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 128.0 / 250.0, green: 128.0 / 250.0, blue: 128.0 / 250.0, alpha: 1)])
         titleTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         titleTextField.leftViewMode = .always
         titleTextField.addLeftPadding()
         
-        // 버튼 내에 이미지 고정 필요 ...ㅠ (날짜 바뀔때 마다 계속 위치 변경 됨)
-        dateSelectButton.setTitle("날짜를 선택해주세요.", for: .normal)
         dateSelectButton.setImage(UIImage(named: "calendar"), for: .normal)
         dateSelectButton.titleLabel?.frame = CGRect(x: 40, y: 455, width: 256, height: 20)
         dateSelectButton.imageView?.frame = CGRect(x: 312, y: 453, width: 24, height: 24)
@@ -110,15 +143,16 @@ class DayAddViewController: UIViewController {
             $0?.isHidden = true
         }
         
+        waringTextField.isHidden = true
+        
         selectButtonView.layer.masksToBounds = false
         datePickerView.layer.masksToBounds = false
+        waringView.layer.masksToBounds = false
     }
     
     @objc func selectDate() {
         let dateFromat = DateFormatter()
         dateFromat.dateFormat = "yyyy-MM-dd"
-        print(dateFromat.string(from: dateSelectPicker.date))
-        
 
         dateSelectButton.setTitle(dateFromat.string(from: dateSelectPicker.date), for: .normal)
         
@@ -153,7 +187,32 @@ class DayAddViewController: UIViewController {
     }
     
     @objc func addDay() {
-        // 서버에 기념일 저장
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd"
+        let dateText = dateFormat.string(from: date ?? Date())
+        var hashTags: [HashTagList] = []
+        hashTagList.forEach {
+            if $0.1 == true {
+                hashTags.append(HashTagList(calendarHashTag: $0.0))
+            }
+        }
+        
+        let calendarRequest = CalendarRequest(kindOfCalendar: dayType.rawValue, title: titleTextField.text ?? "", date: dateText, hashTags: hashTags)
+        
+        if titleTextField.text == nil || titleTextField.text == "" {
+            isTitleTextWrite = true
+            waringViewHeight.priority = UILayoutPriority(100)
+            waringTextField.isHidden = false
+            waringView.layer.masksToBounds = false
+            
+        }
+        
+        
+        if calendar != nil {
+            updateDate(calendarRequest: calendarRequest, calendarIdx: calendarIdx ?? 0)
+        }else {
+            addDate(calendarRequest: calendarRequest)
+        }
     }
 
     
@@ -227,7 +286,7 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return 4
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return hashTagList.count / 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -244,18 +303,11 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
             hashTag.layer.shadowOpacity = 1.0
             hashTag.layer.masksToBounds = false
             
-            
-            if indexPath.section == 0 {
-                if hashTagList[indexPath.row].1 {
-                    hashTag.backgroundColor = colorList[indexPath.row % 3]
-                }
-                hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row].0)
-            }else {
-                if hashTagList[indexPath.row+4].1 {
-                    hashTag.backgroundColor = colorList[indexPath.row % 3]
-                }
-                hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row+4].0)
+            if hashTagList[indexPath.row + (indexPath.section * 4)].1 {
+                hashTag.backgroundColor = colorList[indexPath.row % 3]
             }
+            hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row + (indexPath.section * 4)].0)
+            
         }
         
         return cell
@@ -264,13 +316,9 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let labelTmp = UILabel()
-        if indexPath.section == 0 {
-            labelTmp.text = "# " + hashTagList[indexPath.row].0
-        }else {
-            labelTmp.text = "# " + hashTagList[indexPath.row+4].0
-        }
-        
-        return CGSize(width: labelTmp.intrinsicContentSize.width + 15, height: 26)
+        labelTmp.text = "# " + hashTagList[indexPath.row + (indexPath.section * 4)].0
+       
+        return CGSize(width: labelTmp.intrinsicContentSize.width + 20, height: 26)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -281,33 +329,18 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return UIEdgeInsets(top: 0, left: 20, bottom: 10, right: 20)
     }
     
-    // 일단 앞으로 오게 구현은 했는데 좀 더 다듬어야 할듯..
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
-            if hashTagList[indexPath.row].1 {
-                selectHashTagCount -= 1
-                hashTagList[indexPath.row].1.toggle()
-            }else {
-                if selectHashTagCount > 2 {
-                    return
-                }
-                
-                selectHashTagCount += 1
-                hashTagList[indexPath.row].1.toggle()
-            }
+
+        if hashTagList[indexPath.row + (indexPath.section * 4)].1 {
+            selectHashTagCount -= 1
+            hashTagList[indexPath.row].1.toggle()
         }else {
-            if hashTagList[indexPath.row+4].1 {
-                selectHashTagCount -= 1
-                hashTagList[indexPath.row+4].1.toggle()
-            }else {
-                if selectHashTagCount > 2 {
-                    return
-                }
-                
-                selectHashTagCount += 1
-                hashTagList[indexPath.row+4].1.toggle()
+            if selectHashTagCount > 2 {
+                return
             }
+            selectHashTagCount += 1
+            hashTagList[indexPath.row + (indexPath.section * 4)].1.toggle()
         }
 
         hashTagList.sort {
@@ -315,5 +348,51 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         collectionView.reloadData()
+    }
+}
+
+extension DayAddViewController {
+    func fetchHashTagList() {
+        APIManeger.shared.getData(urlEndpointString: "/calendars/categories", dataType: HashTagListResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+
+            response.result.forEach { hashTag in
+                self?.hashTagList.append((hashTag.tagName, false))
+            }
+            
+            if self?.calendar != nil {
+                self?.hashTagList.enumerated().forEach {
+                    var hashTag = $1
+                    self?.calendar?.hashTags.forEach{
+                        if hashTag.0.description == $0.calendarHashTag.description {
+                            hashTag.1 = true
+                        }
+                    }
+                    
+                    if hashTag.1{
+                        self?.hashTagList[$0].1 = true
+                    }
+                }
+            }
+            self?.hashTagList.sort {
+                $0.1 && !$1.1
+            }
+            self?.hashTagCV.reloadData()
+        }
+    }
+    
+    func updateDate(calendarRequest: CalendarRequest, calendarIdx: Int) {
+        APIManeger.shared.patchData(urlEndpointString: "/calendars/\(calendarIdx)/edit", dataType: CalendarRequest.self, header: APIManeger.buyerTokenHeader, parameter: calendarRequest) { [weak self] response in
+            if response.isSuccess == true {
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    func addDate(calendarRequest: CalendarRequest) {
+        APIManeger.shared.postData(urlEndpointString: "/calendars", dataType: CalendarRequest.self, header: APIManeger.buyerTokenHeader, parameter: calendarRequest) { [weak self] response in
+            if response.isSuccess == true {
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 }

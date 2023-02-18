@@ -19,16 +19,20 @@ class DayDetailViewController: UIViewController {
     
     @IBOutlet weak var findCakeButton: UIButton!
     
+    var totalWidth: CGFloat = 0
+    
+    var centerWidth: [CGFloat] = []
+    
     let colorList: Array<UIColor> = [
         UIColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
         UIColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
         UIColor(red: 244.0 / 255.0, green: 203.0 / 255.0, blue: 203.0 / 255.0, alpha: 1)
     ]
+
     
-    // 서버 연결 후 삭제 - 임시 데이터
-    let hashTagList: Array<String> = ["친구", "기념일", "가족"]
+    var calendarIdx: Int?
     
-    var totalWidth: CGFloat = 0
+    private var calendar: Calendar?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +40,16 @@ class DayDetailViewController: UIViewController {
         setup()
         setupLayout()
         setupNavigationBar()
+        fetchCalendar()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        fetchCalendar()
     }
     
     func setup() {
         hashTagCV.delegate = self
         hashTagCV.dataSource = self
-        
-        hashTagCV.showsHorizontalScrollIndicator = true
+        hashTagCV.isScrollEnabled = false
     }
     
     func setupLayout() {
@@ -54,6 +61,13 @@ class DayDetailViewController: UIViewController {
             btn.layer.shadowRadius = 4
             btn.layer.shadowOpacity = 1.0
         }
+    }
+    
+    func setupText() {
+        titleLabel.text = calendar?.title
+        dDayLabel.text = calendar?.calDate
+        dayTypeLabel.text = calendar?.kindOfCalendar
+        dateTextButton.setTitle(calendar?.date, for: .normal)
     }
     
     func setupNavigationBar() {
@@ -69,12 +83,16 @@ class DayDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = editButton
     }
     
+
     @objc func moveToCalendar() {
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func moveToEdit() {
         guard let editVC = UIStoryboard(name: "DayAddViewController", bundle: nil).instantiateViewController(withIdentifier: "DayAddViewController") as? DayAddViewController else {return}
+        
+        editVC.calendar = calendar
+        editVC.calendarIdx = calendarIdx
         
         self.navigationController?.pushViewController(editVC, animated: true)
     }
@@ -87,7 +105,7 @@ class DayDetailViewController: UIViewController {
 
 extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hashTagList.count
+        return calendar?.hashTags.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,7 +113,7 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
         
         if let hashTagCell = cell as? HashTagCell {
             hashTagCell.backgroundColor = colorList[indexPath.row % 3]
-            hashTagCell.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row])
+            hashTagCell.setHashTagLabel(hashTag: "# " + (calendar?.hashTags[indexPath.row].calendarHashTag ?? ""))
         }
         
         
@@ -104,10 +122,13 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let labelTmp = UILabel()
-        labelTmp.text = "# " + hashTagList[indexPath.row]
+        labelTmp.text = "# " + (calendar?.hashTags[indexPath.row].calendarHashTag ?? "")
+        
+        if calendar?.hashTags.count == 3  {
+            centerWidth.append(labelTmp.intrinsicContentSize.width)
+        }
         
         totalWidth = totalWidth + labelTmp.intrinsicContentSize.width
-        
         return CGSize(width: labelTmp.intrinsicContentSize.width, height: 26)
     }
     
@@ -115,13 +136,18 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
         return 10
     }
     
-    // collection view 가운데 정렬
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
-        let totalSpacingWidth = CGFloat(10 * (hashTagList.count - 1))
+        let totalSpacingWidth = CGFloat(10 * ((calendar?.hashTags.count ?? 0)-1))
 
-        let leftInset = (collectionView.layer.frame.size.width - (totalWidth + totalSpacingWidth)) / 2
-        let rightInset = leftInset
+        var leftInset:CGFloat = (collectionView.layer.frame.size.width - (totalWidth + totalSpacingWidth)) / 2
+        var rightInset = leftInset
+        
+        if calendar?.hashTags.count == 3 {
+            leftInset = ((collectionView.layer.frame.size.width - centerWidth[1]) / 2) - (centerWidth[0] +  10)
+            rightInset = ((collectionView.layer.frame.size.width - centerWidth[1]) / 2) - (centerWidth[2] + 10)
+        }
+        
 
         return UIEdgeInsets(top: 0, left: leftInset-20, bottom: 0, right: rightInset-20)
 
@@ -129,4 +155,16 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
 
 }
 
-
+// 서버 통신 api
+extension DayDetailViewController{
+    func fetchCalendar() {
+        APIManeger.shared.getData(urlEndpointString: "/calendars/\(calendarIdx ?? -1)", dataType: CalendarResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+            self?.calendar = response.result
+            self?.setupText()
+            self?.totalWidth = 0
+            self?.centerWidth.removeAll()
+            self?.hashTagCV.reloadData()
+            
+        }
+    }
+}

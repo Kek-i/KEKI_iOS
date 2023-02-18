@@ -22,7 +22,12 @@ class DayCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         selectionStyle = .none
-//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 10.0, right: 0))
+    }
+    
+    func setupText(title: String, date: String, dDay: String){
+        titleLabel.text = title
+        dateLabel.text = date
+        dDayLabel.text = dDay
     }
     
     func setupLayout() {

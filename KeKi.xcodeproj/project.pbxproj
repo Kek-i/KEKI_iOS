@@ -20,6 +20,7 @@
 		738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64922988A9BE006BB124 /* StoreImageCell.swift */; };
 		738F64982988A9BE006BB124 /* StoreImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64932988A9BE006BB124 /* StoreImageViewController.swift */; };
 		738F64992988A9BE006BB124 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64942988A9BE006BB124 /* TabViewController.swift */; };
+		73E985132995F1A300DC090A /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E985122995F1A300DC090A /* CalendarModel.swift */; };
 		73FE8B9D298FEDAE00264B44 /* RecentCakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8B8D298FEDAD00264B44 /* RecentCakeCell.swift */; };
 		73FE8BA4298FEDAE00264B44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8B94298FEDAD00264B44 /* SearchViewController.swift */; };
 		73FE8BA6298FEDAE00264B44 /* RecentSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8B96298FEDAD00264B44 /* RecentSearchCell.swift */; };
@@ -102,6 +103,7 @@
 		738F64922988A9BE006BB124 /* StoreImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageCell.swift; sourceTree = "<group>"; };
 		738F64932988A9BE006BB124 /* StoreImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageViewController.swift; sourceTree = "<group>"; };
 		738F64942988A9BE006BB124 /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		73E985122995F1A300DC090A /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
 		73FE8B8D298FEDAD00264B44 /* RecentCakeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentCakeCell.swift; sourceTree = "<group>"; };
 		73FE8B94298FEDAD00264B44 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		73FE8B96298FEDAD00264B44 /* RecentSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentSearchCell.swift; sourceTree = "<group>"; };
@@ -334,7 +336,10 @@
 			children = (
 				A2E0151A29933AF700EBACF0 /* AnnouncementModel.swift */,
 				A2E0151929933AF700EBACF0 /* BasicModel.swift */,
+
 				A2E0152129952D3000EBACF0 /* HomeModel.swift */,
+				73E985122995F1A300DC090A /* CalendarModel.swift */,
+
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -655,6 +660,7 @@
 				A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */,
 				A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */,
 				A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */,
+				73E985132995F1A300DC090A /* CalendarModel.swift in Sources */,
 				A2784ADF298AA9D800FE23DF /* AlertViewController.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				A2434B0E29865B9600F60D1A /* UnLoginMyPageViewController.swift in Sources */,
