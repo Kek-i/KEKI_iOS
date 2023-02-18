@@ -135,4 +135,32 @@ class APIManeger {
             }
             .resume()
     }
+    
+    // MARK: 소셜 로그인 용 임시 메소드
+    func postLogin<T: Codable>(urlEndpointString: String,
+                              dataType: T.Type,
+                              header: HTTPHeaders?,
+                              parameter: T,
+                              completionHandler: @escaping (AuthResponse) -> Void) {
+        
+        guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
+
+        AF
+            .request(url,
+                     method: .post,
+                     parameters: parameter,
+                     encoder: .json,
+                     headers: header)
+            .responseDecodable(of: AuthResponse.self) { response in
+                print("response :: \(response)")
+                switch response.result {
+                case .success(let success):
+                    print(success)
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
 }
