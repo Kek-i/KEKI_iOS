@@ -57,21 +57,35 @@ class DefaultTabBarController: UITabBarController {
         let heartViewController = UIViewController()
         heartViewController.tabBarItem = heartTab
 
-        storyboard = UIStoryboard.init(name: "UnLoginUserMypage", bundle: nil)
-        guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "UnLoginMyPageViewController") as? UnLoginMyPageViewController else { return }
-        let mypage = UINavigationController(rootViewController: mypageViewController)
-        mypage.tabBarItem = mypageTab
+        // TODO: 분기 처리 리팩토링 필요
+        if APIManeger.shared.header != nil {
+            storyboard = UIStoryboard.init(name: "LoginUserMypage", bundle: nil)
+            guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "LoginMyPageViewController") as? LoginMyPageViewController else { return }
+            let mypage = UINavigationController(rootViewController: mypageViewController)
+            mypage.tabBarItem = mypageTab
 
+            viewControllers = [
+                home,
+                calendar,
+                searchViewController,
+                heartViewController,
+                mypage
+            ]
+            
+        } else {
+            storyboard = UIStoryboard.init(name: "UnLoginUserMypage", bundle: nil)
+            guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "UnLoginMyPageViewController") as? UnLoginMyPageViewController else { return }
+            let mypage = UINavigationController(rootViewController: mypageViewController)
+            mypage.tabBarItem = mypageTab
 
-        
-        
-        viewControllers = [
-            home,
-            calendar,
-            searchViewController,
-            heartViewController,
-            mypage
-        ]
+            viewControllers = [
+                home,
+                calendar,
+                searchViewController,
+                heartViewController,
+                mypage
+            ]
+        }
     }
 
 }
