@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     // MARK: - Variables, IBOutlet, ...
 
     // TODO: 기본 멘트로 ddayCountingText 재설정 필요 -> 논의 후 설정할 예정
-    private var ddayCountingText: String? = "베이님! \n투리 생일이 3일 남았어요! \n특별한 하루를 준비해요"
+    private var ddayCountingText: String? = "어서오세요! \n당신의 특별한 기념일을! \n케키와 함께 준비해요"
     
     private var nickname: String? = nil
     private var calendarTitle: String? = nil

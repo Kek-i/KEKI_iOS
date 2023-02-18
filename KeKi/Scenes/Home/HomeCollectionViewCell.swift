@@ -30,6 +30,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     func setData(storeData: HomePostRes) {
         storeImageView.kf.setImage(with: URL(string: storeData.postImgUrl))
-        storeNameLabel.text = storeData.storeTitle
+//        storeNameLabel.text = storeData.storeTitle
     }
 }
