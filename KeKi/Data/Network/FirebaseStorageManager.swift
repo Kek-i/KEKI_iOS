@@ -9,15 +9,17 @@ import Foundation
 import FirebaseStorage
 import Firebase
 
+private let PROFILE_IMG_FOLDER_NAME = "iOS-profiles/"
+
 class FirebaseStorageManager {
     static func uploadImage(image: UIImage, pathRoot: String, completion: @escaping (URL?) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
         let metaData = StorageMetadata()
         metaData.contentType = "image/jpeg"
         
-        let imageName = "profile_img_" + pathRoot
+        let imageName = "ProfileImg_" + pathRoot
         
-        let firebaseReference = Storage.storage().reference().child("\(imageName)")
+        let firebaseReference = Storage.storage().reference().child(PROFILE_IMG_FOLDER_NAME + imageName)
         firebaseReference.putData(imageData, metadata: metaData) { metaData, error in
             firebaseReference.downloadURL { url, _ in
                 completion(url)

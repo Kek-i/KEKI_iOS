@@ -9,6 +9,7 @@ import UIKit
 
 private let NICKNAME_VALIDATION_ENDPOINT = "/users/nickname"
 private let SIGNUP_ENDPOINT = "/users/signup"
+private let BUYER_EDIT_PROFILE_ENDPOINT = "/users/profile"
 
 class BuyerProfileSetViewController: UIViewController {
 
@@ -81,7 +82,10 @@ class BuyerProfileSetViewController: UIViewController {
         }
     }
     
-    @objc private func confirmProfileSetting() { signup() }
+    @objc private func confirmProfileSetting() {
+        if APIManeger.shared.header != nil { editProfile() }
+        else { signup() }
+    }
 }
 
 // MARK: - Extensions
@@ -140,6 +144,34 @@ extension BuyerProfileSetViewController {
         })
     }
     
+    private func editProfile() {
+        if let nickname = nickNameTextField.text {
+            
+            if selectedProfileImg != nil { uploadProfileImage(image: selectedProfileImg!) }
+            let editedUserInfo = Signup(nickname: nickname, profileImg: savedProfileImgUrl ?? "")
+            editProfileRequest(param: editedUserInfo)
+            
+        } else { showAlert(message: "닉네임을 입력해주세요") }
+    }
+    
+    private func editProfileRequest(param: Signup) {
+        APIManeger.shared.patchData(urlEndpointString: BUYER_EDIT_PROFILE_ENDPOINT,
+                                   dataType: Signup.self,
+                                   header: APIManeger.shared.header,
+                                   parameter: param,
+                                   completionHandler: { [weak self] response in
+            switch response.code {
+            case 1000:
+                print("구매자 프로필 수정 성공")
+                self?.navigationController?.popToRootViewController(animated: true)
+                
+            default:
+                print("구매자 프로필 수정 실패 :: \(response)")
+                self?.showAlert(message: "네트워크 오류로 인해 프로필 수정에 실패하였습니다.")
+            }
+        })
+    }
+    
     private func signup() {
         if let nickname = nickNameTextField.text {
             
@@ -164,7 +196,6 @@ extension BuyerProfileSetViewController {
                 print("회원가입 성공")
                 let userInfo = response.result
                 
-                let encoder = JSONEncoder()
                 let encoded = try? PropertyListEncoder().encode(userInfo)
                 UserDefaults.standard.set(encoded, forKey: "userInfo")
                 
