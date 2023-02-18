@@ -146,7 +146,6 @@ extension LoginViewController {
         let param = SocialLoginRequest(email: email, provider: provider)
         APIManeger.shared.postSignup(urlEndpointString: SOCIAL_LOGIN_URL_ENDPOINT_STR,
                                    dataType: SocialLoginRequest.self,
-                                   header: nil,
                                    parameter: param,
                                    completionHandler: { [weak self] result in
 
