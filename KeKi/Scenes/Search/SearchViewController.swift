@@ -68,16 +68,22 @@ class SearchViewController: UIViewController {
     
     private var searchText:String?
     private var hashTag:String?
+    
     private var sortType:SortType = .Recent
     
-    private var isSortOpen = false
-    
+    private var sortOpen = false
+    private var isLoading = false
     
     var recentTextList: Array<Search> = []
     var popularTextList: Array<Search> = []
     var recentCakeList: Array<RecentPostSearch> = []
+    var searchResultList: Array<Feed> = []
+    var queryParam: Parameters = [:]
     
-    var searchResult: SearchResult?
+    var cursorIdx: Int?
+    var cursorPrice: Int?
+    var cursorPopularNum: Int?
+    var hasNext: Bool?
     
     var popularColorList: Array<CGColor> = [CGColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
                                             CGColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
@@ -199,7 +205,7 @@ class SearchViewController: UIViewController {
     
     @IBAction func openSortButtonView(_ sender: Any) {
         UIView.animate(withDuration: 0.5) {
-            if self.isSortOpen == false {
+            if self.sortOpen == false {
                 self.sortTypeButtonView.layer.masksToBounds = false
                 self.sortTypeButtonViewHeight.priority = UILayoutPriority(250)
                 [self.hideSortTypeButton1, self.hideSortTypeButton2].forEach {
@@ -215,7 +221,7 @@ class SearchViewController: UIViewController {
         }
         self.view.layoutIfNeeded()
         
-        isSortOpen.toggle()
+        sortOpen.toggle()
     }
     
     
@@ -228,7 +234,8 @@ class SearchViewController: UIViewController {
             sortType = .LowPrice
         }
         openSortButtonView(self)
-        fetchSearchTextResult(searchText: searchText ?? "", sortType: sortType.getRequestType())
+        
+        search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
 
         setHideButtonTitle()
     }
@@ -239,15 +246,17 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
+        hashTag = nil
         searchText = textField.text
         
-        fetchSearchTextResult(searchText: searchText ?? "", sortType: sortType.getRequestType())
+        search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
         
         return true
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField.text == nil || textField.text == ""{
+            searchText = nil
             fetchSearchMain()
             showMainView()
         }
@@ -264,7 +273,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }else if collectionView.tag == 3 {
             return recentCakeList.count
         }else  {
-            return searchResult?.feeds?.count ?? 0
+            return searchResultList.count
         }
     }
     
@@ -289,21 +298,17 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 guard let image = UIImage(data: imageData) else {return cell}
                  
                 recentCakeCell.recentCakeImageView.image = imageRsize(image: image, newWidth: 100, newHeight: 100)
-                
-                     
-                     
-               
             }
         }else {
             if let searchDetailCell = cell as? SearchDetailCell {
-                guard let imageUrl = URL(string: searchResult?.feeds?[indexPath.row].postImgUrls[0] ?? "") else {return cell}
+                guard let imageUrl = URL(string: searchResultList[indexPath.row].postImgUrls[0] ) else {return cell}
                 guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
                 
                 guard let image = UIImage(data: imageData) else {return cell}
                  
                 searchDetailCell.productImageView.image = imageRsize(image: image, newWidth: 105, newHeight: 105)
-                searchDetailCell.productTitleLabel.text = searchResult?.feeds?[indexPath.row].dessertName
-                searchDetailCell.productPriceLabel.text = searchResult?.feeds?[indexPath.row].dessertPrice.description
+                searchDetailCell.productTitleLabel.text = searchResultList[indexPath.row].dessertName
+                searchDetailCell.productPriceLabel.text = searchResultList[indexPath.row].dessertPrice.description
             }
         }
         
@@ -319,28 +324,21 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         return renderImage
     }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if collectionView.tag == 4 && (searchResult?.numOfRows)! > 12 && indexPath.row == 12{
-            
-        }
-    }
-    
-    
+        
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 1 {
             searchText = recentTextList[indexPath.row].searchWord
-            fetchSearchTextResult(searchText: searchText ?? "", sortType: sortType.getRequestType())
+            search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
         }else if collectionView.tag == 2 {
             hashTag = popularTextList[indexPath.row].searchWord
-            fetchSearchTagResult(hashTag: hashTag ?? "", sortType: sortType.getRequestType())
+            search(searchText: nil, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
         }else if collectionView.tag == 3 {
            
         }else {
            
         }
     }
+    
     
 }
 
@@ -371,9 +369,20 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView.tag == 4{
-            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 19)
+            let tabBarHeight = self.tabBarController?.tabBar.frame.height
+            return UIEdgeInsets(top: 0, left: 20, bottom: tabBarHeight!/2, right: 19)
         }else {
             return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
+        }
+    }
+}
+
+
+extension SearchViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.searchResultCV.contentOffset.y > searchResultCV.contentSize.height-searchResultCV.bounds.size.height && self.hasNext == true{
+            search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: cursorIdx, cursorPopularNum: cursorPopularNum, cursorPrice: cursorPrice)
+            isLoading = true
         }
     }
 }
@@ -418,74 +427,43 @@ extension SearchViewController {
         }
     }
     
-    // MARK: 검색어로 검색 - GET
-    func fetchSearchTextResult(searchText: String, sortType: String) {
-        let queryParam: Parameters = [
-                "searchWord" : searchText,
-                 "sortType" : sortType
-            ]
+    // MARK: 검색 파라미터 만든 후 검색
+    func search(searchText: String?, hashTag: String?, sortType: String, cursorIdx: Int?, cursorPopularNum: Int?, cursorPrice: Int?) {
+        if isLoading == true {
+            return
+        }
         
+        queryParam["searchWord"] = searchText
+        queryParam["searchTag"] = hashTag
+        queryParam["sortType"] = sortType
+        queryParam["cursorIdx"] = cursorIdx
+        queryParam["cursorPopularNum"] = cursorPopularNum
+        queryParam["cursorPrice"] = cursorPrice
+        
+        fetchSearchResult(queryParam: queryParam)
+        isLoading = false
+    }
+    
+    // MARK: 검색 - GET
+    func fetchSearchResult(queryParam: Parameters) {
         APIManeger.shared.getData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
             if response.result.feeds?.count != 0 {
-                self?.searchResult = response.result
+                response.result.feeds?.forEach({ feed in
+                    self?.searchResultList.append(feed)
+                })
+                
+                self?.cursorIdx = response.result.cursorIdx
+                self?.hasNext = response.result.hasNext
+                
+                if self?.sortType == .Popular {
+                    self?.cursorPopularNum = response.result.cursorPopularNum
+                }else if self?.sortType == .LowPrice {
+                    self?.cursorPrice = response.result.cursorPrice
+                }
                 self?.showResultView()
             }else {
                 self?.showNoResultView()
             }
         }
     }
-    
-    // MARK: Hash Tag로 검색 - GET
-    func fetchSearchTagResult(hashTag: String, sortType: String) {
-        let queryParam: Parameters = [
-                "searchTag" : hashTag,
-                 "sortType" : sortType
-            ]
-        
-        APIManeger.shared.getData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
-            if response.result.feeds?.count != 0 {
-                self?.searchResult = response.result
-                self?.showResultView()
-            }else {
-                self?.showNoResultView()
-            }
-        }
-    }
-    
-    func fetchSearchTextPriceMoreResult(searchText: String, sortType: String, cursorIdx: Int, cursorPrice: Int) {
-        let queryParam: Parameters = [
-                "searchWord" : searchText,
-                "sortType" : sortType,
-                "cursorIdx" : cursorIdx,
-                "cursorPrice" : cursorPrice
-            ]
-        
-        APIManeger.shared.getData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
-            if response.result.feeds?.count != 0 {
-                self?.searchResult = response.result
-                self?.showResultView()
-            }else {
-                self?.showNoResultView()
-            }
-        }
-    }
-    
-    func fetchSearchTextRecentMoreResult(searchText: String, sortType: String, cursorIdx: Int) {
-        let queryParam: Parameters = [
-                "searchWord" : searchText,
-                "sortType" : sortType,
-                "cursorIdx" : cursorIdx
-            ]
-        
-        APIManeger.shared.getData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
-            if response.result.feeds?.count != 0 {
-                self?.searchResult = response.result
-                self?.showResultView()
-            }else {
-                self?.showNoResultView()
-            }
-        }
-    }
-    
-    
 }
