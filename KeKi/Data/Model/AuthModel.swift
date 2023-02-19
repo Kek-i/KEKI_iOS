@@ -25,11 +25,20 @@ struct AuthResponse: Codable {
     }
 }
 
+struct ProfileResponse: Codable {
+    var isSuccess: Bool
+    var code: Int
+    var message: String
+    var result: Signup
+}
+
 struct Signup: Codable {
     var nickname: String
-    var profileImg: String
+    var profileImg: String? = nil
 }
 
 struct NicknameValid: Codable {
     var nickname: String
 }
+
+

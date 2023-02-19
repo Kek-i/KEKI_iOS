@@ -22,6 +22,8 @@ class LoginMyPageViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
     var userKind: UserKind? = .buyer
+    private var nickname: String = ""
+    private var profileImgUrl: String? = nil
     
     private var sections = [ "계정 설정", "알림 설정", "앱 정보" ]
     
@@ -29,6 +31,7 @@ class LoginMyPageViewController: UIViewController {
     private var nofiticationSettingTitles = [ "푸시 알림" ]
     private var appInfoTitles = [ "공지사항", "약관안내", "개인정보처리방침" ]
     
+    @IBOutlet weak var welcomLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -38,11 +41,13 @@ class LoginMyPageViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupTableView()
+        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        fetchData()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -156,6 +161,13 @@ class LoginMyPageViewController: UIViewController {
 
     }
     
+    // MARK: Methods
+    func setUserInfo(nickname: String, profilImgUrl: String?) {
+        welcomLabel.text = "\(nickname)님 \n오늘도 특별한 하루 보내세요!"
+        if profileImgUrl != nil {
+            // TODO: 프로필 사진 불러오기
+        }
+    }
 }
 
 // MARK: - Extensions
@@ -251,5 +263,30 @@ extension LoginMyPageViewController: UITableViewDelegate {
         default:
             return
         }
+    }
+}
+
+
+// MARK: - 네트워크 관련 Extensions
+private let USER_PROFILE_ENDPOINT_STR = "/users/profile"
+
+extension LoginMyPageViewController {
+    private func fetchData() {
+        APIManeger.shared.testGetData(urlEndpointString: USER_PROFILE_ENDPOINT_STR,
+                                      dataType: ProfileResponse.self,
+                                      parameter: nil,
+                                      completionHandler: { [weak self] response in
+            
+            switch response.code {
+            case 1000:
+                let nickname = response.result.nickname
+                let profileImgUrl = response.result.profileImg
+                self?.setUserInfo(nickname: nickname, profilImgUrl: profileImgUrl ?? nil)
+            default:
+                print("ERROR: \(response.message)")
+            }
+                
+            
+        })
     }
 }

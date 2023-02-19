@@ -142,6 +142,7 @@
                     <size key="freeformSize" width="393" height="1000"/>
                     <connections>
                         <outlet property="tableView" destination="htJ-aM-yF4" id="dy3-cB-Oin"/>
+                        <outlet property="welcomLabel" destination="59p-GC-n7x" id="UAJ-ak-6Jz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNb-0y-WBR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -52,6 +52,11 @@ class BuyerProfileSetViewController: UIViewController {
         // TODO: 소셜로그인을 통해 받아온 유저의 이메일을 label값으로 보이기
         let email = UserDefaults.standard.value(forKey: "socialEmail") as! String
         userEmailLabel.text = email
+        
+        if APIManeger.shared.getHeader() != nil {
+            // 로그인한 유저일 경우 저장된 정보 불러오기(닉네임, 프로필 사진)
+            
+        }
     }
     
     private func setup() {
