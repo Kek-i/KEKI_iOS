@@ -7,6 +7,8 @@
 
 import UIKit
 
+private let LOGOUT_ENDPOINT_STR = "/users/logout"
+
 enum UserKind {
     case buyer
     case seller
@@ -119,11 +121,30 @@ class LoginMyPageViewController: UIViewController {
     }
     
     private func logout() {
-        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
-        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
-        alertViewController.config(todo: .logout)
-        alertViewController.modalPresentationStyle = .fullScreen
-        present(alertViewController, animated: true)
+        let alert = UIAlertController(title: nil, message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        let logout = UIAlertAction(title: "로그아웃", style: .default) { _ in
+            APIManeger.shared.testPatchData(urlEndpointString: LOGOUT_ENDPOINT_STR,
+                                            dataType: GeneralResponseModel.self,
+                                            parameter: nil,
+                                            completionHandler: { [weak self] response in
+                print(response)
+                APIManeger.shared.resetHeader()
+                
+                let main = DefaultTabBarController()
+                main.modalPresentationStyle = .fullScreen
+                main.modalTransitionStyle = .crossDissolve
+                self?.present(main, animated: true)
+            })
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(logout)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+//        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+//        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+//        alertViewController.config(todo: .logout)
+//        alertViewController.modalPresentationStyle = .fullScreen
+//        present(alertViewController, animated: true)
     }
     
     private func secession() {
