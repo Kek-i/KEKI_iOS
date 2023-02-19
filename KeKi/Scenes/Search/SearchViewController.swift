@@ -194,6 +194,7 @@ class SearchViewController: UIViewController {
         noResultLabel.isHidden = true
         searchResultCV.reloadData()
         searchResultCV.isHidden = false
+        
     }
     
     
@@ -227,13 +228,19 @@ class SearchViewController: UIViewController {
     
     @IBAction func selectSortType(_ sender: UIButton) {
         if sender.currentTitle == SortType.Recent.rawValue{
+            cursorPopularNum = nil
+            cursorPrice = nil
             sortType = .Recent
         }else if sender.currentTitle == SortType.Popular.rawValue{
+            cursorPrice = nil
             sortType = .Popular
         }else if sender.currentTitle == SortType.LowPrice.rawValue{
+            cursorPopularNum = nil
             sortType = .LowPrice
         }
         openSortButtonView(self)
+        
+        searchResultList.removeAll()
         
         search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
 
@@ -328,9 +335,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 1 {
             searchText = recentTextList[indexPath.row].searchWord
+            hashTag = nil
             search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
         }else if collectionView.tag == 2 {
             hashTag = popularTextList[indexPath.row].searchWord
+            searchText = nil
             search(searchText: nil, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
         }else if collectionView.tag == 3 {
            
@@ -441,7 +450,6 @@ extension SearchViewController {
         queryParam["cursorPrice"] = cursorPrice
         
         fetchSearchResult(queryParam: queryParam)
-        isLoading = false
     }
     
     // MARK: 검색 - GET
@@ -464,6 +472,10 @@ extension SearchViewController {
             }else {
                 self?.showNoResultView()
             }
+            
+            self?.isLoading = false
         }
+        
+        
     }
 }
