@@ -36,6 +36,7 @@
 		A23F2DA729A0FCA70046ED70 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A23F2DA629A0FCA70046ED70 /* FirebaseFirestoreSwift */; };
 		A23F2DA929A0FCA70046ED70 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A23F2DA829A0FCA70046ED70 /* FirebaseStorage */; };
 		A23F2DAB29A0FDB80046ED70 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23F2DAA29A0FDB80046ED70 /* FirebaseStorageManager.swift */; };
+		A23F2DAD29A1F3C00046ED70 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23F2DAC29A1F3BF0046ED70 /* HomeModel.swift */; };
 		A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434AC9298651F500F60D1A /* AppDelegate.swift */; };
 		A2434ACC298651F500F60D1A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434ACB298651F500F60D1A /* SceneDelegate.swift */; };
 		A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2434ACD298651F500F60D1A /* HomeViewController.swift */; };
@@ -133,6 +134,7 @@
 		A23F2D9B29A0EBEA0046ED70 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		A23F2D9D29A0FA930046ED70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A23F2DAA29A0FDB80046ED70 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
+		A23F2DAC29A1F3BF0046ED70 /* HomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		A2434AC6298651F500F60D1A /* KeKi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeKi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2434AC9298651F500F60D1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2434ACB298651F500F60D1A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				A2E0151929933AF700EBACF0 /* BasicModel.swift */,
 				73E985122995F1A300DC090A /* CalendarModel.swift */,
 				A2E7D14729A0CA8100110CD2 /* AuthModel.swift */,
+				A23F2DAC29A1F3BF0046ED70 /* HomeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -696,6 +699,7 @@
 			files = (
 				A2B1CD822988F92C00D87570 /* FeedCell.swift in Sources */,
 				A2434B0C29865B8B00F60D1A /* StoreViewController.swift in Sources */,
+				A23F2DAD29A1F3C00046ED70 /* HomeModel.swift in Sources */,
 				A2434ACE298651F500F60D1A /* HomeViewController.swift in Sources */,
 				738F64992988A9BE006BB124 /* TabViewController.swift in Sources */,
 				731AA68F298D00C0008A9A1B /* SettingTableViewCell.swift in Sources */,

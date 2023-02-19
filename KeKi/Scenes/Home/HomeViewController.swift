@@ -7,11 +7,21 @@
 
 import UIKit
 
+private let URL_ENDPOINT_STR = "/calendars/home"
+
 class HomeViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
 
-    var ddayCountingText: String? = "베이님! \n투리 생일이 3일 남았어요! \n특별한 하루를 준비해요"
+    // TODO: 기본 멘트로 ddayCountingText 재설정 필요 -> 논의 후 설정할 예정
+    private var ddayCountingText: String? = "어서오세요! \n당신의 특별한 기념일을! \n케키와 함께 준비해요"
+    
+    private var nickname: String? = nil
+    private var calendarTitle: String? = nil
+    private var calendarDate: Int? = -1
+    
+    private var homeData: HomeResponse? = nil
+    private var homeStoreDataList: [HomeTagRes] = []
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var ddayCountingLabel: UILabel!
@@ -22,6 +32,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        fetchData()
+        
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
         setUpDdayCountingLabel()
@@ -52,9 +64,7 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeTableViewCell")
-        
     }
-
 }
 
 // MARK: - Extensions
@@ -65,6 +75,11 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell", for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
+        if (homeData != nil) && (homeStoreDataList.count > indexPath.section) {
+            cell.tagDetailDelegate = self
+            cell.setData(sectionData: homeStoreDataList[indexPath.section])
+            cell.reloadCell()
+        }
         return cell
     }
 
@@ -86,5 +101,42 @@ extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {}
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         return true     // 스크린 맨 위를 누르면 가장 상단으로 이동
+    }
+}
+
+// MARK: 네트워크 통신 관련 extension
+extension HomeViewController {
+    private func fetchData(){
+        APIManeger.shared.testGetData(urlEndpointString: URL_ENDPOINT_STR,
+                                      dataType: HomeResponse.self,
+                                      parameter: nil,
+                                      completionHandler: { [weak self] response in
+            self?.homeData = response.self
+            self?.homeStoreDataList = response.result.homeTagResList
+            self?.tableView.reloadData()
+            
+            print("response:: \(response)")
+            
+            if let nickname = response.result.nickname {
+                if let calendarTitle = response.result.calendarTitle,
+                   let calendarDate = response.result.calendarDate {
+                    self?.ddayCountingLabel.text = "\(nickname)님! \n\(calendarTitle)이 \(calendarDate)일 남았어요! \n특별한 하루를 준비해요"
+                } else {
+                    self?.ddayCountingLabel.text = "어서오세요! \n\(nickname)님의 특별한 기념일을! \n케키와 함께 준비해요"
+                }
+            }
+            
+        })
+    }
+}
+
+extension HomeViewController: TagDetailDelegate {
+    func tapTagAction(tagTitle: String) {
+        let storyboard = UIStoryboard.init(name: "Search", bundle: nil)
+        guard let searchResultViewController = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
+
+        self.navigationController?.pushViewController(searchResultViewController, animated: true)
+        
+        // TODO: 탭 액션이 발생한 태그의 검색 결과 화면으로 전환 (현재 검색 화면까지만 넘어가도록 구현)
     }
 }
