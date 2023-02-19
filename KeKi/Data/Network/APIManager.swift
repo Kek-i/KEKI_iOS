@@ -14,12 +14,16 @@ private let buyerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiI
 private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoxLCJzdWIiOiIxIiwiZXhwIjoxNjc1NjkzODMzfQ.4o2Lc_tMUvQJY1PP_dPQOxeOaeRVkT-HyUciBR_659s"    // 임시 판매자 액세스 토큰
 
 class APIManeger {
-    
     // 임시 액세스 토큰 (구매자,판매자)
     static let buyerTokenHeader = HTTPHeaders(["Authorization": buyerAccessToken])
     static let sellerTokenHeader = HTTPHeaders(["Authorization": buyerAccessToken])
     
+    
+    private var userInfo: AuthResponse.Result? = nil
+    private var header: HTTPHeaders? = nil
+
     static let shared = APIManeger()    // 과한 객체 생성으로 인한 메모리 낭비를 줄이기 위함
+    
     
     // MARK: 제네릭을 활용한 서버와의 GET 통신 메소드
     // ---
@@ -128,6 +132,153 @@ class APIManeger {
             .responseDecodable(of: GeneralResponseModel.self) { response in
                 switch response.result {
                 case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
+    
+    // MARK: 소셜 로그인 용 임시 메소드
+//    func postSignup<T: Codable>(urlEndpointString: String,
+//                              dataType: T.Type,
+//                              header: HTTPHeaders?,
+//                              parameter: T,
+//                              completionHandler: @escaping (AuthResponse) -> Void) {
+//        
+//        guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
+//
+//        AF
+//            .request(url,
+//                     method: .post,
+//                     parameters: parameter,
+//                     encoder: .json,
+//                     headers: header)
+//            .responseDecodable(of: AuthResponse.self) { response in
+//                print("response :: \(response)")
+//                switch response.result {
+//                case .success(let success):
+//                    print(success)
+//                    completionHandler(success)
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//            }
+//            .resume()
+//    }
+}
+
+
+// MARK: 소셜 로그인 기능이 병합된 후 변경할 요청 메소드 정의
+extension APIManeger {
+    // 앱 시작 시, SceneDelegate에서 호출할 설정 메소드
+    func setUserInfo(userInfo: AuthResponse.Result) {
+        self.userInfo = userInfo
+        self.header = HTTPHeaders(["Authorization": userInfo.accessToken])
+    }
+    
+    func getHeader() -> HTTPHeaders? { return header }
+    func getHeaderByToken(accessToken: String) -> HTTPHeaders { return HTTPHeaders(["Authorization": accessToken]) }
+
+    func testGetData<T: Decodable>(urlEndpointString: String,
+                                   dataType: T.Type,
+                                   parameter: Parameters,
+                                   completionHandler: @escaping (T)->Void) {
+
+            guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
+
+
+            AF
+                .request(url, method: .get,
+                         parameters: parameter,
+                         encoding: URLEncoding.queryString,
+                         headers: self.header ?? nil)
+                .responseDecodable(of: T.self) { response in
+                    
+                    switch response.result {
+                    case .success(let success):
+                        completionHandler(success)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+                .resume()
+        }
+    
+    func testPostData<T: Codable>(urlEndpointString: String,
+                              dataType: T.Type,
+                              parameter: T?,
+                              completionHandler: @escaping (GeneralResponseModel) -> Void) {
+        
+        guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
+
+        AF
+            .request(url,
+                     method: .post,
+                     parameters: parameter,
+                     encoder: .json,
+                     headers: self.header ?? nil)
+            .responseDecodable(of: GeneralResponseModel.self) { response in
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
+    
+    func testPatchData<T: Codable>(urlEndpointString: String,
+                               dataType: T.Type,
+                               parameter: T?,
+                               completionHandler: @escaping (GeneralResponseModel) -> Void) {
+        
+        guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
+
+        AF
+            .request(url,
+                     method: .patch,
+                     parameters: parameter,
+                     encoder: .json,
+                     headers: self.header ?? nil)
+            .responseDecodable(of: GeneralResponseModel.self) { response in
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .resume()
+    }
+    
+    
+    // MARK: 소셜 로그인 용 임시 메소드
+    func postSignup<T: Codable>(urlEndpointString: String,
+                              dataType: T.Type,
+                              parameter: T,
+                              completionHandler: @escaping (AuthResponse) -> Void) {
+        
+        let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
+        let header = APIManeger.shared.getHeaderByToken(accessToken: accessToken)
+        
+        guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
+
+        AF
+            .request(url,
+                     method: .post,
+                     parameters: parameter,
+                     encoder: .json,
+                     headers: header)
+            .responseDecodable(of: AuthResponse.self) { response in
+                print("response :: \(response)")
+                switch response.result {
+                case .success(let success):
+                    print(success)
                     completionHandler(success)
                 case .failure(let error):
                     print(error.localizedDescription)

@@ -7,6 +7,17 @@
 
 import UIKit
 
+import KakaoSDKAuth
+import KakaoSDKUser
+
+enum Role: String {
+    case notUser = "비회원"
+    case buyer = "구매자"
+    case seller = "판매자"
+}
+
+private let SOCIAL_LOGIN_URL_ENDPOINT_STR = "/users/login"
+
 class LoginViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
@@ -43,6 +54,7 @@ class LoginViewController: UIViewController {
     @IBAction func didTapKakaoLoginButton(_ sender: UIButton) {
         // TODO: 카카오 로그인 기능 추가
         print("didTapKakaoLoginButton")
+        kakaoSocialLogin()
     }
     
     @IBAction func didTapNaverLoginButton(_ sender: UIButton) {
@@ -89,3 +101,87 @@ class LoginViewController: UIViewController {
 }
 
 // MARK: - Extensions
+extension LoginViewController {
+    private func kakaoSocialLogin() {
+        // 카카오톡 실행 가능 여부 확인
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            // 카톡 설치
+            UserApi.shared.loginWithKakaoTalk { [weak self] (oauthToken, error) in
+                if let error = error { print(error) }
+                else {
+                    print("loginWithKakaoTalk() success.")
+                    self?.getKakaoUserInfo(oauthToken: oauthToken)
+                }
+            }
+        } else {
+            // 카톡 미설치
+            UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
+                if let error = error { print(error) }
+                else {
+                    print("loginWithKakaoAccount() success.")
+                    self?.getKakaoUserInfo(oauthToken: oauthToken)
+                }
+            }
+        }
+    }
+}
+
+extension LoginViewController {
+    private func getKakaoUserInfo(oauthToken: OAuthToken?) {
+        UserApi.shared.me { [self] user, error in
+            if let error = error {
+                print(error)
+            } else {
+                
+                guard let email = user?.kakaoAccount?.email else{
+                    print("email is nil")
+                    return
+                }
+                requestSocialLogin(email: email, provider: "카카오")
+            }
+        }
+    }
+    
+    private func requestSocialLogin(email: String, provider: String) {
+        let param = SocialLoginRequest(email: email, provider: provider)
+        APIManeger.shared.postSignup(urlEndpointString: SOCIAL_LOGIN_URL_ENDPOINT_STR,
+                                   dataType: SocialLoginRequest.self,
+                                   parameter: param,
+                                   completionHandler: { [weak self] result in
+
+            print("result :: \(result)")
+            // 발급받은 토큰 저장
+            let accessToken = result.result.accessToken
+            let refreshToken = result.result.refreshToken
+            
+            UserDefaults.standard.set(email, forKey: "socialEmail")
+            UserDefaults.standard.set(accessToken, forKey: "accessToken")
+            UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
+            
+            let role = result.result.role
+            switch role {
+            case Role.notUser.rawValue:
+                self?.signup()
+                
+            case Role.buyer.rawValue, Role.seller.rawValue:
+                // TODO: role 구분 및 이후 처리
+                self?.signin()
+                
+            default:
+                print("알 수 없는 유저")
+            }
+        })
+    }
+
+    private func signup() {
+        guard let selectUserCategoryViewController = storyboard?.instantiateViewController(withIdentifier: "SelectUserCategoryViewController") as? SelectUserCategoryViewController else { return }
+        navigationController?.pushViewController(selectUserCategoryViewController, animated: true)
+    }
+    
+    private func signin() {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        guard let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
+        self.navigationController?.pushViewController(homeViewController, animated: true)
+    }
+}
+
