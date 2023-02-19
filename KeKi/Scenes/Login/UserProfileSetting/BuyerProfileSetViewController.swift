@@ -47,7 +47,7 @@ class BuyerProfileSetViewController: UIViewController {
     
     @IBAction func didTapvVlidateNicknameButton(_ sender: UIButton) { checkNicknameValidation() }
     
-    // MARK: - Helper Methods (Setup Method, ...)
+    // MARK: - Helper Methods (Setup Method, ...)    
     private func configure() {
         // TODO: 소셜로그인을 통해 받아온 유저의 이메일을 label값으로 보이기
         let email = UserDefaults.standard.value(forKey: "socialEmail") as! String
@@ -55,7 +55,7 @@ class BuyerProfileSetViewController: UIViewController {
         
         if APIManeger.shared.getHeader() != nil {
             // 로그인한 유저일 경우 저장된 정보 불러오기(닉네임, 프로필 사진)
-            
+            fetchData()
         }
     }
     
@@ -220,3 +220,23 @@ extension BuyerProfileSetViewController {
 
 }
 
+extension BuyerProfileSetViewController {
+    private func fetchData() {
+        APIManeger.shared.testGetData(urlEndpointString: BUYER_EDIT_PROFILE_ENDPOINT,
+                                      dataType: ProfileResponse.self,
+                                      parameter: nil,
+                                      completionHandler: { [weak self] response in
+            
+            switch response.code {
+            case 1000:
+                self?.nickNameTextField.text = response.result.nickname
+                let profileImgUrl = response.result.profileImg
+                // TODO: 프로필 사진 불러오기
+            default:
+                print("ERROR: \(response.message)")
+            }
+                
+            
+        })
+    }
+}
