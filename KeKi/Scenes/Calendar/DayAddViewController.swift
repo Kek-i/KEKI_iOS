@@ -353,7 +353,7 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension DayAddViewController {
     func fetchHashTagList() {
-        APIManeger.shared.getData(urlEndpointString: "/calendars/categories", dataType: HashTagListResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+        APIManeger.shared.getData(urlEndpointString: "/calendars/categories", dataType: HashTagListResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
 
             response.result.forEach { hashTag in
                 self?.hashTagList.append((hashTag.tagName, false))

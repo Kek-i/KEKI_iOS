@@ -85,7 +85,7 @@ extension AnnouncementViewController: UITableViewDelegate {
 
 extension AnnouncementViewController {
     private func fetchData() {
-        APIManeger.shared.getData(urlEndpointString: URL_ENDPOINT_STR, dataType: AnnouncementListResponse.self, header: nil, completionHandler: { [weak self] response in
+        APIManeger.shared.getData(urlEndpointString: URL_ENDPOINT_STR, dataType: AnnouncementListResponse.self, header: nil, parameter: nil, completionHandler: { [weak self] response in
             self?.announcementList = response.result
             self?.tableView.reloadData()
         })
