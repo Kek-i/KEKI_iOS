@@ -105,6 +105,7 @@ class SearchViewController: UIViewController {
     
     func setup() {
         searchTextField.delegate = self
+        searchTextField.text = searchText ?? ""
         
         var tag = 1
         
@@ -157,6 +158,10 @@ class SearchViewController: UIViewController {
         
         self.sortTypeButtonViewHeight.priority = UILayoutPriority(1000)
         sortTypeButtonView.layer.masksToBounds = false
+    }
+    
+    func setSearchText(text: String) {
+        self.searchText = text
     }
     
     func setHideButtonTitle() {
