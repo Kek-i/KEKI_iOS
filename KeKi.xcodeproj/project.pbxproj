@@ -15,6 +15,7 @@
 		735AC112298D03390099B549 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735AC110298D03390099B549 /* Calendar.storyboard */; };
 		735AC113298D03390099B549 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC111298D03390099B549 /* CalendarViewController.swift */; };
 		735AC116298D04570099B549 /* DayAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC114298D04570099B549 /* DayAddViewController.swift */; };
+		7367E1D5299A1546008E517F /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367E1D4299A1546008E517F /* SearchModel.swift */; };
 		738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F648F2988A9B3006BB124 /* StoreProductViewController.swift */; };
 		738F64962988A9BE006BB124 /* StoreInfoPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */; };
 		738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64922988A9BE006BB124 /* StoreImageCell.swift */; };
@@ -115,6 +116,7 @@
 		735AC110298D03390099B549 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		735AC111298D03390099B549 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		735AC114298D04570099B549 /* DayAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAddViewController.swift; sourceTree = "<group>"; };
+		7367E1D4299A1546008E517F /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		738F648F2988A9B3006BB124 /* StoreProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreProductViewController.swift; sourceTree = "<group>"; };
 		738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreInfoPopUpViewController.swift; sourceTree = "<group>"; };
 		738F64922988A9BE006BB124 /* StoreImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageCell.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 				A2E0151A29933AF700EBACF0 /* AnnouncementModel.swift */,
 				A2E0151929933AF700EBACF0 /* BasicModel.swift */,
 				73E985122995F1A300DC090A /* CalendarModel.swift */,
+				7367E1D4299A1546008E517F /* SearchModel.swift */,
 				A2E7D14729A0CA8100110CD2 /* AuthModel.swift */,
 			);
 			path = Model;
@@ -723,6 +726,7 @@
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				A2E015122992A35700EBACF0 /* HomeTableViewCell.swift in Sources */,
 				A2F607602989DCB000F4F3DD /* ProductImgCell.swift in Sources */,
+				7367E1D5299A1546008E517F /* SearchModel.swift in Sources */,
 				73FE8BAB298FEDAE00264B44 /* PopularSearchCell.swift in Sources */,
 				A23F2D9C29A0EBEA0046ED70 /* UIImage+.swift in Sources */,
 				A2F6075B2989633400F4F3DD /* ProductDetailViewController.swift in Sources */,

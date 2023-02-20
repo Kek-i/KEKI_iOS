@@ -158,7 +158,7 @@ extension DayDetailViewController: UICollectionViewDelegate, UICollectionViewDat
 // 서버 통신 api
 extension DayDetailViewController{
     func fetchCalendar() {
-        APIManeger.shared.getData(urlEndpointString: "/calendars/\(calendarIdx ?? -1)", dataType: CalendarResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+        APIManeger.shared.getData(urlEndpointString: "/calendars/\(calendarIdx ?? -1)", dataType: CalendarResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
             self?.calendar = response.result
             self?.setupText()
             self?.totalWidth = 0

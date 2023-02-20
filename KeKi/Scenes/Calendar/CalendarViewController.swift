@@ -138,7 +138,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 // 서버 통신 api
 extension CalendarViewController {
     func fetchCalendarList() {
-        APIManeger.shared.getData(urlEndpointString: "/calendars", dataType: CalendarListResponse.self, header: APIManeger.buyerTokenHeader) { [weak self] response in
+        APIManeger.shared.getData(urlEndpointString: "/calendars", dataType: CalendarListResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
             self?.calendarList = response.result
             self?.dayTableView.reloadData()
             self?.setupDisplay()
