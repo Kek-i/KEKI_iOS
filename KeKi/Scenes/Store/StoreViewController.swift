@@ -25,7 +25,6 @@ class StoreViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
-        
     }
     
     func setupLayout() {

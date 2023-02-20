@@ -9,19 +9,21 @@ import UIKit
 
 class StoreProductViewController: UIViewController {
 
-    @IBOutlet weak var storeProductCV: UICollectionView!{
-        didSet{
-            storeProductCV.delegate = self
-            storeProductCV.dataSource = self
-            
-            let cellNib = UINib(nibName: "StoreImageCell", bundle: nil)
-            
-            storeProductCV.register(cellNib, forCellWithReuseIdentifier: "StoreImageCell")
-        }
-    }
+    @IBOutlet weak var storeProductCV: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setup()
+    }
+    
+    func setup() {
+        storeProductCV.delegate = self
+        storeProductCV.dataSource = self
+        
+//        let cellNib = UINib(nibName: "StoreImageCell", bundle: nil)
+//
+//        storeProductCV.register(cellNib, forCellWithReuseIdentifier: "StoreImageCell")
     }
 
 }

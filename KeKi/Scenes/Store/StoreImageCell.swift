@@ -15,8 +15,11 @@ class StoreImageCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        storeImageView.layer.cornerRadius = 10
-        
+        setupLayout()
     }
 
+    func setupLayout() {
+        storeImageView.layer.cornerRadius = 10
+    }
+    
 }
