@@ -10,10 +10,14 @@ import UIKit
 class SellerProfileSetViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
+    private let imagePickerController = UIImagePickerController()
+    private var selectedProfileImg: UIImage? = nil
+    
     private var placeholder: Dictionary<String, String> = [:]
     
     @IBOutlet weak var userEmailLabel: UILabel!
     
+    @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var storeNameTextField: UITextField!
     @IBOutlet weak var storeAddressTextField: UITextField!
     @IBOutlet weak var storeIntroTextView: UITextView!
@@ -36,6 +40,9 @@ class SellerProfileSetViewController: UIViewController {
     
     // MARK: - Action Methods (IBAction, ...)
     @IBAction func didTapSelectPicButton(_ sender: UIButton) {
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true)
     }
     
     
@@ -48,6 +55,7 @@ class SellerProfileSetViewController: UIViewController {
     }
     
     private func setupLayout() {
+        profileImageButton.layer.cornerRadius = profileImageButton.frame.width / 2
         [
             storeNameTextField,
             storeAddressTextField,
@@ -103,6 +111,28 @@ class SellerProfileSetViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         guard let home = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
         navigationController?.pushViewController(home, animated: true)
+    }
+}
+
+// MARK: - Extensions
+extension SellerProfileSetViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            selectedProfileImg = editedImage
+        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            selectedProfileImg = originalImage
+        }
+        
+        print(selectedProfileImg)
+
+        selectedProfileImg = selectedProfileImg?.resized(toWidth: profileImageButton.frame.width)
+        profileImageButton.backgroundColor = .clear
+        profileImageButton.setImage(selectedProfileImg, for: .normal)
+
+        print(profileImageButton.backgroundImage(for: .normal))
+        
+        picker.dismiss(animated: true)
     }
 }
 

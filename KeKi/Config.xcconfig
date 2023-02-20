@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  KeKi
+//
+//  Created by 김초원 on 2023/02/18.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+
+KAKAO_NATIVE_APP_KEY = e2abb1dfec5ae90f3ac6233769bfafec
