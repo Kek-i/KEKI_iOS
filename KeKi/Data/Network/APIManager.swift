@@ -185,7 +185,7 @@ extension APIManeger {
 
     func testGetData<T: Decodable>(urlEndpointString: String,
                                    dataType: T.Type,
-                                   parameter: Parameters,
+                                   parameter: Parameters?,
                                    completionHandler: @escaping (T)->Void) {
 
             guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
