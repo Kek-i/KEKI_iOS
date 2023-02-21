@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>282823038399-q6hdt4r1k26qn58lu5921b4lvnpsk21j.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.282823038399-q6hdt4r1k26qn58lu5921b4lvnpsk21j</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>282823038399-cm5dqtlsjn914vihc1uruiv34susog3b.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAotbbn31CLnrV7RgsrfZ3XTb5PNHxFsQo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>282823038399</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.keki.www.KeKi</string>
+	<key>PROJECT_ID</key>
+	<string>keki-b25b7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>keki-b25b7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:282823038399:ios:53f9cc5080b5e877443d0a</string>
+</dict>
+</plist>
