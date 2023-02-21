@@ -19,10 +19,6 @@ class StoreImageViewController: UIViewController {
     func setup() {
         storeImageCV.delegate = self
         storeImageCV.dataSource = self
-        
-//        let cellNib = UINib(nibName: "StoreImageCell", bundle: nil)
-//
-//        storeImageCV.register(cellNib, forCellWithReuseIdentifier: "StoreImageCell")
     }
 
 }

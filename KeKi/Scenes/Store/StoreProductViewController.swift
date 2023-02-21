@@ -20,10 +20,6 @@ class StoreProductViewController: UIViewController {
     func setup() {
         storeProductCV.delegate = self
         storeProductCV.dataSource = self
-        
-//        let cellNib = UINib(nibName: "StoreImageCell", bundle: nil)
-//
-//        storeProductCV.register(cellNib, forCellWithReuseIdentifier: "StoreImageCell")
     }
 
 }

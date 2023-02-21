@@ -448,8 +448,8 @@
 				738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */,
 				738F64942988A9BE006BB124 /* TabViewController.swift */,
 				738F648F2988A9B3006BB124 /* StoreProductViewController.swift */,
-				738F64922988A9BE006BB124 /* StoreImageCell.swift */,
 				738F64932988A9BE006BB124 /* StoreImageViewController.swift */,
+				738F64922988A9BE006BB124 /* StoreImageCell.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
