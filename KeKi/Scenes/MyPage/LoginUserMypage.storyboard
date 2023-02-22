@@ -141,6 +141,7 @@
                     <navigationItem key="navigationItem" id="oH5-Yg-1nG"/>
                     <size key="freeformSize" width="393" height="1000"/>
                     <connections>
+                        <outlet property="profileImgView" destination="BtC-7c-UxC" id="zjm-1G-t9m"/>
                         <outlet property="tableView" destination="htJ-aM-yF4" id="dy3-cB-Oin"/>
                         <outlet property="welcomLabel" destination="59p-GC-n7x" id="UAJ-ak-6Jz"/>
                     </connections>

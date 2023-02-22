@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 private let LOGOUT_ENDPOINT_STR = "/users/logout"
 
@@ -33,6 +34,7 @@ class LoginMyPageViewController: UIViewController {
     private var nofiticationSettingTitles = [ "푸시 알림" ]
     private var appInfoTitles = [ "공지사항", "약관안내", "개인정보처리방침" ]
     
+    @IBOutlet weak var profileImgView: UIImageView!
     @IBOutlet weak var welcomLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
@@ -43,6 +45,7 @@ class LoginMyPageViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupTableView()
+        setupLayout()
         fetchData()
     }
     
@@ -93,6 +96,11 @@ class LoginMyPageViewController: UIViewController {
         tableView.layer.shadowOffset = CGSize(width: 6, height: 6)
     }
     
+    private func setupLayout() {
+        profileImgView.layer.cornerRadius = profileImgView.frame.width / 2
+        profileImgView.layer.borderWidth = 0.5
+        profileImgView.layer.borderColor = UIColor.lightGray.cgColor
+    }
     
     ///
     ///
@@ -186,8 +194,10 @@ class LoginMyPageViewController: UIViewController {
     // MARK: Methods
     func setUserInfo(nickname: String, profilImgUrl: String?) {
         welcomLabel.text = "\(nickname)님 \n오늘도 특별한 하루 보내세요!"
+        
         if profileImgUrl != nil {
             // TODO: 프로필 사진 불러오기
+//            profileImgView.kf.
         }
     }
 }
@@ -304,6 +314,7 @@ extension LoginMyPageViewController {
                 let nickname = response.result.nickname
                 let profileImgUrl = response.result.profileImg
                 self?.setUserInfo(nickname: nickname, profilImgUrl: profileImgUrl ?? nil)
+                self?.profileImgView.kf.setImage(with: URL(string: profileImgUrl!))
             default:
                 print("ERROR: \(response.message)")
             }

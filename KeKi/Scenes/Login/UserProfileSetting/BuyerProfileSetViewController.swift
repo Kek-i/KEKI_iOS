@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 private let NICKNAME_VALIDATION_ENDPOINT = "/users/nickname"
 private let SIGNUP_ENDPOINT = "/users/signup"
@@ -111,11 +112,14 @@ extension BuyerProfileSetViewController: UIImagePickerControllerDelegate, UINavi
 
 // MARK: - Extensions
 extension BuyerProfileSetViewController {
-    private func uploadProfileImage(image: UIImage) {
+    private func uploadProfileImage(image: UIImage, completionHandler: @escaping ()-> Void) {
         if let userEmail = UserDefaults.standard.value(forKey: "socialEmail") {
             FirebaseStorageManager.uploadImage(image: image, pathRoot: userEmail as! String,
                                                completion: { [weak self] url in
-                if let url = url { self?.savedProfileImgUrl = url.absoluteString }
+                if let url = url {
+                    self?.savedProfileImgUrl = url.absoluteString
+                    completionHandler()
+                }
             })
         }
     }
@@ -152,9 +156,13 @@ extension BuyerProfileSetViewController {
     private func editProfile() {
         if let nickname = nickNameTextField.text {
             
-            if selectedProfileImg != nil { uploadProfileImage(image: selectedProfileImg!) }
-            let editedUserInfo = Signup(nickname: nickname, profileImg: savedProfileImgUrl ?? "")
-            editProfileRequest(param: editedUserInfo)
+            if selectedProfileImg != nil {
+                uploadProfileImage(image: selectedProfileImg!) { [weak self] in
+                    let editedUserInfo = Signup(nickname: nickname, profileImg: self?.savedProfileImgUrl ?? "")
+                    self?.editProfileRequest(param: editedUserInfo)
+                    print(editedUserInfo)
+                }
+            }
             
         } else { showAlert(message: "닉네임을 입력해주세요") }
     }
@@ -167,6 +175,7 @@ extension BuyerProfileSetViewController {
                                    completionHandler: { [weak self] response in
             switch response.code {
             case 1000:
+                print("param.profileImg :: \(param.profileImg)")
                 print("구매자 프로필 수정 성공")
                 self?.navigationController?.popToRootViewController(animated: true)
                 
@@ -179,11 +188,14 @@ extension BuyerProfileSetViewController {
     
     private func signup() {
         if let nickname = nickNameTextField.text {
-            
-            if selectedProfileImg != nil { uploadProfileImage(image: selectedProfileImg!) }
-            let signupInfo = Signup(nickname: nickname, profileImg: savedProfileImgUrl ?? "")
-            signupRequest(param: signupInfo)
-            
+
+            if selectedProfileImg != nil {
+                uploadProfileImage(image: selectedProfileImg!) { [weak self] in
+                    let signupInfo = Signup(nickname: nickname, profileImg: self?.savedProfileImgUrl ?? "")
+                    self?.signupRequest(param: signupInfo)
+                }
+            }
+
         } else { showAlert(message: "닉네임을 입력해주세요") }
     }
     
@@ -232,6 +244,10 @@ extension BuyerProfileSetViewController {
                 self?.nickNameTextField.text = response.result.nickname
                 let profileImgUrl = response.result.profileImg
                 // TODO: 프로필 사진 불러오기
+                print("profile edit - profileImgUrl :: \(profileImgUrl)")
+                self?.profileImageButton.imageView?.kf.setImage(with: URL(string: profileImgUrl!))
+                self?.profileImageButton.backgroundColor = .clear
+//                self?.profileImageButton.kf.setBackgroundImage(with: URL(string: profileImgUrl!), for: .normal)
             default:
                 print("ERROR: \(response.message)")
             }
