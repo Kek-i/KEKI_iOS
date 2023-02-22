@@ -81,7 +81,39 @@ extension HomeTableViewCell: UICollectionViewDataSource {
 
 extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: 각 태그별 스토어 게시물 탭 이벤트 처리 메소드 정의 필요
         print("tapped store post :: indexPath --> \(indexPath)")
+        
+        // TODO: 각 태그별 스토어 게시물 탭 이벤트 처리 메소드 정의 필요
+        // 탭 이벤트가 발생한 게시물의 인덱스 정보 (postIdx)를 피드 상세를 보여주는 셀에 넘겨주고
+        // 피드 상세 셀에서 받은 postIdx를 통해 서버에서 피드 정보 불러오기
+        
+        let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
+        guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
+        
+        if storePostList.count == 0 {
+            let alert = UIAlertController(title: nil, message: "준비 중인 케이크입니다!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            if let vc = self.next(ofType: UIViewController.self) { vc.present(alert, animated: true) }
+            
+        } else {
+            feedViewController.postIdx = storePostList[indexPath.row].postIdx
+            if let vc = self.next(ofType: UIViewController.self) {
+                vc.tabBarController?.tabBar.isHidden = true
+                vc.navigationController?.pushViewController(feedViewController, animated: true)
+            }
+        }
+        
+        
+    }
+}
+
+extension UIResponder {
+    func next<T:UIResponder>(ofType: T.Type) -> T? {
+        let r = self.next
+        if let r = r as? T ?? r?.next(ofType: T.self) {
+            return r
+        } else {
+            return nil
+        }
     }
 }

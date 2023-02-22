@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 private let NICKNAME_VALIDATION_ENDPOINT = "/users/nickname"
 private let SIGNUP_ENDPOINT = "/users/signup"
@@ -47,11 +48,16 @@ class BuyerProfileSetViewController: UIViewController {
     
     @IBAction func didTapvVlidateNicknameButton(_ sender: UIButton) { checkNicknameValidation() }
     
-    // MARK: - Helper Methods (Setup Method, ...)
+    // MARK: - Helper Methods (Setup Method, ...)    
     private func configure() {
         // TODO: 소셜로그인을 통해 받아온 유저의 이메일을 label값으로 보이기
         let email = UserDefaults.standard.value(forKey: "socialEmail") as! String
         userEmailLabel.text = email
+        
+        if APIManeger.shared.getHeader() != nil {
+            // 로그인한 유저일 경우 저장된 정보 불러오기(닉네임, 프로필 사진)
+            fetchData()
+        }
     }
     
     private func setup() {
@@ -106,11 +112,14 @@ extension BuyerProfileSetViewController: UIImagePickerControllerDelegate, UINavi
 
 // MARK: - Extensions
 extension BuyerProfileSetViewController {
-    private func uploadProfileImage(image: UIImage) {
+    private func uploadProfileImage(image: UIImage, completionHandler: @escaping ()-> Void) {
         if let userEmail = UserDefaults.standard.value(forKey: "socialEmail") {
             FirebaseStorageManager.uploadImage(image: image, pathRoot: userEmail as! String,
                                                completion: { [weak self] url in
-                if let url = url { self?.savedProfileImgUrl = url.absoluteString }
+                if let url = url {
+                    self?.savedProfileImgUrl = url.absoluteString
+                    completionHandler()
+                }
             })
         }
     }
@@ -147,9 +156,13 @@ extension BuyerProfileSetViewController {
     private func editProfile() {
         if let nickname = nickNameTextField.text {
             
-            if selectedProfileImg != nil { uploadProfileImage(image: selectedProfileImg!) }
-            let editedUserInfo = Signup(nickname: nickname, profileImg: savedProfileImgUrl ?? "")
-            editProfileRequest(param: editedUserInfo)
+            if selectedProfileImg != nil {
+                uploadProfileImage(image: selectedProfileImg!) { [weak self] in
+                    let editedUserInfo = Signup(nickname: nickname, profileImg: self?.savedProfileImgUrl ?? "")
+                    self?.editProfileRequest(param: editedUserInfo)
+                    print(editedUserInfo)
+                }
+            }
             
         } else { showAlert(message: "닉네임을 입력해주세요") }
     }
@@ -174,11 +187,14 @@ extension BuyerProfileSetViewController {
     
     private func signup() {
         if let nickname = nickNameTextField.text {
-            
-            if selectedProfileImg != nil { uploadProfileImage(image: selectedProfileImg!) }
-            let signupInfo = Signup(nickname: nickname, profileImg: savedProfileImgUrl ?? "")
-            signupRequest(param: signupInfo)
-            
+
+            if selectedProfileImg != nil {
+                uploadProfileImage(image: selectedProfileImg!) { [weak self] in
+                    let signupInfo = Signup(nickname: nickname, profileImg: self?.savedProfileImgUrl ?? "")
+                    self?.signupRequest(param: signupInfo)
+                }
+            }
+
         } else { showAlert(message: "닉네임을 입력해주세요") }
     }
     
@@ -215,3 +231,29 @@ extension BuyerProfileSetViewController {
 
 }
 
+extension BuyerProfileSetViewController {
+    private func fetchData() {
+        APIManeger.shared.testGetData(urlEndpointString: BUYER_EDIT_PROFILE_ENDPOINT,
+                                      dataType: ProfileResponse.self,
+                                      parameter: nil,
+                                      completionHandler: { [weak self] response in
+            
+            switch response.code {
+            case 1000:
+                self?.nickNameTextField.text = response.result.nickname
+                if let profileImgUrl = response.result.profileImg {
+                    let modifier = AnyImageModifier { return $0.withRenderingMode(.alwaysOriginal) }
+                    self?.profileImageButton.kf.setImage(with: URL(string: profileImgUrl),
+                                                         for: .normal, placeholder: nil,
+                                                         options: [.imageModifier(modifier)],
+                                                         progressBlock: nil, completionHandler: nil)
+                }
+                
+            default:
+                print("ERROR: \(response.message)")
+            }
+                
+            
+        })
+    }
+}

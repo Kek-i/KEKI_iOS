@@ -182,7 +182,8 @@ extension APIManeger {
     
     func getHeader() -> HTTPHeaders? { return header }
     func getHeaderByToken(accessToken: String) -> HTTPHeaders { return HTTPHeaders(["Authorization": accessToken]) }
-
+    func resetHeader() { header = nil }
+    
     func testGetData<T: Decodable>(urlEndpointString: String,
                                    dataType: T.Type,
                                    parameter: Parameters?,

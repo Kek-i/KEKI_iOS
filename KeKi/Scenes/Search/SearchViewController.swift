@@ -103,8 +103,14 @@ class SearchViewController: UIViewController {
         fetchSearchMain()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+        
     func setup() {
         searchTextField.delegate = self
+        searchTextField.text = searchText ?? ""
         
         var tag = 1
         
@@ -157,6 +163,10 @@ class SearchViewController: UIViewController {
         
         self.sortTypeButtonViewHeight.priority = UILayoutPriority(1000)
         sortTypeButtonView.layer.masksToBounds = false
+    }
+    
+    func setSearchText(text: String) {
+        self.searchText = text
     }
     
     func setHideButtonTitle() {
@@ -344,7 +354,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }else if collectionView.tag == 3 {
            
         }else {
-           
+            let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
+            guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
+            feedViewController.feedData = searchResultList
+            self.navigationController?.pushViewController(feedViewController, animated: true)
         }
     }
     
@@ -400,16 +413,28 @@ extension SearchViewController {
 extension SearchViewController {
     func fetchSearchMain() {
         // MARK: 로그인 토큰 있을 시 검색 메인 화면
-        APIManeger.shared.getData(urlEndpointString: "/histories", dataType: SearchMainResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
-            
+//        APIManeger.shared.getData(urlEndpointString: "/histories", dataType: SearchMainResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+//
+//            self?.recentTextList = response.result.recentSearches
+//            self?.popularTextList = response.result.popularSearches
+//            self?.recentCakeList = response.result.recentPostSearches
+//
+//            self?.recentCV.reloadData()
+//            self?.popularCV.reloadData()
+//            self?.recentCakeCV.reloadData()
+//        }
+        APIManeger.shared.testGetData(urlEndpointString: "/histories",
+                                      dataType: SearchMainResponse.self,
+                                      parameter: nil,
+                                      completionHandler: { [weak self] response in
             self?.recentTextList = response.result.recentSearches
             self?.popularTextList = response.result.popularSearches
             self?.recentCakeList = response.result.recentPostSearches
-            
+
             self?.recentCV.reloadData()
             self?.popularCV.reloadData()
             self?.recentCakeCV.reloadData()
-        }
+        })
         
         // MARK: 로그인 토큰 없을 시 검색 메인 화면
 //        APIManeger.shared.getData(urlEndpointString: "/histories", dataType: NoLoginSearchMainResponse.self, header: nil) { [weak self] response in
@@ -421,19 +446,33 @@ extension SearchViewController {
     
     // MARK: 최근 검색어 - GET
     func fetchRecnetSearches() {
-        APIManeger.shared.getData(urlEndpointString: "/histories/recent-searches", dataType: RecentSearchesResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+//        APIManeger.shared.getData(urlEndpointString: "/histories/recent-searches", dataType: RecentSearchesResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+//            self?.recentTextList = response.result
+//            self?.recentCV.reloadData()
+//        }
+        APIManeger.shared.testGetData(urlEndpointString: "/histories/recent-searches",
+                                      dataType: RecentSearchesResponse.self,
+                                      parameter: nil, completionHandler: { [weak self] response in
             self?.recentTextList = response.result
             self?.recentCV.reloadData()
-        }
+        })
     }
     
     // MARK: 최근 검색어 삭제 - PATCH
     func deleteRecentSearches() {
-        APIManeger.shared.patchData(urlEndpointString: "/histories", dataType: SearchMainResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
-            if response.isSuccess == true {
-                self?.fetchRecnetSearches()
-            }
-        }
+//        APIManeger.shared.patchData(urlEndpointString: "/histories", dataType: SearchMainResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+//            if response.isSuccess == true {
+//                self?.fetchRecnetSearches()
+//            }
+//        }
+        APIManeger.shared.testPatchData(urlEndpointString: "/histories",
+                                        dataType: SearchMainResponse.self,
+                                        parameter: nil,
+                                        completionHandler: { [weak self] response in
+                    if response.isSuccess == true {
+                        self?.fetchRecnetSearches()
+                    }
+        })
     }
     
     // MARK: 검색 파라미터 만든 후 검색
@@ -454,15 +493,39 @@ extension SearchViewController {
     
     // MARK: 검색 - GET
     func fetchSearchResult(queryParam: Parameters) {
-        APIManeger.shared.getData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
+//        APIManeger.shared.getData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
+//            if response.result.feeds?.count != 0 {
+//                response.result.feeds?.forEach({ feed in
+//                    self?.searchResultList.append(feed)
+//                })
+//
+//                self?.cursorIdx = response.result.cursorIdx
+//                self?.hasNext = response.result.hasNext
+//
+//                if self?.sortType == .Popular {
+//                    self?.cursorPopularNum = response.result.cursorPopularNum
+//                }else if self?.sortType == .LowPrice {
+//                    self?.cursorPrice = response.result.cursorPrice
+//                }
+//                self?.showResultView()
+//            }else {
+//                self?.showNoResultView()
+//            }
+//
+//            self?.isLoading = false
+//        }
+        
+        APIManeger.shared.testGetData(urlEndpointString: "/posts",
+                                      dataType: SearchResultResponse.self,
+                                      parameter: queryParam, completionHandler: { [weak self] response in
             if response.result.feeds?.count != 0 {
                 response.result.feeds?.forEach({ feed in
                     self?.searchResultList.append(feed)
                 })
-                
+
                 self?.cursorIdx = response.result.cursorIdx
                 self?.hasNext = response.result.hasNext
-                
+
                 if self?.sortType == .Popular {
                     self?.cursorPopularNum = response.result.cursorPopularNum
                 }else if self?.sortType == .LowPrice {
@@ -472,9 +535,9 @@ extension SearchViewController {
             }else {
                 self?.showNoResultView()
             }
-            
+
             self?.isLoading = false
-        }
+        })
         
         
     }

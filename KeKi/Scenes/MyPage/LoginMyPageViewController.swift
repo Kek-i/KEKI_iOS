@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Kingfisher
+
+private let LOGOUT_ENDPOINT_STR = "/users/logout"
 
 enum UserKind {
     case buyer
@@ -22,6 +25,8 @@ class LoginMyPageViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
     var userKind: UserKind? = .buyer
+    private var nickname: String = ""
+    private var profileImgUrl: String? = nil
     
     private var sections = [ "계정 설정", "알림 설정", "앱 정보" ]
     
@@ -29,6 +34,8 @@ class LoginMyPageViewController: UIViewController {
     private var nofiticationSettingTitles = [ "푸시 알림" ]
     private var appInfoTitles = [ "공지사항", "약관안내", "개인정보처리방침" ]
     
+    @IBOutlet weak var profileImgView: UIImageView!
+    @IBOutlet weak var welcomLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -38,11 +45,14 @@ class LoginMyPageViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupTableView()
+        setupLayout()
+        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        fetchData()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -86,6 +96,11 @@ class LoginMyPageViewController: UIViewController {
         tableView.layer.shadowOffset = CGSize(width: 6, height: 6)
     }
     
+    private func setupLayout() {
+        profileImgView.layer.cornerRadius = profileImgView.frame.width / 2
+        profileImgView.layer.borderWidth = 0.5
+        profileImgView.layer.borderColor = UIColor.lightGray.cgColor
+    }
     
     ///
     ///
@@ -114,11 +129,31 @@ class LoginMyPageViewController: UIViewController {
     }
     
     private func logout() {
-        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
-        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
-        alertViewController.config(todo: .logout)
-        alertViewController.modalPresentationStyle = .fullScreen
-        present(alertViewController, animated: true)
+        let alert = UIAlertController(title: nil, message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        let logout = UIAlertAction(title: "로그아웃", style: .default) { _ in
+            APIManeger.shared.testPatchData(urlEndpointString: LOGOUT_ENDPOINT_STR,
+                                            dataType: GeneralResponseModel.self,
+                                            parameter: nil,
+                                            completionHandler: { [weak self] response in
+                print(response)
+                APIManeger.shared.resetHeader()
+                
+                self?.navigationController?.popToRootViewController(animated: false)
+                let main = DefaultTabBarController()
+                main.modalPresentationStyle = .fullScreen
+                main.modalTransitionStyle = .crossDissolve
+                self?.present(main, animated: true)
+            })
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(logout)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+//        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+//        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+//        alertViewController.config(todo: .logout)
+//        alertViewController.modalPresentationStyle = .fullScreen
+//        present(alertViewController, animated: true)
     }
     
     private func secession() {
@@ -156,6 +191,15 @@ class LoginMyPageViewController: UIViewController {
 
     }
     
+    // MARK: Methods
+    func setUserInfo(nickname: String, profilImgUrl: String?) {
+        welcomLabel.text = "\(nickname)님 \n오늘도 특별한 하루 보내세요!"
+        
+        if profileImgUrl != nil {
+            // TODO: 프로필 사진 불러오기
+//            profileImgView.kf.
+        }
+    }
 }
 
 // MARK: - Extensions
@@ -251,5 +295,31 @@ extension LoginMyPageViewController: UITableViewDelegate {
         default:
             return
         }
+    }
+}
+
+
+// MARK: - 네트워크 관련 Extensions
+private let USER_PROFILE_ENDPOINT_STR = "/users/profile"
+
+extension LoginMyPageViewController {
+    private func fetchData() {
+        APIManeger.shared.testGetData(urlEndpointString: USER_PROFILE_ENDPOINT_STR,
+                                      dataType: ProfileResponse.self,
+                                      parameter: nil,
+                                      completionHandler: { [weak self] response in
+            
+            switch response.code {
+            case 1000:
+                let nickname = response.result.nickname
+                let profileImgUrl = response.result.profileImg
+                self?.setUserInfo(nickname: nickname, profilImgUrl: profileImgUrl ?? nil)
+                if profileImgUrl != nil { self?.profileImgView.kf.setImage(with: URL(string: profileImgUrl!)) }
+            default:
+                print("ERROR: \(response.message)")
+            }
+                
+            
+        })
     }
 }

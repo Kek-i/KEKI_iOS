@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct HomeResponse: Decodable {
+struct HomeResponse: Codable {
     var isSuccess: Bool
     var code: Int
     var message: String
     var result: Result
 }
 
-struct Result: Decodable {
+struct Result: Codable {
     var userIdx: Int? = nil
     var nickname: String? = nil
     var calendarTitle: String? = nil
@@ -22,14 +22,14 @@ struct Result: Decodable {
     var homeTagResList: [HomeTagRes]
 }
 
-struct HomeTagRes: Decodable {
+struct HomeTagRes: Codable {
     var tagIdx: Int
     var tagName: String
     var homePostRes: [HomePostRes]
 }
 
-struct HomePostRes: Decodable {
+struct HomePostRes: Codable {
     var postIdx: Int
-//    var storeTitle: String
+    var storeTitle: String
     var postImgUrl: String
 }

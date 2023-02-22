@@ -9,11 +9,16 @@ import UIKit
 
 class FeedViewController: UIViewController {
     // MARK: - Variables, IBOutlet, ...
+    var postIdx: Int = -1
+    var feedData: [Feed] = []
+    
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Methods of LifeCycle
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        if feedData.count == 0 { fetchData() }
+        
         setupNavigationBar()
         setupTableView()
     }
@@ -22,11 +27,26 @@ class FeedViewController: UIViewController {
 
     
     // MARK: - Helper Methods (Setup Method, ...)
+    private func fetchData() {
+        // 개별 피드 조회
+        if postIdx != -1 {
+            APIManeger.shared.testGetData(urlEndpointString: "/posts/\(postIdx)",
+                                          dataType: SingleFeedResponse.self,
+                                          parameter: nil,
+                                          completionHandler: { [weak self] response in
+                    
+                if response.isSuccess { self?.feedData.append(response.result) }
+                self?.tableView.reloadData()
+                
+            })
+        }
+    }
     
     private func setupNavigationBar() {
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "피드"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(didTapBackItem))
     }
     
     private func setupTableView() {
@@ -34,15 +54,17 @@ class FeedViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "FeedCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
-
     }
+    
+    @objc private func didTapBackItem() { self.navigationController?.popViewController(animated: true) }
     
 }
 
 // MARK: - Extensions
 extension FeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        print("feedData.count :: \(feedData.count)")
+        return feedData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,6 +72,9 @@ extension FeedViewController: UITableViewDataSource {
                 as? FeedCell else { return UITableViewCell() }
         cell.setup()
         cell.feedAlertDelegate = self
+        cell.configure(data: feedData[indexPath.row])
+        if feedData.count == 1 { cell.setSingleFeedView() }
+        cell.reloadData()
         return cell
     }
 

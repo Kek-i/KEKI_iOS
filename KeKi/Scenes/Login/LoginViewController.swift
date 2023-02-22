@@ -164,8 +164,8 @@ extension LoginViewController {
                 self?.signup()
                 
             case Role.buyer.rawValue, Role.seller.rawValue:
-                // TODO: role 구분 및 이후 처리
-                self?.signin()
+                APIManeger.shared.setUserInfo(userInfo: result.result)
+                self?.showMain()
                 
             default:
                 print("알 수 없는 유저")
@@ -178,10 +178,11 @@ extension LoginViewController {
         navigationController?.pushViewController(selectUserCategoryViewController, animated: true)
     }
     
-    private func signin() {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        guard let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
-        self.navigationController?.pushViewController(homeViewController, animated: true)
+    private func showMain() {
+        let main = DefaultTabBarController()
+        main.modalPresentationStyle = .fullScreen
+        main.modalTransitionStyle = .crossDissolve
+        self.present(main, animated: true)
     }
 }
 
