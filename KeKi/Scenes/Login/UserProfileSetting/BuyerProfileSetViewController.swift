@@ -175,7 +175,6 @@ extension BuyerProfileSetViewController {
                                    completionHandler: { [weak self] response in
             switch response.code {
             case 1000:
-                print("param.profileImg :: \(param.profileImg)")
                 print("구매자 프로필 수정 성공")
                 self?.navigationController?.popToRootViewController(animated: true)
                 
