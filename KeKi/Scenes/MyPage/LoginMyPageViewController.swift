@@ -314,7 +314,7 @@ extension LoginMyPageViewController {
                 let nickname = response.result.nickname
                 let profileImgUrl = response.result.profileImg
                 self?.setUserInfo(nickname: nickname, profilImgUrl: profileImgUrl ?? nil)
-                self?.profileImgView.kf.setImage(with: URL(string: profileImgUrl!))
+                if profileImgUrl != nil { self?.profileImgView.kf.setImage(with: URL(string: profileImgUrl!)) }
             default:
                 print("ERROR: \(response.message)")
             }

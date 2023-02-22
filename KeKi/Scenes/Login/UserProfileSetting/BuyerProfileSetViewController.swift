@@ -242,12 +242,14 @@ extension BuyerProfileSetViewController {
             switch response.code {
             case 1000:
                 self?.nickNameTextField.text = response.result.nickname
-                let profileImgUrl = response.result.profileImg
-                // TODO: 프로필 사진 불러오기
-                print("profile edit - profileImgUrl :: \(profileImgUrl)")
-                self?.profileImageButton.imageView?.kf.setImage(with: URL(string: profileImgUrl!))
-                self?.profileImageButton.backgroundColor = .clear
-//                self?.profileImageButton.kf.setBackgroundImage(with: URL(string: profileImgUrl!), for: .normal)
+                if let profileImgUrl = response.result.profileImg {
+                    let modifier = AnyImageModifier { return $0.withRenderingMode(.alwaysOriginal) }
+                    self?.profileImageButton.kf.setImage(with: URL(string: profileImgUrl),
+                                                         for: .normal, placeholder: nil,
+                                                         options: [.imageModifier(modifier)],
+                                                         progressBlock: nil, completionHandler: nil)
+                }
+                
             default:
                 print("ERROR: \(response.message)")
             }
