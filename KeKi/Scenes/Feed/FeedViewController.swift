@@ -10,7 +10,6 @@ import UIKit
 class FeedViewController: UIViewController {
     // MARK: - Variables, IBOutlet, ...
     var postIdx: Int = -1
-    var mode: FeedMode?
     var feedData: [Feed] = []
     
     @IBOutlet weak var tableView: UITableView!
@@ -28,9 +27,6 @@ class FeedViewController: UIViewController {
 
     
     // MARK: - Helper Methods (Setup Method, ...)
-    func setData(postIdx: Int) {
-        fetchData()
-    }
     
     private func fetchData() {
         if postIdx != -1 {
@@ -48,6 +44,7 @@ class FeedViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "피드"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(didTapBackItem))
