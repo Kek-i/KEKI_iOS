@@ -74,42 +74,46 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fLN-MI-dcj">
-                        <rect key="frame" x="23" y="533.33333333333337" width="176" height="30"/>
+                        <rect key="frame" x="16" y="533.33333333333337" width="166" height="30"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7K-SM-5nP">
-                                <rect key="frame" x="0.0" y="0.0" width="53.333333333333336" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                 <color key="backgroundColor" red="0.9882352941176471" green="0.95686274509803915" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="B41-qR-eGd"/>
+                                    <constraint firstAttribute="width" constant="50" id="YDA-Hh-kDR"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="# 친구">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="11"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="# 친구"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uP2-Kn-N8M">
-                                <rect key="frame" x="61.333333333333329" y="0.0" width="53.333333333333329" height="30"/>
+                                <rect key="frame" x="58" y="0.0" width="50" height="30"/>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="fXX-Eo-WSE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="# 친구">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="11"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="# 친구"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgC-EV-uGu">
-                                <rect key="frame" x="122.66666666666664" y="0.0" width="53.333333333333329" height="30"/>
+                                <rect key="frame" x="116" y="0.0" width="50" height="30"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.79607843140000001" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="3VS-Ap-lfr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="# 친구">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="11"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="# 친구"/>
                             </button>
                         </subviews>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oSK-8L-8m5">
-                        <rect key="frame" x="257" y="525" width="40" height="40"/>
+                        <rect key="frame" x="264" y="525" width="40" height="40"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="73W-qA-14W"/>
@@ -131,18 +135,17 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e88-AC-HKz">
-                        <rect key="frame" x="16" y="394" width="83" height="25"/>
+                        <rect key="frame" x="21" y="394" width="59" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="KfH-aG-aGG"/>
                         </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="제품이름">
-                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
-                        </buttonConfiguration>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="제품이름"/>
                     </button>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="이 제품은 어쩌구저쩌구 케이크어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구…이 제품은 어쩌구저쩌구 케이크어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구… 근데 이거 높이값 고정인가 아 집가고 싶다 아 초밥 먹고 싶은디 " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="p5c-uC-NH0">
-                        <rect key="frame" x="23" y="429" width="274" height="89.333333333333371"/>
+                        <rect key="frame" x="16" y="429" width="288" height="89.333333333333371"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -150,7 +153,7 @@
                     </textView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="p5c-uC-NH0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="1aZ-NY-pdg"/>
+                    <constraint firstItem="p5c-uC-NH0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="1aZ-NY-pdg"/>
                     <constraint firstItem="e5N-ye-wT5" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="3pZ-ey-e4h"/>
                     <constraint firstItem="Gau-NA-CUj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Eel-RJ-sac"/>
                     <constraint firstItem="p5c-uC-NH0" firstAttribute="top" secondItem="e88-AC-HKz" secondAttribute="bottom" constant="10" id="GWy-0T-pfq"/>
@@ -166,7 +169,7 @@
                     <constraint firstItem="f3U-f8-ueK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Zd1-8h-BHd"/>
                     <constraint firstAttribute="trailing" secondItem="OuS-tT-pVB" secondAttribute="trailing" constant="10" id="aJo-ac-Iep"/>
                     <constraint firstItem="fLN-MI-dcj" firstAttribute="top" secondItem="p5c-uC-NH0" secondAttribute="bottom" constant="15" id="awt-2d-7gF"/>
-                    <constraint firstItem="e88-AC-HKz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="f2M-ov-lA2"/>
+                    <constraint firstItem="e88-AC-HKz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="f2M-ov-lA2"/>
                     <constraint firstItem="p5c-uC-NH0" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="fh5-dn-sWa"/>
                     <constraint firstAttribute="bottomMargin" secondItem="oSK-8L-8m5" secondAttribute="bottom" constant="24" id="iCF-sL-UOj"/>
                     <constraint firstItem="Gau-NA-CUj" firstAttribute="top" secondItem="f3U-f8-ueK" secondAttribute="bottom" constant="10" id="lAW-YT-tEx"/>
