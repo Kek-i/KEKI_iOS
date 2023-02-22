@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol AlertDelegate {
     func showFeedMainAlert()
@@ -16,11 +17,7 @@ class FeedCell: UITableViewCell {
     
     var feedAlertDelegate: AlertDelegate!
     
-    var imageList: [String] = [
-        "a.circle",
-        "b.circle",
-        "c.circle"
-    ]
+    var imageList: [String] = []
 
     @IBOutlet weak var profileImgView: UIImageView!
     @IBOutlet weak var nicknameLabel: UILabel!
@@ -60,13 +57,14 @@ class FeedCell: UITableViewCell {
     
     func configure(data: Feed) {
         nicknameLabel.text = data.storeName
+        
         imageList = data.postImgUrls
-        // TODO: url을 통해 이미지 불러오기
+        pageControl.numberOfPages = imageList.count
+        pageControl.currentPage = 0
+        
         dessertNameButton.setTitle(data.dessertName, for: .normal)
         descriptionTextView.text = data.description
-        if data.like {
-            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        }
+        if data.like { heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) }
     }
     
     func setup() {
@@ -74,11 +72,6 @@ class FeedCell: UITableViewCell {
         imgCollectionView.dataSource = self
         imgCollectionView.delegate = self
         imgCollectionView.showsHorizontalScrollIndicator = false
-    }
-    
-    private func setupPageControl() {
-        pageControl.numberOfPages = imageList.count
-        pageControl.currentPage = 0
     }
 }
 
@@ -91,6 +84,8 @@ extension FeedCell: UICollectionViewDataSource {
         print(indexPath.row)
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedImgsCell", for: indexPath) as? FeedImgsCell else { return UICollectionViewCell() }
+        let imgURL = imageList[indexPath.row]
+        cell.imgView.kf.setImage(with: URL(string: imgURL))
         return cell
     }
     
