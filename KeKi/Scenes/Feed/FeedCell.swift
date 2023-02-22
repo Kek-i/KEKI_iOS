@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol AlertDelegate {
     func showFeedMainAlert()
@@ -16,11 +17,8 @@ class FeedCell: UITableViewCell {
     
     var feedAlertDelegate: AlertDelegate!
     
-    var imageList: [String] = [
-        "a.circle",
-        "b.circle",
-        "c.circle"
-    ]
+    var imageList: [String] = []
+    var tagList: [String] = []
 
     @IBOutlet weak var profileImgView: UIImageView!
     @IBOutlet weak var nicknameLabel: UILabel!
@@ -28,13 +26,24 @@ class FeedCell: UITableViewCell {
     @IBOutlet weak var imgCollectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var dessertNameButton: UIButton!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    @IBOutlet weak var tag1Button: UIButton!
+    @IBOutlet weak var tag2Button: UIButton!
+    @IBOutlet weak var tag3Button: UIButton!
+    
     @IBOutlet weak var heartButton: UIButton!
+    @IBOutlet weak var separatorView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         imgCollectionView.register(UINib(nibName: "FeedImgsCell", bundle: nil), forCellWithReuseIdentifier: "FeedImgsCell")
         heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
         heartButton.setImage(UIImage(systemName: "heart.fill"), for: .selected)
+        [tag1Button,tag2Button,tag3Button].forEach {
+            $0?.layer.cornerRadius = 15
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -51,19 +60,57 @@ class FeedCell: UITableViewCell {
         heartButton.isSelected = !heartButton.isSelected
     }
     
+    func setSingleFeedView() { separatorView.isHidden = true }
+    func reloadData() { imgCollectionView.reloadData() }
+    
+    func configure(data: Feed) {
+        // set store profile
+        nicknameLabel.text = data.storeName
+
+        profileImgView.kf.setImage(with: URL(string: data.storeProfileImg))
+        profileImgView.layer.cornerRadius = profileImgView.frame.width / 2
+        
+        profileImgView.layer.borderWidth = 0.3  // 정방형이 아닌 크기의 프로필 사진에 대한 임시처리
+        profileImgView.layer.borderColor = UIColor.lightGray.cgColor    // 정방형이 아닌 크기의 프로필 사진에 대한 임시처리
+        
+        // set dessert contents
+        imageList = data.postImgUrls
+        pageControl.numberOfPages = imageList.count
+        pageControl.currentPage = 0
+        
+        dessertNameButton.setTitle(data.dessertName, for: .normal)
+        descriptionTextView.text = data.description
+        
+        tagList = data.tags
+        setTagButton()
+        
+        if data.like { heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) }
+    }
     
     func setup() {
-        
-        
         imgCollectionView.isPagingEnabled = true
         imgCollectionView.dataSource = self
         imgCollectionView.delegate = self
         imgCollectionView.showsHorizontalScrollIndicator = false
     }
     
-    private func setupPageControl() {
-        pageControl.numberOfPages = imageList.count
-        pageControl.currentPage = 0
+    func setTagButton() {
+        switch tagList.count {
+        case 1:
+            tag1Button.setTitle("# \(tagList[0])", for: .normal)
+            [ tag2Button, tag3Button ].forEach { $0?.isHidden = true }
+        case 2:
+            tag1Button.setTitle("# \(tagList[0])", for: .normal)
+            tag2Button.setTitle("# \(tagList[1])", for: .normal)
+            [ tag3Button ].forEach { $0?.isHidden = true }
+        case 3:
+            tag1Button.setTitle("# \(tagList[0])", for: .normal)
+            tag2Button.setTitle("# \(tagList[1])", for: .normal)
+            tag3Button.setTitle("# \(tagList[2])", for: .normal)
+
+        default:
+            return
+        }
     }
 }
 
@@ -76,6 +123,8 @@ extension FeedCell: UICollectionViewDataSource {
         print(indexPath.row)
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedImgsCell", for: indexPath) as? FeedImgsCell else { return UICollectionViewCell() }
+        let imgURL = imageList[indexPath.row]
+        cell.imgView.kf.setImage(with: URL(string: imgURL))
         return cell
     }
     

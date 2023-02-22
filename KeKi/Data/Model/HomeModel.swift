@@ -30,6 +30,6 @@ struct HomeTagRes: Decodable {
 
 struct HomePostRes: Decodable {
     var postIdx: Int
-//    var storeTitle: String
+    var storeTitle: String
     var postImgUrl: String
 }

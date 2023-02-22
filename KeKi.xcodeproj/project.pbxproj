@@ -64,6 +64,7 @@
 		A2784ADD298AA9C700FE23DF /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2784ADC298AA9C700FE23DF /* Alert.storyboard */; };
 		A2784ADF298AA9D800FE23DF /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784ADE298AA9D800FE23DF /* AlertViewController.swift */; };
 		A2784AE2298AB50100FE23DF /* PolicyWebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2784AE1298AB50100FE23DF /* PolicyWebView.storyboard */; };
+		A2A7966729A4E76700A2F2E2 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A7966629A4E76700A2F2E2 /* FeedModel.swift */; };
 		A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */; };
 		A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */; };
 		A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */; };
@@ -161,6 +162,7 @@
 		A2784ADC298AA9C700FE23DF /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		A2784ADE298AA9D800FE23DF /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A2784AE1298AB50100FE23DF /* PolicyWebView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PolicyWebView.storyboard; sourceTree = "<group>"; };
+		A2A7966629A4E76700A2F2E2 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthorityGuidance.storyboard; sourceTree = "<group>"; };
 		A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityGuidanceViewController.swift; sourceTree = "<group>"; };
 		A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserCategoryViewController.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				7367E1D4299A1546008E517F /* SearchModel.swift */,
 				A2E7D14729A0CA8100110CD2 /* AuthModel.swift */,
 				A23F2DAC29A1F3BF0046ED70 /* HomeModel.swift */,
+				A2A7966629A4E76700A2F2E2 /* FeedModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				738F64992988A9BE006BB124 /* TabViewController.swift in Sources */,
 				731AA68F298D00C0008A9A1B /* SettingTableViewCell.swift in Sources */,
 				A2B1CD7D2988EFE900D87570 /* FeedViewController.swift in Sources */,
+				A2A7966729A4E76700A2F2E2 /* FeedModel.swift in Sources */,
 				A2B1CD612987687F00D87570 /* BuyerProfileSetViewController.swift in Sources */,
 				A2F6075529890F8C00F4F3DD /* FeedImgsCell.swift in Sources */,
 				731AA6A0298D016D008A9A1B /* DayCell.swift in Sources */,
