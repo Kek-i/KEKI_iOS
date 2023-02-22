@@ -26,10 +26,8 @@
                                             <constraint firstAttribute="width" secondItem="7DE-hY-Djh" secondAttribute="height" multiplier="1:1" id="aF2-Qy-f5C"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P42-e6-uiK">
-                                        <rect key="frame" x="110" y="29.666666666666654" width="194" height="40.666666666666657"/>
-                                        <string key="text">유닝이님. 
-오늘도 특별한 하루 보내세요!</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘도 특별한 하루 보내세요!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P42-e6-uiK">
+                                        <rect key="frame" x="110" y="40" width="194" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
