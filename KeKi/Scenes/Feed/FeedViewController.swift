@@ -27,10 +27,9 @@ class FeedViewController: UIViewController {
 
     
     // MARK: - Helper Methods (Setup Method, ...)
-    
     private func fetchData() {
+        // 개별 피드 조회
         if postIdx != -1 {
-            // 개별 피드 조회
             APIManeger.shared.testGetData(urlEndpointString: "/posts/\(postIdx)",
                                           dataType: SingleFeedResponse.self,
                                           parameter: nil,
