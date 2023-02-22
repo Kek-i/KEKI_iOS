@@ -130,6 +130,7 @@ class LoginMyPageViewController: UIViewController {
                 print(response)
                 APIManeger.shared.resetHeader()
                 
+                self?.navigationController?.popToRootViewController(animated: false)
                 let main = DefaultTabBarController()
                 main.modalPresentationStyle = .fullScreen
                 main.modalTransitionStyle = .crossDissolve
