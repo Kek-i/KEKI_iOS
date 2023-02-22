@@ -9,15 +9,15 @@ import UIKit
 
 class FeedViewController: UIViewController {
     // MARK: - Variables, IBOutlet, ...
-    var postIdx: Int = -1   // 피드 개별 조회할 경우, postIdx 값이 변경 -> API 호출 다르게 하도록
-    private var feedData: [Feed] = []
+    var postIdx: Int = -1
+    var feedData: [Feed] = []
     
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Methods of LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
+        if feedData.count == 0 { fetchData() }
         
         setupNavigationBar()
         setupTableView()
@@ -27,13 +27,9 @@ class FeedViewController: UIViewController {
 
     
     // MARK: - Helper Methods (Setup Method, ...)
-    func setData(postIdx: Int) {
-        fetchData()
-    }
-    
     private func fetchData() {
+        // 개별 피드 조회
         if postIdx != -1 {
-            // 개별 피드 조회
             APIManeger.shared.testGetData(urlEndpointString: "/posts/\(postIdx)",
                                           dataType: SingleFeedResponse.self,
                                           parameter: nil,
@@ -44,12 +40,10 @@ class FeedViewController: UIViewController {
                 
             })
         }
-        else {
-            // TODO: 피드 목록 조회 (by 스토어명 / 검색어 / 태그명)
-        }
     }
     
     private func setupNavigationBar() {
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "피드"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(didTapBackItem))

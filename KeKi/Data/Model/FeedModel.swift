@@ -14,3 +14,9 @@ struct SingleFeedResponse: Codable {
     var result: Feed
 }
 
+struct FeedResponse: Codable {
+    var isSuccess: Bool
+    var code: Int
+    var message: String
+    var result: [Feed]
+}

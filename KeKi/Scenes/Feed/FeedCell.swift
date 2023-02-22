@@ -52,12 +52,22 @@ class FeedCell: UITableViewCell {
     
     
     @IBAction func didTapViewmoreButton(_ sender: UIButton) {
-        print("didTapViewmoreButton")
         feedAlertDelegate.showFeedMainAlert()
     }
     
     @IBAction func didTapHeartButton(_ sender: UIButton) {
         heartButton.isSelected = !heartButton.isSelected
+        heartButton.isSelected ? postLikeFeed() : discardFeedLike()
+    }
+    
+    private func postLikeFeed() {
+        // TODO: 피드 찜하기 기능
+        print("찜 하기")
+    }
+    
+    private func discardFeedLike() {
+        // TODO: 피드 찜 취소하기 기능
+        print("찜 취소")
     }
     
     func setSingleFeedView() { separatorView.isHidden = true }
@@ -80,6 +90,7 @@ class FeedCell: UITableViewCell {
         
         dessertNameButton.setTitle(data.dessertName, for: .normal)
         descriptionTextView.text = data.description
+        descriptionTextView.sizeToFit()
         
         tagList = data.tags
         setTagButton()
@@ -149,5 +160,3 @@ extension FeedCell: UICollectionViewDelegateFlowLayout {
         }
     }
 }
-
-
