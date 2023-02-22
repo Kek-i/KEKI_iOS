@@ -33,15 +33,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         fetchData()
-        
-        navigationController?.navigationBar.isHidden = true
-        tabBarController?.tabBar.isHidden = false
         setUpDdayCountingLabel()
-        
         setupTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = false
         tabBarController?.selectedIndex = 0
     }
     

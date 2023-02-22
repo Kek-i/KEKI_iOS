@@ -28,7 +28,11 @@ class FeedCell: UITableViewCell {
     @IBOutlet weak var imgCollectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var dessertNameButton: UIButton!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
     @IBOutlet weak var heartButton: UIButton!
+    @IBOutlet weak var separatorView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,10 +55,21 @@ class FeedCell: UITableViewCell {
         heartButton.isSelected = !heartButton.isSelected
     }
     
+    func setSingleFeedView() { separatorView.isHidden = true }
+    func reloadData() { imgCollectionView.reloadData() }
+    
+    func configure(data: Feed) {
+        nicknameLabel.text = data.storeName
+        imageList = data.postImgUrls
+        // TODO: url을 통해 이미지 불러오기
+        dessertNameButton.setTitle(data.dessertName, for: .normal)
+        descriptionTextView.text = data.description
+        if data.like {
+            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+    }
     
     func setup() {
-        
-        
         imgCollectionView.isPagingEnabled = true
         imgCollectionView.dataSource = self
         imgCollectionView.delegate = self

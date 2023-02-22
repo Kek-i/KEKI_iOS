@@ -187,11 +187,14 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="descriptionTextView" destination="p5c-uC-NH0" id="QUn-Kh-Qgg"/>
+                <outlet property="dessertNameButton" destination="e88-AC-HKz" id="WhV-JV-MxE"/>
                 <outlet property="heartButton" destination="oSK-8L-8m5" id="i6G-9K-QgR"/>
                 <outlet property="imgCollectionView" destination="Gau-NA-CUj" id="xGE-l6-Dhx"/>
                 <outlet property="nicknameLabel" destination="IAu-II-bYw" id="voi-i0-dEt"/>
                 <outlet property="pageControl" destination="e5N-ye-wT5" id="o5C-gy-Giy"/>
                 <outlet property="profileImgView" destination="Hhf-r6-Vgn" id="SJz-3i-eRH"/>
+                <outlet property="separatorView" destination="OuS-tT-pVB" id="c2N-wI-o2v"/>
             </connections>
             <point key="canvasLocation" x="138.93129770992365" y="19.718309859154932"/>
         </tableViewCell>
