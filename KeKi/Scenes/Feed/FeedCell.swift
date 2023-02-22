@@ -90,6 +90,7 @@ class FeedCell: UITableViewCell {
         
         dessertNameButton.setTitle(data.dessertName, for: .normal)
         descriptionTextView.text = data.description
+        descriptionTextView.sizeToFit()
         
         tagList = data.tags
         setTagButton()
