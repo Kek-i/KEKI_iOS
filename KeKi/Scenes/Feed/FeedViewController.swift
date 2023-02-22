@@ -9,15 +9,16 @@ import UIKit
 
 class FeedViewController: UIViewController {
     // MARK: - Variables, IBOutlet, ...
-    var postIdx: Int = -1   // 피드 개별 조회할 경우, postIdx 값이 변경 -> API 호출 다르게 하도록
-    private var feedData: [Feed] = []
+    var postIdx: Int = -1
+    var mode: FeedMode?
+    var feedData: [Feed] = []
     
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Methods of LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
+        if feedData.count == 0 { fetchData() }
         
         setupNavigationBar()
         setupTableView()
@@ -43,9 +44,6 @@ class FeedViewController: UIViewController {
                 self?.tableView.reloadData()
                 
             })
-        }
-        else {
-            // TODO: 피드 목록 조회 (by 스토어명 / 검색어 / 태그명)
         }
     }
     
