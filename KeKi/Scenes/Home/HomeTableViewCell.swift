@@ -90,12 +90,20 @@ extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
         let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
         guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
         
-        feedViewController.postIdx = storePostList[indexPath.row].postIdx
-        
-        if let vc = self.next(ofType: UIViewController.self) {
-            vc.tabBarController?.tabBar.isHidden = true
-            vc.navigationController?.pushViewController(feedViewController, animated: true)
+        if storePostList.count == 0 {
+            let alert = UIAlertController(title: nil, message: "준비 중인 케이크입니다!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            if let vc = self.next(ofType: UIViewController.self) { vc.present(alert, animated: true) }
+            
+        } else {
+            feedViewController.postIdx = storePostList[indexPath.row].postIdx
+            if let vc = self.next(ofType: UIViewController.self) {
+                vc.tabBarController?.tabBar.isHidden = true
+                vc.navigationController?.pushViewController(feedViewController, animated: true)
+            }
         }
+        
+        
     }
 }
 
