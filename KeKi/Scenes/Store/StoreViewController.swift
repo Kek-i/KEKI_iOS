@@ -47,9 +47,12 @@ class StoreViewController: UIViewController {
         setupLayout()
     }
     
-    func setupLayout() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-
+    }
+    
+    func setupLayout() {
         storeImageView.layer.cornerRadius = 40
         
         orderButton.layer.cornerRadius = 10

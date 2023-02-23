@@ -63,4 +63,19 @@ extension StoreProductViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 5)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // TODO: 선택된 dessert의 상품 상세 화면으로 이동
+        let storyboard = UIStoryboard.init(name: "ProductDetail", bundle: nil)
+        guard let productViewController = storyboard.instantiateViewController(withIdentifier: "ProductViewController") as? ProductViewController else { return }
+        
+        
+        
+        productViewController.dessertIdx = desserts[indexPath.row].dessertIdx
+        
+        if let vc = self.next(ofType: UIViewController.self) {
+            vc.tabBarController?.tabBar.isHidden = true
+            vc.navigationController?.pushViewController(productViewController, animated: true)
+        }
+    }
 }
