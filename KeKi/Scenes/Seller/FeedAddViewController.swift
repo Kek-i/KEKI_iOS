@@ -199,9 +199,12 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
                 
                 
                 if indexPath.row == 0 {
+                    imageCell.productImage.frame.size = CGSize(width: 19.8, height: 19.8)
+                    
+                    
                     guard let image = UIImage(named: "imagePlus") else {return cell}
-                    let resizeImage = imageResize(image: image, newWidth: 25, newHeight: 25)
-                    imageCell.productImage.image = resizeImage
+//                    let resizeImage = imageResize(image: image, newWidth: 25, newHeight: 25)
+                    imageCell.productImage.image = image
                 }
             }
         }else {

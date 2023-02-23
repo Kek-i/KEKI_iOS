@@ -19,10 +19,15 @@ class ImageCell: UICollectionViewCell {
     
     func setupLayout() {
         productImage.backgroundColor = .white
-        productImage.layer.cornerRadius = 13
-        productImage.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
-        productImage.layer.shadowOffset = CGSize(width: 3, height: 3)
-        productImage.layer.shadowRadius = 6
-        productImage.layer.shadowOpacity = 1.0
+        
+        layer.masksToBounds = false
+        layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
+        layer.shadowOffset = CGSize(width: 3, height: 3)
+        layer.shadowRadius = 6
+        layer.shadowOpacity = 1.0
+        
+        
+        contentView.layer.cornerRadius = 13
+        contentView.layer.masksToBounds = true
     }
 }
