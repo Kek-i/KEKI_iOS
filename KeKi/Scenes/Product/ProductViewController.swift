@@ -13,7 +13,7 @@ class ProductViewController: UIViewController {
     var dessertImg: [Post] = []
     
     // MARK: - Variables, IBOutlet, ...
-    @IBOutlet weak var isImageEmptyLabel: UILabel!
+    @IBOutlet weak var isImageEmptyView: UIView!
     
     @IBOutlet weak var imgCollectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -48,6 +48,11 @@ class ProductViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ellipsis.vertical"), style: .plain, target: self, action: #selector(didTapViewmoreButton))
     }
     
+    private func checkImageNone() {
+        if dessertImg.count == 0 { isImageEmptyView.isHidden = false }
+        else { isImageEmptyView.isHidden = true }
+    }
+    
     @objc private func didTapViewmoreButton() {
         // TODO: 판매자에게만 보이도록 수정 필요
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -78,13 +83,8 @@ extension ProductViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImgCell", for: indexPath) as? ProductImgCell else { return UICollectionViewCell() }
         
-        if dessertImg.count == 0 {
-            cell.imageView.image = UIImage(named: "buyerIcon")
-            cell.imageView.contentMode = .scaleAspectFit
-            return cell
-            
-        } else {
-            // TODO: 이미지 설정
+        if dessertImg.count == 0 { return cell }
+        else {
             cell.imageView.kf.setImage(with: URL(string: dessertImg[indexPath.row].postImgUrl))
             cell.imageView.contentMode = .scaleAspectFit
             return cell
@@ -141,6 +141,7 @@ extension ProductViewController {
                 
                 self?.setupPageControl()
                 self?.imgCollectionView.reloadData()
+                self?.checkImageNone()
             }
         })
     }
