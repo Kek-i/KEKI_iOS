@@ -56,6 +56,7 @@ class FeedAddViewController: UIViewController {
         
         setup()
         setupLayout()
+        setupTextViewPlaceholder()
         setupNavigationBar()
         fetchHashTagList()
     }
@@ -104,12 +105,21 @@ class FeedAddViewController: UIViewController {
         }
         
         productContentTextView.layer.borderWidth = 0
-        productContentTextView.text = "제품을 소개해주세요.(최대 150자)"
-        productContentTextView.textColor = UIColor(red: 128.0 / 250.0, green: 128.0 / 250.0, blue: 128.0 / 250.0, alpha: 1)
-        productContentTextView.textContainerInset = .zero
+        productContentTextView.textContainerInset = .init(top: 16, left: 20, bottom: 15, right: 27)
         
         selectButtonView.layer.masksToBounds = false
     }
+    
+    func setupTextViewPlaceholder() {
+        if productContentTextView.text == "" {
+            productContentTextView.text = "제품을 소개해주세요.(최대 150자)"
+            productContentTextView.textColor = UIColor(red: 128.0 / 250.0, green: 128.0 / 250.0, blue: 128.0 / 250.0, alpha: 1)
+        }else if productContentTextView.text == "제품을 소개해주세요.(최대 150자)"{
+            productContentTextView.text = ""
+            productContentTextView.textColor = .black
+        }
+    }
+    
     
     func setupNavigationBar() {
         self.navigationController?.isNavigationBarHidden = false
@@ -311,14 +321,23 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
 }
 
 extension FeedAddViewController: UITextViewDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = textField.text else {return false}
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        setupTextViewPlaceholder()
+    }
     
-        if text.count >= 150 && range.length == 0 && range.location < 150 {
-            return false
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            setupTextViewPlaceholder()
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let textRange = Range(range, in: currentText) else {return false}
         
-        return true
+        let changedText = currentText.replacingCharacters(in: textRange, with: text)
+        
+        return changedText.count <= 150
     }
 }
 
