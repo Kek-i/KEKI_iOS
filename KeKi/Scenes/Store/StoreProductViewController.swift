@@ -8,6 +8,7 @@
 import UIKit
 
 class StoreProductViewController: UIViewController {
+    var desserts: [Dessert] = []
 
     @IBOutlet weak var storeProductCV: UICollectionView!{
         didSet{
@@ -24,16 +25,23 @@ class StoreProductViewController: UIViewController {
         super.viewDidLoad()
     }
 
+    func configure(desserts: [Dessert]) {
+        self.desserts = desserts
+        storeProductCV?.reloadData()
+    }
 }
 
 extension StoreProductViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return desserts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreImageCell", for: indexPath)
+
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreImageCell", for: indexPath) as? StoreImageCell else { return UICollectionViewCell() }
         
+        let url = desserts[indexPath.row].dessertImgUrl
+        cell.storeImageView.kf.setImage(with: URL(string: url))
         return cell
     }
 }
@@ -48,10 +56,11 @@ extension StoreProductViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 105, height: 105)
+        let width = (self.view.frame.width - 20) / 3 - 10
+        return CGSize(width: width, height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 20, bottom: 0, right: 20)
+        return UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 5)
     }
 }

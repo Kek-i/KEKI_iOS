@@ -6,12 +6,20 @@
 //
 
 import UIKit
+import Alamofire
 import Kingfisher
+
+protocol TabDelegate {
+    func configureFeedTab(storeIdx: Int)
+    func configureProductTab(storeIdx: Int)
+}
 
 class StoreViewController: UIViewController {
     
     var storeIdx: Int?
     var storeInfo: Store?
+    
+    var delegate: TabDelegate!
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var infoButton: UIButton!
@@ -24,6 +32,13 @@ class StoreViewController: UIViewController {
     
     
     @IBOutlet weak var orderButton: UIButton!
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "embedContainer" {
+            let tabVC = segue.destination as! TabViewController
+            tabVC.setDelegate(storeVC: self)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +59,9 @@ class StoreViewController: UIViewController {
         orderButton.layer.shadowOpacity = 1.0
     }
 
+    @IBAction func didTapBackItem(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func showInfoPopUp(_ sender: Any) {
         guard let infoPopUpVC = self.storyboard?.instantiateViewController(withIdentifier: "StoreInfoPopUpViewController") as? StoreInfoPopUpViewController else {return}
@@ -59,16 +77,23 @@ class StoreViewController: UIViewController {
     }
     
     private func fetchData() {
+        // 스토어 정보 fetch
         APIManeger.shared.testGetData(urlEndpointString: "/stores/profile/\(storeIdx!)",
                                       dataType: StoreResponse.self,
                                       parameter: nil,
                                       completionHandler: { [weak self] response in
+            
             self?.storeInfo = response.result
-            self?.configure()
+            self?.configureProfile()
         })
+        
+        // 스토어 피드 & 상품 정보 fetch
+        delegate.configureFeedTab(storeIdx: storeIdx!)
+        delegate.configureProductTab(storeIdx: storeIdx!)
+
     }
     
-    private func configure() {
+    private func configureProfile() {
         storeNameLabel.text = storeInfo?.nickname
         if let url = storeInfo?.storeImgUrl {
             storeImageView.kf.setImage(with: URL(string: url))

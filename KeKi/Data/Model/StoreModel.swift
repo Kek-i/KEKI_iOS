@@ -20,3 +20,22 @@ struct Store: Codable {
     var introduction: String
     var orderUrl: String
 }
+
+struct ProductResponse: Codable {
+    var isSuccess: Bool?
+    var code: Int?
+    var message: String?
+    var result: ProductResult?
+}
+
+struct ProductResult: Codable {
+    var desserts: [Dessert]
+    var cursorIdx: Int
+    var hasNext: Bool
+}
+
+struct Dessert: Codable {
+    var dessertIdx: Int
+    var dessertImgUrl: String
+    var dessertName: String
+}

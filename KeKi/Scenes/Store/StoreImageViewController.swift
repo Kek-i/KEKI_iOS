@@ -8,7 +8,8 @@
 import UIKit
 
 class StoreImageViewController: UIViewController {
-
+    var feeds: [Feed] = []
+    
     @IBOutlet weak var storeImageCV: UICollectionView! {
         didSet{
             storeImageCV.delegate = self
@@ -24,17 +25,23 @@ class StoreImageViewController: UIViewController {
         super.viewDidLoad()
     }
 
+    func configure(feeds: [Feed]) {
+        self.feeds = feeds
+        storeImageCV.reloadData()
+    }
 }
 
 
 extension StoreImageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return feeds.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreImageCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreImageCell", for: indexPath) as? StoreImageCell else { return UICollectionViewCell() }
         
+        let url = feeds[indexPath.row].postImgUrls[0]
+        cell.storeImageView.kf.setImage(with: URL(string: url))
         return cell
     }
 }
@@ -49,10 +56,11 @@ extension StoreImageViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 105, height: 105)
+        let width = (self.view.frame.width - 20) / 3 - 10
+        return CGSize(width: width, height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 20, bottom: 0, right: 20)
+        return UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 5)
     }
 }
