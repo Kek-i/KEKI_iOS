@@ -295,10 +295,10 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if let hashTag = cell as? HashTagCell {
             
             
-            hashTag.backgroundColor = .gray
+            hashTag.backgroundColor = .white
             
             hashTag.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
-            hashTag.layer.shadowOffset = CGSize(width: 0, height: 3)
+            hashTag.layer.shadowOffset = CGSize(width: 3, height: 3)
             hashTag.layer.shadowRadius = 6
             hashTag.layer.shadowOpacity = 1.0
             hashTag.layer.masksToBounds = false
