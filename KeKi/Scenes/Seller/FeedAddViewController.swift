@@ -189,21 +189,8 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         if collectionView.tag == 1 {
             if let imageCell = cell as? ImageCell {
-                
-                imageCell.contentView.layer.backgroundColor = CGColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-                imageCell.contentView.layer.cornerRadius = 13
-                imageCell.contentView.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
-                imageCell.contentView.layer.shadowOffset = CGSize(width: 3, height: 3)
-                imageCell.contentView.layer.shadowRadius = 6
-                imageCell.contentView.layer.shadowOpacity = 1.0
-                
-                
                 if indexPath.row == 0 {
-                    imageCell.productImage.frame.size = CGSize(width: 19.8, height: 19.8)
-                    
-                    
                     guard let image = UIImage(named: "imagePlus") else {return cell}
-//                    let resizeImage = imageResize(image: image, newWidth: 25, newHeight: 25)
                     imageCell.productImage.image = image
                 }
             }
