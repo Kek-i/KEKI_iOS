@@ -15,7 +15,10 @@
 		735AC112298D03390099B549 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735AC110298D03390099B549 /* Calendar.storyboard */; };
 		735AC113298D03390099B549 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC111298D03390099B549 /* CalendarViewController.swift */; };
 		735AC116298D04570099B549 /* DayAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC114298D04570099B549 /* DayAddViewController.swift */; };
+		735AFF0329A704F900779E85 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AFF0229A704F900779E85 /* ImageCell.swift */; };
 		7367E1D5299A1546008E517F /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367E1D4299A1546008E517F /* SearchModel.swift */; };
+		7367E1DF29A6DF2D008E517F /* FeedAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7367E1DE29A6DF2D008E517F /* FeedAdd.storyboard */; };
+		7367E1E129A6E174008E517F /* FeedAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367E1E029A6E174008E517F /* FeedAddViewController.swift */; };
 		738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F648F2988A9B3006BB124 /* StoreProductViewController.swift */; };
 		738F64962988A9BE006BB124 /* StoreInfoPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */; };
 		738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64922988A9BE006BB124 /* StoreImageCell.swift */; };
@@ -118,7 +121,10 @@
 		735AC110298D03390099B549 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		735AC111298D03390099B549 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		735AC114298D04570099B549 /* DayAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAddViewController.swift; sourceTree = "<group>"; };
+		735AFF0229A704F900779E85 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		7367E1D4299A1546008E517F /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		7367E1DE29A6DF2D008E517F /* FeedAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedAdd.storyboard; sourceTree = "<group>"; };
+		7367E1E029A6E174008E517F /* FeedAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAddViewController.swift; sourceTree = "<group>"; };
 		738F648F2988A9B3006BB124 /* StoreProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreProductViewController.swift; sourceTree = "<group>"; };
 		738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreInfoPopUpViewController.swift; sourceTree = "<group>"; };
 		738F64922988A9BE006BB124 /* StoreImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageCell.swift; sourceTree = "<group>"; };
@@ -246,6 +252,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7367E1DD29A6DEE3008E517F /* Seller */ = {
+			isa = PBXGroup;
+			children = (
+				7367E1DE29A6DF2D008E517F /* FeedAdd.storyboard */,
+				7367E1E029A6E174008E517F /* FeedAddViewController.swift */,
+				735AFF0229A704F900779E85 /* ImageCell.swift */,
+			);
+			path = Seller;
+			sourceTree = "<group>";
+		};
 		A2434ABD298651F500F60D1A = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +331,7 @@
 				A2434AF2298658D800F60D1A /* Home */,
 				A2434AF82986592B00F60D1A /* Announcement */,
 				A2434AF5298658F900F60D1A /* Search */,
+				7367E1DD29A6DEE3008E517F /* Seller */,
 				A2434AF6298658FF00F60D1A /* Store */,
 				A2434AF4298658EB00F60D1A /* MyPage */,
 				A2434AF72986590600F60D1A /* Calendar */,
@@ -628,6 +645,7 @@
 				A2784AD9298A979700FE23DF /* LoginUserMypage.storyboard in Resources */,
 				A2434AFE29865AF100F60D1A /* Login.storyboard in Resources */,
 				A2784ADD298AA9C700FE23DF /* Alert.storyboard in Resources */,
+				7367E1DF29A6DF2D008E517F /* FeedAdd.storyboard in Resources */,
 				A2F6075629890F8C00F4F3DD /* FeedImgsCell.xib in Resources */,
 				A2434AFE29865AF100F60D1A /* Login.storyboard in Resources */,
 				A2B1CD7F2988EFFE00D87570 /* Feed.storyboard in Resources */,
@@ -745,6 +763,7 @@
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */,
 				73FE8BA9298FEDAE00264B44 /* SearchDetailCell.swift in Sources */,
+				7367E1E129A6E174008E517F /* FeedAddViewController.swift in Sources */,
 				738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2E0151E29933B0100EBACF0 /* APIManager.swift in Sources */,
@@ -753,6 +772,7 @@
 				A2784ADB298A9E0F00FE23DF /* PolicyWebViewController.swift in Sources */,
 				735AC116298D04570099B549 /* DayAddViewController.swift in Sources */,
 				A2E0151C29933AF700EBACF0 /* AnnouncementModel.swift in Sources */,
+				735AFF0329A704F900779E85 /* ImageCell.swift in Sources */,
 				738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				73FE8BA4298FEDAE00264B44 /* SearchViewController.swift in Sources */,
