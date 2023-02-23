@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import BSImagePicker
+import Photos
 
 enum ProductType: String {
     case cake = "케이크"
@@ -27,9 +29,11 @@ class FeedAddViewController: UIViewController {
     
     @IBOutlet weak var selectButtonViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var productContentTextField: UITextField!
+    @IBOutlet weak var productContentTextView: UITextView!
     
     @IBOutlet weak var hashTagCV: UICollectionView!
+    
+    let imagePickerController = ImagePickerController()
     
     var productType: ProductType = .none
     
@@ -65,7 +69,7 @@ class FeedAddViewController: UIViewController {
             
             tag += 1
         }
-        productContentTextField.delegate = self
+        productContentTextView.delegate = self
         
    
         let flowLayout = UICollectionViewFlowLayout()
@@ -77,7 +81,7 @@ class FeedAddViewController: UIViewController {
     }
     
     func setupLayout() {
-        [selectButtonView, productContentTextField].forEach {
+        [selectButtonView, productContentTextView].forEach {
             $0?.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
             $0?.layer.shadowOffset = CGSize(width: 3, height: 3)
             $0?.layer.shadowRadius = 13
@@ -85,7 +89,7 @@ class FeedAddViewController: UIViewController {
             $0?.layer.cornerRadius = 10
         }
         
-        [productTypeSelectButton, cakeButton, tarteButton, cookiesButton, productContentTextField].forEach {
+        [productTypeSelectButton, cakeButton, tarteButton, cookiesButton].forEach {
             $0.contentHorizontalAlignment = .left
         }
         
@@ -99,12 +103,10 @@ class FeedAddViewController: UIViewController {
             $0?.isHidden = true
         }
         
-        productContentTextField.layer.borderWidth = 0
-        productContentTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
-        productContentTextField.leftViewMode = .always
-        productContentTextField.addLeftPadding()
-        
-        productContentTextField.attributedPlaceholder = NSAttributedString(string: "제품을 소개해주세요.(최대 150자)", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 128.0 / 250.0, green: 128.0 / 250.0, blue: 128.0 / 250.0, alpha: 1)])
+        productContentTextView.layer.borderWidth = 0
+        productContentTextView.text = "제품을 소개해주세요.(최대 150자)"
+        productContentTextView.textColor = UIColor(red: 128.0 / 250.0, green: 128.0 / 250.0, blue: 128.0 / 250.0, alpha: 1)
+        productContentTextView.textContainerInset = .zero
         
         selectButtonView.layer.masksToBounds = false
     }
@@ -191,7 +193,12 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             if let imageCell = cell as? ImageCell {
                 if indexPath.row == 0 {
                     guard let image = UIImage(named: "imagePlus") else {return cell}
+                    imageCell.productImage.contentMode = .center
                     imageCell.productImage.image = image
+                }else {
+                    if imageList.count != 0 {
+                        imageCell.productImage.image = imageList[indexPath.row-1]
+                    }
                 }
             }
         }else {
@@ -241,6 +248,11 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.tag == 1 {
+            if indexPath.row == 0 {
+                selectImage()
+            }
+        }
         if collectionView.tag == 2 {
             if hashTagList[indexPath.row + (indexPath.section * 4)].1 {
                 selectHashTagCount -= 1
@@ -260,9 +272,45 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             collectionView.reloadData()
         }
     }
+    
+    func selectImage() {
+        imagePickerController.settings.selection.max = 4
+        imagePickerController.settings.fetch.assets.supportedMediaTypes = [.image]
+        
+        self.presentImagePicker(imagePickerController) { (asset) in
+            
+        } deselect: { (asset) in
+            
+        } cancel: { (assets) in
+            
+        } finish: { (assets) in
+            let imageManager = PHImageManager.default()
+            let option = PHImageRequestOptions()
+            option.isSynchronous = true
+            
+            assets.forEach { asset in
+                var thumbnail = UIImage()
+                
+                imageManager.requestImage(for: asset,
+                                          targetSize: CGSize(width: 100, height: 200),
+                                          contentMode: .aspectFit,
+                                          options: option) { (result, info) in
+                    thumbnail = result!
+                }
+                
+                let data = thumbnail.jpegData(compressionQuality: 0.7)
+                guard let newImage = UIImage(data: data!) else {return}
+                
+                self.imageList.append(newImage)
+            }
+            self.imageAddCV.reloadData()
+        }
+
+    }
+    
 }
 
-extension FeedAddViewController: UITextFieldDelegate {
+extension FeedAddViewController: UITextViewDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else {return false}
     

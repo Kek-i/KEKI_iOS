@@ -16,6 +16,7 @@
 		735AC113298D03390099B549 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC111298D03390099B549 /* CalendarViewController.swift */; };
 		735AC116298D04570099B549 /* DayAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC114298D04570099B549 /* DayAddViewController.swift */; };
 		735AFF0329A704F900779E85 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AFF0229A704F900779E85 /* ImageCell.swift */; };
+		735AFF0629A7B0FC00779E85 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 735AFF0529A7B0FC00779E85 /* BSImagePicker */; };
 		7367E1D5299A1546008E517F /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367E1D4299A1546008E517F /* SearchModel.swift */; };
 		7367E1DF29A6DF2D008E517F /* FeedAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7367E1DE29A6DF2D008E517F /* FeedAdd.storyboard */; };
 		7367E1E129A6E174008E517F /* FeedAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367E1E029A6E174008E517F /* FeedAddViewController.swift */; };
@@ -215,6 +216,7 @@
 				A2BA8B2C29A0C6BC00BD7712 /* KakaoSDKCommonCore in Frameworks */,
 				A23F2DA729A0FCA70046ED70 /* FirebaseFirestoreSwift in Frameworks */,
 				A23F2DA529A0FCA70046ED70 /* FirebaseFirestore in Frameworks */,
+				735AFF0629A7B0FC00779E85 /* BSImagePicker in Frameworks */,
 				A2434AE22986523000F60D1A /* Tabman in Frameworks */,
 				A2BA8B2E29A0C6BC00BD7712 /* KakaoSDKShare in Frameworks */,
 				A2BA8B2A29A0C6BC00BD7712 /* KakaoSDKCommon in Frameworks */,
@@ -591,6 +593,7 @@
 				A23F2DA429A0FCA70046ED70 /* FirebaseFirestore */,
 				A23F2DA629A0FCA70046ED70 /* FirebaseFirestoreSwift */,
 				A23F2DA829A0FCA70046ED70 /* FirebaseStorage */,
+				735AFF0529A7B0FC00779E85 /* BSImagePicker */,
 			);
 			productName = KeKi;
 			productReference = A2434AC6298651F500F60D1A /* KeKi.app */;
@@ -627,6 +630,7 @@
 				A2434B1529865C5B00F60D1A /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				A2BA8B2429A0C6BC00BD7712 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A23F2D9F29A0FCA70046ED70 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				735AFF0429A7B0FC00779E85 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
 			);
 			productRefGroup = A2434AC7298651F500F60D1A /* Products */;
 			projectDirPath = "";
@@ -1014,6 +1018,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		735AFF0429A7B0FC00779E85 /* XCRemoteSwiftPackageReference "BSImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mikaoj/BSImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		A23F2D9F29A0FCA70046ED70 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1065,6 +1077,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		735AFF0529A7B0FC00779E85 /* BSImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 735AFF0429A7B0FC00779E85 /* XCRemoteSwiftPackageReference "BSImagePicker" */;
+			productName = BSImagePicker;
+		};
 		A23F2DA029A0FCA70046ED70 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A23F2D9F29A0FCA70046ED70 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
