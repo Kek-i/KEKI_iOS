@@ -224,7 +224,6 @@ class DayAddViewController: UIViewController {
                 [self.dDayButton, self.dayNumButton, self.dayRepeatButton].forEach {
                     $0?.layer.isHidden = false
                 }
-                self.selectButtonView.layer.masksToBounds = false
                 
             }else {
                 self.selectButtonViewHeight.priority = UILayoutPriority(1000)
@@ -233,7 +232,6 @@ class DayAddViewController: UIViewController {
                 [self.dDayButton, self.dayNumButton, self.dayRepeatButton].forEach {
                     $0?.layer.isHidden = true
                 }
-                self.selectButtonView.layer.masksToBounds = true
 
             }
         }
@@ -249,12 +247,10 @@ class DayAddViewController: UIViewController {
                 self.datePickerViewHeight.priority = UILayoutPriority(240)
                 
                 self.dateSelectPicker.isHidden = false
-                self.datePickerView.layer.masksToBounds = false
             }else {
                 self.datePickerViewHeight.priority = UILayoutPriority(1000)
         
                 self.dateSelectPicker.isHidden = true
-                self.datePickerView.layer.masksToBounds = true
             }
         }
         self.view.layoutIfNeeded()
