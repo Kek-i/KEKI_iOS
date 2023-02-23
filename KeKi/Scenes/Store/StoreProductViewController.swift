@@ -14,9 +14,9 @@ class StoreProductViewController: UIViewController {
             storeProductCV.delegate = self
             storeProductCV.dataSource = self
             
-            let cellNib = UINib(nibName: "StoreImageCell", bundle: nil)
-            
-            storeProductCV.register(cellNib, forCellWithReuseIdentifier: "StoreImageCell")
+            // MARK: Xib파일이 없는 상태로 등록하려고 하자 오류가 나서 임시로 주석처리 해둠
+//            let cellNib = UINib(nibName: "StoreImageCell", bundle: nil)
+//            storeProductCV.register(cellNib, forCellWithReuseIdentifier: "StoreImageCell")
         }
     }
     

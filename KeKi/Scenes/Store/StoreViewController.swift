@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class StoreViewController: UIViewController {
+    
+    var storeIdx: Int?
+    var storeInfo: Store?
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var infoButton: UIButton!
@@ -24,11 +28,13 @@ class StoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchData()
         setupLayout()
-        
     }
     
     func setupLayout() {
+        navigationController?.navigationBar.isHidden = true
+
         storeImageView.layer.cornerRadius = 40
         
         orderButton.layer.cornerRadius = 10
@@ -48,4 +54,28 @@ class StoreViewController: UIViewController {
         self.present(infoPopUpVC, animated: true)
     }
     
+    @IBAction func didTapOrderButton(_ sender: UIButton) {
+        // TODO: 주문 링크로 접속 (웹뷰 사용?)
+    }
+    
+    private func fetchData() {
+        APIManeger.shared.testGetData(urlEndpointString: "/stores/profile/\(storeIdx!)",
+                                      dataType: StoreResponse.self,
+                                      parameter: nil,
+                                      completionHandler: { [weak self] response in
+            self?.storeInfo = response.result
+            self?.configure()
+        })
+    }
+    
+    private func configure() {
+        storeNameLabel.text = storeInfo?.nickname
+        if let url = storeInfo?.storeImgUrl {
+            storeImageView.kf.setImage(with: URL(string: url))
+            storeImageView.backgroundColor = .clear
+            storeImageView.layer.borderColor = UIColor.lightGray.cgColor
+            storeImageView.layer.borderWidth = 0.5
+        }
+        storeDescriptionLabel.text = storeInfo?.introduction
+    }
 }

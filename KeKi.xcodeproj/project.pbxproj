@@ -65,6 +65,7 @@
 		A2784ADF298AA9D800FE23DF /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784ADE298AA9D800FE23DF /* AlertViewController.swift */; };
 		A2784AE2298AB50100FE23DF /* PolicyWebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2784AE1298AB50100FE23DF /* PolicyWebView.storyboard */; };
 		A2A7966729A4E76700A2F2E2 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A7966629A4E76700A2F2E2 /* FeedModel.swift */; };
+		A2A7966929A705F000A2F2E2 /* StoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A7966829A705F000A2F2E2 /* StoreModel.swift */; };
 		A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */; };
 		A2B1CD5D29874E7E00D87570 /* AuthorityGuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */; };
 		A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */; };
@@ -163,6 +164,7 @@
 		A2784ADE298AA9D800FE23DF /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A2784AE1298AB50100FE23DF /* PolicyWebView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PolicyWebView.storyboard; sourceTree = "<group>"; };
 		A2A7966629A4E76700A2F2E2 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		A2A7966829A705F000A2F2E2 /* StoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreModel.swift; sourceTree = "<group>"; };
 		A2B1CD5A29874E6C00D87570 /* AuthorityGuidance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthorityGuidance.storyboard; sourceTree = "<group>"; };
 		A2B1CD5C29874E7E00D87570 /* AuthorityGuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityGuidanceViewController.swift; sourceTree = "<group>"; };
 		A2B1CD5E29875D9E00D87570 /* SelectUserCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserCategoryViewController.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				A2E7D14729A0CA8100110CD2 /* AuthModel.swift */,
 				A23F2DAC29A1F3BF0046ED70 /* HomeModel.swift */,
 				A2A7966629A4E76700A2F2E2 /* FeedModel.swift */,
+				A2A7966829A705F000A2F2E2 /* StoreModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -723,6 +726,7 @@
 				731AA69F298D016D008A9A1B /* HashTagCell.swift in Sources */,
 				735AC113298D03390099B549 /* CalendarViewController.swift in Sources */,
 				A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */,
+				A2A7966929A705F000A2F2E2 /* StoreModel.swift in Sources */,
 				A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */,
 				A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */,
 				73E985132995F1A300DC090A /* CalendarModel.swift in Sources */,
