@@ -314,7 +314,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
                 guard let image = UIImage(data: imageData) else {return cell}
                  
-                recentCakeCell.recentCakeImageView.image = imageRsize(image: image, newWidth: 100, newHeight: 100)
+                recentCakeCell.recentCakeImageView.image = imageResize(image: image, newWidth: 100, newHeight: 100)
             }
         }else {
             if let searchDetailCell = cell as? SearchDetailCell {
@@ -323,7 +323,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 
                 guard let image = UIImage(data: imageData) else {return cell}
                  
-                searchDetailCell.productImageView.image = imageRsize(image: image, newWidth: 105, newHeight: 105)
+                searchDetailCell.productImageView.image = imageResize(image: image, newWidth: 105, newHeight: 105)
                 searchDetailCell.productTitleLabel.text = searchResultList[indexPath.row].dessertName
                 searchDetailCell.productPriceLabel.text = searchResultList[indexPath.row].dessertPrice.description
             }
@@ -332,7 +332,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return cell
     }
     
-    func imageRsize(image: UIImage, newWidth: CGFloat, newHeight: CGFloat) -> UIImage {
+    func imageResize(image: UIImage, newWidth: CGFloat, newHeight: CGFloat) -> UIImage {
         let size = CGSize(width: newWidth, height: newHeight)
         let render = UIGraphicsImageRenderer(size: size)
         let renderImage = render.image { context in

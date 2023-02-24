@@ -14,6 +14,10 @@ class StoreInfoPopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setup()
+    }
+    
+    func setup() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
 
                 

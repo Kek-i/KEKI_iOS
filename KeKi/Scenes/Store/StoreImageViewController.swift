@@ -24,6 +24,11 @@ class StoreImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    func setup() {
+        storeImageCV.delegate = self
+        storeImageCV.dataSource = self
+    }
 
     func configure(feeds: [Feed]) {
         self.feeds = feeds

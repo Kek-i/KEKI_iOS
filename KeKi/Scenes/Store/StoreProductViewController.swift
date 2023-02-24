@@ -23,6 +23,13 @@ class StoreProductViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setup()
+    }
+    
+    func setup() {
+        storeProductCV.delegate = self
+        storeProductCV.dataSource = self
     }
 
     func configure(desserts: [Dessert]) {

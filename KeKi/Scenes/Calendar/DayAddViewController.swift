@@ -224,7 +224,6 @@ class DayAddViewController: UIViewController {
                 [self.dDayButton, self.dayNumButton, self.dayRepeatButton].forEach {
                     $0?.layer.isHidden = false
                 }
-                self.selectButtonView.layer.masksToBounds = false
                 
             }else {
                 self.selectButtonViewHeight.priority = UILayoutPriority(1000)
@@ -233,7 +232,6 @@ class DayAddViewController: UIViewController {
                 [self.dDayButton, self.dayNumButton, self.dayRepeatButton].forEach {
                     $0?.layer.isHidden = true
                 }
-                self.selectButtonView.layer.masksToBounds = true
 
             }
         }
@@ -249,12 +247,10 @@ class DayAddViewController: UIViewController {
                 self.datePickerViewHeight.priority = UILayoutPriority(240)
                 
                 self.dateSelectPicker.isHidden = false
-                self.datePickerView.layer.masksToBounds = false
             }else {
                 self.datePickerViewHeight.priority = UILayoutPriority(1000)
         
                 self.dateSelectPicker.isHidden = true
-                self.datePickerView.layer.masksToBounds = true
             }
         }
         self.view.layoutIfNeeded()
@@ -293,16 +289,8 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HashTagCell", for: indexPath)
         
         if let hashTag = cell as? HashTagCell {
-            
-            
-            hashTag.backgroundColor = .gray
-            
-            hashTag.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
-            hashTag.layer.shadowOffset = CGSize(width: 0, height: 3)
-            hashTag.layer.shadowRadius = 6
-            hashTag.layer.shadowOpacity = 1.0
-            hashTag.layer.masksToBounds = false
-            
+            hashTag.backgroundColor = .white
+
             if hashTagList[indexPath.row + (indexPath.section * 4)].1 {
                 hashTag.backgroundColor = colorList[indexPath.row % 3]
             }

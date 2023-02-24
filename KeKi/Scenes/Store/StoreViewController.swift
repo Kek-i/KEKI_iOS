@@ -30,7 +30,6 @@ class StoreViewController: UIViewController {
     @IBOutlet weak var storeNameLabel: UILabel!
     @IBOutlet weak var storeDescriptionLabel: UILabel!
     
-    
     @IBOutlet weak var orderButton: UIButton!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -61,12 +60,28 @@ class StoreViewController: UIViewController {
         orderButton.layer.shadowRadius = 13
         orderButton.layer.shadowOpacity = 1.0
     }
+    
+    func setupNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = false
+        
+        let backButton = UIBarButtonItem(image: UIImage(named: "chevron-right"), style: .done, target: self, action: #selector(backToScreen))
+        backButton.tintColor = .black
+        
+        let infoButton = UIBarButtonItem(image: UIImage(named: "info"), style: .done, target: self, action: #selector(showInfoPopUp))
+        infoButton.tintColor = .black
+        
+        let messageButton = UIBarButtonItem(image: UIImage(named: "icMessage"), style: .done, target: self, action: #selector(moveToMessage))
+        messageButton.tintColor = .black
+        
+        self.navigationItem.leftBarButtonItem = backButton
+        self.navigationItem.rightBarButtonItems = [infoButton, messageButton]
+    }
 
     @IBAction func didTapBackItem(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func showInfoPopUp(_ sender: Any) {
+    @objc func showInfoPopUp() {
         guard let infoPopUpVC = self.storyboard?.instantiateViewController(withIdentifier: "StoreInfoPopUpViewController") as? StoreInfoPopUpViewController else {return}
         
         infoPopUpVC.modalTransitionStyle = .coverVertical
@@ -106,4 +121,5 @@ class StoreViewController: UIViewController {
         }
         storeDescriptionLabel.text = storeInfo?.introduction
     }
+    
 }

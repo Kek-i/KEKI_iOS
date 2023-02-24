@@ -27,7 +27,7 @@ class TabViewController : TabmanViewController {
         tabmanInit()
     }
     
-    func tabmanInit(){
+    func setup(){
         guard let storeImageVC = self.storyboard?.instantiateViewController(withIdentifier: "StoreImageViewController") as? StoreImageViewController else {return}
         
         guard let storeProductVC = self.storyboard?.instantiateViewController(withIdentifier: "StoreProductViewController") as? StoreProductViewController else {return}
@@ -36,7 +36,9 @@ class TabViewController : TabmanViewController {
         viewControllers.append(storeProductVC)
         
         self.dataSource = self
-        
+    }
+    
+    func setupLayout() {
         let bar = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
         
         
@@ -54,10 +56,7 @@ class TabViewController : TabmanViewController {
         bar.indicator.weight = .custom(value: 2)
         bar.indicator.tintColor = UIColor(red: 201.0 / 255.0, green: 83.0 / 255.0, blue: 107.0 / 255.0, alpha: 1)
         
-        
-        
         addBar(bar, dataSource: self, at: .top)
-        
     }
     
     func setDelegate(storeVC: StoreViewController) { storeVC.delegate = self }
