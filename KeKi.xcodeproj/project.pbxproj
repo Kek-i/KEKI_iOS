@@ -17,6 +17,8 @@
 		735AC116298D04570099B549 /* DayAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC114298D04570099B549 /* DayAddViewController.swift */; };
 		735AFF0329A704F900779E85 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AFF0229A704F900779E85 /* ImageCell.swift */; };
 		735AFF0629A7B0FC00779E85 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 735AFF0529A7B0FC00779E85 /* BSImagePicker */; };
+		735AFF0829A850F800779E85 /* ProductAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735AFF0729A850F800779E85 /* ProductAdd.storyboard */; };
+		735AFF0A29A8764D00779E85 /* ProductAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AFF0929A8764D00779E85 /* ProductAddViewController.swift */; };
 		7367E1D5299A1546008E517F /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367E1D4299A1546008E517F /* SearchModel.swift */; };
 		7367E1DF29A6DF2D008E517F /* FeedAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7367E1DE29A6DF2D008E517F /* FeedAdd.storyboard */; };
 		7367E1E129A6E174008E517F /* FeedAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367E1E029A6E174008E517F /* FeedAddViewController.swift */; };
@@ -123,6 +125,8 @@
 		735AC111298D03390099B549 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		735AC114298D04570099B549 /* DayAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAddViewController.swift; sourceTree = "<group>"; };
 		735AFF0229A704F900779E85 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		735AFF0729A850F800779E85 /* ProductAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductAdd.storyboard; sourceTree = "<group>"; };
+		735AFF0929A8764D00779E85 /* ProductAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAddViewController.swift; sourceTree = "<group>"; };
 		7367E1D4299A1546008E517F /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		7367E1DE29A6DF2D008E517F /* FeedAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedAdd.storyboard; sourceTree = "<group>"; };
 		7367E1E029A6E174008E517F /* FeedAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAddViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 			children = (
 				7367E1DE29A6DF2D008E517F /* FeedAdd.storyboard */,
 				7367E1E029A6E174008E517F /* FeedAddViewController.swift */,
+				735AFF0729A850F800779E85 /* ProductAdd.storyboard */,
+				735AFF0929A8764D00779E85 /* ProductAddViewController.swift */,
 				735AFF0229A704F900779E85 /* ImageCell.swift */,
 			);
 			path = Seller;
@@ -664,6 +670,7 @@
 				A2784AE2298AB50100FE23DF /* PolicyWebView.storyboard in Resources */,
 				A2434B1429865BAD00F60D1A /* UnLoginUserMypage.storyboard in Resources */,
 				A2F607592989632700F4F3DD /* ProductDetail.storyboard in Resources */,
+				735AFF0829A850F800779E85 /* ProductAdd.storyboard in Resources */,
 				A2B1CD5B29874E6C00D87570 /* AuthorityGuidance.storyboard in Resources */,
 				735AC112298D03390099B549 /* Calendar.storyboard in Resources */,
 				A2B1CD662987797100D87570 /* UserProfileSetting.storyboard in Resources */,
@@ -747,6 +754,7 @@
 				A2B1CD682987876800D87570 /* SellerProfileSetViewController.swift in Sources */,
 				A2F60765298A1BC800F4F3DD /* LoginMyPageViewController.swift in Sources */,
 				A2B1CD5F29875D9E00D87570 /* SelectUserCategoryViewController.swift in Sources */,
+				735AFF0A29A8764D00779E85 /* ProductAddViewController.swift in Sources */,
 				73E985132995F1A300DC090A /* CalendarModel.swift in Sources */,
 				A2784ADF298AA9D800FE23DF /* AlertViewController.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
