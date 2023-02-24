@@ -8,14 +8,16 @@
 import UIKit
 import Kingfisher
 
-protocol AlertDelegate {
+protocol FeedDelegate {
     func showFeedMainAlert()
     func showFeedDeclarationActionAlert()
+    func showStoreMain(storeIdx: Int)
 }
 
 class FeedCell: UITableViewCell {
     private var postIdx: Int?
-    var feedAlertDelegate: AlertDelegate!
+    private var storeIdx: Int?
+    var feedDelegate: FeedDelegate!
     
     var imageList: [String] = []
     var tagList: [String] = []
@@ -51,7 +53,7 @@ class FeedCell: UITableViewCell {
     
     
     @IBAction func didTapViewmoreButton(_ sender: UIButton) {
-        feedAlertDelegate.showFeedMainAlert()
+        feedDelegate.showFeedMainAlert()
     }
     
     @IBAction func didTapHeartButton(_ sender: UIButton) {
@@ -61,6 +63,7 @@ class FeedCell: UITableViewCell {
     
     @IBAction func didTapNicknameButton(_ sender: UIButton) {
         // TODO: 스토어 메인 화면으로 전환
+        feedDelegate.showStoreMain(storeIdx: storeIdx!)
     }
     
     private func postLikeFeed() {
@@ -77,6 +80,7 @@ class FeedCell: UITableViewCell {
     
     func configure(data: Feed) {
         postIdx = data.postIdx
+        storeIdx = data.storeIdx
         
         // set store profile
         nicknameButton.setTitle(data.storeName, for: .normal)
