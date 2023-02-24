@@ -24,7 +24,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="vq2-xm-XAO"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cU9-i2-zSk">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cU9-i2-zSk">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -32,14 +32,14 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductImgCell" id="zF9-O4-2by" customClass="ProductImgCell" customModule="KeKi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="8" width="284" height="284"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JAM-Jo-35K">
-                                            <rect key="frame" x="0.0" y="0.0" width="284" height="284"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exampleCake" translatesAutoresizingMaskIntoConstraints="NO" id="1wu-yv-LR6">
-                                                    <rect key="frame" x="0.0" y="0.0" width="284" height="284"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -54,12 +54,12 @@
                                 </cells>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="xiS-kz-ykJ">
-                                <rect key="frame" x="0.0" y="403" width="393" height="26"/>
+                                <rect key="frame" x="0.0" y="413" width="393" height="26"/>
                                 <color key="pageIndicatorTintColor" red="0.98039215686274506" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.85098039215686272" green="0.28235294119999998" blue="0.41568627450980389" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lir-8E-pcT">
-                                <rect key="frame" x="30" y="439" width="333" height="19.333333333333314"/>
+                                <rect key="frame" x="30" y="449" width="333" height="19.333333333333314"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제품이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9V-LB-zJW">
                                         <rect key="frame" x="0.0" y="0.0" width="263" height="19.333333333333332"/>
@@ -76,7 +76,7 @@
                                 </subviews>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ft3-pv-W1L">
-                                <rect key="frame" x="30" y="478.33333333333331" width="333" height="246.66666666666669"/>
+                                <rect key="frame" x="25" y="488.33333333333326" width="338" height="309.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">상품 설명
 어쩌구
@@ -87,44 +87,58 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3i3-HD-0gd">
-                                <rect key="frame" x="0.0" y="735" width="393" height="83"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <tabBarItem image="homekit" catalog="system" id="jTe-Ui-Pqd" userLabel="home"/>
-                                    <tabBarItem image="calendar" catalog="system" id="p85-CA-GQ4" userLabel="calendar"/>
-                                    <tabBarItem image="magnifyingglass" catalog="system" id="C9L-i2-YLE" userLabel="search"/>
-                                    <tabBarItem image="heart" catalog="system" id="Ajf-sp-skq" userLabel="heart"/>
-                                    <tabBarItem image="person" catalog="system" id="cHZ-7K-dDP" userLabel="mypage"/>
-                                </items>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tabBar>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPr-UE-zHS">
+                                <rect key="frame" x="0.0" y="102.99999999999997" width="393" height="314.33333333333326"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="H61-PD-ho4">
+                                        <rect key="frame" x="111.00000000000001" y="83.666666666666657" width="171.33333333333337" height="147"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="buyerIcon" translatesAutoresizingMaskIntoConstraints="NO" id="yIT-2k-3Z5">
+                                                <rect key="frame" x="32" y="0.0" width="107" height="107"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이미지 준비 중이에요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73Z-Na-4WN">
+                                                <rect key="frame" x="0.0" y="123.00000000000003" width="171.33333333333334" height="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <color key="textColor" red="0.8784313725490196" green="0.396078431372549" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="H61-PD-ho4" firstAttribute="centerY" secondItem="IPr-UE-zHS" secondAttribute="centerY" id="2hd-cp-QWX"/>
+                                    <constraint firstAttribute="width" secondItem="IPr-UE-zHS" secondAttribute="height" multiplier="1:0.8" id="5qF-de-aQn"/>
+                                    <constraint firstItem="H61-PD-ho4" firstAttribute="centerX" secondItem="IPr-UE-zHS" secondAttribute="centerX" id="zvU-aN-NnR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Ft3-pv-W1L" secondAttribute="bottom" constant="20" id="1gy-Qt-Isb"/>
                             <constraint firstItem="Ft3-pv-W1L" firstAttribute="trailing" secondItem="Lir-8E-pcT" secondAttribute="trailing" id="5xq-R7-bII"/>
                             <constraint firstItem="Lir-8E-pcT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="Amf-V5-RSR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Lir-8E-pcT" secondAttribute="trailing" constant="30" id="BeD-XC-1UC"/>
-                            <constraint firstItem="xiS-kz-ykJ" firstAttribute="top" secondItem="0Go-rC-ajQ" secondAttribute="bottom" id="Gke-A8-tYu"/>
+                            <constraint firstItem="xiS-kz-ykJ" firstAttribute="top" secondItem="0Go-rC-ajQ" secondAttribute="bottom" constant="10" id="Gke-A8-tYu"/>
                             <constraint firstItem="xiS-kz-ykJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="HfB-0z-dH0"/>
                             <constraint firstItem="Lir-8E-pcT" firstAttribute="top" secondItem="xiS-kz-ykJ" secondAttribute="bottom" constant="10" id="Phz-Z8-twC"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="3i3-HD-0gd" secondAttribute="bottom" id="Qs8-EU-KC0"/>
-                            <constraint firstItem="3i3-HD-0gd" firstAttribute="top" secondItem="Ft3-pv-W1L" secondAttribute="bottom" constant="10" id="Ze6-8O-pgm"/>
+                            <constraint firstItem="IPr-UE-zHS" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="topMargin" id="b5S-Xm-5pa"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xiS-kz-ykJ" secondAttribute="trailing" id="cnY-yT-h4Q"/>
-                            <constraint firstItem="Ft3-pv-W1L" firstAttribute="leading" secondItem="Lir-8E-pcT" secondAttribute="leading" id="e7x-X4-zhA"/>
+                            <constraint firstItem="Ft3-pv-W1L" firstAttribute="leading" secondItem="Lir-8E-pcT" secondAttribute="leading" constant="-5" id="e7x-X4-zhA"/>
                             <constraint firstItem="Ft3-pv-W1L" firstAttribute="top" secondItem="Lir-8E-pcT" secondAttribute="bottom" constant="20" id="gEw-I6-wsw"/>
-                            <constraint firstItem="3i3-HD-0gd" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="h3a-rx-EYz"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="IPr-UE-zHS" secondAttribute="trailing" id="jI0-7v-KLj"/>
+                            <constraint firstItem="IPr-UE-zHS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="nvy-hG-dWb"/>
                             <constraint firstItem="0Go-rC-ajQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sWN-4z-TeA"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0Go-rC-ajQ" secondAttribute="trailing" id="x6K-To-1go"/>
                             <constraint firstItem="0Go-rC-ajQ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="zHi-kb-pzg"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3i3-HD-0gd" secondAttribute="trailing" id="zXr-2V-2Ph"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hDi-ll-Pwp"/>
                     <connections>
                         <outlet property="descriptionTextView" destination="Ft3-pv-W1L" id="rhh-gt-Jwj"/>
                         <outlet property="imgCollectionView" destination="0Go-rC-ajQ" id="KBU-YK-LUU"/>
+                        <outlet property="isImageEmptyView" destination="IPr-UE-zHS" id="oeq-Ss-0pt"/>
                         <outlet property="nameLabel" destination="V9V-LB-zJW" id="5g8-lG-46F"/>
                         <outlet property="pageControl" destination="xiS-kz-ykJ" id="j62-uV-8wf"/>
                         <outlet property="priceLabel" destination="i93-9v-lIe" id="C06-33-hhP"/>
@@ -152,12 +166,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="calendar" catalog="system" width="128" height="107"/>
+        <image name="buyerIcon" width="107" height="107"/>
         <image name="exampleCake" width="284" height="284"/>
-        <image name="heart" catalog="system" width="128" height="107"/>
-        <image name="homekit" catalog="system" width="128" height="104"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
-        <image name="person" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

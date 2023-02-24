@@ -9,8 +9,11 @@ import UIKit
 
 class ProductViewController: UIViewController {
 
+    var dessertIdx: Int?
+    var dessertImg: [Post] = []
+    
     // MARK: - Variables, IBOutlet, ...
-    var imgNum = 5
+    @IBOutlet weak var isImageEmptyView: UIView!
     
     @IBOutlet weak var imgCollectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -21,9 +24,10 @@ class ProductViewController: UIViewController {
     // MARK: - Methods of LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchData()
         setupNavigationBar()
         setupCollectionView()
-        setupPageControl()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -44,7 +48,13 @@ class ProductViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ellipsis.vertical"), style: .plain, target: self, action: #selector(didTapViewmoreButton))
     }
     
+    private func checkImageNone() {
+        if dessertImg.count == 0 { isImageEmptyView.isHidden = false }
+        else { isImageEmptyView.isHidden = true }
+    }
+    
     @objc private func didTapViewmoreButton() {
+        // TODO: 판매자에게만 보이도록 수정 필요
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let changeAction = UIAlertAction(title: "상품 수정", style: .default)
@@ -59,7 +69,7 @@ class ProductViewController: UIViewController {
         present(alert, animated: true)
     }
     private func setupPageControl() {
-        pageControl.numberOfPages = imgNum
+        pageControl.numberOfPages = dessertImg.count
         pageControl.currentPage = 0
     }
 }
@@ -67,13 +77,18 @@ class ProductViewController: UIViewController {
 // MARK: - Extensions
 extension ProductViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return dessertImg.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImgCell", for: indexPath) as? ProductImgCell else { return UICollectionViewCell() }
-        return cell
         
+        if dessertImg.count == 0 { return cell }
+        else {
+            cell.imageView.kf.setImage(with: URL(string: dessertImg[indexPath.row].postImgUrl))
+            cell.imageView.contentMode = .scaleAspectFit
+            return cell
+        }
     }
     
 }
@@ -84,7 +99,12 @@ extension ProductViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 60)
+        if dessertImg.count > 1 {
+            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 60)
+        } else {
+            // 보여줄 디저트 이미지가 1개인 경우 중앙 정렬 되도록 inset 설정
+            return UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 35)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -99,5 +119,30 @@ extension ProductViewController: UICollectionViewDelegateFlowLayout {
         if pageControl.currentPage != newPage {
             pageControl.currentPage = newPage
         }
+    }
+}
+
+
+extension ProductViewController {
+    private func fetchData() {
+        APIManeger.shared.testGetData(urlEndpointString: "/desserts/\(dessertIdx!)",
+                                      dataType: ProductsResponse.self,
+                                      parameter: nil,
+                                      completionHandler: { [weak self] response in
+            
+            
+            if let result = response.result {
+                print(result)
+                
+                self?.dessertImg = result.images
+                self?.nameLabel.text = result.nickname
+                self?.priceLabel.text = String(result.dessertPrice)
+                self?.descriptionTextView.text = result.dessertDescription
+                
+                self?.setupPageControl()
+                self?.imgCollectionView.reloadData()
+                self?.checkImageNone()
+            }
+        })
     }
 }

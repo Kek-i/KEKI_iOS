@@ -8,21 +8,22 @@
 import UIKit
 import Kingfisher
 
-protocol AlertDelegate {
+protocol FeedDelegate {
     func showFeedMainAlert()
     func showFeedDeclarationActionAlert()
+    func showStoreMain(storeIdx: Int)
 }
 
 class FeedCell: UITableViewCell {
-    
-    var feedAlertDelegate: AlertDelegate!
+    private var postIdx: Int?
+    private var storeIdx: Int?
+    var feedDelegate: FeedDelegate!
     
     var imageList: [String] = []
     var tagList: [String] = []
 
     @IBOutlet weak var profileImgView: UIImageView!
-    @IBOutlet weak var nicknameLabel: UILabel!
-    
+    @IBOutlet weak var nicknameButton: UIButton!
     @IBOutlet weak var imgCollectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -52,30 +53,37 @@ class FeedCell: UITableViewCell {
     
     
     @IBAction func didTapViewmoreButton(_ sender: UIButton) {
-        feedAlertDelegate.showFeedMainAlert()
+        feedDelegate.showFeedMainAlert()
     }
     
     @IBAction func didTapHeartButton(_ sender: UIButton) {
         heartButton.isSelected = !heartButton.isSelected
-        heartButton.isSelected ? postLikeFeed() : discardFeedLike()
+        postLikeFeed()
+    }
+    
+    @IBAction func didTapNicknameButton(_ sender: UIButton) {
+        // TODO: 스토어 메인 화면으로 전환
+        feedDelegate.showStoreMain(storeIdx: storeIdx!)
     }
     
     private func postLikeFeed() {
-        // TODO: 피드 찜하기 기능
-        print("찜 하기")
-    }
-    
-    private func discardFeedLike() {
-        // TODO: 피드 찜 취소하기 기능
-        print("찜 취소")
+        heartButton.isSelected ? print("찜 하기") : print("찜 취소")
+        
+        APIManeger.shared.testPostData(urlEndpointString: "/posts/\(postIdx!)/like",
+                                       dataType: GeneralResponseModel.self,
+                                       parameter: nil,
+                                       completionHandler: { response in print(response) })
     }
     
     func setSingleFeedView() { separatorView.isHidden = true }
     func reloadData() { imgCollectionView.reloadData() }
     
     func configure(data: Feed) {
+        postIdx = data.postIdx
+        storeIdx = data.storeIdx
+        
         // set store profile
-        nicknameLabel.text = data.storeName
+        nicknameButton.setTitle(data.storeName, for: .normal)
 
         profileImgView.kf.setImage(with: URL(string: data.storeProfileImg))
         profileImgView.layer.cornerRadius = profileImgView.frame.width / 2

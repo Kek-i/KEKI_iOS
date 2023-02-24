@@ -6,9 +6,25 @@
 //
 
 import UIKit
+import Alamofire
+import Kingfisher
+
+protocol TabDelegate {
+    func configureFeedTab(storeIdx: Int)
+    func configureProductTab(storeIdx: Int)
+}
 
 class StoreViewController: UIViewController {
-        
+    
+    var storeIdx: Int?
+    var storeInfo: Store?
+    
+    var delegate: TabDelegate!
+    
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var infoButton: UIButton!
+    @IBOutlet weak var messageButton: UIButton!
+    
     @IBOutlet weak var storeImageView: UIImageView!
     
     @IBOutlet weak var storeNameLabel: UILabel!
@@ -16,11 +32,23 @@ class StoreViewController: UIViewController {
     
     @IBOutlet weak var orderButton: UIButton!
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "embedContainer" {
+            let tabVC = segue.destination as! TabViewController
+            tabVC.setDelegate(storeVC: self)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchData()
         setupLayout()
-        setupNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
     }
     
     func setupLayout() {
@@ -49,7 +77,7 @@ class StoreViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [infoButton, messageButton]
     }
 
-    @objc func backToScreen() {
+    @IBAction func didTapBackItem(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -62,8 +90,36 @@ class StoreViewController: UIViewController {
         self.present(infoPopUpVC, animated: true)
     }
     
-    @objc func moveToMessage() {
+    @IBAction func didTapOrderButton(_ sender: UIButton) {
+        // TODO: 주문 링크로 접속 (웹뷰 사용?)
+    }
+    
+    private func fetchData() {
+        // 스토어 정보 fetch
+        APIManeger.shared.testGetData(urlEndpointString: "/stores/profile/\(storeIdx!)",
+                                      dataType: StoreResponse.self,
+                                      parameter: nil,
+                                      completionHandler: { [weak self] response in
+            
+            self?.storeInfo = response.result
+            self?.configureProfile()
+        })
         
+        // 스토어 피드 & 상품 정보 fetch
+        delegate.configureFeedTab(storeIdx: storeIdx!)
+        delegate.configureProductTab(storeIdx: storeIdx!)
+
+    }
+    
+    private func configureProfile() {
+        storeNameLabel.text = storeInfo?.nickname
+        if let url = storeInfo?.storeImgUrl {
+            storeImageView.kf.setImage(with: URL(string: url))
+            storeImageView.backgroundColor = .clear
+            storeImageView.layer.borderColor = UIColor.lightGray.cgColor
+            storeImageView.layer.borderWidth = 0.5
+        }
+        storeDescriptionLabel.text = storeInfo?.introduction
     }
     
 }

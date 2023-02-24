@@ -23,6 +23,11 @@ class FeedViewController: UIViewController {
         setupTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     // MARK: - Action Methods (IBAction, ...)
 
     
@@ -71,7 +76,7 @@ extension FeedViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath)
                 as? FeedCell else { return UITableViewCell() }
         cell.setup()
-        cell.feedAlertDelegate = self
+        cell.feedDelegate = self
         cell.configure(data: feedData[indexPath.row])
         if feedData.count == 1 { cell.setSingleFeedView() }
         cell.reloadData()
@@ -89,7 +94,13 @@ extension FeedViewController: UITableViewDelegate {
     }
 }
 
-extension FeedViewController: AlertDelegate {
+extension FeedViewController: FeedDelegate {
+    func showStoreMain(storeIdx: Int) {
+        guard let storeViewController = UIStoryboard(name: "Store", bundle: nil).instantiateViewController(withIdentifier: "StoreViewController") as? StoreViewController else {return}
+        
+        storeViewController.storeIdx = storeIdx
+        navigationController?.pushViewController(storeViewController, animated: true)
+    }
     
     func showFeedMainAlert() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

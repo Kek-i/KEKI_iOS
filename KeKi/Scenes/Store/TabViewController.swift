@@ -9,17 +9,22 @@ import Foundation
 import Tabman
 import Pageboy
 import UIKit
+import Alamofire
 
 
 class TabViewController : TabmanViewController {
+    
+    var feeds: [Feed]?
+    var desserts: [Dessert]?
     
     private var viewControllers: Array<UIViewController> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
-        setupLayout()
+        guard let storeViewController = UIStoryboard(name: "Store", bundle: nil).instantiateViewController(withIdentifier: "StoreViewController") as? StoreViewController else {return}
+        storeViewController.delegate = self
+        tabmanInit()
     }
     
     func setup(){
@@ -53,6 +58,8 @@ class TabViewController : TabmanViewController {
         
         addBar(bar, dataSource: self, at: .top)
     }
+    
+    func setDelegate(storeVC: StoreViewController) { storeVC.delegate = self }
 }
 
 extension TabViewController: PageboyViewControllerDataSource, TMBarDataSource {
@@ -80,6 +87,39 @@ extension TabViewController: PageboyViewControllerDataSource, TMBarDataSource {
         }
         
         return item
+    }
+    
+    
+}
+
+extension TabViewController: TabDelegate {
+    func configureFeedTab(storeIdx: Int) {
+
+        // fetch Data
+        let queryParam: Parameters = ["storeIdx" : storeIdx]
+        APIManeger.shared.testGetData(urlEndpointString: "/posts",
+                                      dataType: SearchResultResponse.self,
+                                      parameter: queryParam,
+                                      completionHandler: { [weak self] response in
+            
+            if let feeds = response.result.feeds {
+                (self?.viewControllers[0] as! StoreImageViewController).configure(feeds: feeds)
+            }
+        })
+    }
+    
+    func configureProductTab(storeIdx: Int) {
+        // fetch Data
+        let queryParam: Parameters = ["storeIdx" : storeIdx]
+        APIManeger.shared.testGetData(urlEndpointString: "/desserts",
+                                      dataType: ProductResponse.self,
+                                      parameter: queryParam,
+                                      completionHandler: { [weak self] response in
+            
+            if let result = response.result {
+                (self?.viewControllers[1] as! StoreProductViewController).configure(desserts: result.desserts)
+            }
+        })
     }
     
     
