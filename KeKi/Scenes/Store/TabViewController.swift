@@ -24,7 +24,7 @@ class TabViewController : TabmanViewController {
         
         guard let storeViewController = UIStoryboard(name: "Store", bundle: nil).instantiateViewController(withIdentifier: "StoreViewController") as? StoreViewController else {return}
         storeViewController.delegate = self
-        tabmanInit()
+        setup()
     }
     
     func setup(){
