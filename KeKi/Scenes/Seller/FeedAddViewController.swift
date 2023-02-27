@@ -40,6 +40,8 @@ class FeedAddViewController: UIViewController {
     var imageList: Array<UIImage> = []
     var hashTagList: Array<(String, Bool)> = []
     
+    var desertIdx: Int?
+    
     let colorList: Array<UIColor> = [
         UIColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
         UIColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
@@ -58,7 +60,7 @@ class FeedAddViewController: UIViewController {
         setupLayout()
         setupTextViewPlaceholder()
         setupNavigationBar()
-        fetchHashTagList()
+        fetchFeedAddInfo()
     }
     
     func setup() {
@@ -141,7 +143,15 @@ class FeedAddViewController: UIViewController {
     }
     
     @objc func addFeed() {
-       
+        var hashTags: [String] = []
+        hashTagList.forEach {
+            if $0.1 == true {
+                hashTags.append($0.0)
+                print(hashTags.count)
+            }
+        }
+        print(hashTags)
+//        requestAddFeed()
     }
     
     
@@ -284,7 +294,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func selectImage() {
-        imagePickerController.settings.selection.max = 4
+        imagePickerController.settings.selection.max = 5
         imagePickerController.settings.fetch.assets.supportedMediaTypes = [.image]
         
         self.presentImagePicker(imagePickerController) { (asset) in
@@ -343,14 +353,24 @@ extension FeedAddViewController: UITextViewDelegate {
 
 
 extension FeedAddViewController {
-    func fetchHashTagList() {
-        APIManeger.shared.getData(urlEndpointString: "/calendars/categories", dataType: HashTagListResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
-            
-            response.result.forEach { hashTag in
-                self?.hashTagList.append((hashTag.tagName, false))
+    func fetchFeedAddInfo() {
+        APIManeger.shared.getData(urlEndpointString: "/posts/makeView", dataType: FeedAddResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
+            print(response)
+            response.result?.tags?.forEach { hashTag in
+                self?.hashTagList.append((hashTag, false))
             }
             
+            self?.desertIdx = response.result?.desserts?.count
+            
             self?.hashTagCV.reloadData()
+        }
+    }
+    
+    func requestAddFeed(desertIdx: Int, description: String, postImgUrls: [String], tags: [String]) {
+        let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
+        APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedAddRequest.self, header: nil, parameter: param) { [weak self] response in
+            print(response)
+            self?.navigationController?.popViewController(animated: true)
         }
     }
 }
