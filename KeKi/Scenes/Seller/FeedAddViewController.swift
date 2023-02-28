@@ -92,7 +92,10 @@ class FeedAddViewController: UIViewController {
         productTypeSelectButton.setImage(UIImage(named: "downButton"), for: .normal)
         
         selectButtonViewHeight.priority = UILayoutPriority(1000)
+        
         productTypeTableView.isHidden = true
+        productTypeTableView.separatorStyle = .none
+        productTypeTableView.rowHeight = 25
         
         productContentTextView.layer.borderWidth = 0
         productContentTextView.textContainerInset = .init(top: 16, left: 20, bottom: 15, right: 27)
@@ -232,7 +235,12 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        if collectionView.tag == 1{
+            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        }else {
+            return UIEdgeInsets(top: 0, left: 20, bottom: 14, right: 20)
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -304,6 +312,7 @@ extension FeedAddViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductSelectCell", for: indexPath)
+        cell.selectionStyle = .none
         
         if let productCell = cell as? ProductSelectCell {
             if desertInfoList.count != 0 {
@@ -311,14 +320,17 @@ extension FeedAddViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
         }
+        
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         productType = desertInfoList[indexPath.row].dessertName
-        
         productTypeSelectButton.setTitle(productType, for: .normal)
     }
+    
+
     
     
 }

@@ -73,7 +73,7 @@
                                                             <constraint firstAttribute="height" constant="46" id="wEE-ob-XEu"/>
                                                         </constraints>
                                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <inset key="titleEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="titleEdgeInsets" minX="32" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal">
                                                             <attributedString key="attributedTitle"/>
@@ -90,25 +90,22 @@
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductSelectCell" id="xr9-gf-H2q" customClass="ProductSelectCell" customModule="KeKi" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="50" width="415" height="25.5"/>
+                                                                <rect key="frame" x="0.0" y="50" width="415" height="26"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xr9-gf-H2q" id="o6c-XE-oi8">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="415" height="25.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="415" height="26"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beV-f7-vCh">
-                                                                            <rect key="frame" x="48" y="3" width="39.5" height="19.5"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="19" id="V7X-Zi-REM"/>
-                                                                            </constraints>
+                                                                            <rect key="frame" x="48" y="0.0" width="39.5" height="20"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="beV-f7-vCh" secondAttribute="bottom" constant="3" id="DR4-y9-2Eh"/>
-                                                                        <constraint firstItem="beV-f7-vCh" firstAttribute="top" secondItem="o6c-XE-oi8" secondAttribute="top" constant="3" id="Wym-ys-ArA"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="beV-f7-vCh" secondAttribute="bottom" constant="6" id="DR4-y9-2Eh"/>
+                                                                        <constraint firstItem="beV-f7-vCh" firstAttribute="top" secondItem="o6c-XE-oi8" secondAttribute="top" id="Wym-ys-ArA"/>
                                                                         <constraint firstItem="beV-f7-vCh" firstAttribute="leading" secondItem="o6c-XE-oi8" secondAttribute="leading" constant="48" id="p7e-Ni-ILQ"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
