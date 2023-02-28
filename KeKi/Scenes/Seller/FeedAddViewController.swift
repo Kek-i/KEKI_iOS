@@ -9,13 +9,6 @@ import UIKit
 import BSImagePicker
 import Photos
 
-enum ProductType: String {
-    case cake = "케이크"
-    case tarte = "타르트"
-    case cookies = "쿠키"
-    case none = "제품 선택"
-}
-
 
 class FeedAddViewController: UIViewController {
 
@@ -23,9 +16,7 @@ class FeedAddViewController: UIViewController {
     
     @IBOutlet weak var selectButtonView: UIView!
     @IBOutlet weak var productTypeSelectButton: UIButton!
-    @IBOutlet weak var cakeButton: UIButton!
-    @IBOutlet weak var tarteButton: UIButton!
-    @IBOutlet weak var cookiesButton: UIButton!
+    @IBOutlet weak var productTypeTableView: UITableView!
     
     @IBOutlet weak var selectButtonViewHeight: NSLayoutConstraint!
     
@@ -35,12 +26,12 @@ class FeedAddViewController: UIViewController {
     
     let imagePickerController = ImagePickerController()
     
-    var productType: ProductType = .none
+    var productType = "제품 선택"
     
     var imageList: Array<UIImage> = []
     var hashTagList: Array<(String, Bool)> = []
     
-    var desertIdx: Int?
+    var desertInfoList: Array<DessertInfo> = []
     
     let colorList: Array<UIColor> = [
         UIColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
@@ -72,7 +63,11 @@ class FeedAddViewController: UIViewController {
             
             tag += 1
         }
+        productTypeTableView.dataSource = self
+        productTypeTableView.delegate = self
+        
         productContentTextView.delegate = self
+        
         
    
         let flowLayout = UICollectionViewFlowLayout()
@@ -92,19 +87,12 @@ class FeedAddViewController: UIViewController {
             $0?.layer.cornerRadius = 10
         }
         
-        [productTypeSelectButton, cakeButton, tarteButton, cookiesButton].forEach {
-            $0.contentHorizontalAlignment = .left
-        }
-        
-        productTypeSelectButton.setTitle(productType.rawValue, for: .normal)
+        productTypeSelectButton.contentHorizontalAlignment = .left
+        productTypeSelectButton.setTitle(productType, for: .normal)
         productTypeSelectButton.setImage(UIImage(named: "downButton"), for: .normal)
-        cakeButton.setTitle(ProductType.cake.rawValue, for: .normal)
-        tarteButton.setTitle(ProductType.tarte.rawValue, for: .normal)
-        cookiesButton.setTitle(ProductType.cookies.rawValue, for: .normal)
         
-        [cakeButton, tarteButton, cookiesButton].forEach {
-            $0?.isHidden = true
-        }
+        selectButtonViewHeight.priority = UILayoutPriority(1000)
+        productTypeTableView.isHidden = true
         
         productContentTextView.layer.borderWidth = 0
         productContentTextView.textContainerInset = .init(top: 16, left: 20, bottom: 15, right: 27)
@@ -155,18 +143,15 @@ class FeedAddViewController: UIViewController {
     }
     
     
-    @IBAction func openDayTypeView(_ sender: Any) {
+    @IBAction func openProductType(_ sender: Any) {
         UIView.animate(withDuration: 0.5) {
             if self.isOpenSelectView == false {
                 self.selectButtonViewHeight.priority = UILayoutPriority(100)
-                [self.cakeButton, self.tarteButton, self.cookiesButton].forEach {
-                    $0?.layer.isHidden = false
-                }
+                self.productTypeTableView.isHidden = false
+                
             }else {
                 self.selectButtonViewHeight.priority = UILayoutPriority(1000)
-                [self.cakeButton, self.tarteButton, self.cookiesButton].forEach {
-                    $0?.layer.isHidden = true
-                }
+                self.productTypeTableView.isHidden = true
             }
         }
         self.view.layoutIfNeeded()
@@ -174,26 +159,13 @@ class FeedAddViewController: UIViewController {
         isOpenSelectView.toggle()
     }
     
-    
-    @IBAction func setDayType(_ sender: UIButton) {
-        if sender.titleLabel?.text == ProductType.cake.rawValue {
-            productType = .cake
-        }else if sender.titleLabel?.text == ProductType.tarte.rawValue {
-            productType = .tarte
-        }else if sender.titleLabel?.text == ProductType.cookies.rawValue {
-            productType = .cookies
-        }
-        productTypeSelectButton.setTitle(productType.rawValue, for: .normal)
-    }
-    
-    
 }
 
 
 extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
-            return 5
+            return 6
         }else {
             return 4
         }
@@ -217,6 +189,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
                     imageCell.productImage.image = image
                 }else {
                     if imageList.count != 0 {
+                        imageCell.productImage.contentMode = .scaleToFill
                         imageCell.productImage.image = imageList[indexPath.row-1]
                     }
                 }
@@ -259,12 +232,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if collectionView.tag == 1 {
-            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        }else {
-            return UIEdgeInsets(top: 0, left: 20, bottom: 10, right: 20)
-        }
-        
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -327,8 +295,34 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
 
     }
+}
+
+extension FeedAddViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return desertInfoList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductSelectCell", for: indexPath)
+        
+        if let productCell = cell as? ProductSelectCell {
+            if desertInfoList.count != 0 {
+                productCell.setProductName(productName: desertInfoList[indexPath.row].dessertName)
+            }
+            
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        productType = desertInfoList[indexPath.row].dessertName
+        
+        productTypeSelectButton.setTitle(productType, for: .normal)
+    }
+    
     
 }
+
 
 extension FeedAddViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -356,13 +350,14 @@ extension FeedAddViewController {
     func fetchFeedAddInfo() {
         APIManeger.shared.getData(urlEndpointString: "/posts/makeView", dataType: FeedAddResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
             print(response)
-            response.result?.tags?.forEach { hashTag in
+            response.result.tags.forEach { hashTag in
                 self?.hashTagList.append((hashTag, false))
             }
             
-            self?.desertIdx = response.result?.desserts?.count
+            self?.desertInfoList = response.result.desserts
             
             self?.hashTagCV.reloadData()
+            self?.productTypeTableView.reloadData()
         }
     }
     

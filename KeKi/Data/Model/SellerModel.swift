@@ -19,17 +19,17 @@ struct FeedAddResponse: Codable {
     let isSuccess: Bool?
     let code: Int?
     let message: String?
-    let result: FeedAddResponseResult?
+    let result: FeedAddResponseResult
 }
 
 // MARK: - Result
 struct FeedAddResponseResult: Codable {
-    let desserts: [DessertInfo]?
-    let tags: [String]?
+    let desserts: [DessertInfo]
+    let tags: [String]
 }
 
 // MARK: - Dessert
 struct DessertInfo: Codable {
-    let dessertIdx: Int?
-    let dessertName: String?
+    let dessertIdx: Int
+    let dessertName: String
 }
