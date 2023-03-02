@@ -11,7 +11,7 @@ import Alamofire
 private let DEV_BASE_URL = "https://keki-dev.store" // 개발용 
 
 private let buyerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoxLCJzdWIiOiIxIiwiZXhwIjoxNjc3NjQ4Nzc5fQ.QsR4LIRZhppLTKcQehg9_VkUFqeUUHe7i7VoVSTGyjg"    // 임시 구매자 액세스 토큰
-private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiIyIiwiZXhwIjoxNjc3NjQ4ODU4fQ.CZObUMdmB1UDqAGN6t5z-xoTHH9pfkj_YyVdH3s4vsI"    // 임시 판매자 액세스 토큰
+private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiIyIiwiZXhwIjoxNjc4MzIyMTM1fQ.oy_uRpYrWuV9yZO0vTWWpLgVNiEURasgupR5ROjsqm0"    // 임시 판매자 액세스 토큰
 
 class APIManeger {
     // 임시 액세스 토큰 (구매자,판매자)

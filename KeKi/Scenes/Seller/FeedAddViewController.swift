@@ -29,9 +29,12 @@ class FeedAddViewController: UIViewController {
     var productType = "제품 선택"
     
     var imageList: Array<UIImage> = []
-    var hashTagList: Array<(String, Bool)> = []
+    var hashTagList: [[(String, Bool)]] = []
     
     var desertInfoList: Array<DessertInfo> = []
+    
+    var hashTagLastSection = 0
+    var hashTagLastIdx = 0
     
     let colorList: Array<UIColor> = [
         UIColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
@@ -134,14 +137,6 @@ class FeedAddViewController: UIViewController {
     }
     
     @objc func addFeed() {
-        var hashTags: [String] = []
-        hashTagList.forEach {
-            if $0.1 == true {
-                hashTags.append($0.0)
-                print(hashTags.count)
-            }
-        }
-        print(hashTags)
 //        requestAddFeed()
     }
     
@@ -170,13 +165,17 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         if collectionView.tag == 1 {
             return 6
         }else {
-            return 4
+            if hashTagLastSection != 0 && section == hashTagLastSection-1 {
+                return hashTagLastIdx
+            }else {
+                return 4
+            }
         }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if collectionView.tag == 2 {
-            return hashTagList.count / 4
+            return hashTagList.count
         }else {
             return 1
         }
@@ -200,10 +199,12 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         }else {
             if let hashTag = cell as? HashTagCell {
                 hashTag.backgroundColor = .white
-                if hashTagList[indexPath.row + (indexPath.section * 4)].1 {
+                
+                if hashTagList[indexPath.section][indexPath.row].1 {
                     hashTag.backgroundColor = colorList[indexPath.row % 3]
                 }
-                hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row + (indexPath.section * 4)].0)
+                
+                hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.section][indexPath.row].0)
             }
         }
         return cell
@@ -224,7 +225,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             return CGSize(width: 100, height: 100)
         }else {
             let labelTmp = UILabel()
-            labelTmp.text = "# " + hashTagList[indexPath.row + (indexPath.section * 4)].0
+            labelTmp.text = "# " + hashTagList[indexPath.section][indexPath.row].0
             
             return CGSize(width: labelTmp.intrinsicContentSize.width + 20, height: 26)
         }
@@ -250,19 +251,19 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
         }
         if collectionView.tag == 2 {
-            if hashTagList[indexPath.row + (indexPath.section * 4)].1 {
+            if hashTagList[indexPath.section][indexPath.row].1 {
                 selectHashTagCount -= 1
-                hashTagList[indexPath.row].1.toggle()
+                hashTagList[indexPath.section][indexPath.row].1.toggle()
             }else {
                 if selectHashTagCount > 2 {
                     return
                 }
                 selectHashTagCount += 1
-                hashTagList[indexPath.row + (indexPath.section * 4)].1.toggle()
+                hashTagList[indexPath.section][indexPath.row].1.toggle()
             }
             
             hashTagList.sort {
-                $0.1 && !$1.1
+                $0[0].1 && !$1[0].1
             }
             
             collectionView.reloadData()
@@ -361,9 +362,30 @@ extension FeedAddViewController: UITextViewDelegate {
 extension FeedAddViewController {
     func fetchFeedAddInfo() {
         APIManeger.shared.getData(urlEndpointString: "/posts/makeView", dataType: FeedAddResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
-            print(response)
-            response.result.tags.forEach { hashTag in
-                self?.hashTagList.append((hashTag, false))
+            
+            var tagsSection = 0
+            
+            if response.result.tags.count % 4 != 0 {
+                self?.hashTagLastSection = (response.result.tags.count / 4) + 1
+                self?.hashTagLastIdx = response.result.tags.count % 4
+                tagsSection = (response.result.tags.count / 4) + 1
+            }else {
+                tagsSection = response.result.tags.count / 4
+            }
+            
+            
+            self?.hashTagList = Array(repeating: Array(repeating: ("", false), count: 4), count: tagsSection)
+            
+            var tagIdx = 0
+            
+            for i in 0..<tagsSection {
+                for j in 0..<4 {
+                    if tagIdx == response.result.tags.count {
+                        break
+                    }
+                    self?.hashTagList[i][j] = (response.result.tags[tagIdx], false)
+                    tagIdx += 1
+                }
             }
             
             self?.desertInfoList = response.result.desserts
@@ -376,7 +398,6 @@ extension FeedAddViewController {
     func requestAddFeed(desertIdx: Int, description: String, postImgUrls: [String], tags: [String]) {
         let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
         APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedAddRequest.self, header: nil, parameter: param) { [weak self] response in
-            print(response)
             self?.navigationController?.popViewController(animated: true)
         }
     }
