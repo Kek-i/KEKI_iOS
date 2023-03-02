@@ -29,7 +29,7 @@ class FeedAddViewController: UIViewController {
     var productType = "제품 선택"
     
     var imageList: Array<UIImage> = []
-    var hashTagList: [[(String, Bool)]] = []
+    var hashTagList: [(String, Bool)] = []
     
     var desertInfoList: Array<DessertInfo> = []
     
@@ -165,7 +165,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         if collectionView.tag == 1 {
             return 6
         }else {
-            if hashTagLastSection != 0 && section == hashTagLastSection-1 {
+            if hashTagLastIdx != 0 && section == hashTagLastSection - 1 {
                 return hashTagLastIdx
             }else {
                 return 4
@@ -175,7 +175,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if collectionView.tag == 2 {
-            return hashTagList.count
+            return hashTagLastSection
         }else {
             return 1
         }
@@ -200,11 +200,11 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             if let hashTag = cell as? HashTagCell {
                 hashTag.backgroundColor = .white
                 
-                if hashTagList[indexPath.section][indexPath.row].1 {
+                if hashTagList[indexPath.row + (indexPath.section * 4)].1{
                     hashTag.backgroundColor = colorList[indexPath.row % 3]
                 }
                 
-                hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.section][indexPath.row].0)
+                hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row + (indexPath.section * 4)].0)
             }
         }
         return cell
@@ -225,7 +225,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             return CGSize(width: 100, height: 100)
         }else {
             let labelTmp = UILabel()
-            labelTmp.text = "# " + hashTagList[indexPath.section][indexPath.row].0
+            labelTmp.text = "# " + hashTagList[indexPath.row + (indexPath.section * 4)].0
             
             return CGSize(width: labelTmp.intrinsicContentSize.width + 20, height: 26)
         }
@@ -239,7 +239,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         if collectionView.tag == 1{
             return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         }else {
-            return UIEdgeInsets(top: 0, left: 20, bottom: 14, right: 20)
+            return UIEdgeInsets(top: 0, left: 20, bottom: 14, right: 0)
         }
         
     }
@@ -251,19 +251,18 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
         }
         if collectionView.tag == 2 {
-            if hashTagList[indexPath.section][indexPath.row].1 {
+            if hashTagList[indexPath.row + (indexPath.section * 4)].1 {
                 selectHashTagCount -= 1
-                hashTagList[indexPath.section][indexPath.row].1.toggle()
+                hashTagList[indexPath.row + (indexPath.section * 4)].1.toggle()
             }else {
                 if selectHashTagCount > 2 {
                     return
                 }
                 selectHashTagCount += 1
-                hashTagList[indexPath.section][indexPath.row].1.toggle()
+                hashTagList[indexPath.row + (indexPath.section * 4)].1.toggle()
             }
-            
             hashTagList.sort {
-                $0[0].1 && !$1[0].1
+                $0.1 && !$1.1
             }
             
             collectionView.reloadData()
@@ -319,10 +318,7 @@ extension FeedAddViewController: UITableViewDelegate, UITableViewDataSource {
             if desertInfoList.count != 0 {
                 productCell.setProductName(productName: desertInfoList[indexPath.row].dessertName)
             }
-            
         }
-        
-        
         return cell
     }
     
@@ -330,10 +326,6 @@ extension FeedAddViewController: UITableViewDelegate, UITableViewDataSource {
         productType = desertInfoList[indexPath.row].dessertName
         productTypeSelectButton.setTitle(productType, for: .normal)
     }
-    
-
-    
-    
 }
 
 
@@ -363,29 +355,15 @@ extension FeedAddViewController {
     func fetchFeedAddInfo() {
         APIManeger.shared.getData(urlEndpointString: "/posts/makeView", dataType: FeedAddResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
             
-            var tagsSection = 0
-            
             if response.result.tags.count % 4 != 0 {
                 self?.hashTagLastSection = (response.result.tags.count / 4) + 1
                 self?.hashTagLastIdx = response.result.tags.count % 4
-                tagsSection = (response.result.tags.count / 4) + 1
             }else {
-                tagsSection = response.result.tags.count / 4
+                self?.hashTagLastSection = (response.result.tags.count / 4)
             }
             
-            
-            self?.hashTagList = Array(repeating: Array(repeating: ("", false), count: 4), count: tagsSection)
-            
-            var tagIdx = 0
-            
-            for i in 0..<tagsSection {
-                for j in 0..<4 {
-                    if tagIdx == response.result.tags.count {
-                        break
-                    }
-                    self?.hashTagList[i][j] = (response.result.tags[tagIdx], false)
-                    tagIdx += 1
-                }
+            response.result.tags.forEach {
+                self?.hashTagList.append(($0, false))
             }
             
             self?.desertInfoList = response.result.desserts
