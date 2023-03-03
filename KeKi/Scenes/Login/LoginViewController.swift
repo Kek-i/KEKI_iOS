@@ -165,6 +165,11 @@ extension LoginViewController {
                 
             case Role.buyer.rawValue, Role.seller.rawValue:
                 APIManeger.shared.setUserInfo(userInfo: result.result)
+                
+                let encoder = JSONEncoder()
+                if let encoded = try? encoder.encode(result.result) {
+                    UserDefaults.standard.setValue(encoded, forKey: "userInfo")
+                }
                 self?.showMain()
                 
             default:

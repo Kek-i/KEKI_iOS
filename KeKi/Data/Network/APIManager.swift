@@ -265,8 +265,8 @@ extension APIManeger {
                               parameter: T,
                               completionHandler: @escaping (AuthResponse) -> Void) {
         
-        let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
-        let header = APIManeger.shared.getHeaderByToken(accessToken: accessToken)
+//        let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
+//        let header = APIManeger.shared.getHeaderByToken(accessToken: accessToken)
         
         guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
 
