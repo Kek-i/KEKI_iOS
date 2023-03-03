@@ -10,6 +10,7 @@ import UIKit
 class FeedViewController: UIViewController {
     // MARK: - Variables, IBOutlet, ...
     var postIdx: Int = -1
+    var dessertIdx: Int?
     var feedData: [Feed] = []
     
     @IBOutlet weak var tableView: UITableView!
@@ -95,6 +96,13 @@ extension FeedViewController: UITableViewDelegate {
 }
 
 extension FeedViewController: FeedDelegate {
+    func showProductDetail(dessertIdx: Int) {
+        guard let productViewController = UIStoryboard(name: "ProductDetail", bundle: nil).instantiateViewController(withIdentifier: "ProductViewController") as? ProductViewController else {return}
+        
+        productViewController.dessertIdx = dessertIdx
+        navigationController?.pushViewController(productViewController, animated: true)
+    }
+    
     func showStoreMain(storeIdx: Int) {
         guard let storeViewController = UIStoryboard(name: "Store", bundle: nil).instantiateViewController(withIdentifier: "StoreViewController") as? StoreViewController else {return}
         

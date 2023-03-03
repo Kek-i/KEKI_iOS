@@ -12,10 +12,12 @@ protocol FeedDelegate {
     func showFeedMainAlert()
     func showFeedDeclarationActionAlert()
     func showStoreMain(storeIdx: Int)
+    func showProductDetail(dessertIdx: Int)
 }
 
 class FeedCell: UITableViewCell {
     private var postIdx: Int?
+    private var dessertIdx: Int?
     private var storeIdx: Int?
     var feedDelegate: FeedDelegate!
     
@@ -62,8 +64,15 @@ class FeedCell: UITableViewCell {
     }
     
     @IBAction func didTapNicknameButton(_ sender: UIButton) {
-        // TODO: 스토어 메인 화면으로 전환
-        feedDelegate.showStoreMain(storeIdx: storeIdx!)
+        if let index = storeIdx {
+            feedDelegate.showStoreMain(storeIdx: index)
+        }
+    }
+    
+    @IBAction func didTapDessertNameButon(_ sender: UIButton) {
+        if let index = dessertIdx {
+            feedDelegate.showProductDetail(dessertIdx: index)
+        }
     }
     
     private func postLikeFeed() {
@@ -80,6 +89,7 @@ class FeedCell: UITableViewCell {
     
     func configure(data: Feed) {
         postIdx = data.postIdx
+        dessertIdx = data.dessertIdx
         storeIdx = data.storeIdx
         
         // set store profile

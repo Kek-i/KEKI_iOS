@@ -74,6 +74,7 @@ struct SearchResult: Codable {
 
 struct Feed: Codable {
     let postIdx: Int
+    let dessertIdx: Int
     let dessertName: String
     let dessertPrice: Int
     let description: String
