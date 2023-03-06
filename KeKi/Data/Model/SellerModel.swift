@@ -7,14 +7,14 @@
 
 import Foundation
 
-
+// MARK: - 피드 등록 (POST)
 struct FeedAddRequest: Codable {
     let dessertIdx: Int
     let description: String
     let postImgUrls, tags: [String]
 }
 
-// MARK: - Welcome
+// MARK: - 피드 등록 화면 (GET)
 struct FeedAddResponse: Codable {
     let isSuccess: Bool?
     let code: Int?
@@ -22,14 +22,16 @@ struct FeedAddResponse: Codable {
     let result: FeedAddResponseResult
 }
 
-// MARK: - Result
 struct FeedAddResponseResult: Codable {
     let desserts: [DessertInfo]
     let tags: [String]
 }
 
-// MARK: - Dessert
 struct DessertInfo: Codable {
     let dessertIdx: Int
     let dessertName: String
 }
+
+
+
+
