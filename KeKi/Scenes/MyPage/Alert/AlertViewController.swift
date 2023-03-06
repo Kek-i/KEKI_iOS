@@ -7,6 +7,8 @@
 
 import UIKit
 
+private let LOGOUT_ENDPOINT_STR = "/users/logout"
+
 enum Todo {
     case logout
     case secession
@@ -34,9 +36,13 @@ class AlertViewController: UIViewController {
     // MARK: - Action Methods (IBAction, ...)
     @IBAction func didTapCancelButton(_ sender: UIButton) { dismiss(animated: true) }
     
-    @IBAction func didTapconfirmButton(_ sender: UIButton) {
+    @IBAction func didTapConfirmButton(_ sender: UIButton) {
         // TODO: 로그아웃/탈퇴 기능 구현
-        
+        switch todo {
+        case .logout: logout()
+        case .secession: secession()
+        default: return
+        }
     }
     
     
@@ -46,17 +52,17 @@ class AlertViewController: UIViewController {
     private func setupLayout() {
         
         containerView.layer.cornerRadius = 20
-        cancelButton.layer.cornerRadius = 15
-        confirmButton.layer.cornerRadius = 15
+        cancelButton.layer.cornerRadius = 12
+        confirmButton.layer.cornerRadius = 12
         
         switch todo {
         case .logout:
             titleLabel.text = "로그아웃"
             contentLabel.text = "로그아웃 하시겠습니까?"
-            confirmButton.titleLabel?.text = "로그아웃"
+            confirmButton.setTitle("로그아웃", for: .normal)
         case .secession:
             titleLabel.text = "회원탈퇴"
-            contentLabel.text = "정말 케키와 헤어지실건가요? \n정말요?  진짜요? \n (해당 이메일로 재가입은 불가합니다.)"
+            contentLabel.text = "정말 케키와 헤어지실건가요? \n정말요?  진짜요?"
             confirmButton.titleLabel?.text = "탈퇴하기"
         default:
             return
@@ -66,3 +72,24 @@ class AlertViewController: UIViewController {
 }
 
 // MARK: - Extensions
+extension AlertViewController {
+    func logout() {
+        APIManeger.shared.testPatchData(urlEndpointString: LOGOUT_ENDPOINT_STR,
+                                        dataType: GeneralResponseModel.self,
+                                        parameter: nil,
+                                        completionHandler: { [weak self] response in
+            print(response)
+            APIManeger.shared.resetHeader()
+            
+            self?.navigationController?.popToRootViewController(animated: false)
+            let main = DefaultTabBarController()
+            main.modalPresentationStyle = .fullScreen
+            main.modalTransitionStyle = .crossDissolve
+            self?.present(main, animated: true)
+        })
+    }
+    
+    func secession() {
+        // TODO: 회원탈퇴 기능 구현
+    }
+}
