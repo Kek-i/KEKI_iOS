@@ -8,10 +8,11 @@
 import UIKit
 
 private let LOGOUT_ENDPOINT_STR = "/users/logout"
+private let SIGNOUT_ENDPOINT_STR = "/users/signout"
 
 enum Todo {
     case logout
-    case secession
+    case signout
 }
 
 class AlertViewController: UIViewController {
@@ -40,7 +41,7 @@ class AlertViewController: UIViewController {
         // TODO: 로그아웃/탈퇴 기능 구현
         switch todo {
         case .logout: logout()
-        case .secession: secession()
+        case .signout: signout()
         default: return
         }
     }
@@ -60,13 +61,18 @@ class AlertViewController: UIViewController {
             titleLabel.text = "로그아웃"
             contentLabel.text = "로그아웃 하시겠습니까?"
             confirmButton.setTitle("로그아웃", for: .normal)
-        case .secession:
+        case .signout:
             titleLabel.text = "회원탈퇴"
             contentLabel.text = "정말 케키와 헤어지실건가요? \n정말요?  진짜요?"
-            confirmButton.titleLabel?.text = "탈퇴하기"
+            confirmButton.setTitle("탈퇴하기", for: .normal)
         default:
             return
         }
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
     }
 
 }
@@ -89,7 +95,20 @@ extension AlertViewController {
         })
     }
     
-    func secession() {
-        // TODO: 회원탈퇴 기능 구현
+    func signout() {
+        // TODO: 회원탈퇴 기능 구현 (탈퇴 후 응답X, 재로그인시 AF 오류 발생함)
+    
+//        APIManeger.shared.testDeleteData(urlEndpointString: SIGNOUT_ENDPOINT_STR,
+//                                         completionHandler: { [weak self] response in
+//
+//            switch response.isSuccess {
+//            case true:
+//                self?.showAlert(message: "회원탈퇴에 성공하였습니다")
+//            case false:
+//                self?.showAlert(message: "회원탈퇴에 실패하였습니다")
+//            default:
+//                return
+//            }
+//        })
     }
 }

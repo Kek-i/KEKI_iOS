@@ -260,6 +260,26 @@ extension APIManeger {
             .resume()
     }
     
+    func testDeleteData(urlEndpointString: String,
+                        completionHandler: @escaping (GeneralResponseModel) -> Void) {
+             
+             guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
+
+             AF
+                 .request(url,
+                          method: .delete,
+                          headers: self.header ?? nil)
+                 .responseDecodable(of: GeneralResponseModel.self) { response in
+                     switch response.result {
+                     case .success(let success):
+                         completionHandler(success)
+                     case .failure(let error):
+                         print(error.localizedDescription)
+                     }
+                 }
+                 .resume()
+         }
+    
     
     // MARK: 소셜 로그인 용 임시 메소드
     func postSignup<T: Codable>(urlEndpointString: String,

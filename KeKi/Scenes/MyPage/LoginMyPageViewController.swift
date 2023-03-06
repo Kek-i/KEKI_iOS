@@ -138,7 +138,7 @@ class LoginMyPageViewController: UIViewController {
     private func secession() {
         let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
         guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
-        alertViewController.config(todo: .secession)
+        alertViewController.config(todo: .signout)
         alertViewController.modalPresentationStyle = .overCurrentContext
         present(alertViewController, animated: true)
     }
