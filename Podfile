@@ -7,5 +7,6 @@ target 'KeKi' do
 
   # Pods for KeKi
   pod 'IQKeyboardManagerSwift'
+  pod 'naveridlogin-sdk-ios'
 
 end

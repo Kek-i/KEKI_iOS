@@ -41,4 +41,14 @@ struct NicknameValid: Codable {
     var nickname: String
 }
 
-
+struct Seller: Codable {
+    var storeImgUrl: String
+    var nickname: String
+    var address: String
+    var introduciton: String?
+    var orderUrl: String
+    var businessName: String
+    var brandName: String
+    var businessAddress: String
+    var businessNumber: String
+}

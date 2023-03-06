@@ -7,8 +7,11 @@
 
 import UIKit
 
+import Alamofire
+
 import KakaoSDKAuth
 import KakaoSDKUser
+import NaverThirdPartyLogin
 
 enum Role: String {
     case notUser = "비회원"
@@ -21,6 +24,8 @@ private let SOCIAL_LOGIN_URL_ENDPOINT_STR = "/users/login"
 class LoginViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
+    let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
+    
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var naverLoginButton: UIButton!
@@ -60,6 +65,7 @@ class LoginViewController: UIViewController {
     @IBAction func didTapNaverLoginButton(_ sender: UIButton) {
         // TODO: 네이버 로그인 기능 추가
         print("didTapNaverLoginButton")
+        naverSocialLogin()
     }
     
     @IBAction func didTapAppleLoginButton(_ sender: UIButton) {
@@ -100,7 +106,21 @@ class LoginViewController: UIViewController {
     }
 }
 
-// MARK: - Extensions
+// MARK: - Social Login Delegate
+extension LoginViewController : NaverThirdPartyLoginConnectionDelegate {
+    func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() { getNaverUserInfo() }
+    
+    func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() { getNaverUserInfo() }
+    
+    func oauth20ConnectionDidFinishDeleteToken() { getNaverUserInfo() }
+    
+    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
+        print("Naver Login ERROR :: \(error.localizedDescription)")
+    }
+}
+
+
+// MARK: - Social Login GetUserInfo Methods
 extension LoginViewController {
     private func kakaoSocialLogin() {
         // 카카오톡 실행 가능 여부 확인
@@ -124,6 +144,12 @@ extension LoginViewController {
             }
         }
     }
+    
+    private func naverSocialLogin() {
+        print("naverSocialLogin called")
+        naverLoginInstance?.delegate = self
+        naverLoginInstance?.requestThirdPartyLogin()
+    }
 }
 
 extension LoginViewController {
@@ -140,6 +166,27 @@ extension LoginViewController {
                 requestSocialLogin(email: email, provider: "카카오")
             }
         }
+    }
+    
+    private func getNaverUserInfo() {
+        guard let tokenType = naverLoginInstance?.tokenType else { return }
+        guard let accessToken = naverLoginInstance?.accessToken else { return }
+        
+        let urlStr = "https://openapi.naver.com/v1/nid/me"
+        let url = URL(string: urlStr)!
+        
+        let authorization = "\(tokenType) \(accessToken)"
+        let req = AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
+        
+        req.responseJSON { response in
+                guard let result = response.value as? [String: Any] else { return }
+//                guard let object = result["response"] as? [String: Any] else { return }
+//                guard let name = object["name"] as? String else { return }
+//                guard let email = object["email"] as? String else { return }
+//                guard let id = object["id"] as? String else {return}
+                
+                print(result)
+              }
     }
     
     private func requestSocialLogin(email: String, provider: String) {

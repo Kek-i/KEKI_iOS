@@ -1,16 +1,20 @@
 PODS:
   - IQKeyboardManagerSwift (6.5.11)
+  - naveridlogin-sdk-ios (4.1.5)
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
+  - naveridlogin-sdk-ios
 
 SPEC REPOS:
   trunk:
     - IQKeyboardManagerSwift
+    - naveridlogin-sdk-ios
 
 SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
+  naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
 
-PODFILE CHECKSUM: 4039b25daee2333fe4a89140b95737e7ce70b500
+PODFILE CHECKSUM: 18b404ef9b74349acb4ce7bfff30340858422270
 
 COCOAPODS: 1.11.3
