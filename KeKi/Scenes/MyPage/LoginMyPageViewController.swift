@@ -8,11 +8,9 @@
 import UIKit
 import Kingfisher
 
-private let LOGOUT_ENDPOINT_STR = "/users/logout"
-
-enum UserKind {
-    case buyer
-    case seller
+enum UserKind: String {
+    case buyer = "구매자"
+    case seller = "판매자"
 }
 
 enum SectionModel {
@@ -24,7 +22,7 @@ enum SectionModel {
 class LoginMyPageViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
-    var userKind: UserKind? = .buyer
+    let userKind = APIManeger.shared.getUserInfo().role
     private var nickname: String = ""
     private var profileImgUrl: String? = nil
     
@@ -111,10 +109,10 @@ class LoginMyPageViewController: UIViewController {
         let storyboard = UIStoryboard.init(name: "UserProfileSetting", bundle: nil)
         let next: UIViewController?
         switch userKind {
-        case .buyer:
+        case UserKind.buyer.rawValue:
             next = storyboard.instantiateViewController(withIdentifier: "BuyerProfileSetViewController") as? BuyerProfileSetViewController
 
-        case .seller:
+        case UserKind.seller.rawValue:
             next = storyboard.instantiateViewController(withIdentifier: "SellerProfileSetViewController") as? SellerProfileSetViewController
         default:
             next = UIViewController()
@@ -129,38 +127,19 @@ class LoginMyPageViewController: UIViewController {
     }
     
     private func logout() {
-        let alert = UIAlertController(title: nil, message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
-        let logout = UIAlertAction(title: "로그아웃", style: .default) { _ in
-            APIManeger.shared.testPatchData(urlEndpointString: LOGOUT_ENDPOINT_STR,
-                                            dataType: GeneralResponseModel.self,
-                                            parameter: nil,
-                                            completionHandler: { [weak self] response in
-                print(response)
-                APIManeger.shared.resetHeader()
-                
-                self?.navigationController?.popToRootViewController(animated: false)
-                let main = DefaultTabBarController()
-                main.modalPresentationStyle = .fullScreen
-                main.modalTransitionStyle = .crossDissolve
-                self?.present(main, animated: true)
-            })
-        }
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
-        alert.addAction(logout)
-        alert.addAction(cancel)
-        present(alert, animated: true)
-//        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
-//        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
-//        alertViewController.config(todo: .logout)
-//        alertViewController.modalPresentationStyle = .fullScreen
-//        present(alertViewController, animated: true)
+        let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
+        guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
+        alertViewController.config(todo: .logout)
+        tabBarController?.tabBar.isHidden = true
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        present(alertViewController, animated: true)
     }
     
     private func secession() {
         let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
         guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
-        alertViewController.config(todo: .secession)
-        alertViewController.modalPresentationStyle = .fullScreen
+        alertViewController.config(todo: .signout)
+        alertViewController.modalPresentationStyle = .overCurrentContext
         present(alertViewController, animated: true)
     }
     
@@ -305,16 +284,19 @@ private let USER_PROFILE_ENDPOINT_STR = "/users/profile"
 extension LoginMyPageViewController {
     private func fetchData() {
         APIManeger.shared.testGetData(urlEndpointString: USER_PROFILE_ENDPOINT_STR,
-                                      dataType: ProfileResponse.self,
+                                      dataType: ProfileResponse<Signup>.self,
                                       parameter: nil,
                                       completionHandler: { [weak self] response in
             
             switch response.code {
             case 1000:
-                let nickname = response.result.nickname
-                let profileImgUrl = response.result.profileImg
-                self?.setUserInfo(nickname: nickname, profilImgUrl: profileImgUrl ?? nil)
-                if profileImgUrl != nil { self?.profileImgView.kf.setImage(with: URL(string: profileImgUrl!)) }
+                if let result = response.result {
+                    let nickname = result.nickname
+                    let profileImgUrl = result.profileImg
+                    self?.setUserInfo(nickname: nickname, profilImgUrl: profileImgUrl ?? nil)
+                    if profileImgUrl != nil { self?.profileImgView.kf.setImage(with: URL(string: profileImgUrl!)) }
+                }
+                
             default:
                 print("ERROR: \(response.message)")
             }

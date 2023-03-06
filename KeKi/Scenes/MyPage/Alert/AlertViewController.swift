@@ -7,9 +7,12 @@
 
 import UIKit
 
+private let LOGOUT_ENDPOINT_STR = "/users/logout"
+private let SIGNOUT_ENDPOINT_STR = "/users/signout"
+
 enum Todo {
     case logout
-    case secession
+    case signout
 }
 
 class AlertViewController: UIViewController {
@@ -34,9 +37,13 @@ class AlertViewController: UIViewController {
     // MARK: - Action Methods (IBAction, ...)
     @IBAction func didTapCancelButton(_ sender: UIButton) { dismiss(animated: true) }
     
-    @IBAction func didTapconfirmButton(_ sender: UIButton) {
+    @IBAction func didTapConfirmButton(_ sender: UIButton) {
         // TODO: 로그아웃/탈퇴 기능 구현
-        
+        switch todo {
+        case .logout: logout()
+        case .signout: signout()
+        default: return
+        }
     }
     
     
@@ -46,23 +53,62 @@ class AlertViewController: UIViewController {
     private func setupLayout() {
         
         containerView.layer.cornerRadius = 20
-        cancelButton.layer.cornerRadius = 15
-        confirmButton.layer.cornerRadius = 15
+        cancelButton.layer.cornerRadius = 12
+        confirmButton.layer.cornerRadius = 12
         
         switch todo {
         case .logout:
             titleLabel.text = "로그아웃"
             contentLabel.text = "로그아웃 하시겠습니까?"
-            confirmButton.titleLabel?.text = "로그아웃"
-        case .secession:
+            confirmButton.setTitle("로그아웃", for: .normal)
+        case .signout:
             titleLabel.text = "회원탈퇴"
-            contentLabel.text = "정말 케키와 헤어지실건가요? \n정말요?  진짜요? \n (해당 이메일로 재가입은 불가합니다.)"
-            confirmButton.titleLabel?.text = "탈퇴하기"
+            contentLabel.text = "정말 케키와 헤어지실건가요? \n정말요?  진짜요?"
+            confirmButton.setTitle("탈퇴하기", for: .normal)
         default:
             return
         }
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
     }
 
 }
 
 // MARK: - Extensions
+extension AlertViewController {
+    func logout() {
+        APIManeger.shared.testPatchData(urlEndpointString: LOGOUT_ENDPOINT_STR,
+                                        dataType: GeneralResponseModel.self,
+                                        parameter: nil,
+                                        completionHandler: { [weak self] response in
+            print(response)
+            APIManeger.shared.resetHeader()
+            
+            self?.navigationController?.popToRootViewController(animated: false)
+            let main = DefaultTabBarController()
+            main.modalPresentationStyle = .fullScreen
+            main.modalTransitionStyle = .crossDissolve
+            self?.present(main, animated: true)
+        })
+    }
+    
+    func signout() {
+        // TODO: 회원탈퇴 기능 구현 (탈퇴 후 응답X, 재로그인시 AF 오류 발생함)
+    
+//        APIManeger.shared.testDeleteData(urlEndpointString: SIGNOUT_ENDPOINT_STR,
+//                                         completionHandler: { [weak self] response in
+//
+//            switch response.isSuccess {
+//            case true:
+//                self?.showAlert(message: "회원탈퇴에 성공하였습니다")
+//            case false:
+//                self?.showAlert(message: "회원탈퇴에 실패하였습니다")
+//            default:
+//                return
+//            }
+//        })
+    }
+}

@@ -25,11 +25,11 @@ struct AuthResponse: Codable {
     }
 }
 
-struct ProfileResponse: Codable {
+struct ProfileResponse<T: Codable>: Codable {
     var isSuccess: Bool
     var code: Int
     var message: String
-    var result: Signup
+    var result: T?
 }
 
 struct Signup: Codable {
@@ -42,13 +42,13 @@ struct NicknameValid: Codable {
 }
 
 struct Seller: Codable {
-    var storeImgUrl: String
-    var nickname: String
-    var address: String
-    var introduciton: String?
-    var orderUrl: String
-    var businessName: String
-    var brandName: String
-    var businessAddress: String
-    var businessNumber: String
+    var storeImgUrl: String? = nil
+    var nickname: String?
+    var address: String?
+    var introduction: String?
+    var orderUrl: String?
+    var businessName: String?
+    var brandName: String?
+    var businessAddress: String?
+    var businessNumber: String?
 }

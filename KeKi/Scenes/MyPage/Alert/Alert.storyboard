@@ -13,18 +13,18 @@
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="AlertViewController" id="Y6W-OH-hqX" customClass="AlertViewController" customModule="KeKi" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41p-S9-dYX">
                                 <rect key="frame" x="46.666666666666657" y="321" width="300" height="210"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tTE-AY-VWA">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="tTE-AY-VWA">
                                         <rect key="frame" x="30" y="140" width="240" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8j9-6m-otm">
-                                                <rect key="frame" x="0.0" y="0.0" width="115" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="112" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Amh-sa-U06"/>
@@ -37,13 +37,13 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxZ-rG-33j">
-                                                <rect key="frame" x="125" y="0.0" width="115" height="40"/>
+                                                <rect key="frame" x="128" y="0.0" width="112" height="40"/>
                                                 <color key="backgroundColor" red="0.94901960784313721" green="0.84313725490196079" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="탈퇴하기"/>
                                                 <connections>
-                                                    <action selector="didTapSecessionButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="AGz-co-n1d"/>
+                                                    <action selector="didTapConfirmButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="lt2-Ok-XpC"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -73,7 +73,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="210" id="3eR-5q-PYx"/>
                                     <constraint firstAttribute="bottom" secondItem="tTE-AY-VWA" secondAttribute="bottom" constant="30" id="QdW-UD-g58"/>
@@ -87,7 +87,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="41p-S9-dYX" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="6sQ-Rp-qon"/>
                             <constraint firstItem="41p-S9-dYX" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="vqv-Ir-xqZ"/>
@@ -107,9 +107,6 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

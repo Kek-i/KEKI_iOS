@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import Kingfisher
 
 private let SIGNUP_ENDPOINT = "/stores/signup"
+private let SELLER_EDIT_PROFILE_ENDPOINT = "/stores/profile"
 
 class SellerProfileSetViewController: UIViewController {
 
@@ -36,9 +38,11 @@ class SellerProfileSetViewController: UIViewController {
     // MARK: - Methods of LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        tabBarController?.tabBar.isHidden = true
         setupNavigationBarLayout()
         setupLayout()
+        configure()
+        setup()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -48,13 +52,19 @@ class SellerProfileSetViewController: UIViewController {
         present(imagePickerController, animated: true)
     }
     
-    
     // MARK: - Helper Methods (Setup Method, ...)
+    private func configure() {
+        let email = UserDefaults.standard.value(forKey: "socialEmail") as! String
+        userEmailLabel.text = email
+        if APIManeger.shared.getHeader() != nil { fetchData() }
+    }
+    
     private func setup() {
         placeholder["storeIntroTextView"] = "간단히 가게를 소개해주세요. (최대 100자)"
         placeholder["bAddressTextView"] = "사업자등록증에 표기된 사업자주소를  입력해주세요."
         storeIntroTextView.delegate = self
         bAddressTextView.delegate = self
+        imagePickerController.delegate = self
     }
     
     private func setupLayout() {
@@ -132,7 +142,6 @@ extension SellerProfileSetViewController: UIImagePickerControllerDelegate, UINav
         }
         
         selectedProfileImg = selectedProfileImg?.resized(toWidth: profileImageButton.frame.width)
-        profileImageButton.backgroundColor = .clear
         profileImageButton.setImage(selectedProfileImg, for: .normal)
         
         picker.dismiss(animated: true)
@@ -177,16 +186,17 @@ extension SellerProfileSetViewController {
         }
     }
     
-    private func setSellerInfo() -> Seller {
-        let signupInfo = Seller(storeImgUrl: savedProfileImgUrl ?? "",
+    private func getSellerInfo() -> Seller {
+        let sellerInfo = Seller(storeImgUrl: savedProfileImgUrl ?? "",
                                 nickname: storeNameTextField.text!,
                                 address: storeAddressTextField.text ?? "",
+                                introduction: storeIntroTextView.text ?? "",
                                 orderUrl: orderLinkTextField.text ?? "",
                                 businessName: bRepresentativeNameTextField.text ?? "",
                                 brandName: bStoreNameTextField.text ?? "",
                                 businessAddress: bAddressTextView.text ?? "",
                                 businessNumber: bCompRegistNumTextField.text ?? "")
-        return signupInfo
+        return sellerInfo
     }
     
     private func signup() {
@@ -194,14 +204,28 @@ extension SellerProfileSetViewController {
 
             if selectedProfileImg != nil {
                 uploadProfileImage(image: selectedProfileImg!) { [weak self] in
-                    let signupInfo = self?.setSellerInfo()
+                    let signupInfo = self?.getSellerInfo()
                     self?.signupRequest(param: signupInfo!)
                 }
             } else {
-                let signupInfo = setSellerInfo()
+                let signupInfo = getSellerInfo()
                 signupRequest(param: signupInfo)
             }
             
+        } else { showAlert(message: "가게 이름을 입력해주세요") }
+    }
+    
+    private func editProfile() {
+        if let _ = storeNameTextField.text {
+            if selectedProfileImg != nil {
+                uploadProfileImage(image: selectedProfileImg!) { [weak self] in
+                    let editedUserInfo = self?.getSellerInfo()
+                    self?.editProfileRequest(param: editedUserInfo!)
+                }
+            } else {
+                let signupInfo = getSellerInfo()
+                editProfileRequest(param: signupInfo)
+            }
         } else { showAlert(message: "가게 이름을 입력해주세요") }
     }
     
@@ -231,8 +255,62 @@ extension SellerProfileSetViewController {
         })
     }
     
-    private func editProfile() {
-        // TODO: 판매자 프로필 편집 구현
-        print("seller :: editProfile")
+    private func editProfileRequest(param: Seller) {
+        APIManeger.shared.testPatchData(urlEndpointString: SELLER_EDIT_PROFILE_ENDPOINT,
+                                   dataType: Seller.self,
+                                   parameter: param,
+                                   completionHandler: { [weak self] response in
+            switch response.code {
+            case 1000:
+                print("판매자 프로필 수정 성공")
+                self?.navigationController?.popToRootViewController(animated: true)
+                
+            default:
+                print("판매자 프로필 수정 실패 :: \(response)")
+                self?.showAlert(message: "네트워크 오류로 인해 프로필 수정에 실패하였습니다.")
+            }
+        })
+    }
+    
+    private func fetchData() {
+        APIManeger.shared.testGetData(urlEndpointString: SELLER_EDIT_PROFILE_ENDPOINT,
+                                      dataType: ProfileResponse<Seller>.self,
+                                      parameter: nil,
+                                      completionHandler: { [weak self] response in
+
+            switch response.code {
+            case 1000:
+                if let result = response.result {
+
+                    self?.storeNameTextField.text = result.nickname
+                    self?.storeAddressTextField.text = result.address
+                    if let _ = result.introduction {
+                        self?.storeIntroTextView.text = result.introduction
+                        self?.storeIntroTextView.textColor = .black
+                    }
+                    
+                    self?.orderLinkTextField.text = result.orderUrl
+
+                    self?.bStoreNameTextField.text = result.brandName
+                    self?.bRepresentativeNameTextField.text = result.businessName
+                    if let _ = result.businessAddress {
+                        self?.bAddressTextView.text = result.businessAddress
+                        self?.bAddressTextView.textColor = .black
+                    }
+                    self?.bCompRegistNumTextField.text = result.businessNumber
+
+                    if let profileImgUrl = result.storeImgUrl {
+                        let modifier = AnyImageModifier { return $0.withRenderingMode(.alwaysOriginal) }
+                        self?.profileImageButton.kf.setImage(with: URL(string: profileImgUrl),
+                                                             for: .normal, placeholder: nil,
+                                                             options: [.imageModifier(modifier)],
+                                                             progressBlock: nil, completionHandler: nil)
+                    }
+                }
+
+            default:
+                print("ERROR: \(response.message)")
+            }
+        })
     }
 }
