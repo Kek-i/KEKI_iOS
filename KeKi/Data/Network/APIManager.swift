@@ -180,6 +180,8 @@ extension APIManeger {
         self.header = HTTPHeaders(["Authorization": userInfo.accessToken])
     }
     
+    func getUserInfo() -> AuthResponse.Result { return self.userInfo! }
+    
     func getHeader() -> HTTPHeaders? { return header }
     func getHeaderByToken(accessToken: String) -> HTTPHeaders { return HTTPHeaders(["Authorization": accessToken]) }
     func resetHeader() { header = nil }

@@ -132,7 +132,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykt-Wf-hSu">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="858"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJK-rS-crk">
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJK-rS-crk">
                                                 <rect key="frame" x="137.66666666666666" y="30" width="118" height="118"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.96470588239999999" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -143,7 +143,6 @@
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                                 <connections>
                                                     <action selector="didTapSelectPicButton:" destination="o2d-QA-mYI" eventType="touchUpInside" id="xQg-Gp-i3k"/>
-                                                    <action selector="didTapSelectPictureButton:" destination="GDi-4T-dhO" eventType="touchUpInside" id="tjd-ZZ-3HB"/>
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="5bg-e5-bbk">

@@ -10,9 +10,9 @@ import Kingfisher
 
 private let LOGOUT_ENDPOINT_STR = "/users/logout"
 
-enum UserKind {
-    case buyer
-    case seller
+enum UserKind: String {
+    case buyer = "구매자"
+    case seller = "판매자"
 }
 
 enum SectionModel {
@@ -24,7 +24,7 @@ enum SectionModel {
 class LoginMyPageViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
-    var userKind: UserKind? = .buyer
+    let userKind = APIManeger.shared.getUserInfo().role
     private var nickname: String = ""
     private var profileImgUrl: String? = nil
     
@@ -111,10 +111,10 @@ class LoginMyPageViewController: UIViewController {
         let storyboard = UIStoryboard.init(name: "UserProfileSetting", bundle: nil)
         let next: UIViewController?
         switch userKind {
-        case .buyer:
+        case UserKind.buyer.rawValue:
             next = storyboard.instantiateViewController(withIdentifier: "BuyerProfileSetViewController") as? BuyerProfileSetViewController
 
-        case .seller:
+        case UserKind.seller.rawValue:
             next = storyboard.instantiateViewController(withIdentifier: "SellerProfileSetViewController") as? SellerProfileSetViewController
         default:
             next = UIViewController()
@@ -305,16 +305,19 @@ private let USER_PROFILE_ENDPOINT_STR = "/users/profile"
 extension LoginMyPageViewController {
     private func fetchData() {
         APIManeger.shared.testGetData(urlEndpointString: USER_PROFILE_ENDPOINT_STR,
-                                      dataType: ProfileResponse.self,
+                                      dataType: ProfileResponse<Signup>.self,
                                       parameter: nil,
                                       completionHandler: { [weak self] response in
             
             switch response.code {
             case 1000:
-                let nickname = response.result.nickname
-                let profileImgUrl = response.result.profileImg
-                self?.setUserInfo(nickname: nickname, profilImgUrl: profileImgUrl ?? nil)
-                if profileImgUrl != nil { self?.profileImgView.kf.setImage(with: URL(string: profileImgUrl!)) }
+                if let result = response.result {
+                    let nickname = result.nickname
+                    let profileImgUrl = result.profileImg
+                    self?.setUserInfo(nickname: nickname, profilImgUrl: profileImgUrl ?? nil)
+                    if profileImgUrl != nil { self?.profileImgView.kf.setImage(with: URL(string: profileImgUrl!)) }
+                }
+                
             default:
                 print("ERROR: \(response.message)")
             }

@@ -234,19 +234,21 @@ extension BuyerProfileSetViewController {
 extension BuyerProfileSetViewController {
     private func fetchData() {
         APIManeger.shared.testGetData(urlEndpointString: BUYER_EDIT_PROFILE_ENDPOINT,
-                                      dataType: ProfileResponse.self,
+                                      dataType: ProfileResponse<Signup>.self,
                                       parameter: nil,
                                       completionHandler: { [weak self] response in
             
             switch response.code {
             case 1000:
-                self?.nickNameTextField.text = response.result.nickname
-                if let profileImgUrl = response.result.profileImg {
-                    let modifier = AnyImageModifier { return $0.withRenderingMode(.alwaysOriginal) }
-                    self?.profileImageButton.kf.setImage(with: URL(string: profileImgUrl),
-                                                         for: .normal, placeholder: nil,
-                                                         options: [.imageModifier(modifier)],
-                                                         progressBlock: nil, completionHandler: nil)
+                if let result = response.result {
+                    self?.nickNameTextField.text = result.nickname
+                    if let profileImgUrl = result.profileImg {
+                        let modifier = AnyImageModifier { return $0.withRenderingMode(.alwaysOriginal) }
+                        self?.profileImageButton.kf.setImage(with: URL(string: profileImgUrl),
+                                                             for: .normal, placeholder: nil,
+                                                             options: [.imageModifier(modifier)],
+                                                             progressBlock: nil, completionHandler: nil)
+                    }
                 }
                 
             default:
