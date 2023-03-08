@@ -28,15 +28,17 @@ class FeedAddViewController: UIViewController {
     
     var productType = "제품 선택"
     
-    var imageList: Array<UIImage> = []
+    var imageList: [UIImage] = []
+    var postImgUrls: [String] = []
     var hashTagList: [(String, Bool)] = []
     
-    var desertInfoList: Array<DessertInfo> = []
+    var desertInfoList: [DessertInfo] = []
+    var selectDesertIdx = -1
     
     var hashTagLastSection = 0
     var hashTagLastIdx = 0
     
-    let colorList: Array<UIColor> = [
+    let colorList: [UIColor] = [
         UIColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
         UIColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
         UIColor(red: 244.0 / 255.0, green: 203.0 / 255.0, blue: 203.0 / 255.0, alpha: 1)
@@ -137,7 +139,41 @@ class FeedAddViewController: UIViewController {
     }
     
     @objc func addFeed() {
-//        requestAddFeed()
+        if productContentTextView.text == nil && productContentTextView.text == "" {
+            showAlert(title: "제품 소개란 입력", message: "제품의 소개란을 입력해주세요.")
+            return
+        }
+        if selectHashTagCount == 0 {
+            showAlert(title: "해시태그 선택", message: "해시태그를 1개 이상 선택해주세요.")
+            return
+        }
+        if imageList.count == 0 {
+            showAlert(title: "이미지 선택", message: "제품의 이미지를 1개 이상 선택해주세요.")
+            return
+        }
+        if selectDesertIdx == -1 {
+            showAlert(title: "제품 선택", message: "제품을 선택해주세요.")
+            return
+        }
+        
+        let description = productContentTextView.text!
+        var selectTags: [String] = []
+        hashTagList.forEach {
+            if $0.1 {
+                selectTags.append($0.0)
+            }
+        }
+        uploadImages {
+            self.requestAddFeed(desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
+        }
+        
+        
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
     }
     
     
@@ -185,12 +221,13 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         if collectionView.tag == 1 {
             if let imageCell = cell as? ImageCell {
+                imageCell.productImage.image = nil
                 if indexPath.row == 0 {
                     guard let image = UIImage(named: "imagePlus") else {return cell}
                     imageCell.productImage.contentMode = .center
                     imageCell.productImage.image = image
                 }else {
-                    if imageList.count != 0 {
+                    if imageList.count != 0 && imageList.count > indexPath.row-1{
                         imageCell.productImage.contentMode = .scaleToFill
                         imageCell.productImage.image = imageList[indexPath.row-1]
                     }
@@ -273,6 +310,8 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         imagePickerController.settings.selection.max = 5
         imagePickerController.settings.fetch.assets.supportedMediaTypes = [.image]
         
+        imageList.removeAll()
+        
         self.presentImagePicker(imagePickerController) { (asset) in
             
         } deselect: { (asset) in
@@ -323,6 +362,7 @@ extension FeedAddViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectDesertIdx = indexPath.row
         productType = desertInfoList[indexPath.row].dessertName
         productTypeSelectButton.setTitle(productType, for: .normal)
     }
@@ -373,10 +413,28 @@ extension FeedAddViewController {
         }
     }
     
-    func requestAddFeed(desertIdx: Int, description: String, postImgUrls: [String], tags: [String]) {
+    func uploadImages(completionHanlder: @escaping () -> Void) {
+        imageList.forEach { image in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyMMdd_HHmmssss"
+            let pathRoot = dateFormatter.string(from: Date())
+            
+            FirebaseStorageManager.uploadImage(image: image, pathRoot: pathRoot,
+                                                        folderName: FirebaseStorageManager.profileFolder
+                                                        ,completion: { [weak self] url in
+                self?.postImgUrls.append(url?.description ?? "")
+                
+                if self?.imageList.count == self?.postImgUrls.count {
+                    completionHanlder()
+                }
+            })
+        }
+    }
+
+    func requestAddFeed(desertIdx: Int, description: String, tags: [String]) {
         let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
-        APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedAddRequest.self, header: nil, parameter: param) { [weak self] response in
-            self?.navigationController?.popViewController(animated: true)
+        APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedAddRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+            self?.showAlert(title: "성공", message: "성공")
         }
     }
 }
