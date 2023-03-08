@@ -10,13 +10,13 @@ import Alamofire
 
 private let DEV_BASE_URL = "https://keki-dev.store" // 개발용 
 
-private let buyerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoxLCJzdWIiOiIxIiwiZXhwIjoxNjc2OTY3MDE0fQ.Fiuxn5L8uepxdXBnkTNWk2j9Mw6IXR6u6SQPjQCk6QI"    // 임시 구매자 액세스 토큰
-private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiIyIiwiZXhwIjoxNjc2OTY2OTMxfQ.LBKAMN93zX8NiBBc2ly1Lyu0WYei94_dxSvQoygbg98"    // 임시 판매자 액세스 토큰
+private let buyerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoxLCJzdWIiOiIxIiwiZXhwIjoxNjc4NjA2ODE4fQ.0oqG7wBSUu2VaFyZCwn2ovP30KAHXq4DY7ZGoXKcUP0"    // 임시 구매자 액세스 토큰
+private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiIyIiwiZXhwIjoxNjc4MzIyMTM1fQ.oy_uRpYrWuV9yZO0vTWWpLgVNiEURasgupR5ROjsqm0"    // 임시 판매자 액세스 토큰
 
 class APIManeger {
     // 임시 액세스 토큰 (구매자,판매자)
     static let buyerTokenHeader = HTTPHeaders(["Authorization": buyerAccessToken])
-    static let sellerTokenHeader = HTTPHeaders(["Authorization": buyerAccessToken])
+    static let sellerTokenHeader = HTTPHeaders(["Authorization": sellerAccessToken])
     
     
     private var userInfo: AuthResponse.Result? = nil
@@ -45,6 +45,7 @@ class APIManeger {
         AF
             .request(url, method: .get, parameters: parameter, headers: header ?? nil)
             .responseDecodable(of: T.self) { response in
+                print(response)
                 switch response.result {
                 case .success(let success):
                     completionHandler(success)

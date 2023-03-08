@@ -12,6 +12,7 @@
 		731AA6A0298D016D008A9A1B /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA693298D016C008A9A1B /* DayCell.swift */; };
 		731AA6A4298D016D008A9A1B /* DayDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731AA697298D016D008A9A1B /* DayDetail.storyboard */; };
 		731AA6A6298D016D008A9A1B /* DayDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731AA699298D016D008A9A1B /* DayDetailViewController.swift */; };
+		734403FC29AD01820023381A /* ProductSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734403FB29AD01820023381A /* ProductSelectCell.swift */; };
 		735AC112298D03390099B549 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 735AC110298D03390099B549 /* Calendar.storyboard */; };
 		735AC113298D03390099B549 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC111298D03390099B549 /* CalendarViewController.swift */; };
 		735AC116298D04570099B549 /* DayAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC114298D04570099B549 /* DayAddViewController.swift */; };
@@ -27,6 +28,7 @@
 		738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64922988A9BE006BB124 /* StoreImageCell.swift */; };
 		738F64982988A9BE006BB124 /* StoreImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64932988A9BE006BB124 /* StoreImageViewController.swift */; };
 		738F64992988A9BE006BB124 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64942988A9BE006BB124 /* TabViewController.swift */; };
+		73A3A42229AC460400724463 /* SellerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3A42129AC460400724463 /* SellerModel.swift */; };
 		73E985132995F1A300DC090A /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E985122995F1A300DC090A /* CalendarModel.swift */; };
 		73FE8B9D298FEDAE00264B44 /* RecentCakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8B8D298FEDAD00264B44 /* RecentCakeCell.swift */; };
 		73FE8BA4298FEDAE00264B44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8B94298FEDAD00264B44 /* SearchViewController.swift */; };
@@ -124,6 +126,7 @@
 		731AA693298D016C008A9A1B /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		731AA697298D016D008A9A1B /* DayDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DayDetail.storyboard; sourceTree = "<group>"; };
 		731AA699298D016D008A9A1B /* DayDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayDetailViewController.swift; sourceTree = "<group>"; };
+		734403FB29AD01820023381A /* ProductSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSelectCell.swift; sourceTree = "<group>"; };
 		735AC110298D03390099B549 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		735AC111298D03390099B549 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		735AC114298D04570099B549 /* DayAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAddViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +141,7 @@
 		738F64922988A9BE006BB124 /* StoreImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageCell.swift; sourceTree = "<group>"; };
 		738F64932988A9BE006BB124 /* StoreImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageViewController.swift; sourceTree = "<group>"; };
 		738F64942988A9BE006BB124 /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		73A3A42129AC460400724463 /* SellerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerModel.swift; sourceTree = "<group>"; };
 		73E985122995F1A300DC090A /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
 		73FE8B8D298FEDAD00264B44 /* RecentCakeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentCakeCell.swift; sourceTree = "<group>"; };
 		73FE8B94298FEDAD00264B44 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -272,6 +276,7 @@
 				735AFF0729A850F800779E85 /* ProductAdd.storyboard */,
 				735AFF0929A8764D00779E85 /* ProductAddViewController.swift */,
 				735AFF0229A704F900779E85 /* ImageCell.swift */,
+				734403FB29AD01820023381A /* ProductSelectCell.swift */,
 			);
 			path = Seller;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				A2A7966629A4E76700A2F2E2 /* FeedModel.swift */,
 				A2A7966829A705F000A2F2E2 /* StoreModel.swift */,
 				A236506429A7A0FC00744252 /* ProductModel.swift */,
+				73A3A42129AC460400724463 /* SellerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -772,6 +778,7 @@
 				A2434B0E29865B9600F60D1A /* UnLoginMyPageViewController.swift in Sources */,
 				738F64962988A9BE006BB124 /* StoreInfoPopUpViewController.swift in Sources */,
 				738F64982988A9BE006BB124 /* StoreImageViewController.swift in Sources */,
+				734403FC29AD01820023381A /* ProductSelectCell.swift in Sources */,
 				A2434AFA298659A500F60D1A /* TemplateViewController.swift in Sources */,
 				A2E015122992A35700EBACF0 /* HomeTableViewCell.swift in Sources */,
 				A2F607602989DCB000F4F3DD /* ProductImgCell.swift in Sources */,
@@ -779,6 +786,7 @@
 				73FE8BAB298FEDAE00264B44 /* PopularSearchCell.swift in Sources */,
 				A23F2D9C29A0EBEA0046ED70 /* UIImage+.swift in Sources */,
 				A2F6075B2989633400F4F3DD /* ProductViewController.swift in Sources */,
+				73A3A42229AC460400724463 /* SellerModel.swift in Sources */,
 				A2434B0E29865B9600F60D1A /* UnLoginMyPageViewController.swift in Sources */,
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
 				A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */,

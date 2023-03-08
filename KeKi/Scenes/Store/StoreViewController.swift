@@ -64,13 +64,13 @@ class StoreViewController: UIViewController {
     func setupNavigationBar() {
         self.navigationController?.isNavigationBarHidden = false
         
-        let backButton = UIBarButtonItem(image: UIImage(named: "chevron-right"), style: .done, target: self, action: #selector(backToScreen))
+        let backButton = UIBarButtonItem(image: UIImage(named: "chevron-right"), style: .done, target: self, action: #selector(didTapBackItem))
         backButton.tintColor = .black
         
         let infoButton = UIBarButtonItem(image: UIImage(named: "info"), style: .done, target: self, action: #selector(showInfoPopUp))
         infoButton.tintColor = .black
         
-        let messageButton = UIBarButtonItem(image: UIImage(named: "icMessage"), style: .done, target: self, action: #selector(moveToMessage))
+        let messageButton = UIBarButtonItem(image: UIImage(named: "icMessage"), style: .done, target: self, action: #selector(didTapOrderButton))
         messageButton.tintColor = .black
         
         self.navigationItem.leftBarButtonItem = backButton

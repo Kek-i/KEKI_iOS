@@ -9,13 +9,6 @@ import UIKit
 import BSImagePicker
 import Photos
 
-enum ProductType: String {
-    case cake = "케이크"
-    case tarte = "타르트"
-    case cookies = "쿠키"
-    case none = "제품 선택"
-}
-
 
 class FeedAddViewController: UIViewController {
 
@@ -23,9 +16,7 @@ class FeedAddViewController: UIViewController {
     
     @IBOutlet weak var selectButtonView: UIView!
     @IBOutlet weak var productTypeSelectButton: UIButton!
-    @IBOutlet weak var cakeButton: UIButton!
-    @IBOutlet weak var tarteButton: UIButton!
-    @IBOutlet weak var cookiesButton: UIButton!
+    @IBOutlet weak var productTypeTableView: UITableView!
     
     @IBOutlet weak var selectButtonViewHeight: NSLayoutConstraint!
     
@@ -35,12 +26,19 @@ class FeedAddViewController: UIViewController {
     
     let imagePickerController = ImagePickerController()
     
-    var productType: ProductType = .none
+    var productType = "제품 선택"
     
-    var imageList: Array<UIImage> = []
-    var hashTagList: Array<(String, Bool)> = []
+    var imageList: [UIImage] = []
+    var postImgUrls: [String] = []
+    var hashTagList: [(String, Bool)] = []
     
-    let colorList: Array<UIColor> = [
+    var desertInfoList: [DessertInfo] = []
+    var selectDesertIdx = -1
+    
+    var hashTagLastSection = 0
+    var hashTagLastIdx = 0
+    
+    let colorList: [UIColor] = [
         UIColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
         UIColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
         UIColor(red: 244.0 / 255.0, green: 203.0 / 255.0, blue: 203.0 / 255.0, alpha: 1)
@@ -58,7 +56,7 @@ class FeedAddViewController: UIViewController {
         setupLayout()
         setupTextViewPlaceholder()
         setupNavigationBar()
-        fetchHashTagList()
+        fetchFeedAddInfo()
     }
     
     func setup() {
@@ -70,7 +68,11 @@ class FeedAddViewController: UIViewController {
             
             tag += 1
         }
+        productTypeTableView.dataSource = self
+        productTypeTableView.delegate = self
+        
         productContentTextView.delegate = self
+        
         
    
         let flowLayout = UICollectionViewFlowLayout()
@@ -90,19 +92,15 @@ class FeedAddViewController: UIViewController {
             $0?.layer.cornerRadius = 10
         }
         
-        [productTypeSelectButton, cakeButton, tarteButton, cookiesButton].forEach {
-            $0.contentHorizontalAlignment = .left
-        }
-        
-        productTypeSelectButton.setTitle(productType.rawValue, for: .normal)
+        productTypeSelectButton.contentHorizontalAlignment = .left
+        productTypeSelectButton.setTitle(productType, for: .normal)
         productTypeSelectButton.setImage(UIImage(named: "downButton"), for: .normal)
-        cakeButton.setTitle(ProductType.cake.rawValue, for: .normal)
-        tarteButton.setTitle(ProductType.tarte.rawValue, for: .normal)
-        cookiesButton.setTitle(ProductType.cookies.rawValue, for: .normal)
         
-        [cakeButton, tarteButton, cookiesButton].forEach {
-            $0?.isHidden = true
-        }
+        selectButtonViewHeight.priority = UILayoutPriority(1000)
+        
+        productTypeTableView.isHidden = true
+        productTypeTableView.separatorStyle = .none
+        productTypeTableView.rowHeight = 25
         
         productContentTextView.layer.borderWidth = 0
         productContentTextView.textContainerInset = .init(top: 16, left: 20, bottom: 15, right: 27)
@@ -141,22 +139,53 @@ class FeedAddViewController: UIViewController {
     }
     
     @objc func addFeed() {
-       
+        if productContentTextView.text == nil && productContentTextView.text == "" {
+            showAlert(title: "제품 소개란 입력", message: "제품의 소개란을 입력해주세요.")
+            return
+        }
+        if selectHashTagCount == 0 {
+            showAlert(title: "해시태그 선택", message: "해시태그를 1개 이상 선택해주세요.")
+            return
+        }
+        if imageList.count == 0 {
+            showAlert(title: "이미지 선택", message: "제품의 이미지를 1개 이상 선택해주세요.")
+            return
+        }
+        if selectDesertIdx == -1 {
+            showAlert(title: "제품 선택", message: "제품을 선택해주세요.")
+            return
+        }
+        
+        let description = productContentTextView.text!
+        var selectTags: [String] = []
+        hashTagList.forEach {
+            if $0.1 {
+                selectTags.append($0.0)
+            }
+        }
+        uploadImages {
+            self.requestAddFeed(desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
+        }
+        
+        
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
     }
     
     
-    @IBAction func openDayTypeView(_ sender: Any) {
+    @IBAction func openProductType(_ sender: Any) {
         UIView.animate(withDuration: 0.5) {
             if self.isOpenSelectView == false {
                 self.selectButtonViewHeight.priority = UILayoutPriority(100)
-                [self.cakeButton, self.tarteButton, self.cookiesButton].forEach {
-                    $0?.layer.isHidden = false
-                }
+                self.productTypeTableView.isHidden = false
+                
             }else {
                 self.selectButtonViewHeight.priority = UILayoutPriority(1000)
-                [self.cakeButton, self.tarteButton, self.cookiesButton].forEach {
-                    $0?.layer.isHidden = true
-                }
+                self.productTypeTableView.isHidden = true
             }
         }
         self.view.layoutIfNeeded()
@@ -164,34 +193,25 @@ class FeedAddViewController: UIViewController {
         isOpenSelectView.toggle()
     }
     
-    
-    @IBAction func setDayType(_ sender: UIButton) {
-        if sender.titleLabel?.text == ProductType.cake.rawValue {
-            productType = .cake
-        }else if sender.titleLabel?.text == ProductType.tarte.rawValue {
-            productType = .tarte
-        }else if sender.titleLabel?.text == ProductType.cookies.rawValue {
-            productType = .cookies
-        }
-        productTypeSelectButton.setTitle(productType.rawValue, for: .normal)
-    }
-    
-    
 }
 
 
 extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
-            return 5
+            return 6
         }else {
-            return 4
+            if hashTagLastIdx != 0 && section == hashTagLastSection - 1 {
+                return hashTagLastIdx
+            }else {
+                return 4
+            }
         }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if collectionView.tag == 2 {
-            return hashTagList.count / 4
+            return hashTagLastSection
         }else {
             return 1
         }
@@ -201,12 +221,14 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         if collectionView.tag == 1 {
             if let imageCell = cell as? ImageCell {
+                imageCell.productImage.image = nil
                 if indexPath.row == 0 {
                     guard let image = UIImage(named: "imagePlus") else {return cell}
                     imageCell.productImage.contentMode = .center
                     imageCell.productImage.image = image
                 }else {
-                    if imageList.count != 0 {
+                    if imageList.count != 0 && imageList.count > indexPath.row-1{
+                        imageCell.productImage.contentMode = .scaleToFill
                         imageCell.productImage.image = imageList[indexPath.row-1]
                     }
                 }
@@ -214,9 +236,11 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         }else {
             if let hashTag = cell as? HashTagCell {
                 hashTag.backgroundColor = .white
-                if hashTagList[indexPath.row + (indexPath.section * 4)].1 {
+                
+                if hashTagList[indexPath.row + (indexPath.section * 4)].1{
                     hashTag.backgroundColor = colorList[indexPath.row % 3]
                 }
+                
                 hashTag.setHashTagLabel(hashTag: "# " + hashTagList[indexPath.row + (indexPath.section * 4)].0)
             }
         }
@@ -249,10 +273,10 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if collectionView.tag == 1 {
-            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        if collectionView.tag == 1{
+            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         }else {
-            return UIEdgeInsets(top: 0, left: 20, bottom: 10, right: 20)
+            return UIEdgeInsets(top: 0, left: 20, bottom: 14, right: 0)
         }
         
     }
@@ -266,7 +290,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         if collectionView.tag == 2 {
             if hashTagList[indexPath.row + (indexPath.section * 4)].1 {
                 selectHashTagCount -= 1
-                hashTagList[indexPath.row].1.toggle()
+                hashTagList[indexPath.row + (indexPath.section * 4)].1.toggle()
             }else {
                 if selectHashTagCount > 2 {
                     return
@@ -274,7 +298,6 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
                 selectHashTagCount += 1
                 hashTagList[indexPath.row + (indexPath.section * 4)].1.toggle()
             }
-            
             hashTagList.sort {
                 $0.1 && !$1.1
             }
@@ -284,8 +307,10 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func selectImage() {
-        imagePickerController.settings.selection.max = 4
+        imagePickerController.settings.selection.max = 5
         imagePickerController.settings.fetch.assets.supportedMediaTypes = [.image]
+        
+        imageList.removeAll()
         
         self.presentImagePicker(imagePickerController) { (asset) in
             
@@ -317,8 +342,32 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
 
     }
-    
 }
+
+extension FeedAddViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return desertInfoList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductSelectCell", for: indexPath)
+        cell.selectionStyle = .none
+        
+        if let productCell = cell as? ProductSelectCell {
+            if desertInfoList.count != 0 {
+                productCell.setProductName(productName: desertInfoList[indexPath.row].dessertName)
+            }
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectDesertIdx = indexPath.row
+        productType = desertInfoList[indexPath.row].dessertName
+        productTypeSelectButton.setTitle(productType, for: .normal)
+    }
+}
+
 
 extension FeedAddViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -343,14 +392,49 @@ extension FeedAddViewController: UITextViewDelegate {
 
 
 extension FeedAddViewController {
-    func fetchHashTagList() {
-        APIManeger.shared.getData(urlEndpointString: "/calendars/categories", dataType: HashTagListResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+    func fetchFeedAddInfo() {
+        APIManeger.shared.getData(urlEndpointString: "/posts/makeView", dataType: FeedAddResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
             
-            response.result.forEach { hashTag in
-                self?.hashTagList.append((hashTag.tagName, false))
+            if response.result.tags.count % 4 != 0 {
+                self?.hashTagLastSection = (response.result.tags.count / 4) + 1
+                self?.hashTagLastIdx = response.result.tags.count % 4
+            }else {
+                self?.hashTagLastSection = (response.result.tags.count / 4)
             }
             
+            response.result.tags.forEach {
+                self?.hashTagList.append(($0, false))
+            }
+            
+            self?.desertInfoList = response.result.desserts
+            
             self?.hashTagCV.reloadData()
+            self?.productTypeTableView.reloadData()
+        }
+    }
+    
+    func uploadImages(completionHanlder: @escaping () -> Void) {
+        imageList.forEach { image in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyMMdd_HHmmssss"
+            let pathRoot = dateFormatter.string(from: Date())
+            
+            FirebaseStorageManager.uploadImage(image: image, pathRoot: pathRoot,
+                                                        folderName: FirebaseStorageManager.profileFolder
+                                                        ,completion: { [weak self] url in
+                self?.postImgUrls.append(url?.description ?? "")
+                
+                if self?.imageList.count == self?.postImgUrls.count {
+                    completionHanlder()
+                }
+            })
+        }
+    }
+
+    func requestAddFeed(desertIdx: Int, description: String, tags: [String]) {
+        let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
+        APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedAddRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+            self?.showAlert(title: "성공", message: "성공")
         }
     }
 }
