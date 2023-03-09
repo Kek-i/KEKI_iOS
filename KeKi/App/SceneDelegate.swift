@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let _ = UserDefaults.standard.object(forKey: "userInfo") {
             if let data = UserDefaults.standard.value(forKey: "userInfo") as? Data {
                 let decodedUserInfo = try? PropertyListDecoder().decode(AuthResponse.Result.self, from: data)
-                APIManeger.shared.setUserInfo(userInfo: decodedUserInfo!)
+                if let _ = decodedUserInfo { APIManeger.shared.setUserInfo(userInfo: decodedUserInfo!) }
+                
             }
         }
         
