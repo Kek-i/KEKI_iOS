@@ -26,6 +26,8 @@ class FeedAddViewController: UIViewController {
     
     let imagePickerController = ImagePickerController()
     
+    var postIdx: Int?
+    
     var productType = "제품 선택"
     
     var imageList: [UIImage] = []
@@ -56,7 +58,12 @@ class FeedAddViewController: UIViewController {
         setupLayout()
         setupTextViewPlaceholder()
         setupNavigationBar()
-        fetchFeedAddInfo()
+        if postIdx != nil {
+            
+        }else {
+            fetchFeedAddInfo()
+        }
+        
     }
     
     func setup() {
@@ -412,6 +419,64 @@ extension FeedAddViewController {
             self?.productTypeTableView.reloadData()
         }
     }
+    
+    func fetchFeedEditInfo(postIdx: Int) {
+        APIManeger.shared.getData(urlEndpointString: "/posts/\(postIdx)/editView", dataType: FeedEditResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
+            
+            self?.postIdx = response.result.postIdx
+            self?.selectDesertIdx = response.result.currentDessertIdx
+            self?.desertInfoList = response.result.desserts
+            self?.selectHashTagCount = response.result.currentTags.count
+            self?.postImgUrls = response.result.postImgUrls
+            self?.productType = response.result.currentDessertName
+            
+            
+            if response.result.tagCategories.count % 4 != 0 {
+                self?.hashTagLastSection = (response.result.tagCategories.count / 4) + 1
+                self?.hashTagLastIdx = response.result.tagCategories.count % 4
+            }else {
+                self?.hashTagLastSection = (response.result.tagCategories.count / 4)
+            }
+            
+            response.result.tagCategories.forEach {
+                self?.hashTagList.append(($0, false))
+            }
+            
+            self?.hashTagList.enumerated().forEach({
+                var tag = $1
+                response.result.currentTags.forEach {
+                    if tag.0 == $0 {
+                        tag.1 = true
+                    }
+                }
+                if tag.1 {
+                    self?.hashTagList[$0].1 = true
+                }
+            })
+            
+            self?.hashTagList.sort {
+                $0.1 && !$1.1
+            }
+            
+            self?.productContentTextView.text = response.result.description
+            self?.productTypeSelectButton.setTitle(self?.productType, for: .normal)
+            
+            self?.loadImages {
+                self?.imageAddCV.reloadData()
+            }
+            
+            self?.hashTagCV.reloadData()
+        }
+    }
+    
+    func loadImages(completionHandler: @escaping () -> Void) {
+        postImgUrls.forEach { url in
+            FirebaseStorageManager.downloadImage(urlString: url) { [weak self] image in
+                self?.imageList.append(image!)
+            }
+        }
+    }
+    
     
     func uploadImages(completionHanlder: @escaping () -> Void) {
         imageList.forEach { image in

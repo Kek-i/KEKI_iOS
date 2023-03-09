@@ -27,10 +27,30 @@ struct FeedAddResponseResult: Codable {
     let tags: [String]
 }
 
+// MARK: - 피드 수정 화면 (GET)
+struct FeedEditResponse: Codable {
+    let isSuccess: Bool
+    let code: Int
+    let message: String
+    let result: FeedEdit
+}
+
+struct FeedEdit: Codable {
+    let postIdx, currentDessertIdx: Int
+    let currentDessertName, description: String
+    let postImgUrls: [String]
+    let currentTags: [String]
+    let desserts: [DessertInfo]
+    let tagCategories: [String]
+}
+
+// MARK: - 피드 추가 및 수정 공통 사용
 struct DessertInfo: Codable {
     let dessertIdx: Int
     let dessertName: String
 }
+
+
 
 
 
