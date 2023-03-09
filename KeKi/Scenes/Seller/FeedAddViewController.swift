@@ -362,7 +362,7 @@ extension FeedAddViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectDesertIdx = indexPath.row
+        selectDesertIdx = desertInfoList[indexPath.row].dessertIdx
         productType = desertInfoList[indexPath.row].dessertName
         productTypeSelectButton.setTitle(productType, for: .normal)
     }
