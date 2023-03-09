@@ -287,28 +287,31 @@ extension APIManeger {
                               dataType: T.Type,
                               parameter: T,
                               completionHandler: @escaping (AuthResponse) -> Void) {
-        
-//        let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
-//        let header = APIManeger.shared.getHeaderByToken(accessToken: accessToken)
-        
-        guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
+        if let _ = UserDefaults.standard.value(forKey: "accessToken") {
+            
+            let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
+            let header = APIManeger.shared.getHeaderByToken(accessToken: accessToken)
+            
+            guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
 
-        AF
-            .request(url,
-                     method: .post,
-                     parameters: parameter,
-                     encoder: .json,
-                     headers: header)
-            .responseDecodable(of: AuthResponse.self) { response in
-                print("response :: \(response)")
-                switch response.result {
-                case .success(let success):
-                    print(success)
-                    completionHandler(success)
-                case .failure(let error):
-                    print(error.localizedDescription)
+            AF
+                .request(url,
+                         method: .post,
+                         parameters: parameter,
+                         encoder: .json,
+                         headers: header)
+                .responseDecodable(of: AuthResponse.self) { response in
+                    print("response :: \(response)")
+                    switch response.result {
+                    case .success(let success):
+                        print(success)
+                        completionHandler(success)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
                 }
-            }
-            .resume()
+                .resume()
+            
+        }
     }
 }

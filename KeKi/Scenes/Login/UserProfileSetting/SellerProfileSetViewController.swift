@@ -234,6 +234,7 @@ extension SellerProfileSetViewController {
                                    dataType: Seller.self,
                                    parameter: param,
                                    completionHandler: { [weak self] response in
+            print("signupRequest response :: \(response)")
             switch response.code {
             case 1000:
                 print("회원가입 성공")
