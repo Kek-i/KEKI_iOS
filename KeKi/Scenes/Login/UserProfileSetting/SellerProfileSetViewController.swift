@@ -177,6 +177,7 @@ extension SellerProfileSetViewController {
     private func uploadProfileImage(image: UIImage, completionHandler: @escaping ()-> Void) {
         if let userEmail = UserDefaults.standard.value(forKey: "socialEmail") {
             FirebaseStorageManager.uploadImage(image: image, pathRoot: userEmail as! String,
+                                               folderName: "iOS-profiles/",
                                                completion: { [weak self] url in
                 if let url = url {
                     self?.savedProfileImgUrl = url.absoluteString
@@ -234,6 +235,7 @@ extension SellerProfileSetViewController {
                                    dataType: Seller.self,
                                    parameter: param,
                                    completionHandler: { [weak self] response in
+            print("signupRequest response :: \(response)")
             switch response.code {
             case 1000:
                 print("회원가입 성공")
