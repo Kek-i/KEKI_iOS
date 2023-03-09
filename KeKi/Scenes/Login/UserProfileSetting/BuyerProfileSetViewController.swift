@@ -115,6 +115,7 @@ extension BuyerProfileSetViewController {
     private func uploadProfileImage(image: UIImage, completionHandler: @escaping ()-> Void) {
         if let userEmail = UserDefaults.standard.value(forKey: "socialEmail") {
             FirebaseStorageManager.uploadImage(image: image, pathRoot: userEmail as! String,
+                                               folderName: "iOS-profiles/",
                                                completion: { [weak self] url in
                 if let url = url {
                     self?.savedProfileImgUrl = url.absoluteString

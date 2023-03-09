@@ -196,32 +196,35 @@ extension LoginViewController {
                                    parameter: param,
                                    completionHandler: { [weak self] result in
 
-            print("result :: \(result)")
-            // 발급받은 토큰 저장
-            let accessToken = result.result.accessToken
-            let refreshToken = result.result.refreshToken
-            
-            UserDefaults.standard.set(email, forKey: "socialEmail")
-            UserDefaults.standard.set(accessToken, forKey: "accessToken")
-            UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
-            
-            let role = result.result.role
-            switch role {
-            case Role.notUser.rawValue:
-                self?.signup()
+            if let result = result.result {
+                print("result :: \(result)")
+                // 발급받은 토큰 저장
+                let accessToken = result.accessToken
+                let refreshToken = result.refreshToken
                 
-            case Role.buyer.rawValue, Role.seller.rawValue:
-                APIManeger.shared.setUserInfo(userInfo: result.result)
+                UserDefaults.standard.set(email, forKey: "socialEmail")
+                UserDefaults.standard.set(accessToken, forKey: "accessToken")
+                UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
                 
-                let encoder = JSONEncoder()
-                if let encoded = try? encoder.encode(result.result) {
-                    UserDefaults.standard.setValue(encoded, forKey: "userInfo")
+                let role = result.role
+                switch role {
+                case Role.notUser.rawValue:
+                    self?.signup()
+                    
+                case Role.buyer.rawValue, Role.seller.rawValue:
+                    APIManeger.shared.setUserInfo(userInfo: result)
+                    
+                    let encoder = JSONEncoder()
+                    if let encoded = try? encoder.encode(result) {
+                        UserDefaults.standard.setValue(encoded, forKey: "userInfo")
+                    }
+                    self?.showMain()
+                    
+                default:
+                    print("알 수 없는 유저")
                 }
-                self?.showMain()
-                
-            default:
-                print("알 수 없는 유저")
             }
+            
         })
     }
 
