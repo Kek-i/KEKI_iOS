@@ -58,8 +58,10 @@ class FeedAddViewController: UIViewController {
         setupLayout()
         setupTextViewPlaceholder()
         setupNavigationBar()
+        
+        postIdx = 2
         if postIdx != nil {
-            
+            fetchFeedEditInfo(postIdx: postIdx ?? 0)
         }else {
             fetchFeedAddInfo()
         }

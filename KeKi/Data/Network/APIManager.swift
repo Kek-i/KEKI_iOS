@@ -11,7 +11,7 @@ import Alamofire
 private let DEV_BASE_URL = "https://keki-dev.store" // 개발용 
 
 private let buyerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoxLCJzdWIiOiIxIiwiZXhwIjoxNjc4NjA2ODE4fQ.0oqG7wBSUu2VaFyZCwn2ovP30KAHXq4DY7ZGoXKcUP0"    // 임시 구매자 액세스 토큰
-private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiIyIiwiZXhwIjoxNjc4MzIyMTM1fQ.oy_uRpYrWuV9yZO0vTWWpLgVNiEURasgupR5ROjsqm0"    // 임시 판매자 액세스 토큰
+private let sellerAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWR4IjoyLCJzdWIiOiIyIiwiZXhwIjoxNjc4OTM5MTAzfQ.RTDNJJeUbjUCuXbpmGBmJINe9Sa2I-qBKzjQA46J6FI"    // 임시 판매자 액세스 토큰
 
 class APIManeger {
     // 임시 액세스 토큰 (구매자,판매자)
@@ -287,8 +287,9 @@ extension APIManeger {
                               dataType: T.Type,
                               parameter: T,
                               completionHandler: @escaping (AuthResponse) -> Void) {
+        print("postSignup test")
         if let _ = UserDefaults.standard.value(forKey: "accessToken") {
-            
+            print("postSignup test")
             let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
             let header = APIManeger.shared.getHeaderByToken(accessToken: accessToken)
             
