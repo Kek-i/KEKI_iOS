@@ -6,16 +6,26 @@
 //
 
 import UIKit
+import Alamofire
 
 class HeartViewController: UIViewController {
 
     @IBOutlet weak var heartCV: UICollectionView!
+    
+    var feedList: Array<Feed> = []
+    
+    var hasNext: Bool?
+    var cursorDate: String?
+    var queryParam: Parameters = [:]
+    
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
         setupNavigationBar()
+        getHeart()
     }
     
     
@@ -52,18 +62,31 @@ class HeartViewController: UIViewController {
 
 extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return feedList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeartCell", for: indexPath)
+        if let heatCell = cell as? HeartDetailCell {
+            heatCell.productTitleLabel.text = feedList[indexPath.row].dessertName
+            heatCell.productPriceLabel.text = feedList[indexPath.row].dessertPrice.description
+            
+            if let imageUrl = URL(string: feedList[indexPath.row].postImgUrls[0]) {
+                if let imageData = try? Data(contentsOf: imageUrl) {
+                    heatCell.productImageView.image = (UIImage(data: imageData)!)
+                }
+            }
+            
+            
+        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
         guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
-//        feedViewController.feedData = heartList
+        feedViewController.feedData = feedList
         self.navigationController?.pushViewController(feedViewController, animated: true)
         
     }
@@ -81,10 +104,38 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
         return UIEdgeInsets(top: 0, left: 20, bottom: tabBarHeight!/2, right: 19)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if heartCV.contentOffset.y > heartCV.contentSize.height-heartCV.bounds.size.height && self.hasNext == true{
+            getHeart()
+            isLoading = true
+        }
+    }
+    
     
 }
 
 
 extension HeartViewController {
+    func getHeart() {
+        if isLoading == true {
+            return
+        }
+        
+        queryParam["cursorDate"] = cursorDate
+        fetchHeartList(queryParam: queryParam)
+    }
     
+    
+    func fetchHeartList(queryParam: Parameters) {
+        APIManeger.shared.getData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
+            print(response)
+            
+            self?.feedList = response.result.feeds
+            
+            self?.hasNext = response.result.hasNext
+            self?.cursorDate = response.result.cursorDate
+            
+            self?.heartCV.reloadData()
+        }
+    }
 }
