@@ -58,7 +58,7 @@
                                     <constraint firstAttribute="height" constant="46" id="CYj-ZC-MdM"/>
                                 </constraints>
                                 <attributedString key="attributedText"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZWd-g2-JHC">
                                 <rect key="frame" x="20" y="340" width="376" height="206"/>

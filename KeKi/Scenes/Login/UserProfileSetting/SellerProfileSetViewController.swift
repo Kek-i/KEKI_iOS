@@ -176,8 +176,7 @@ extension SellerProfileSetViewController: UITextViewDelegate {
 extension SellerProfileSetViewController {
     private func uploadProfileImage(image: UIImage, completionHandler: @escaping ()-> Void) {
         if let userEmail = UserDefaults.standard.value(forKey: "socialEmail") {
-            FirebaseStorageManager.uploadImage(image: image, pathRoot: userEmail as! String,
-                                               folderName: "iOS-profiles/",
+            FirebaseStorageManager.uploadImage(image: image, pathRoot: userEmail as! String, folderName: FirebaseStorageManager.profileFolder,
                                                completion: { [weak self] url in
                 if let url = url {
                     self?.savedProfileImgUrl = url.absoluteString

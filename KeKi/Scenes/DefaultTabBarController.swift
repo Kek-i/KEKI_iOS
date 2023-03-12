@@ -55,7 +55,8 @@ class DefaultTabBarController: UITabBarController {
         let search = UINavigationController(rootViewController: searchViewController)
         searchViewController.tabBarItem = searchTab
         
-        let heartViewController = UIViewController()
+        guard let heartViewController =  UIStoryboard(name: "ProductAdd", bundle: nil).instantiateViewController(withIdentifier: "ProductAddViewController") as? ProductAddViewController else {return}
+        let heart = UINavigationController(rootViewController: heartViewController)
         heartViewController.tabBarItem = heartTab
 
         // TODO: 분기 처리 리팩토링 필요
@@ -69,7 +70,7 @@ class DefaultTabBarController: UITabBarController {
                 home,
                 calendar,
                 search,
-                heartViewController,
+                heart,
                 mypage
             ]
             
@@ -83,7 +84,7 @@ class DefaultTabBarController: UITabBarController {
                 home,
                 calendar,
                 searchViewController,
-                heartViewController,
+                heart,
                 mypage
             ]
         }

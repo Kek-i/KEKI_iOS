@@ -26,6 +26,8 @@ class FeedAddViewController: UIViewController {
     
     let imagePickerController = ImagePickerController()
     
+    var postIdx: Int?
+    
     var productType = "제품 선택"
     
     var imageList: [UIImage] = []
@@ -56,7 +58,14 @@ class FeedAddViewController: UIViewController {
         setupLayout()
         setupTextViewPlaceholder()
         setupNavigationBar()
-        fetchFeedAddInfo()
+        
+        postIdx = 2
+        if postIdx != nil {
+            fetchFeedEditInfo(postIdx: postIdx ?? 0)
+        }else {
+            fetchFeedAddInfo()
+        }
+        
     }
     
     func setup() {
@@ -139,7 +148,7 @@ class FeedAddViewController: UIViewController {
     }
     
     @objc func addFeed() {
-        if productContentTextView.text == nil && productContentTextView.text == "" {
+        if productContentTextView.text == nil || productContentTextView.text == "" || productContentTextView.text == "제품을 소개해주세요.(최대 150자)"{
             showAlert(title: "제품 소개란 입력", message: "제품의 소개란을 입력해주세요.")
             return
         }
@@ -163,8 +172,15 @@ class FeedAddViewController: UIViewController {
                 selectTags.append($0.0)
             }
         }
+        
+        
         uploadImages {
-            self.requestAddFeed(desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
+            if self.postIdx != nil {
+                self.requestEditFeed(postIdx: self.postIdx!, desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
+            }else {
+                self.requestAddFeed(desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
+            }
+            
         }
         
         
@@ -362,7 +378,7 @@ extension FeedAddViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectDesertIdx = indexPath.row
+        selectDesertIdx = desertInfoList[indexPath.row].dessertIdx
         productType = desertInfoList[indexPath.row].dessertName
         productTypeSelectButton.setTitle(productType, for: .normal)
     }
@@ -413,7 +429,66 @@ extension FeedAddViewController {
         }
     }
     
+    func fetchFeedEditInfo(postIdx: Int) {
+        APIManeger.shared.getData(urlEndpointString: "/posts/\(postIdx)/editView", dataType: FeedEditResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
+            
+            self?.postIdx = response.result.postIdx
+            self?.selectDesertIdx = response.result.currentDessertIdx
+            self?.desertInfoList = response.result.desserts
+            self?.selectHashTagCount = response.result.currentTags.count
+            self?.postImgUrls = response.result.postImgUrls
+            self?.productType = response.result.currentDessertName
+            
+            
+            if response.result.tagCategories.count % 4 != 0 {
+                self?.hashTagLastSection = (response.result.tagCategories.count / 4) + 1
+                self?.hashTagLastIdx = response.result.tagCategories.count % 4
+            }else {
+                self?.hashTagLastSection = (response.result.tagCategories.count / 4)
+            }
+            
+            response.result.tagCategories.forEach {
+                self?.hashTagList.append(($0, false))
+            }
+            
+            self?.hashTagList.enumerated().forEach({
+                var tag = $1
+                response.result.currentTags.forEach {
+                    if tag.0 == $0 {
+                        tag.1 = true
+                    }
+                }
+                if tag.1 {
+                    self?.hashTagList[$0].1 = true
+                }
+            })
+            
+            self?.hashTagList.sort {
+                $0.1 && !$1.1
+            }
+            
+            self?.postImgUrls.forEach({ url in
+                if let imageUrl = URL(string: url) {
+                    if let imageData = try? Data(contentsOf: imageUrl) {
+                        self?.imageList.append(UIImage(data: imageData)!)
+                    }
+                }
+            })
+            
+            self?.productContentTextView.text = response.result.description
+            self?.productContentTextView.textColor = .black
+            
+            self?.productTypeSelectButton.setTitle(self?.productType, for: .normal)
+            
+            self?.hashTagCV.reloadData()
+            self?.imageAddCV.reloadData()
+            self?.productTypeTableView.reloadData()
+        }
+    }
+    
+    
     func uploadImages(completionHanlder: @escaping () -> Void) {
+        postImgUrls.removeAll()
         imageList.forEach { image in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyMMdd_HHmmssss"
@@ -432,8 +507,17 @@ extension FeedAddViewController {
     }
 
     func requestAddFeed(desertIdx: Int, description: String, tags: [String]) {
-        let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
-        APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedAddRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+        let param = FeedRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
+        APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+            // 나중에 화면 바뀌도록 바꾸기
+            self?.showAlert(title: "성공", message: "피드 추가 성공")
+        }
+    }
+    
+    func requestEditFeed(postIdx: Int, desertIdx: Int, description: String, tags: [String]) {
+        let param = FeedRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
+        APIManeger.shared.patchData(urlEndpointString: "/posts/\(postIdx)", dataType: FeedRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+            // 나중에 화면 바뀌도록 바꾸기
             self?.showAlert(title: "성공", message: "성공")
         }
     }
