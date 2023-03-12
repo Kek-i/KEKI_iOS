@@ -23,6 +23,9 @@
 		7367E1D5299A1546008E517F /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367E1D4299A1546008E517F /* SearchModel.swift */; };
 		7367E1DF29A6DF2D008E517F /* FeedAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7367E1DE29A6DF2D008E517F /* FeedAdd.storyboard */; };
 		7367E1E129A6E174008E517F /* FeedAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367E1E029A6E174008E517F /* FeedAddViewController.swift */; };
+		7381210B29BDE26B006E7113 /* Heart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7381210A29BDE26B006E7113 /* Heart.storyboard */; };
+		7381210D29BDE27E006E7113 /* HeartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381210C29BDE27E006E7113 /* HeartViewController.swift */; };
+		7381210F29BE158C006E7113 /* HeartDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381210E29BE158C006E7113 /* HeartDetailCell.swift */; };
 		738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F648F2988A9B3006BB124 /* StoreProductViewController.swift */; };
 		738F64962988A9BE006BB124 /* StoreInfoPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */; };
 		738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64922988A9BE006BB124 /* StoreImageCell.swift */; };
@@ -136,6 +139,9 @@
 		7367E1D4299A1546008E517F /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		7367E1DE29A6DF2D008E517F /* FeedAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedAdd.storyboard; sourceTree = "<group>"; };
 		7367E1E029A6E174008E517F /* FeedAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAddViewController.swift; sourceTree = "<group>"; };
+		7381210A29BDE26B006E7113 /* Heart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Heart.storyboard; sourceTree = "<group>"; };
+		7381210C29BDE27E006E7113 /* HeartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartViewController.swift; sourceTree = "<group>"; };
+		7381210E29BE158C006E7113 /* HeartDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartDetailCell.swift; sourceTree = "<group>"; };
 		738F648F2988A9B3006BB124 /* StoreProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreProductViewController.swift; sourceTree = "<group>"; };
 		738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreInfoPopUpViewController.swift; sourceTree = "<group>"; };
 		738F64922988A9BE006BB124 /* StoreImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageCell.swift; sourceTree = "<group>"; };
@@ -281,6 +287,16 @@
 			path = Seller;
 			sourceTree = "<group>";
 		};
+		7381210929BDE25C006E7113 /* Heart */ = {
+			isa = PBXGroup;
+			children = (
+				7381210A29BDE26B006E7113 /* Heart.storyboard */,
+				7381210C29BDE27E006E7113 /* HeartViewController.swift */,
+				7381210E29BE158C006E7113 /* HeartDetailCell.swift */,
+			);
+			path = Heart;
+			sourceTree = "<group>";
+		};
 		A2434ABD298651F500F60D1A = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +360,7 @@
 		A2434AE9298657B100F60D1A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7381210929BDE25C006E7113 /* Heart */,
 				A2F60757298962F900F4F3DD /* Product */,
 				A2B1CD7B2988EFD800D87570 /* Feed */,
 				A2434AF3298658E600F60D1A /* Login */,
@@ -691,6 +708,7 @@
 				A2B1CD662987797100D87570 /* UserProfileSetting.storyboard in Resources */,
 				73FE8BB0299251CB00264B44 /* DayAddViewController.storyboard in Resources */,
 				A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */,
+				7381210B29BDE26B006E7113 /* Heart.storyboard in Resources */,
 				A2E0150C2992A2CB00EBACF0 /* HomeCollectionViewCell.xib in Resources */,
 				731AA6A4298D016D008A9A1B /* DayDetail.storyboard in Resources */,
 				73FE8BAA298FEDAE00264B44 /* Search.storyboard in Resources */,
@@ -761,7 +779,9 @@
 				A23F2DAB29A0FDB80046ED70 /* FirebaseStorageManager.swift in Sources */,
 				A236506129A75BD900744252 /* UIResponder+.swift in Sources */,
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
+				7381210F29BE158C006E7113 /* HeartDetailCell.swift in Sources */,
 				A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */,
+				7381210D29BDE27E006E7113 /* HeartViewController.swift in Sources */,
 				73FE8BA6298FEDAE00264B44 /* RecentSearchCell.swift in Sources */,
 				731AA6A6298D016D008A9A1B /* DayDetailViewController.swift in Sources */,
 				A2E015162992A66600EBACF0 /* UIDevice+.swift in Sources */,

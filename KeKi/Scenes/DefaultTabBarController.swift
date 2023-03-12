@@ -55,7 +55,7 @@ class DefaultTabBarController: UITabBarController {
         let search = UINavigationController(rootViewController: searchViewController)
         searchViewController.tabBarItem = searchTab
         
-        guard let heartViewController =  UIStoryboard(name: "ProductAdd", bundle: nil).instantiateViewController(withIdentifier: "ProductAddViewController") as? ProductAddViewController else {return}
+        guard let heartViewController = UIStoryboard(name: "Heart", bundle: nil).instantiateViewController(withIdentifier: "HeartViewController") as? HeartViewController else {return}
         let heart = UINavigationController(rootViewController: heartViewController)
         heartViewController.tabBarItem = heartTab
 
