@@ -172,8 +172,15 @@ class FeedAddViewController: UIViewController {
                 selectTags.append($0.0)
             }
         }
+        
+        
         uploadImages {
-            self.requestAddFeed(desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
+            if self.postIdx != nil {
+                self.requestEditFeed(postIdx: self.postIdx!, desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
+            }else {
+                self.requestAddFeed(desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
+            }
+            
         }
         
         
@@ -460,27 +467,28 @@ extension FeedAddViewController {
                 $0.1 && !$1.1
             }
             
+            self?.postImgUrls.forEach({ url in
+                if let imageUrl = URL(string: url) {
+                    if let imageData = try? Data(contentsOf: imageUrl) {
+                        self?.imageList.append(UIImage(data: imageData)!)
+                    }
+                }
+            })
+            
             self?.productContentTextView.text = response.result.description
+            self?.productContentTextView.textColor = .black
+            
             self?.productTypeSelectButton.setTitle(self?.productType, for: .normal)
             
-            self?.loadImages {
-                self?.imageAddCV.reloadData()
-            }
-            
             self?.hashTagCV.reloadData()
-        }
-    }
-    
-    func loadImages(completionHandler: @escaping () -> Void) {
-        postImgUrls.forEach { url in
-            FirebaseStorageManager.downloadImage(urlString: url) { [weak self] image in
-                self?.imageList.append(image!)
-            }
+            self?.imageAddCV.reloadData()
+            self?.productTypeTableView.reloadData()
         }
     }
     
     
     func uploadImages(completionHanlder: @escaping () -> Void) {
+        postImgUrls.removeAll()
         imageList.forEach { image in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyMMdd_HHmmssss"
@@ -501,6 +509,15 @@ extension FeedAddViewController {
     func requestAddFeed(desertIdx: Int, description: String, tags: [String]) {
         let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
         APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedAddRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+            // 나중에 화면 바뀌도록 바꾸기
+            self?.showAlert(title: "성공", message: "피드 추가 성공")
+        }
+    }
+    
+    func requestEditFeed(postIdx: Int, desertIdx: Int, description: String, tags: [String]) {
+        let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
+        APIManeger.shared.patchData(urlEndpointString: "/posts/\(postIdx)", dataType: FeedAddRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+            // 나중에 화면 바뀌도록 바꾸기
             self?.showAlert(title: "성공", message: "성공")
         }
     }
