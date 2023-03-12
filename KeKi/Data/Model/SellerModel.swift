@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - 피드 등록 (POST)
-struct FeedAddRequest: Codable {
+// MARK: - 피드 등록 및 피드 수정 (POST, PATCH)
+struct FeedRequest: Codable {
     let dessertIdx: Int
     let description: String
     let postImgUrls, tags: [String]
@@ -51,7 +51,9 @@ struct DessertInfo: Codable {
 }
 
 
-
-
+// MARK: - 상품 추가 및 수정 (POST, PATCH)
+struct ProductRequest: Codable {
+    let dessertName, dessertPrice, dessertDescription, dessertImg: String
+}
 
 

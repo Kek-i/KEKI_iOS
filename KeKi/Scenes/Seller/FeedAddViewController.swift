@@ -148,7 +148,7 @@ class FeedAddViewController: UIViewController {
     }
     
     @objc func addFeed() {
-        if productContentTextView.text == nil && productContentTextView.text == "" {
+        if productContentTextView.text == nil || productContentTextView.text == "" || productContentTextView.text == "제품을 소개해주세요.(최대 150자)"{
             showAlert(title: "제품 소개란 입력", message: "제품의 소개란을 입력해주세요.")
             return
         }
@@ -507,16 +507,16 @@ extension FeedAddViewController {
     }
 
     func requestAddFeed(desertIdx: Int, description: String, tags: [String]) {
-        let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
-        APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedAddRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+        let param = FeedRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
+        APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
             // 나중에 화면 바뀌도록 바꾸기
             self?.showAlert(title: "성공", message: "피드 추가 성공")
         }
     }
     
     func requestEditFeed(postIdx: Int, desertIdx: Int, description: String, tags: [String]) {
-        let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
-        APIManeger.shared.patchData(urlEndpointString: "/posts/\(postIdx)", dataType: FeedAddRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+        let param = FeedRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
+        APIManeger.shared.patchData(urlEndpointString: "/posts/\(postIdx)", dataType: FeedRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
             // 나중에 화면 바뀌도록 바꾸기
             self?.showAlert(title: "성공", message: "성공")
         }

@@ -20,7 +20,8 @@ class ProductAddViewController: UIViewController {
     
     let imagePickerController = ImagePickerController()
     
-    var imageList: Array<UIImage> = []
+    var selectedImage: UIImage?
+    var selectedImageUrl: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +76,16 @@ class ProductAddViewController: UIViewController {
         textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 128.0 / 250.0, green: 128.0 / 250.0, blue: 128.0 / 250.0, alpha: 1)])
     }
     
+    func setupTextViewPlaceholder() {
+        if productContentTV.text == "" {
+            productContentTV.text = "제품을 소개해주세요.(최대 150자)"
+            productContentTV.textColor = UIColor(red: 128.0 / 250.0, green: 128.0 / 250.0, blue: 128.0 / 250.0, alpha: 1)
+        }else if productContentTV.text == "제품을 소개해주세요.(최대 150자)"{
+            productContentTV.text = ""
+            productContentTV.textColor = .black
+        }
+    }
+    
     
     func setupNavigationBar() {
         self.navigationController?.isNavigationBarHidden = false
@@ -96,24 +107,51 @@ class ProductAddViewController: UIViewController {
     }
     
     @objc func addProduct() {
-       
+        if productTitleTF.text == nil || productTitleTF.text == "" {
+            showAlert(title: "상품 이름 입력", message: "상품의 이름을 입력해주세요.")
+            return
+        }
+        
+        if productPriceTF.text == nil || productPriceTF.text == "" {
+            showAlert(title: "상품 가격 입력", message: "상품의 가격을 입력해주세요.")
+            return
+        }
+        
+        if productContentTV.text == nil || productContentTV.text == "" || productTitleTF.text == "제품을 소개해주세요.(최대 150자)"{
+            showAlert(title: "제품 소개란 입력", message: "제품의 소개란을 입력해주세요.")
+            return
+        }
+        
+        if selectedImage == nil {
+            showAlert(title: "상품 대표사진 추가", message: "상품의 대표사진을 추가해주세요.")
+            return
+        }
+        
+        let desertName = productTitleTF.text!
+        let desertPrice = productPriceTF.text!
+        let dessertDescription = productContentTV.text!
+        
+        uploadImages {
+            self.requestAddProduct(dessertName: desertName, desertPrice: desertPrice, dessertDescription: dessertDescription, dessertImg: self.selectedImageUrl!)
+        }
+        
+        
     }
     
-    func setupTextViewPlaceholder() {
-        if productContentTV.text == "" {
-            productContentTV.text = "제품을 소개해주세요.(최대 150자)"
-            productContentTV.textColor = UIColor(red: 128.0 / 250.0, green: 128.0 / 250.0, blue: 128.0 / 250.0, alpha: 1)
-        }else if productContentTV.text == "제품을 소개해주세요.(최대 150자)"{
-            productContentTV.text = ""
-            productContentTV.textColor = .black
-        }
+
+    
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
     }
 }
 
 
 extension ProductAddViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -125,8 +163,8 @@ extension ProductAddViewController: UICollectionViewDelegate, UICollectionViewDa
                 imageCell.productImage.contentMode = .center
                 imageCell.productImage.image = image
             }else {
-                if imageList.count != 0 {
-                    imageCell.productImage.image = imageList[indexPath.row-1]
+                if selectedImage != nil {
+                    imageCell.productImage.image = selectedImage
                 }
             }
         }
@@ -152,7 +190,7 @@ extension ProductAddViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func selectImage() {
-        imagePickerController.settings.selection.max = 4
+        imagePickerController.settings.selection.max = 1
         imagePickerController.settings.fetch.assets.supportedMediaTypes = [.image]
         
         self.presentImagePicker(imagePickerController) { (asset) in
@@ -177,9 +215,7 @@ extension ProductAddViewController: UICollectionViewDelegate, UICollectionViewDa
                 }
                 
                 let data = thumbnail.jpegData(compressionQuality: 0.7)
-                guard let newImage = UIImage(data: data!) else {return}
-                
-                self.imageList.append(newImage)
+                self.selectedImage = UIImage(data: data!)
             }
             self.productImageCV.reloadData()
         }
@@ -205,6 +241,40 @@ extension ProductAddViewController: UITextViewDelegate {
         let changedText = currentText.replacingCharacters(in: textRange, with: text)
         
         return changedText.count <= 150
+    }
+}
+
+extension ProductAddViewController {
+    func uploadImages(completionHanlder: @escaping () -> Void) {
+        selectedImageUrl = nil
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyMMdd_HHmmssss"
+        let pathRoot = dateFormatter.string(from: Date())
+
+        FirebaseStorageManager.uploadImage(image: selectedImage!, pathRoot: pathRoot,
+                                                    folderName: FirebaseStorageManager.productFolder
+                                                    ,completion: { [weak self] url in
+            self?.selectedImageUrl = url?.description
+            completionHanlder()
+        })
+    }
+
+    func requestAddProduct(dessertName: String, desertPrice: String, dessertDescription: String, dessertImg: String) {
+        let param = ProductRequest(dessertName: dessertName, dessertPrice: desertPrice, dessertDescription: dessertDescription, dessertImg: dessertImg)
+        APIManeger.shared.postData(urlEndpointString: "/desserts", dataType: ProductRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+            // 나중에 화면 바뀌도록 바꾸기
+            print(response)
+            self?.showAlert(title: "성공", message: "상품 추가 성공")
+        }
+    }
+    
+    func requestEditProduct(postIdx: Int, desertIdx: Int, description: String, tags: [String]) {
+//        let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
+//        APIManeger.shared.patchData(urlEndpointString: "/posts/\(postIdx)", dataType: FeedAddRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+//            // 나중에 화면 바뀌도록 바꾸기
+//            self?.showAlert(title: "성공", message: "성공")
+//        }
     }
 }
 
