@@ -47,7 +47,6 @@ class HeartViewController: UIViewController {
     
         self.navigationItem.leftBarButtonItem = titleItem
         
-        // action에 addDay 추가 (서버 연결 후)
         let menuButton = UIBarButtonItem(image: UIImage(named: "option"), style: .done, target: self, action: #selector(openMenu))
         menuButton.tintColor = .black
         
@@ -124,7 +123,6 @@ extension HeartViewController {
         queryParam["cursorDate"] = cursorDate
         fetchHeartList(queryParam: queryParam)
     }
-    
     
     func fetchHeartList(queryParam: Parameters) {
         APIManeger.shared.getData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
