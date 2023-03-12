@@ -23,18 +23,26 @@ class ProductAddViewController: UIViewController {
     var selectedImage: UIImage?
     var selectedImageUrl: String?
     
+    var dessertIdx: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupLayout()
         setupNavigationBar()
         setupTextViewPlaceholder()
+        
+        dessertIdx = 2
+        
+        if dessertIdx != nil {
+            fetchProductEdit(dessertIdx: dessertIdx!)
+        }
+        
     }
     
     func setup() {
         productImageCV.delegate = self
         productImageCV.dataSource = self
-        
         productContentTV.delegate = self
     }
     
@@ -132,7 +140,11 @@ class ProductAddViewController: UIViewController {
         let dessertDescription = productContentTV.text!
         
         uploadImages {
-            self.requestAddProduct(dessertName: desertName, desertPrice: desertPrice, dessertDescription: dessertDescription, dessertImg: self.selectedImageUrl!)
+            if self.dessertIdx != nil {
+                self.requestEditProduct(dessertIdx: self.dessertIdx ?? 0, dessertName: desertName, desertPrice: desertPrice, dessertDescription: dessertDescription, dessertImg: self.selectedImageUrl!)
+            }else {
+                self.requestAddProduct(dessertName: desertName, desertPrice: desertPrice, dessertDescription: dessertDescription, dessertImg: self.selectedImageUrl!)
+            }
         }
         
         
@@ -245,9 +257,27 @@ extension ProductAddViewController: UITextViewDelegate {
 }
 
 extension ProductAddViewController {
+    func fetchProductEdit(dessertIdx: Int) {
+        APIManeger.shared.getData(urlEndpointString: "/desserts/\(dessertIdx)/editDessert", dataType: ProductEditResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
+            
+            self?.productTitleTF.text = response.result.dessertName
+            self?.productPriceTF.text = response.result.dessertPrice.description
+            self?.productContentTV.text = response.result.dessertDescription
+            self?.selectedImageUrl = response.result.dessertImg
+            
+            if let imageUrl = URL(string: response.result.dessertImg) {
+                if let imageData = try? Data(contentsOf: imageUrl) {
+                    self?.selectedImage = UIImage(data: imageData)!
+                }
+            }
+            
+            self?.productContentTV.textColor = .black
+            
+            self?.productImageCV.reloadData()
+        }
+    }
+    
     func uploadImages(completionHanlder: @escaping () -> Void) {
-        selectedImageUrl = nil
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyMMdd_HHmmssss"
         let pathRoot = dateFormatter.string(from: Date())
@@ -269,12 +299,13 @@ extension ProductAddViewController {
         }
     }
     
-    func requestEditProduct(postIdx: Int, desertIdx: Int, description: String, tags: [String]) {
-//        let param = FeedAddRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
-//        APIManeger.shared.patchData(urlEndpointString: "/posts/\(postIdx)", dataType: FeedAddRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
-//            // 나중에 화면 바뀌도록 바꾸기
-//            self?.showAlert(title: "성공", message: "성공")
-//        }
+    func requestEditProduct(dessertIdx: Int, dessertName: String, desertPrice: String, dessertDescription: String, dessertImg: String) {
+        let param = ProductRequest(dessertName: dessertName, dessertPrice: desertPrice, dessertDescription: dessertDescription, dessertImg: dessertImg)
+        APIManeger.shared.patchData(urlEndpointString: "/desserts/\(dessertIdx)", dataType: ProductRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+            // 나중에 화면 바뀌도록 바꾸기
+            print(response)
+            self?.showAlert(title: "성공", message: "상품 수정 성공")
+        }
     }
 }
 

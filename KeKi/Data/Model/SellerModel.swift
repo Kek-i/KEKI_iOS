@@ -57,3 +57,18 @@ struct ProductRequest: Codable {
 }
 
 
+// MARK: - 상품 수정 화면 (GET)
+struct ProductEditResponse: Codable {
+    let isSuccess: Bool
+    let code: Int
+    let message: String
+    let result: ProductEdit
+}
+
+struct ProductEdit: Codable {
+    let nickname: String
+    let dessertImg: String
+    let dessertName: String
+    let dessertPrice: Int
+    let dessertDescription: String
+}
