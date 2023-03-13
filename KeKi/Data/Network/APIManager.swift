@@ -94,7 +94,7 @@ class APIManeger {
     func postData<T: Codable>(urlEndpointString: String,
                               dataType: T.Type,
                               header: HTTPHeaders?,
-                              parameter: T,
+                              parameter: T?,
                               completionHandler: @escaping (GeneralResponseModel) -> Void) {
         
         guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }

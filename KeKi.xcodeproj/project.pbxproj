@@ -26,6 +26,7 @@
 		7381210B29BDE26B006E7113 /* Heart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7381210A29BDE26B006E7113 /* Heart.storyboard */; };
 		7381210D29BDE27E006E7113 /* HeartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381210C29BDE27E006E7113 /* HeartViewController.swift */; };
 		7381210F29BE158C006E7113 /* HeartDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381210E29BE158C006E7113 /* HeartDetailCell.swift */; };
+		7381211129BE2E87006E7113 /* HeartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381211029BE2E87006E7113 /* HeartModel.swift */; };
 		738F64902988A9B3006BB124 /* StoreProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F648F2988A9B3006BB124 /* StoreProductViewController.swift */; };
 		738F64962988A9BE006BB124 /* StoreInfoPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */; };
 		738F64972988A9BE006BB124 /* StoreImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64922988A9BE006BB124 /* StoreImageCell.swift */; };
@@ -142,6 +143,7 @@
 		7381210A29BDE26B006E7113 /* Heart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Heart.storyboard; sourceTree = "<group>"; };
 		7381210C29BDE27E006E7113 /* HeartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartViewController.swift; sourceTree = "<group>"; };
 		7381210E29BE158C006E7113 /* HeartDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartDetailCell.swift; sourceTree = "<group>"; };
+		7381211029BE2E87006E7113 /* HeartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartModel.swift; sourceTree = "<group>"; };
 		738F648F2988A9B3006BB124 /* StoreProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreProductViewController.swift; sourceTree = "<group>"; };
 		738F64912988A9BE006BB124 /* StoreInfoPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreInfoPopUpViewController.swift; sourceTree = "<group>"; };
 		738F64922988A9BE006BB124 /* StoreImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageCell.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				A2A7966829A705F000A2F2E2 /* StoreModel.swift */,
 				A236506429A7A0FC00744252 /* ProductModel.swift */,
 				73A3A42129AC460400724463 /* SellerModel.swift */,
+				7381211029BE2E87006E7113 /* HeartModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -780,6 +783,7 @@
 				A236506129A75BD900744252 /* UIResponder+.swift in Sources */,
 				A2434ACA298651F500F60D1A /* AppDelegate.swift in Sources */,
 				7381210F29BE158C006E7113 /* HeartDetailCell.swift in Sources */,
+				7381211129BE2E87006E7113 /* HeartModel.swift in Sources */,
 				A2B1CD6A2987A29000D87570 /* UITextField+.swift in Sources */,
 				7381210D29BDE27E006E7113 /* HeartViewController.swift in Sources */,
 				73FE8BA6298FEDAE00264B44 /* RecentSearchCell.swift in Sources */,
