@@ -40,7 +40,6 @@
 		A236506129A75BD900744252 /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236506029A75BD900744252 /* UIResponder+.swift */; };
 		A236506529A7A0FC00744252 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236506429A7A0FC00744252 /* ProductModel.swift */; };
 		A23F2D9C29A0EBEA0046ED70 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23F2D9B29A0EBEA0046ED70 /* UIImage+.swift */; };
-		A23F2D9E29A0FA930046ED70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A23F2D9D29A0FA930046ED70 /* GoogleService-Info.plist */; };
 		A23F2DA129A0FCA70046ED70 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A23F2DA029A0FCA70046ED70 /* FirebaseAnalytics */; };
 		A23F2DA329A0FCA70046ED70 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A23F2DA229A0FCA70046ED70 /* FirebaseAuth */; };
 		A23F2DA529A0FCA70046ED70 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A23F2DA429A0FCA70046ED70 /* FirebaseFirestore */; };
@@ -99,6 +98,7 @@
 		A2BA8B3229A0C6BC00BD7712 /* KakaoSDKTalk in Frameworks */ = {isa = PBXBuildFile; productRef = A2BA8B3129A0C6BC00BD7712 /* KakaoSDKTalk */; };
 		A2BA8B3429A0C6BC00BD7712 /* KakaoSDKTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = A2BA8B3329A0C6BC00BD7712 /* KakaoSDKTemplate */; };
 		A2BA8B3629A0C6BC00BD7712 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = A2BA8B3529A0C6BC00BD7712 /* KakaoSDKUser */; };
+		A2C2C9AA29BEF9A60049D9D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2C2C9A929BEF9A60049D9D0 /* GoogleService-Info.plist */; };
 		A2E0150C2992A2CB00EBACF0 /* HomeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E0150B2992A2CB00EBACF0 /* HomeCollectionViewCell.xib */; };
 		A2E0150E2992A2FE00EBACF0 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E0150D2992A2FE00EBACF0 /* HomeTableViewCell.xib */; };
 		A2E015102992A32B00EBACF0 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E0150F2992A32B00EBACF0 /* HomeCollectionViewCell.swift */; };
@@ -154,8 +154,8 @@
 		9C943509B2DF89C336174319 /* Pods-KeKi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeKi.debug.xcconfig"; path = "Target Support Files/Pods-KeKi/Pods-KeKi.debug.xcconfig"; sourceTree = "<group>"; };
 		A236506029A75BD900744252 /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
 		A236506429A7A0FC00744252 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		A23CBFC829BEBD24002ACEB2 /* KeKi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeKi.entitlements; sourceTree = "<group>"; };
 		A23F2D9B29A0EBEA0046ED70 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
-		A23F2D9D29A0FA930046ED70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A23F2DAA29A0FDB80046ED70 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		A23F2DAC29A1F3BF0046ED70 /* HomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		A2434AC6298651F500F60D1A /* KeKi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeKi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +199,7 @@
 		A2B1CD802988F92C00D87570 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		A2B1CD812988F92C00D87570 /* FeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedCell.xib; sourceTree = "<group>"; };
 		A2BA8B2329A0C64700BD7712 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		A2C2C9A929BEF9A60049D9D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A2E0150B2992A2CB00EBACF0 /* HomeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCollectionViewCell.xib; sourceTree = "<group>"; };
 		A2E0150D2992A2FE00EBACF0 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
 		A2E0150F2992A32B00EBACF0 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -302,10 +303,11 @@
 		A2434AC8298651F500F60D1A /* KeKi */ = {
 			isa = PBXGroup;
 			children = (
+				A23CBFC829BEBD24002ACEB2 /* KeKi.entitlements */,
 				A2434AE62986578100F60D1A /* App */,
 				A2434AE72986579000F60D1A /* Global */,
 				A2434AD7298651F600F60D1A /* Info.plist */,
-				A23F2D9D29A0FA930046ED70 /* GoogleService-Info.plist */,
+				A2C2C9A929BEF9A60049D9D0 /* GoogleService-Info.plist */,
 				A2BA8B2329A0C64700BD7712 /* Config.xcconfig */,
 				A2434AE82986579F00F60D1A /* Utils */,
 				A2434AEF2986588500F60D1A /* Data */,
@@ -677,11 +679,11 @@
 				A2434AD6298651F600F60D1A /* LaunchScreen.storyboard in Resources */,
 				A2434B0029865B0A00F60D1A /* Announcement.storyboard in Resources */,
 				A2E0150E2992A2FE00EBACF0 /* HomeTableViewCell.xib in Resources */,
+				A2C2C9AA29BEF9A60049D9D0 /* GoogleService-Info.plist in Resources */,
 				A2434AD3298651F600F60D1A /* Assets.xcassets in Resources */,
 				A2F607612989DCB000F4F3DD /* ProductImgCell.xib in Resources */,
 				A2B1CD832988F92C00D87570 /* FeedCell.xib in Resources */,
 				A2B1CD7229888D2800D87570 /* AnnouncementCell.xib in Resources */,
-				A23F2D9E29A0FA930046ED70 /* GoogleService-Info.plist in Resources */,
 				A2784AE2298AB50100FE23DF /* PolicyWebView.storyboard in Resources */,
 				A2434B1429865BAD00F60D1A /* UnLoginUserMypage.storyboard in Resources */,
 				A2F607592989632700F4F3DD /* ProductDetail.storyboard in Resources */,
@@ -962,6 +964,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KeKi/KeKi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J4X458RVHG;
@@ -979,7 +982,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.keki.www.KeKi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codepatissier.keki;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -996,6 +999,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KeKi/KeKi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J4X458RVHG;
@@ -1013,7 +1017,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.keki.www.KeKi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codepatissier.keki;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

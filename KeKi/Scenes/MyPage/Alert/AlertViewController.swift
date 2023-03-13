@@ -98,17 +98,17 @@ extension AlertViewController {
     func signout() {
         // TODO: 회원탈퇴 기능 구현 (탈퇴 후 응답X, 재로그인시 AF 오류 발생함)
     
-//        APIManeger.shared.testDeleteData(urlEndpointString: SIGNOUT_ENDPOINT_STR,
-//                                         completionHandler: { [weak self] response in
-//
-//            switch response.isSuccess {
-//            case true:
-//                self?.showAlert(message: "회원탈퇴에 성공하였습니다")
-//            case false:
-//                self?.showAlert(message: "회원탈퇴에 실패하였습니다")
-//            default:
-//                return
-//            }
-//        })
+        APIManeger.shared.testDeleteData(urlEndpointString: SIGNOUT_ENDPOINT_STR,
+                                         completionHandler: { [weak self] response in
+
+            switch response.isSuccess {
+            case true:
+                self?.showAlert(message: "회원탈퇴에 성공하였습니다")
+            case false:
+                self?.showAlert(message: "회원탈퇴에 실패하였습니다")
+            default:
+                return
+            }
+        })
     }
 }

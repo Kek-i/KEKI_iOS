@@ -12,6 +12,7 @@ import Alamofire
 import KakaoSDKAuth
 import KakaoSDKUser
 import NaverThirdPartyLogin
+import AuthenticationServices
 
 enum Role: String {
     case notUser = "비회원"
@@ -21,6 +22,7 @@ enum Role: String {
 
 private let SOCIAL_LOGIN_URL_ENDPOINT_STR = "/users/login"
 
+@available(iOS 13.0, *)
 class LoginViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
@@ -29,7 +31,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var naverLoginButton: UIButton!
-    @IBOutlet weak var appleLoginButton: UIButton!
+    @IBOutlet weak var appleLoginButton: ASAuthorizationAppleIDButton!
     
     
     // MARK: - Methods of LifeCycle
@@ -37,8 +39,10 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         setupButtonLayouts()
-        
         setupAuthorityGuidanceViewController()
+        
+        // apple login button setup
+        appleLoginButton.addTarget(self, action: #selector(didTapAppleLoginButton(_:)), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,7 +74,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func didTapAppleLoginButton(_ sender: UIButton) {
         // TODO: 애플 로그인 기능 추가
-        print("didTapNaverLoginButton")
+        print("didTapAppleLoginButton")
+        appleSocialLogin()
     }
     
     
@@ -94,7 +99,7 @@ class LoginViewController: UIViewController {
         googleLoginButton.configuration?.imagePadding = 53
         kakaoLoginButton.configuration?.imagePadding = 53
         naverLoginButton.configuration?.imagePadding = 34
-        appleLoginButton.configuration?.imagePadding = 48
+//        appleLoginButton.configuration?.imagePadding = 48
     }
     
     private func setupAuthorityGuidanceViewController() {
@@ -104,9 +109,21 @@ class LoginViewController: UIViewController {
         present(authorityGuidanceViewController, animated: true)
         
     }
+    
+    // MARK: @objc methods
+    @objc func didTapAppleLoginButton() {
+        let authorizationProvider = ASAuthorizationAppleIDProvider()
+        let request = authorizationProvider.createRequest()
+        request.requestedScopes = [.email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
 }
 
-// MARK: - Social Login Delegate
+// MARK: - NAVER Social Login Delegate
 extension LoginViewController : NaverThirdPartyLoginConnectionDelegate {
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() { getNaverUserInfo() }
     
@@ -118,6 +135,32 @@ extension LoginViewController : NaverThirdPartyLoginConnectionDelegate {
         print("Naver Login ERROR :: \(error.localizedDescription)")
     }
 }
+
+// MARK: - APPLE Social Login Delegate
+extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
+        print("Apple ID Credential Authorization User ID : \(appleIDCredential.user)")
+        print("Apple ID Credential Authorization User Email : \(appleIDCredential.email)")
+        
+        if let email = UserDefaults.standard.value(forKey: "appleEmail") {
+            requestSocialLogin(email: email as! String, provider: "애플")
+            
+        } else if let email = appleIDCredential.email {
+            UserDefaults.standard.set(email, forKey: "appleEmail")
+            requestSocialLogin(email: email, provider: "애플")
+        }
+
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Apple ID Credential failed with error : \(error.localizedDescription)")
+    }
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+} 
 
 
 // MARK: - Social Login GetUserInfo Methods
@@ -149,6 +192,17 @@ extension LoginViewController {
         print("naverSocialLogin called")
         naverLoginInstance?.delegate = self
         naverLoginInstance?.requestThirdPartyLogin()
+    }
+    
+    private func appleSocialLogin() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
     }
 }
 
@@ -196,19 +250,22 @@ extension LoginViewController {
                                    parameter: param,
                                    completionHandler: { [weak self] result in
 
+            
             if let result = result.result {
-                print("result :: \(result)")
                 // 발급받은 토큰 저장
-                let accessToken = result.accessToken
-                let refreshToken = result.refreshToken
-                
+//                let accessToken = result.accessToken
+//                let refreshToken = result.refreshToken
+//
                 UserDefaults.standard.set(email, forKey: "socialEmail")
-                UserDefaults.standard.set(accessToken, forKey: "accessToken")
-                UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
+//                UserDefaults.standard.set(accessToken, forKey: "accessToken")
+//                UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
                 
                 let role = result.role
                 switch role {
                 case Role.notUser.rawValue:
+                    let userInfo = result
+                    let encoded = try? PropertyListEncoder().encode(userInfo)
+                    UserDefaults.standard.set(encoded, forKey: "userInfo")
                     self?.signup()
                     
                 case Role.buyer.rawValue, Role.seller.rawValue:

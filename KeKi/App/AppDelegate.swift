@@ -14,6 +14,8 @@ import KakaoSDKAuth
 
 import NaverThirdPartyLogin
 
+import AuthenticationServices
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
