@@ -12,7 +12,7 @@ class HeartViewController: UIViewController {
 
     @IBOutlet weak var heartCV: UICollectionView!
     
-    var feedList: Array<Feed> = []
+    var feedList: Array<HeartFeed> = []
     
     var hasNext: Bool?
     var cursorDate: String?
@@ -25,7 +25,11 @@ class HeartViewController: UIViewController {
         
         setup()
         setupNavigationBar()
-        getHeart()
+        getHeart(cursorDate: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getHeart(cursorDate: nil)
     }
     
     
@@ -70,9 +74,9 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
             heatCell.productTitleLabel.text = feedList[indexPath.row].dessertName
             heatCell.productPriceLabel.text = feedList[indexPath.row].dessertPrice.description
             
-            if let imageUrl = URL(string: feedList[indexPath.row].postImgUrls[0]) {
+            if let imageUrl = URL(string: feedList[indexPath.row].postImgUrl) {
                 if let imageData = try? Data(contentsOf: imageUrl) {
-                    heatCell.productImageView.image = (UIImage(data: imageData)!)
+                    heatCell.productImageView.image = imageResize(image: UIImage(data: imageData)!, newWidth: 105, newHeight: 105)
                 }
             }
             
@@ -82,10 +86,21 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
         return cell
     }
     
+    func imageResize(image: UIImage, newWidth: CGFloat, newHeight: CGFloat) -> UIImage {
+        let size = CGSize(width: newWidth, height: newHeight)
+        let render = UIGraphicsImageRenderer(size: size)
+        let renderImage = render.image { context in
+            image.draw(in: CGRect(origin: .zero, size: size))
+        }
+        
+        return renderImage
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
         guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
-        feedViewController.feedData = feedList
+//        feedViewController.feedData = feedList
         self.navigationController?.pushViewController(feedViewController, animated: true)
         
     }
@@ -105,17 +120,18 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if heartCV.contentOffset.y > heartCV.contentSize.height-heartCV.bounds.size.height && self.hasNext == true{
-            getHeart()
+            getHeart(cursorDate: self.cursorDate)
             isLoading = true
         }
     }
+    
     
     
 }
 
 
 extension HeartViewController {
-    func getHeart() {
+    func getHeart(cursorDate: String?) {
         if isLoading == true {
             return
         }
@@ -125,7 +141,7 @@ extension HeartViewController {
     }
     
     func fetchHeartList(queryParam: Parameters) {
-        APIManeger.shared.getData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, header: APIManeger.buyerTokenHeader, parameter: queryParam) { [weak self] response in
+        APIManeger.shared.getData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
             print(response)
             
             self?.feedList = response.result.feeds
@@ -137,3 +153,4 @@ extension HeartViewController {
         }
     }
 }
+

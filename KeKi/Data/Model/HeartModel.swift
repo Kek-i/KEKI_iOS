@@ -15,10 +15,16 @@ struct HeartResponse: Codable {
     let result: HeartResponseResult
 }
 
-
 struct HeartResponseResult: Codable {
-    let feeds: [Feed]
+    let feeds: [HeartFeed]
     let cursorDate: String
     let hasNext: Bool
     let numOfRows: Int
+}
+
+struct HeartFeed: Codable {
+    let postIdx: Int
+    let dessertName: String
+    let dessertPrice: Int
+    let postImgUrl: String
 }
