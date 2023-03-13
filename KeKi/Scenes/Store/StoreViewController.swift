@@ -18,6 +18,7 @@ class StoreViewController: UIViewController {
     
     var storeIdx: Int?
     var storeInfo: Store?
+    var sellerInfo: SellerInfo?
     
     var delegate: TabDelegate!
     
@@ -44,11 +45,11 @@ class StoreViewController: UIViewController {
         
         fetchData()
         setupLayout()
+        setupNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
     }
     
     func setupLayout() {
@@ -63,7 +64,7 @@ class StoreViewController: UIViewController {
     
     func setupNavigationBar() {
         self.navigationController?.isNavigationBarHidden = false
-        
+
         let backButton = UIBarButtonItem(image: UIImage(named: "chevron-right"), style: .done, target: self, action: #selector(didTapBackItem))
         backButton.tintColor = .black
         
@@ -74,25 +75,46 @@ class StoreViewController: UIViewController {
         messageButton.tintColor = .black
         
         self.navigationItem.leftBarButtonItem = backButton
-        self.navigationItem.rightBarButtonItems = [infoButton, messageButton]
+        self.navigationItem.rightBarButtonItems = [messageButton, infoButton]
     }
-
-    @IBAction func didTapBackItem(_ sender: UIButton) {
+    
+    @objc func didTapBackItem(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func showInfoPopUp() {
-        guard let infoPopUpVC = self.storyboard?.instantiateViewController(withIdentifier: "StoreInfoPopUpViewController") as? StoreInfoPopUpViewController else {return}
-        
-        infoPopUpVC.modalTransitionStyle = .coverVertical
-        infoPopUpVC.modalPresentationStyle = .overCurrentContext
-        
-        self.present(infoPopUpVC, animated: true)
+        fetchSellerInfo {
+            guard let infoPopUpVC = self.storyboard?.instantiateViewController(withIdentifier: "StoreInfoPopUpViewController") as? StoreInfoPopUpViewController else {return}
+            
+            infoPopUpVC.sellerInfo = self.sellerInfo
+            
+            infoPopUpVC.modalTransitionStyle = .coverVertical
+            infoPopUpVC.modalPresentationStyle = .overCurrentContext
+            
+            self.present(infoPopUpVC, animated: true)
+        }
     }
     
-    @IBAction func didTapOrderButton(_ sender: UIButton) {
+    @objc func didTapOrderButton(_ sender: UIButton) {
         // TODO: 주문 링크로 접속 (웹뷰 사용?)
     }
+    
+    
+    private func configureProfile() {
+        storeNameLabel.text = storeInfo?.nickname
+        if let url = storeInfo?.storeImgUrl {
+            storeImageView.kf.setImage(with: URL(string: url))
+            storeImageView.backgroundColor = .clear
+            storeImageView.layer.borderColor = UIColor.lightGray.cgColor
+            storeImageView.layer.borderWidth = 0.5
+        }
+        storeDescriptionLabel.text = storeInfo?.introduction
+    }
+    
+}
+    
+    
+extension StoreViewController{
     
     private func fetchData() {
         // 스토어 정보 fetch
@@ -108,18 +130,15 @@ class StoreViewController: UIViewController {
         // 스토어 피드 & 상품 정보 fetch
         delegate.configureFeedTab(storeIdx: storeIdx!)
         delegate.configureProductTab(storeIdx: storeIdx!)
+    }
 
+    func fetchSellerInfo(completionHandler: @escaping () -> Void) {
+        APIManeger.shared.getData(urlEndpointString: "/stores/store-info/\(storeIdx!)", dataType: SellerInfoResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+            print(response)
+            self?.sellerInfo = response.result
+            completionHandler()
+        }
     }
     
-    private func configureProfile() {
-        storeNameLabel.text = storeInfo?.nickname
-        if let url = storeInfo?.storeImgUrl {
-            storeImageView.kf.setImage(with: URL(string: url))
-            storeImageView.backgroundColor = .clear
-            storeImageView.layer.borderColor = UIColor.lightGray.cgColor
-            storeImageView.layer.borderWidth = 0.5
-        }
-        storeDescriptionLabel.text = storeInfo?.introduction
-    }
     
 }
