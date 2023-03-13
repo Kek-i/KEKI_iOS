@@ -39,3 +39,15 @@ struct Dessert: Codable {
     var dessertImgUrl: String
     var dessertName: String
 }
+
+
+// MARK: - 사업자 정보 조회 (GET)
+struct SellerInfoResponse: Codable {
+    let isSuccess: Bool
+    let code: Int
+    let message: String
+    let result: SellerInfo
+}
+struct SellerInfo: Codable {
+    let businessName, brandName, businessAddress, businessNumber: String
+}
