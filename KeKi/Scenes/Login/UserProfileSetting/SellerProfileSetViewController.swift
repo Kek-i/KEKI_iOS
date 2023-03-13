@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Toast
 
 private let SIGNUP_ENDPOINT = "/stores/signup"
 private let SELLER_EDIT_PROFILE_ENDPOINT = "/stores/profile"
@@ -239,7 +240,6 @@ extension SellerProfileSetViewController {
             case 1000:
                 print("회원가입 성공")
                 let userInfo = response.result
-                
                 let encoded = try? PropertyListEncoder().encode(userInfo)
                 UserDefaults.standard.set(encoded, forKey: "userInfo")
                 
@@ -249,8 +249,7 @@ extension SellerProfileSetViewController {
                 self?.present(main, animated: true)
                 
             default:
-                print("회원가입 실패 :: \(response.message)")
-                self?.showAlert(message: "네트워크 오류로 인해 회원가입에 실패하였습니다.")
+                self?.view.makeToast("회원가입 실패 (\(response.message)", duration: 1.0, position: .center)
             }
             
         })

@@ -13,9 +13,9 @@ struct SocialLoginRequest: Codable {
 }
 
 struct AuthResponse: Codable {
-    var isSuccess: Bool
-    var code: Int
-    var message: String
+    var isSuccess: Bool?
+    var code: Int?
+    var message: String?
     var result: Result?
     
     struct Result: Codable {

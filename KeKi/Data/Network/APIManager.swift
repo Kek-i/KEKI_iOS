@@ -287,11 +287,11 @@ extension APIManeger {
                               dataType: T.Type,
                               parameter: T,
                               completionHandler: @escaping (AuthResponse) -> Void) {
-        print("postSignup test")
-        if let _ = UserDefaults.standard.value(forKey: "accessToken") {
-            print("postSignup test")
-            let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
-            let header = APIManeger.shared.getHeaderByToken(accessToken: accessToken)
+        
+//        if let _ = UserDefaults.standard.value(forKey: "accessToken") {
+//            print("postSignup test")
+//            let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
+//            let header = APIManeger.shared.getHeaderByToken(accessToken: accessToken)
             
             guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
 
@@ -313,6 +313,6 @@ extension APIManeger {
                 }
                 .resume()
             
-        }
+//        }
     }
 }

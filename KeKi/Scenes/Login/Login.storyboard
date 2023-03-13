@@ -82,7 +82,7 @@
                                             <action selector="didTapNaverLoginButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="XSA-8E-9Wy"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIw-bP-OFN">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIw-bP-OFN" customClass="ASAuthorizationAppleIDButton">
                                         <rect key="frame" x="0.0" y="180" width="277" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -113,7 +113,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8e6-WO-Y6w"/>
                     <connections>
-                        <outlet property="appleLoginButton" destination="RIw-bP-OFN" id="13K-af-F69"/>
+                        <outlet property="appleLoginButton" destination="RIw-bP-OFN" id="CLc-Oj-67s"/>
                         <outlet property="googleLoginButton" destination="ufg-oM-Oc7" id="ImT-ba-g7a"/>
                         <outlet property="kakaoLoginButton" destination="QPF-Do-CC8" id="RFx-oV-bem"/>
                         <outlet property="naverLoginButton" destination="XWB-Gh-rDd" id="4MM-0h-hR6"/>
