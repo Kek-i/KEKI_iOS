@@ -39,6 +39,9 @@ class FeedAddViewController: UIViewController {
     
     var hashTagLastSection = 0
     var hashTagLastIdx = 0
+    var selectHashTagCount = 0
+    
+    var isOpenSelectView = false
     
     let colorList: [UIColor] = [
         UIColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
@@ -46,9 +49,7 @@ class FeedAddViewController: UIViewController {
         UIColor(red: 244.0 / 255.0, green: 203.0 / 255.0, blue: 203.0 / 255.0, alpha: 1)
     ]
     
-    var selectHashTagCount = 0
     
-    var isOpenSelectView = false
     
     
     override func viewDidLoad() {
@@ -321,7 +322,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             collectionView.reloadData()
         }
     }
-    
+     
     func selectImage() {
         imagePickerController.settings.selection.max = 5
         imagePickerController.settings.fetch.assets.supportedMediaTypes = [.image]
