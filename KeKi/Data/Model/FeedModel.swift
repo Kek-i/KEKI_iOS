@@ -20,3 +20,7 @@ struct FeedResponse: Codable {
     var message: String
     var result: [Feed]
 }
+
+struct ReportFeed: Codable {
+    var reportName: String
+}
