@@ -133,7 +133,7 @@ extension StoreViewController{
     }
 
     func fetchSellerInfo(completionHandler: @escaping () -> Void) {
-        APIManeger.shared.getData(urlEndpointString: "/stores/store-info/\(storeIdx!)", dataType: SellerInfoResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+        APIManeger.shared.testGetData(urlEndpointString: "/stores/store-info/\(storeIdx!)", dataType: SellerInfoResponse.self, parameter: nil) { [weak self] response in
             print(response)
             self?.sellerInfo = response.result
             completionHandler()
