@@ -198,7 +198,6 @@ class DayAddViewController: UIViewController {
                 hashTags.append(HashTagList(calendarHashTag: $0.0))
             }
         }
-        
         let calendarRequest = CalendarRequest(kindOfCalendar: dayType.rawValue, title: titleTextField.text ?? "", date: dateText, hashTags: hashTags)
         
         if titleTextField.text == nil || titleTextField.text == "" {

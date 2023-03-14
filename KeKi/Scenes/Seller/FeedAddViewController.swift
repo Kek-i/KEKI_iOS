@@ -322,7 +322,7 @@ extension FeedAddViewController: UICollectionViewDelegate, UICollectionViewDataS
             collectionView.reloadData()
         }
     }
-    
+     
     func selectImage() {
         imagePickerController.settings.selection.max = 5
         imagePickerController.settings.fetch.assets.supportedMediaTypes = [.image]
