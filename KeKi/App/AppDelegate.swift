@@ -38,6 +38,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         instance?.consumerSecret = kConsumerSecret // pw
         instance?.appName = kServiceAppName // app name
         
+        
+        // Loacl Notification
+        let center = UNUserNotificationCenter.current() // 알림 센터 가져오기
+        center.delegate = self // delegate 패턴을 이용한 처리 (extension으로 구현)
+        
+        let options = UNAuthorizationOptions(arrayLiteral: [.badge, .sound])    // 권한 종류 (뱃지, 소리)
+        
+        center.requestAuthorization(options: options) { success, error in
+            // 권한 요청 메서드 :: 권한에 따라 success가 허용->true, 거부->error
+            if let error = error {
+                print("에러 발생: \(error.localizedDescription)")
+            }
+        }
+        
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
@@ -52,6 +66,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NaverThirdPartyLoginConnection.getSharedInstance()?.application(app, open: url, options: options)
 
         return false
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    // 앱이 foreground에 있을때 알림이 오면 이 메서드 호출
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // 푸쉬가 오면 다음을 표시하라는 뜻
+        // 배너는 배너, 뱃지는 앱 아이콘에 숫자 뜨는 것, 사운드는 알림 소리, list는 알림센터에 뜨는 것
+        completionHandler([.banner, .badge, .sound, .list])
+    }
+    
+    // 사용자가 알림을 터치하면 호출되는 메소드
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        // apns에 simulator Target Bundle 아래에 추가로 전달될 값(여기선 다루지 않음)
+        // let value = response.notification.request.content.userInfo["key값"]
     }
 }
 

@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Toast
 
 class FeedViewController: UIViewController {
     // MARK: - Variables, IBOutlet, ...
     var postIdx: Int = -1
+    var dessertIdx: Int?
     var feedData: [Feed] = []
     
     @IBOutlet weak var tableView: UITableView!
@@ -95,6 +97,13 @@ extension FeedViewController: UITableViewDelegate {
 }
 
 extension FeedViewController: FeedDelegate {
+    func showProductDetail(dessertIdx: Int) {
+        guard let productViewController = UIStoryboard(name: "ProductDetail", bundle: nil).instantiateViewController(withIdentifier: "ProductViewController") as? ProductViewController else {return}
+        
+        productViewController.dessertIdx = dessertIdx
+        navigationController?.pushViewController(productViewController, animated: true)
+    }
+    
     func showStoreMain(storeIdx: Int) {
         guard let storeViewController = UIStoryboard(name: "Store", bundle: nil).instantiateViewController(withIdentifier: "StoreViewController") as? StoreViewController else {return}
         
@@ -131,11 +140,11 @@ extension FeedViewController: FeedDelegate {
     func showFeedDeclarationActionAlert() {
         let alert = UIAlertController(title: "신고 사유 선택", message: "타당한 신고사유를 선택해주세요. \n신고사유에 맞지않는 신고일 경우, 해당신고는 처리되지 않습니다.", preferredStyle: .actionSheet)
         
-        let declarationAction = UIAlertAction(title: "스팸홍보/도배", style: .default)
-        let abuseAction = UIAlertAction(title: "욕설/혐오/차별", style: .default)
-        let noxiousAction = UIAlertAction(title: "음란물/유해한 정보", style: .default)
-        let illegalAction = UIAlertAction(title: "사기/불법정보", style: .default)
-        let inappropriatenessAction = UIAlertAction(title: "게시글 성격에 부적절함", style: .default)
+        let declarationAction = UIAlertAction(title: "스팸홍보/도배", style: .default) { [weak self] _ in self?.reportFeed(reason: "스팸홍보/도배") }
+        let abuseAction = UIAlertAction(title: "욕설/혐오/차별", style: .default) { [weak self] _ in self?.reportFeed(reason: "욕설/혐오/차별") }
+        let noxiousAction = UIAlertAction(title: "음란물/유해한 정보", style: .default) { [weak self] _ in self?.reportFeed(reason: "음란물/유해한 정보") }
+        let illegalAction = UIAlertAction(title: "사기/불법정보", style: .default) { [weak self] _ in self?.reportFeed(reason: "사기/불법정보") }
+        let inappropriatenessAction = UIAlertAction(title: "게시글 성격에 부적절함", style: .default) { [weak self] _ in self?.reportFeed(reason: "게시글 성격에 부적절함") }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
@@ -148,5 +157,19 @@ extension FeedViewController: FeedDelegate {
             cancelAction
         ].forEach { alert.addAction($0) }
         present(alert, animated: true)
+    }
+    
+    func reportFeed(reason: String) {
+        let param = ReportFeed(reportName: reason)
+        APIManeger.shared.testPostData(urlEndpointString: "/posts/\(postIdx)/report",
+                                       dataType: ReportFeed.self,
+                                       parameter: param,
+                                       completionHandler: { [weak self] response in
+            if response.code == 1000 {
+                self?.view.makeToast("게시물 신고가 처리되었습니다", duration: 1.0, position: .center)
+            } else {
+                self?.view.makeToast("게시물 신고에 실패하였습니다", duration: 1.0, position: .center)
+            }
+        })
     }
 }
