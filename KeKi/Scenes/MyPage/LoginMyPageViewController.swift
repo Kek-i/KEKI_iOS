@@ -56,9 +56,14 @@ class LoginMyPageViewController: UIViewController {
     // MARK: - Action Methods (IBAction, ...)
     @IBAction func changedNotificationSwitchValue(_ sender: UISwitch) {
         // TODO: switch 값에 따라 푸시 알림 설정 값 변경하기
+        if sender.isOn {
+            print("푸시 알림 켬")
+        } else {
+            print("푸시 알림 끔")
+        }
     }
     
-    // MARK: - Helper Methods (Setup Method, ...)
+    // MARK: - Helper Methods (Setup Method, ...)    
     private func setupNavigationBar() {
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = .black
@@ -173,11 +178,6 @@ class LoginMyPageViewController: UIViewController {
     // MARK: Methods
     func setUserInfo(nickname: String, profilImgUrl: String?) {
         welcomLabel.text = "\(nickname)님 \n오늘도 특별한 하루 보내세요!"
-        
-        if profileImgUrl != nil {
-            // TODO: 프로필 사진 불러오기
-//            profileImgView.kf.
-        }
     }
 }
 
