@@ -60,6 +60,8 @@ class DayAddViewController: UIViewController {
     var hashTagList: Array<(String, Bool)> = []
     
     var selectHashTagCount = 0
+    var hashTagLastSection = 0
+    var hashTagLastIdx = 0
     
     var date:Date?
         
@@ -279,10 +281,14 @@ class DayAddViewController: UIViewController {
 
 extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        if hashTagLastIdx != 0 && section == hashTagLastSection - 1 {
+            return hashTagLastIdx
+        }else {
+            return 4
+        }
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return hashTagList.count / 4
+        return hashTagLastSection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -322,7 +328,7 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
         if hashTagList[indexPath.row + (indexPath.section * 4)].1 {
             selectHashTagCount -= 1
-            hashTagList[indexPath.row].1.toggle()
+            hashTagList[indexPath.row + (indexPath.section * 4)].1.toggle()
         }else {
             if selectHashTagCount > 2 {
                 return
@@ -330,7 +336,6 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
             selectHashTagCount += 1
             hashTagList[indexPath.row + (indexPath.section * 4)].1.toggle()
         }
-
         hashTagList.sort {
             $0.1 && !$1.1
         }
@@ -342,6 +347,14 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
 extension DayAddViewController {
     func fetchHashTagList() {
         APIManeger.shared.getData(urlEndpointString: "/calendars/categories", dataType: HashTagListResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+            
+            if response.result.count % 4 != 0 {
+                self?.hashTagLastSection = (response.result.count / 4) + 1
+                self?.hashTagLastIdx = response.result.count % 4
+            }else {
+                self?.hashTagLastSection = (response.result.count / 4)
+            }
+            
 
             response.result.forEach { hashTag in
                 self?.hashTagList.append((hashTag.tagName, false))
