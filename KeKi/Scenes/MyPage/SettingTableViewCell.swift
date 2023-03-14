@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class SettingTableViewCell: UITableViewCell {
 
@@ -15,6 +16,7 @@ class SettingTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setNotificationSetSwitch()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -22,4 +24,18 @@ class SettingTableViewCell: UITableViewCell {
         selectionStyle = .none
     }
 
+    private func setNotificationSetSwitch() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound]) { [weak self] (didAllow, error) in
+            guard let err = error else {
+                print(didAllow)
+                DispatchQueue.main.async {
+                    if didAllow { self?.notificationSwitch?.isOn = true }
+                    else { self?.notificationSwitch?.isOn = false }
+                }
+                return
+            }
+
+            print(err.localizedDescription)
+        }
+    }
 }
