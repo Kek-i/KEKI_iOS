@@ -258,7 +258,7 @@ extension ProductAddViewController: UITextViewDelegate {
 
 extension ProductAddViewController {
     func fetchProductEdit(dessertIdx: Int) {
-        APIManeger.shared.getData(urlEndpointString: "/desserts/\(dessertIdx)/editDessert", dataType: ProductEditResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
+        APIManeger.shared.testGetData(urlEndpointString: "/desserts/\(dessertIdx)/editDessert", dataType: ProductEditResponse.self, parameter: nil) { [weak self] response in
             
             self?.productTitleTF.text = response.result.dessertName
             self?.productPriceTF.text = response.result.dessertPrice.description
@@ -292,7 +292,7 @@ extension ProductAddViewController {
 
     func requestAddProduct(dessertName: String, desertPrice: String, dessertDescription: String, dessertImg: String) {
         let param = ProductRequest(dessertName: dessertName, dessertPrice: desertPrice, dessertDescription: dessertDescription, dessertImg: dessertImg)
-        APIManeger.shared.postData(urlEndpointString: "/desserts", dataType: ProductRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+        APIManeger.shared.testPostData(urlEndpointString: "/desserts", dataType: ProductRequest.self, parameter: param) { [weak self] response in
             // 나중에 화면 바뀌도록 바꾸기
             print(response)
             self?.showAlert(title: "성공", message: "상품 추가 성공")
@@ -301,7 +301,7 @@ extension ProductAddViewController {
     
     func requestEditProduct(dessertIdx: Int, dessertName: String, desertPrice: String, dessertDescription: String, dessertImg: String) {
         let param = ProductRequest(dessertName: dessertName, dessertPrice: desertPrice, dessertDescription: dessertDescription, dessertImg: dessertImg)
-        APIManeger.shared.patchData(urlEndpointString: "/desserts/\(dessertIdx)", dataType: ProductRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+        APIManeger.shared.testPatchData(urlEndpointString: "/desserts/\(dessertIdx)", dataType: ProductRequest.self, parameter: param) { [weak self] response in
             // 나중에 화면 바뀌도록 바꾸기
             print(response)
             self?.showAlert(title: "성공", message: "상품 수정 성공")

@@ -345,7 +345,7 @@ extension DayAddViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension DayAddViewController {
     func fetchHashTagList() {
-        APIManeger.shared.getData(urlEndpointString: "/calendars/categories", dataType: HashTagListResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+        APIManeger.shared.testGetData(urlEndpointString: "/calendars/categories", dataType: HashTagListResponse.self, parameter: nil) { [weak self] response in
             
             if response.result.count % 4 != 0 {
                 self?.hashTagLastSection = (response.result.count / 4) + 1
@@ -381,7 +381,7 @@ extension DayAddViewController {
     }
     
     func updateDate(calendarRequest: CalendarRequest, calendarIdx: Int) {
-        APIManeger.shared.patchData(urlEndpointString: "/calendars/\(calendarIdx)/edit", dataType: CalendarRequest.self, header: APIManeger.buyerTokenHeader, parameter: calendarRequest) { [weak self] response in
+        APIManeger.shared.testPatchData(urlEndpointString: "/calendars/\(calendarIdx)/edit", dataType: CalendarRequest.self, parameter: calendarRequest) { [weak self] response in
             if response.isSuccess == true {
                 self?.navigationController?.popViewController(animated: true)
             }
@@ -389,7 +389,7 @@ extension DayAddViewController {
     }
     
     func addDate(calendarRequest: CalendarRequest) {
-        APIManeger.shared.postData(urlEndpointString: "/calendars", dataType: CalendarRequest.self, header: APIManeger.buyerTokenHeader, parameter: calendarRequest) { [weak self] response in
+        APIManeger.shared.testPostData(urlEndpointString: "/calendars", dataType: CalendarRequest.self, parameter: calendarRequest) { [weak self] response in
             if response.isSuccess == true {
                 self?.navigationController?.popViewController(animated: true)
             }

@@ -141,7 +141,7 @@ extension HeartViewController {
     }
     
     func fetchHeartList(queryParam: Parameters) {
-        APIManeger.shared.getData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, header: APIManeger.buyerTokenHeader, parameter: nil) { [weak self] response in
+        APIManeger.shared.testGetData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, parameter: nil) { [weak self] response in
             print(response)
             
             self?.feedList = response.result.feeds

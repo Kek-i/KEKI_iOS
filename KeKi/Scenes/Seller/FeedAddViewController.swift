@@ -410,7 +410,7 @@ extension FeedAddViewController: UITextViewDelegate {
 
 extension FeedAddViewController {
     func fetchFeedAddInfo() {
-        APIManeger.shared.getData(urlEndpointString: "/posts/makeView", dataType: FeedAddResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
+        APIManeger.shared.testGetData(urlEndpointString: "/posts/makeView", dataType: FeedAddResponse.self, parameter: nil) { [weak self] response in
             
             if response.result.tags.count % 4 != 0 {
                 self?.hashTagLastSection = (response.result.tags.count / 4) + 1
@@ -431,7 +431,7 @@ extension FeedAddViewController {
     }
     
     func fetchFeedEditInfo(postIdx: Int) {
-        APIManeger.shared.getData(urlEndpointString: "/posts/\(postIdx)/editView", dataType: FeedEditResponse.self, header: APIManeger.sellerTokenHeader, parameter: nil) { [weak self] response in
+        APIManeger.shared.testGetData(urlEndpointString: "/posts/\(postIdx)/editView", dataType: FeedEditResponse.self, parameter: nil) { [weak self] response in
             
             self?.postIdx = response.result.postIdx
             self?.selectDesertIdx = response.result.currentDessertIdx
@@ -509,7 +509,7 @@ extension FeedAddViewController {
 
     func requestAddFeed(desertIdx: Int, description: String, tags: [String]) {
         let param = FeedRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
-        APIManeger.shared.postData(urlEndpointString: "/posts", dataType: FeedRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+        APIManeger.shared.testPostData(urlEndpointString: "/posts", dataType: FeedRequest.self, parameter: param) { [weak self] response in
             // 나중에 화면 바뀌도록 바꾸기
             self?.showAlert(title: "성공", message: "피드 추가 성공")
         }
@@ -517,7 +517,7 @@ extension FeedAddViewController {
     
     func requestEditFeed(postIdx: Int, desertIdx: Int, description: String, tags: [String]) {
         let param = FeedRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
-        APIManeger.shared.patchData(urlEndpointString: "/posts/\(postIdx)", dataType: FeedRequest.self, header: APIManeger.sellerTokenHeader, parameter: param) { [weak self] response in
+        APIManeger.shared.testPatchData(urlEndpointString: "/posts/\(postIdx)", dataType: FeedRequest.self, parameter: param) { [weak self] response in
             // 나중에 화면 바뀌도록 바꾸기
             self?.showAlert(title: "성공", message: "성공")
         }
