@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
     // MARK: - Variables, IBOutlet, ...
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
-    @IBOutlet weak var googleLoginButton: GIDSignInButton!
+    @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var naverLoginButton: UIButton!
     @IBOutlet weak var appleLoginButton: ASAuthorizationAppleIDButton!
@@ -106,7 +106,7 @@ class LoginViewController: UIViewController {
             appleLoginButton
         ].forEach { $0?.layer.cornerRadius = 25 }
 
-//        googleLoginButton.configuration?.imagePadding = 53
+        googleLoginButton.configuration?.imagePadding = 53
         kakaoLoginButton.configuration?.imagePadding = 53
         naverLoginButton.configuration?.imagePadding = 34
 //        appleLoginButton.configuration?.imagePadding = 48
