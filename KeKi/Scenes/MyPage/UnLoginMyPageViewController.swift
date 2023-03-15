@@ -52,8 +52,8 @@ class UnLoginMyPageViewController: UIViewController {
         let leftItem = UIBarButtonItem(customView: title)
         self.navigationItem.leftBarButtonItem = leftItem
         
-        let messageBarItem = UIBarButtonItem(image: UIImage(named: "mypageMessage"), style: .plain, target: self, action: nil)
-        let notificationBarItem = UIBarButtonItem(image: UIImage(named: "mypageNotification"), style: .plain, target: self, action: nil)
+        let messageBarItem = UIBarButtonItem(image: UIImage(named: "mypageMessage"), style: .plain, target: self, action: #selector(didTapMessageBarItem))
+        let notificationBarItem = UIBarButtonItem(image: UIImage(named: "mypageNotification"), style: .plain, target: self, action: #selector(didTapNotificationBarItem))
         navigationItem.rightBarButtonItems = [notificationBarItem, messageBarItem]
     }
     
@@ -106,6 +106,18 @@ class UnLoginMyPageViewController: UIViewController {
 
     }
 
+    // MARK: @objc methods
+    @objc private func didTapMessageBarItem() {
+        let alert = UIAlertController(title: "안내", message: "채팅 기능은 곧 업데이트될 예정입니다!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
+    }
+    
+    @objc private func didTapNotificationBarItem() {
+        let alert = UIAlertController(title: "안내", message: "알림 기능은 곧 업데이트될 예정입니다!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - Extensions
