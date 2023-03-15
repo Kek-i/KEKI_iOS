@@ -13,6 +13,7 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import NaverThirdPartyLogin
 import AuthenticationServices
+import GoogleSignIn
 
 enum Role: String {
     case notUser = "비회원"
@@ -28,7 +29,7 @@ class LoginViewController: UIViewController {
     // MARK: - Variables, IBOutlet, ...
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
-    @IBOutlet weak var googleLoginButton: UIButton!
+    @IBOutlet weak var googleLoginButton: GIDSignInButton!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var naverLoginButton: UIButton!
     @IBOutlet weak var appleLoginButton: ASAuthorizationAppleIDButton!
@@ -43,6 +44,9 @@ class LoginViewController: UIViewController {
         
         // apple login button setup
         appleLoginButton.addTarget(self, action: #selector(didTapAppleLoginButton(_:)), for: .touchUpInside)
+        
+        // google login setup
+        setGoogleSignInButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,10 +58,11 @@ class LoginViewController: UIViewController {
     @IBAction func didTapGoogleLoginButton(_ sender: UIButton) {
         // TODO: 구글 로그인 기능 추가
         print("didTapGoogleLoginButton")
+        googleSocialLogin()
         
         // 유저 정보 설정창으로 전환 처리 (임시 구현, 이후 삭제 예정)
-        guard let selectUserCategoryViewController = storyboard?.instantiateViewController(withIdentifier: "SelectUserCategoryViewController") as? SelectUserCategoryViewController else { return }
-        navigationController?.pushViewController(selectUserCategoryViewController, animated: true)
+//        guard let selectUserCategoryViewController = storyboard?.instantiateViewController(withIdentifier: "SelectUserCategoryViewController") as? SelectUserCategoryViewController else { return }
+//        navigationController?.pushViewController(selectUserCategoryViewController, animated: true)
     }
     
     @IBAction func didTapKakaoLoginButton(_ sender: UIButton) {
@@ -80,6 +85,11 @@ class LoginViewController: UIViewController {
     
     
     // MARK: - Helper Methods (Setup Method, ...)
+    private func setGoogleSignInButton() {
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().delegate = self
+    }
+    
     private func setupButtonLayouts() {
         [
             googleLoginButton,
@@ -96,7 +106,7 @@ class LoginViewController: UIViewController {
             appleLoginButton
         ].forEach { $0?.layer.cornerRadius = 25 }
 
-        googleLoginButton.configuration?.imagePadding = 53
+//        googleLoginButton.configuration?.imagePadding = 53
         kakaoLoginButton.configuration?.imagePadding = 53
         naverLoginButton.configuration?.imagePadding = 34
 //        appleLoginButton.configuration?.imagePadding = 48
@@ -120,6 +130,33 @@ class LoginViewController: UIViewController {
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
+    }
+}
+
+// MARK: - GOOGLE Social Login Delegate
+extension LoginViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+                print("The user has not signed in before or they have since signed out.")
+            } else {
+                print("\(error.localizedDescription)")
+            }
+            return
+        }
+            
+        // 사용자 정보 가져오기
+        if let email = user.profile.email {
+            print("User Email : \(email)")
+            requestSocialLogin(email: email, provider: "구글")
+            
+        } else {
+            print("Error : User Data Not Found")
+        }
+    }
+    
+    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFinishAuthorizationWithResult receiveType: THIRDPARTYLOGIN_RECEIVE_TYPE) {
+        print("Google Login Disconnect")
     }
 }
 
@@ -203,6 +240,10 @@ extension LoginViewController {
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
+    }
+    
+    private func googleSocialLogin() {
+        GIDSignIn.sharedInstance()?.signIn()
     }
 }
 

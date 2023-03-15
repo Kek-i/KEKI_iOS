@@ -9,5 +9,6 @@ target 'KeKi' do
   pod 'IQKeyboardManagerSwift'
   pod 'naveridlogin-sdk-ios'
   pod 'JGProgressHUD'
+  pod 'GoogleSignIn', '~> 5.0'
 
 end

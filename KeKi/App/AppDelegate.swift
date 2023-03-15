@@ -16,6 +16,8 @@ import NaverThirdPartyLogin
 
 import AuthenticationServices
 
+import GoogleSignIn
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -37,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         instance?.consumerKey = "XEK5Tv83wP" // 상수 - client id
         instance?.consumerSecret = "XZHzyRgQditsj_BuDAHZ" // pw
         instance?.appName = "케키" // app name
+        
+        // Google
+        GIDSignIn.sharedInstance().clientID = "282823038399-jp07tva2mg6o0amv7hrm1relkockop3r.apps.googleusercontent.com"
         
         
         // Loacl Notification
