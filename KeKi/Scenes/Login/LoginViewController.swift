@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Toast
 import Alamofire
 
 import KakaoSDKAuth
@@ -266,31 +266,36 @@ extension LoginViewController {
                                    dataType: SocialLoginRequest.self,
                                    parameter: param,
                                    completionHandler: { [weak self] result in
-
-            
-            if let result = result.result {
-                UserDefaults.standard.set(email, forKey: "socialEmail")
-                
-                let role = result.role
-                switch role {
-                case Role.notUser.rawValue:
-                    APIManeger.shared.setUserInfo(userInfo: result)
-                    self?.signup()
-                    
-                case Role.buyer.rawValue, Role.seller.rawValue:
-                    APIManeger.shared.setUserInfo(userInfo: result)
-                    
-                    let encoder = PropertyListEncoder()
-                    if let encoded = try? encoder.encode(result) {
-                        UserDefaults.standard.setValue(encoded, forKey: "userInfo")
+            if let isSuccess = result.isSuccess {
+                if isSuccess {
+                    if let result = result.result {
+                        UserDefaults.standard.set(email, forKey: "socialEmail")
+                        
+                        let role = result.role
+                        switch role {
+                        case Role.notUser.rawValue:
+                            APIManeger.shared.setUserInfo(userInfo: result)
+                            self?.signup()
+                            
+                        case Role.buyer.rawValue, Role.seller.rawValue:
+                            APIManeger.shared.setUserInfo(userInfo: result)
+                            
+                            let encoder = PropertyListEncoder()
+                            if let encoded = try? encoder.encode(result) {
+                                UserDefaults.standard.setValue(encoded, forKey: "userInfo")
+                            }
+                            self?.showMain()
+                            
+                        default:
+                            print("알 수 없는 유저")
+                        }
                     }
-                    self?.showMain()
                     
-                default:
-                    print("알 수 없는 유저")
+                } else {
+                    self?.view.makeToast(result.message, duration: 1.5, position: .center)
                 }
             }
-            
+
         })
     }
 
