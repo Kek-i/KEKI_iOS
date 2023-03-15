@@ -100,7 +100,7 @@ extension AlertViewController {
     
         APIManeger.shared.testDeleteData(urlEndpointString: SIGNOUT_ENDPOINT_STR,
                                          completionHandler: { [weak self] response in
-
+            APIManeger.shared.resetHeader()
             switch response.isSuccess {
             case true:
                 self?.dismiss(animated: true)

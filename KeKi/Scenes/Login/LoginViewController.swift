@@ -252,29 +252,21 @@ extension LoginViewController {
 
             
             if let result = result.result {
-                // 발급받은 토큰 저장
-//                let accessToken = result.accessToken
-//                let refreshToken = result.refreshToken
-//
                 UserDefaults.standard.set(email, forKey: "socialEmail")
-//                UserDefaults.standard.set(accessToken, forKey: "accessToken")
-//                UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
                 
                 let role = result.role
                 switch role {
                 case Role.notUser.rawValue:
                     APIManeger.shared.setUserInfo(userInfo: result)
-//                    let userInfo = result
-//                    let encoded = try? PropertyListEncoder().encode(userInfo)
-//                    UserDefaults.standard.set(encoded, forKey: "userInfo")
                     self?.signup()
                     
                 case Role.buyer.rawValue, Role.seller.rawValue:
                     APIManeger.shared.setUserInfo(userInfo: result)
                     
-                    let encoder = JSONEncoder()
+                    let encoder = PropertyListEncoder()
                     if let encoded = try? encoder.encode(result) {
                         UserDefaults.standard.setValue(encoded, forKey: "userInfo")
+                        print("userInfo 저장됨")
                     }
                     self?.showMain()
                     
