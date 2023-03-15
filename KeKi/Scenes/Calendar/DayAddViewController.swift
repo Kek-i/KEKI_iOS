@@ -205,6 +205,7 @@ class DayAddViewController: UIViewController {
             waringViewHeight.priority = UILayoutPriority(100)
             waringTextField.isHidden = false
             waringView.layer.masksToBounds = false
+            return
             
         }
         

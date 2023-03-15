@@ -146,7 +146,7 @@ extension CalendarViewController {
         
     }
     func deleteCalendar(calendarIdx: Int) {
-        APIManeger.shared.testPatchData(urlEndpointString: "/calendars/\(calendarIdx)", dataType: CalendarRequest.self, parameter: nil) { [weak self] response in
+        APIManeger.shared.testDeleteData(urlEndpointString: "/calendars/\(calendarIdx)") { [weak self] response in
             if response.isSuccess == true {
             self?.fetchCalendarList()
             }
