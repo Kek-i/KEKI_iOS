@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import JGProgressHUD
 
 class HeartViewController: UIViewController {
 
@@ -141,16 +142,27 @@ extension HeartViewController {
     }
     
     func fetchHeartList(queryParam: Parameters) {
-        APIManeger.shared.testGetData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, parameter: nil) { [weak self] response in
-            print(response)
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.textLabel.text = "Loading"
+            hud.show(in: self.view)
             
-            self?.feedList = response.result.feeds
-            
-            self?.hasNext = response.result.hasNext
-            self?.cursorDate = response.result.cursorDate
-            
-            self?.heartCV.reloadData()
+            APIManeger.shared.testGetData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, parameter: nil) { [weak self] response in
+                hud.dismiss(animated: true)
+                
+                print(response)
+                
+                self?.feedList = response.result.feeds
+                
+                self?.hasNext = response.result.hasNext
+                self?.cursorDate = response.result.cursorDate
+                
+                self?.heartCV.reloadData()
+            }
         }
+        
     }
 }
 
