@@ -35,7 +35,7 @@
                                                     <constraint firstAttribute="height" constant="24" id="gKj-By-cUB"/>
                                                 </constraints>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="Label">
+                                                    <fragment content="D-DAY">
                                                         <attributes>
                                                             <font key="NSFont" size="20" name="SFPro-Bold"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
