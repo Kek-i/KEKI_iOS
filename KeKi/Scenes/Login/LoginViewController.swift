@@ -111,7 +111,7 @@ class LoginViewController: UIViewController {
     private func setupAuthorityGuidanceViewController() {
         let storyboard = UIStoryboard.init(name: "AuthorityGuidance", bundle: nil)
         guard let authorityGuidanceViewController = storyboard.instantiateViewController(withIdentifier: "AuthorityGuidanceViewController") as? AuthorityGuidanceViewController else { return }
-        authorityGuidanceViewController.modalPresentationStyle = .fullScreen
+        authorityGuidanceViewController.modalPresentationStyle = .overCurrentContext
         present(authorityGuidanceViewController, animated: true)
         
     }
