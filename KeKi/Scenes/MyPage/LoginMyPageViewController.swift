@@ -56,11 +56,8 @@ class LoginMyPageViewController: UIViewController {
     // MARK: - Action Methods (IBAction, ...)
     @IBAction func changedNotificationSwitchValue(_ sender: UISwitch) {
         // TODO: switch 값에 따라 푸시 알림 설정 값 변경하기
-        if sender.isOn {
-            print("푸시 알림 켬")
-        } else {
-            print("푸시 알림 끔")
-        }
+        if sender.isOn { print("푸시 알림 켬") }
+        else { print("푸시 알림 끔") }
     }
     
     // MARK: - Helper Methods (Setup Method, ...)    
@@ -76,8 +73,8 @@ class LoginMyPageViewController: UIViewController {
         let leftItem = UIBarButtonItem(customView: title)
         self.navigationItem.leftBarButtonItem = leftItem
         
-        let messageBarItem = UIBarButtonItem(image: UIImage(named: "mypageMessage"), style: .plain, target: self, action: nil)
-        let notificationBarItem = UIBarButtonItem(image: UIImage(named: "mypageNotification"), style: .plain, target: self, action: nil)
+        let messageBarItem = UIBarButtonItem(image: UIImage(named: "mypageMessage"), style: .plain, target: self, action: #selector(didTapMessageBarItem))
+        let notificationBarItem = UIBarButtonItem(image: UIImage(named: "mypageNotification"), style: .plain, target: self, action: #selector(didTapNotificationBarItem))
         navigationItem.rightBarButtonItems = [notificationBarItem, messageBarItem]
     }
     
@@ -178,6 +175,19 @@ class LoginMyPageViewController: UIViewController {
     // MARK: Methods
     func setUserInfo(nickname: String, profilImgUrl: String?) {
         welcomLabel.text = "\(nickname)님 \n오늘도 특별한 하루 보내세요!"
+    }
+    
+    // MARK: @objc methods
+    @objc private func didTapMessageBarItem() {
+        let alert = UIAlertController(title: "안내", message: "채팅 기능은 곧 업데이트될 예정입니다!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
+    }
+    
+    @objc private func didTapNotificationBarItem() {
+        let alert = UIAlertController(title: "안내", message: "알림 기능은 곧 업데이트될 예정입니다!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
 }
 

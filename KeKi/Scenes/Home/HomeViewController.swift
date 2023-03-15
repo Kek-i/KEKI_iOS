@@ -46,6 +46,17 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Action Methods (IBAction, ...)
+    @IBAction func didTapChatButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "안내", message: "채팅 기능은 곧 업데이트될 예정입니다!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
+    }
+    
+    @IBAction func didTapNotificationButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "안내", message: "알림 기능은 곧 업데이트될 예정입니다!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
+    }
     
     
     // MARK: - Helper Methods (Setup Method, ...)
