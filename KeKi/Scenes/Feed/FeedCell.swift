@@ -94,8 +94,10 @@ class FeedCell: UITableViewCell {
         
         // set store profile
         nicknameButton.setTitle(data.storeName, for: .normal)
-
-        profileImgView.kf.setImage(with: URL(string: data.storeProfileImg ?? ""))
+        
+        if let img = data.storeProfileImg {
+            profileImgView.kf.setImage(with: URL(string: img))
+        }
         profileImgView.layer.cornerRadius = profileImgView.frame.width / 2
         
         profileImgView.layer.borderWidth = 0.3  // 정방형이 아닌 크기의 프로필 사진에 대한 임시처리
