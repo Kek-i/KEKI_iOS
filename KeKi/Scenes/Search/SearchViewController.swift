@@ -266,7 +266,6 @@ extension SearchViewController: UITextFieldDelegate {
         hashTag = nil
         searchResultList.removeAll()
         searchText = textField.text
-        
         search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
         
         return true
@@ -275,7 +274,9 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField.text == nil || textField.text == ""{
             searchText = nil
+            
             searchResultList.removeAll()
+            
             fetchSearchMain()
             showMainView()
         }
