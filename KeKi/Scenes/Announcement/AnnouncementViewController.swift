@@ -12,23 +12,9 @@ private let URL_ENDPOINT_STR = "/cs/notice"
 class AnnouncementViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
+    @objc let refreshControl = UIRefreshControl()
     private var announcementList: [AnnouncementListResponse.Result] = []
-//    private var announcementList: [String] = [  // 임시 데이터 (서버연결 후 삭제 예정)
-//        "새로운 디저트가 등록되었어요!",
-//        "크리스마스 기념 할인행사",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요! 어서 확인해보세요",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//        "새로운 디저트가 등록되었어요!",
-//    ]
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -38,6 +24,7 @@ class AnnouncementViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         setupTableView()
         fetchData()
+        initRefresh()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -49,6 +36,19 @@ class AnnouncementViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "AnnouncementCell", bundle: nil), forCellReuseIdentifier: "AnnouncementCell")
+    }
+    
+    private func initRefresh() {
+        refreshControl.addTarget(self, action: #selector(refreshView(refresh: )), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc private func refreshView(refresh: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.fetchData()
+            self.tableView.reloadData()
+            refresh.endRefreshing()
+        }
     }
 }
 
