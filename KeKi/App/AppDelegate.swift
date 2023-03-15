@@ -11,11 +11,8 @@ import FirebaseCore
 
 import KakaoSDKCommon
 import KakaoSDKAuth
-
 import NaverThirdPartyLogin
-
 import AuthenticationServices
-
 import GoogleSignIn
 
 @main
@@ -35,10 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         instance?.isInAppOauthEnable = true // SafariViewController에서 인증하는 방식 활성화
         instance?.isOnlyPortraitSupportedInIphone() // 인증 화면을 아이폰의 세로모드에서만 적용
         
-        instance?.serviceUrlScheme = "https://keki-dev.store/users/callback/naver" // 앱을 등록할 때 입력한 URL Scheme
+        instance?.serviceUrlScheme = "naverlogin" // 앱을 등록할 때 입력한 URL Scheme
         instance?.consumerKey = "XZHzyRgQditsj_BuDAHZ" // 상수 - client id
         instance?.consumerSecret = "XEK5Tv83wP" // pw
         instance?.appName = "케키" // app name
+        
         
         // Google
         GIDSignIn.sharedInstance().clientID = "282823038399-jp07tva2mg6o0amv7hrm1relkockop3r.apps.googleusercontent.com"

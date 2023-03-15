@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NaverThirdPartyLogin
 
 private let LOGOUT_ENDPOINT_STR = "/users/logout"
 private let SIGNOUT_ENDPOINT_STR = "/users/signout"
@@ -85,6 +86,8 @@ extension AlertViewController {
                                         parameter: nil,
                                         completionHandler: { [weak self] response in
             print(response)
+            let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+            instance?.requestDeleteToken()
             APIManeger.shared.resetHeader()
             
             self?.navigationController?.popToRootViewController(animated: false)

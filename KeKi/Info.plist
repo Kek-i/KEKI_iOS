@@ -19,7 +19,7 @@
 			<string>naverlogin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>https://keki-dev.store/users/callback/naver</string>
+				<string>naverlogin</string>
 			</array>
 		</dict>
 		<dict>

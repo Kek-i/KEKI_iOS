@@ -55,29 +55,13 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Action Methods (IBAction, ...)
-    @IBAction func didTapGoogleLoginButton(_ sender: UIButton) {
-        // TODO: 구글 로그인 기능 추가
-        print("didTapGoogleLoginButton")
-        googleSocialLogin()
-    }
+    @IBAction func didTapGoogleLoginButton(_ sender: UIButton) { googleSocialLogin() }
     
-    @IBAction func didTapKakaoLoginButton(_ sender: UIButton) {
-        // TODO: 카카오 로그인 기능 추가
-        print("didTapKakaoLoginButton")
-        kakaoSocialLogin()
-    }
+    @IBAction func didTapKakaoLoginButton(_ sender: UIButton) { kakaoSocialLogin() }
     
-    @IBAction func didTapNaverLoginButton(_ sender: UIButton) {
-        // TODO: 네이버 로그인 기능 추가
-        print("didTapNaverLoginButton")
-        naverSocialLogin()
-    }
+    @IBAction func didTapNaverLoginButton(_ sender: UIButton) { naverSocialLogin() }
     
-    @IBAction func didTapAppleLoginButton(_ sender: UIButton) {
-        // TODO: 애플 로그인 기능 추가
-        print("didTapAppleLoginButton")
-        appleSocialLogin()
-    }
+    @IBAction func didTapAppleLoginButton(_ sender: UIButton) { appleSocialLogin() }
     
     
     // MARK: - Helper Methods (Setup Method, ...)
@@ -173,8 +157,6 @@ extension LoginViewController : NaverThirdPartyLoginConnectionDelegate {
 extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-        print("Apple ID Credential Authorization User ID : \(appleIDCredential.user)")
-        print("Apple ID Credential Authorization User Email : \(appleIDCredential.email)")
         
         if let email = UserDefaults.standard.value(forKey: "appleEmail") {
             requestSocialLogin(email: email as! String, provider: "애플")
@@ -269,15 +251,13 @@ extension LoginViewController {
         let authorization = "\(tokenType) \(accessToken)"
         let req = AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
         
-        req.responseJSON { response in
-                guard let result = response.value as? [String: Any] else { return }
-//                guard let object = result["response"] as? [String: Any] else { return }
-//                guard let name = object["name"] as? String else { return }
-//                guard let email = object["email"] as? String else { return }
-//                guard let id = object["id"] as? String else {return}
-                
-                print(result)
-              }
+        req.responseJSON { [weak self] response in
+            guard let result = response.value as? [String: Any] else { return }
+            guard let object = result["response"] as? [String: Any] else { return }
+            guard let email = object["email"] as? String else { return }
+
+            self?.requestSocialLogin(email: email, provider: "네이버")
+        }
     }
     
     private func requestSocialLogin(email: String, provider: String) {
@@ -303,7 +283,6 @@ extension LoginViewController {
                     let encoder = PropertyListEncoder()
                     if let encoded = try? encoder.encode(result) {
                         UserDefaults.standard.setValue(encoded, forKey: "userInfo")
-                        print("userInfo 저장됨")
                     }
                     self?.showMain()
                     
