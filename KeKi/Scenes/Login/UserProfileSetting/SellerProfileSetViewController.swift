@@ -122,7 +122,7 @@ class SellerProfileSetViewController: UIViewController {
     }
     
     @objc private func confirmProfileSetting() {
-        if APIManeger.shared.getHeader() != nil { editProfile() }
+        if let _ = UserDefaults.standard.object(forKey: "userInfo") { editProfile() }
         else { signup() }
     }
     

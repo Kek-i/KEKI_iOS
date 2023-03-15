@@ -17,11 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // MARK: Setting UserInfo (token , role)
         if let _ = UserDefaults.standard.object(forKey: "userInfo") {
-//            UserDefaults.standard.removeObject(forKey: "userInfo")    // for test
             if let data = UserDefaults.standard.value(forKey: "userInfo") as? Data {
                 let decodedUserInfo = try? PropertyListDecoder().decode(AuthResponse.Result.self, from: data)
                 if let _ = decodedUserInfo { APIManeger.shared.setUserInfo(userInfo: decodedUserInfo!) }
-
             }
         }
         
