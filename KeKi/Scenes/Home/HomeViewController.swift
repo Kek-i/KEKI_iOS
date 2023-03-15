@@ -12,6 +12,7 @@ private let URL_ENDPOINT_STR = "/calendars/home"
 class HomeViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
+    @objc let refreshControl = UIRefreshControl()
 
     // TODO: 기본 멘트로 ddayCountingText 재설정 필요 -> 논의 후 설정할 예정
     private var ddayCountingText: String? = "어서오세요! \n당신의 특별한 기념일을! \n케키와 함께 준비해요"
@@ -35,6 +36,7 @@ class HomeViewController: UIViewController {
         fetchData()
         setUpDdayCountingLabel()
         setupTableView()
+        initRefresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +49,11 @@ class HomeViewController: UIViewController {
     
     
     // MARK: - Helper Methods (Setup Method, ...)
+    private func initRefresh() {
+        refreshControl.addTarget(self, action: #selector(refreshView(refresh: )), for: .valueChanged)
+        scrollView.refreshControl = refreshControl
+    }
+    
     private func setUpDdayCountingLabel() {
         let attributedString = NSMutableAttributedString(string: ddayCountingText!)
         let paragraphStyle = NSMutableParagraphStyle()
@@ -62,6 +69,14 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeTableViewCell")
+    }
+    
+    @objc private func refreshView(refresh: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.fetchData()
+            self.tableView.reloadData()
+            refresh.endRefreshing()
+        }
     }
 }
 
