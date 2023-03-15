@@ -414,7 +414,6 @@ extension SearchViewController {
 // 서버 통신 api
 extension SearchViewController {
     func fetchSearchMain() {
-        // MARK: 로그인 토큰 있을 시 검색 메인 화면
         APIManeger.shared.testGetData(urlEndpointString: "/histories",
                                       dataType: SearchMainResponse.self,
                                       parameter: nil,
@@ -471,24 +470,25 @@ extension SearchViewController {
         APIManeger.shared.testGetData(urlEndpointString: "/posts",
                                       dataType: SearchResultResponse.self,
                                       parameter: queryParam, completionHandler: { [weak self] response in
-            if response.result.feeds?.count != 0 {
-                response.result.feeds?.forEach({ feed in
-                    self?.searchResultList.append(feed)
-                })
+            response.result.feeds?.forEach({ feed in
+                self?.searchResultList.append(feed)
+            })
 
-                self?.cursorIdx = response.result.cursorIdx
-                self?.hasNext = response.result.hasNext
+            self?.cursorIdx = response.result.cursorIdx
+            self?.hasNext = response.result.hasNext
 
-                if self?.sortType == .Popular {
-                    self?.cursorPopularNum = response.result.cursorPopularNum
-                }else if self?.sortType == .LowPrice {
-                    self?.cursorPrice = response.result.cursorPrice
-                }
-                self?.showResultView()
-            }else {
-                self?.showNoResultView()
+            if self?.sortType == .Popular {
+                self?.cursorPopularNum = response.result.cursorPopularNum
+            }else if self?.sortType == .LowPrice {
+                self?.cursorPrice = response.result.cursorPrice
             }
-
+            
+            if self?.searchResultList.count == 0 {
+                self?.showNoResultView()
+            }else {
+                self?.showResultView()
+            }
+            
             self?.isLoading = false
         })
     }
