@@ -89,7 +89,7 @@ class BuyerProfileSetViewController: UIViewController {
     }
     
     @objc private func confirmProfileSetting() {
-        if APIManeger.shared.getHeader() != nil { editProfile() }
+        if let _ = UserDefaults.standard.object(forKey: "userInfo") { editProfile() }
         else { signup() }
     }
 }
@@ -193,6 +193,9 @@ extension BuyerProfileSetViewController {
                     let signupInfo = Signup(nickname: nickname, profileImg: self?.savedProfileImgUrl ?? "")
                     self?.signupRequest(param: signupInfo)
                 }
+            } else {
+                let signupInfo = Signup(nickname: nickname, profileImg: savedProfileImgUrl ?? "")
+                signupRequest(param: signupInfo)
             }
 
         } else { showAlert(message: "닉네임을 입력해주세요") }

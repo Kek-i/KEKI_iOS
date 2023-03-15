@@ -63,7 +63,7 @@ class AlertViewController: UIViewController {
             confirmButton.setTitle("로그아웃", for: .normal)
         case .signout:
             titleLabel.text = "회원탈퇴"
-            contentLabel.text = "정말 케키와 헤어지실건가요? \n정말요?  진짜요?"
+            contentLabel.text = "정말 케키와 헤어지실건가요? \n정말요?  진짜요?\n(해당 이메일로 재가입은 불가능합니다)"
             confirmButton.setTitle("탈퇴하기", for: .normal)
         default:
             return
@@ -103,9 +103,9 @@ extension AlertViewController {
 
             switch response.isSuccess {
             case true:
-                self?.showAlert(message: "회원탈퇴에 성공하였습니다")
+                self?.dismiss(animated: true)
             case false:
-                self?.showAlert(message: "회원탈퇴에 실패하였습니다")
+                self?.dismiss(animated: true)
             default:
                 return
             }

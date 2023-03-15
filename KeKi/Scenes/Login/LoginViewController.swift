@@ -264,9 +264,9 @@ extension LoginViewController {
                 switch role {
                 case Role.notUser.rawValue:
                     APIManeger.shared.setUserInfo(userInfo: result)
-                    let userInfo = result
-                    let encoded = try? PropertyListEncoder().encode(userInfo)
-                    UserDefaults.standard.set(encoded, forKey: "userInfo")
+//                    let userInfo = result
+//                    let encoded = try? PropertyListEncoder().encode(userInfo)
+//                    UserDefaults.standard.set(encoded, forKey: "userInfo")
                     self?.signup()
                     
                 case Role.buyer.rawValue, Role.seller.rawValue:

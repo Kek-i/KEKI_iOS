@@ -22,7 +22,7 @@ enum SectionModel {
 class LoginMyPageViewController: UIViewController {
 
     // MARK: - Variables, IBOutlet, ...
-    let userKind = APIManeger.shared.getUserInfo().role
+    let userKind = APIManeger.shared.getUserInfo()?.role
     private var nickname: String = ""
     private var profileImgUrl: String? = nil
     
