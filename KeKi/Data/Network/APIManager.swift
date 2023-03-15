@@ -181,11 +181,16 @@ extension APIManeger {
         self.header = HTTPHeaders(["Authorization": userInfo.accessToken])
     }
     
-    func getUserInfo() -> AuthResponse.Result { return self.userInfo! }
+    func getUserInfo() -> AuthResponse.Result? { return self.userInfo! }
     
     func getHeader() -> HTTPHeaders? { return header }
     func getHeaderByToken(accessToken: String) -> HTTPHeaders { return HTTPHeaders(["Authorization": accessToken]) }
-    func resetHeader() { header = nil }
+    func resetHeader() {
+        header = nil
+        if let _ = UserDefaults.standard.object(forKey: "userInfo") {
+            UserDefaults.standard.removeObject(forKey: "userInfo")
+        }
+    }
     
     func testGetData<T: Decodable>(urlEndpointString: String,
                                    dataType: T.Type,
@@ -288,11 +293,6 @@ extension APIManeger {
                               parameter: T,
                               completionHandler: @escaping (AuthResponse) -> Void) {
         
-//        if let _ = UserDefaults.standard.value(forKey: "accessToken") {
-//            print("postSignup test")
-//            let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
-//            let header = APIManeger.shared.getHeaderByToken(accessToken: accessToken)
-            
             guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
 
             AF
@@ -300,7 +300,7 @@ extension APIManeger {
                          method: .post,
                          parameters: parameter,
                          encoder: .json,
-                         headers: self.header ?? nil)
+                         headers: header)
                 .responseDecodable(of: AuthResponse.self) { response in
                     print("response :: \(response)")
                     switch response.result {
@@ -313,6 +313,5 @@ extension APIManeger {
                 }
                 .resume()
             
-//        }
     }
 }
