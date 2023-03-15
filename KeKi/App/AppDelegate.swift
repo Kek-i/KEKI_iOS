@@ -33,10 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         instance?.isInAppOauthEnable = true // SafariViewController에서 인증하는 방식 활성화
         instance?.isOnlyPortraitSupportedInIphone() // 인증 화면을 아이폰의 세로모드에서만 적용
         
-        instance?.serviceUrlScheme = kServiceAppUrlScheme // 앱을 등록할 때 입력한 URL Scheme
-        instance?.consumerKey = kConsumerKey // 상수 - client id
-        instance?.consumerSecret = kConsumerSecret // pw
-        instance?.appName = kServiceAppName // app name
+        instance?.serviceUrlScheme = "https://keki-dev.store/users/callback/naver" // 앱을 등록할 때 입력한 URL Scheme
+        instance?.consumerKey = "XEK5Tv83wP" // 상수 - client id
+        instance?.consumerSecret = "XZHzyRgQditsj_BuDAHZ" // pw
+        instance?.appName = "케키" // app name
         
         
         // Loacl Notification

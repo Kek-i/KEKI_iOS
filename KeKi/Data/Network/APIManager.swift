@@ -300,7 +300,7 @@ extension APIManeger {
                          method: .post,
                          parameters: parameter,
                          encoder: .json,
-                         headers: header)
+                         headers: self.header ?? nil)
                 .responseDecodable(of: AuthResponse.self) { response in
                     print("response :: \(response)")
                     switch response.result {

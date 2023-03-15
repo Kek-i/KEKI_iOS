@@ -263,6 +263,7 @@ extension LoginViewController {
                 let role = result.role
                 switch role {
                 case Role.notUser.rawValue:
+                    APIManeger.shared.setUserInfo(userInfo: result)
                     let userInfo = result
                     let encoded = try? PropertyListEncoder().encode(userInfo)
                     UserDefaults.standard.set(encoded, forKey: "userInfo")
