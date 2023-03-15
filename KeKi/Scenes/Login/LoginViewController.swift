@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var naverLoginButton: UIButton!
-    @IBOutlet weak var appleLoginButton: ASAuthorizationAppleIDButton!
+    @IBOutlet weak var appleLoginButton: UIButton!
     
     
     // MARK: - Methods of LifeCycle
@@ -59,10 +59,6 @@ class LoginViewController: UIViewController {
         // TODO: 구글 로그인 기능 추가
         print("didTapGoogleLoginButton")
         googleSocialLogin()
-        
-        // 유저 정보 설정창으로 전환 처리 (임시 구현, 이후 삭제 예정)
-//        guard let selectUserCategoryViewController = storyboard?.instantiateViewController(withIdentifier: "SelectUserCategoryViewController") as? SelectUserCategoryViewController else { return }
-//        navigationController?.pushViewController(selectUserCategoryViewController, animated: true)
     }
     
     @IBAction func didTapKakaoLoginButton(_ sender: UIButton) {
@@ -109,7 +105,7 @@ class LoginViewController: UIViewController {
         googleLoginButton.configuration?.imagePadding = 53
         kakaoLoginButton.configuration?.imagePadding = 53
         naverLoginButton.configuration?.imagePadding = 34
-//        appleLoginButton.configuration?.imagePadding = 48
+        appleLoginButton.configuration?.imagePadding = 48
     }
     
     private func setupAuthorityGuidanceViewController() {
