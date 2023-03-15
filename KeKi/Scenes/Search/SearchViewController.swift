@@ -437,16 +437,13 @@ extension SearchViewController {
         })
     }
     
-    // MARK: 최근 검색어 삭제 - PATCH
+    // MARK: 최근 검색어 삭제 - DELETE
     func deleteRecentSearches() {
-        APIManeger.shared.testPatchData(urlEndpointString: "/histories",
-                                        dataType: SearchMainResponse.self,
-                                        parameter: nil,
-                                        completionHandler: { [weak self] response in
-                    if response.isSuccess == true {
-                        self?.fetchRecnetSearches()
-                    }
-        })
+        APIManeger.shared.testDeleteData(urlEndpointString: "/histories") { [weak self] response in
+            if response.isSuccess == true {
+                self?.fetchRecnetSearches()
+            }
+        }
     }
     
     // MARK: 검색 파라미터 만든 후 검색
