@@ -100,7 +100,7 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
         guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
-//        feedViewController.feedData = feedList
+        feedViewController.postIdx = feedList[indexPath.row].postIdx
         self.navigationController?.pushViewController(feedViewController, animated: true)
         
     }
