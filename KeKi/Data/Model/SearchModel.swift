@@ -81,7 +81,8 @@ struct Feed: Codable {
     let postImgUrls: [String]
     let tags: [String]
     let storeIdx: Int
-    let storeName, storeProfileImg: String
+    let storeName: String
+    let storeProfileImg: String?
     let like: Bool
 }
 

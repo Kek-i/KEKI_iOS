@@ -199,7 +199,7 @@ extension APIManeger {
 
             guard let url = URL(string: DEV_BASE_URL + urlEndpointString) else { return }
 
-
+        
             AF
                 .request(url, method: .get,
                          parameters: parameter,
