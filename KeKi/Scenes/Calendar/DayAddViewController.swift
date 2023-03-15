@@ -382,7 +382,7 @@ extension DayAddViewController {
     }
     
     func updateDate(calendarRequest: CalendarRequest, calendarIdx: Int) {
-        APIManeger.shared.testPatchData(urlEndpointString: "/calendars/\(calendarIdx)/edit", dataType: CalendarRequest.self, parameter: calendarRequest) { [weak self] response in
+        APIManeger.shared.testPatchData(urlEndpointString: "/calendars/\(calendarIdx)", dataType: CalendarRequest.self, parameter: calendarRequest) { [weak self] response in
             if response.isSuccess == true {
                 self?.navigationController?.popViewController(animated: true)
             }
