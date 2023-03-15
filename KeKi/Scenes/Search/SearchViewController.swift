@@ -345,12 +345,14 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 1 {
             searchText = recentTextList[indexPath.row].searchWord
+            searchTextField.text = searchText
             hashTag = nil
             search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
         }else if collectionView.tag == 2 {
-            hashTag = popularTextList[indexPath.row].searchWord
-            searchText = nil
-            search(searchText: nil, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
+            searchText = popularTextList[indexPath.row].searchWord
+            searchTextField.text = searchText
+            hashTag = nil
+            search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
         }else if collectionView.tag == 3 {
            
         }else {
