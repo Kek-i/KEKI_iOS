@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import JGProgressHUD
 
 enum SortType: String {
     case Recent = "최신순"
@@ -468,28 +469,41 @@ extension SearchViewController {
     
     // MARK: 검색 - GET
     func fetchSearchResult(queryParam: Parameters) {
-        APIManeger.shared.testGetData(urlEndpointString: "/posts",
-                                      dataType: SearchResultResponse.self,
-                                      parameter: queryParam, completionHandler: { [weak self] response in
-            if response.result.feeds?.count != 0 {
-                response.result.feeds?.forEach({ feed in
-                    self?.searchResultList.append(feed)
-                })
+        DispatchQueue.main.async {
+            // Loading Animation Setting
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.textLabel.text = "Loading"
+            hud.show(in: self.view)
+            
+            APIManeger.shared.testGetData(urlEndpointString: "/posts",
+                                          dataType: SearchResultResponse.self,
+                                          parameter: queryParam, completionHandler: { [weak self] response in
+                hud.dismiss()
 
-                self?.cursorIdx = response.result.cursorIdx
-                self?.hasNext = response.result.hasNext
+                if response.result.feeds?.count != 0 {
+                    response.result.feeds?.forEach({ feed in
+                        self?.searchResultList.append(feed)
+                    })
 
-                if self?.sortType == .Popular {
-                    self?.cursorPopularNum = response.result.cursorPopularNum
-                }else if self?.sortType == .LowPrice {
-                    self?.cursorPrice = response.result.cursorPrice
+                    self?.cursorIdx = response.result.cursorIdx
+                    self?.hasNext = response.result.hasNext
+
+                    if self?.sortType == .Popular {
+                        self?.cursorPopularNum = response.result.cursorPopularNum
+                    }else if self?.sortType == .LowPrice {
+                        self?.cursorPrice = response.result.cursorPrice
+                    }
+                    self?.showResultView()
+                }else {
+                    self?.showNoResultView()
                 }
-                self?.showResultView()
-            }else {
-                self?.showNoResultView()
-            }
 
-            self?.isLoading = false
-        })
+                self?.isLoading = false
+            })
+        }
+        
+        
     }
 }
