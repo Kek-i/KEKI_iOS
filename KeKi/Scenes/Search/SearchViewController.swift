@@ -415,7 +415,6 @@ extension SearchViewController {
 // 서버 통신 api
 extension SearchViewController {
     func fetchSearchMain() {
-        // MARK: 로그인 토큰 있을 시 검색 메인 화면
         APIManeger.shared.testGetData(urlEndpointString: "/histories",
                                       dataType: SearchMainResponse.self,
                                       parameter: nil,
@@ -469,6 +468,7 @@ extension SearchViewController {
     
     // MARK: 검색 - GET
     func fetchSearchResult(queryParam: Parameters) {
+
         DispatchQueue.main.async {
             // Loading Animation Setting
             let hud = JGProgressHUD()
@@ -503,7 +503,6 @@ extension SearchViewController {
                 self?.isLoading = false
             })
         }
-        
         
     }
 }
