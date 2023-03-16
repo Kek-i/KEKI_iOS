@@ -11,6 +11,7 @@ class StoreInfoPopUpViewController: UIViewController {
 
     @IBOutlet var selfView: UIView!
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var sellerName: UILabel!
     @IBOutlet weak var storeName: UILabel!
     @IBOutlet weak var storeAddress: UILabel!
@@ -22,6 +23,7 @@ class StoreInfoPopUpViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
+        setupLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,8 +35,11 @@ class StoreInfoPopUpViewController: UIViewController {
     
     func setup() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-
         selfView.addGestureRecognizer(tapGesture)
+    }
+    
+    func setupLayout() {
+        containerView.layer.cornerRadius = 12
     }
 
     @objc func handleTap(sender: UITapGestureRecognizer) {
