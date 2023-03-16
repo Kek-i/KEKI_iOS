@@ -119,27 +119,13 @@ extension FeedViewController: FeedDelegate {
     
     func showFeedMainAlert() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
         let declarationAction = UIAlertAction(title: "신고하기", style: .default) { [weak self] _ in
             self?.showFeedDeclarationActionAlert()
         }
-        
-        let notToSeeAction = UIAlertAction(title: "게시글 보지 않기", style: .default) {_ in
-            // TODO: 게시글 안 보이게 하는 기능 구현
-        }
-        
-        let blockAction = UIAlertAction(title: "차단하기", style: .default) {_ in
-            // TODO: 피드 게시자 차단 기능 구현
-        }
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
-        [
-            declarationAction,
-            notToSeeAction,
-            blockAction,
-            cancelAction
-        ].forEach { alert.addAction($0) }
+        alert.addAction(declarationAction)
+        alert.addAction(cancelAction)
         present(alert, animated: true)
     }
     
