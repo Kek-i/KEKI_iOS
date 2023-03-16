@@ -11,6 +11,7 @@ import Toast
 class FeedViewController: UIViewController {
     // MARK: - Variables, IBOutlet, ...
     var postIdx: Int = -1
+    var focusingIdx: IndexPath?
     var dessertIdx: Int?
     var feedData: [Feed] = []
     
@@ -61,6 +62,11 @@ class FeedViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "FeedCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
+        
+        if let idx = focusingIdx {
+            tableView.scrollToRow(at: idx, at: .middle, animated: true)
+        }
+
     }
     
     @objc private func didTapBackItem() { self.navigationController?.popViewController(animated: true) }
