@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="haN-oa-3Vp">
-                                <rect key="frame" x="42" y="376" width="288" height="171"/>
+                                <rect key="frame" x="52.666666666666657" y="376" width="288" height="171"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saJ-IG-UMp">
                                         <rect key="frame" x="114" y="29" width="60" height="20"/>
@@ -38,7 +38,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSk-Qa-rDq">
-                                        <rect key="frame" x="130.66666666666666" y="66" width="27" height="13"/>
+                                        <rect key="frame" x="130.33333333333334" y="66" width="27" height="13"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Label">
                                                 <attributes>
@@ -102,20 +102,20 @@
                                     <constraint firstItem="SSk-Qa-rDq" firstAttribute="top" secondItem="saJ-IG-UMp" secondAttribute="bottom" constant="17" id="EED-Fq-4bf"/>
                                     <constraint firstItem="saJ-IG-UMp" firstAttribute="centerX" secondItem="haN-oa-3Vp" secondAttribute="centerX" id="IN5-Se-gHc"/>
                                     <constraint firstAttribute="trailing" secondItem="aWa-pd-VYw" secondAttribute="trailing" constant="26" id="Yjt-mm-AqP"/>
+                                    <constraint firstItem="rWQ-nE-afc" firstAttribute="leading" secondItem="haN-oa-3Vp" secondAttribute="leading" constant="29" id="giO-g8-mkL"/>
                                     <constraint firstItem="SSk-Qa-rDq" firstAttribute="centerX" secondItem="haN-oa-3Vp" secondAttribute="centerX" id="jEk-pT-07s"/>
                                     <constraint firstItem="saJ-IG-UMp" firstAttribute="top" secondItem="haN-oa-3Vp" secondAttribute="top" constant="29" id="lcb-hF-7nB"/>
                                     <constraint firstAttribute="height" constant="171" id="wOt-HY-0nm"/>
-                                    <constraint firstItem="rWQ-nE-afc" firstAttribute="leading" secondItem="haN-oa-3Vp" secondAttribute="leading" constant="29" id="xGk-z9-ER5"/>
                                     <constraint firstItem="aWa-pd-VYw" firstAttribute="top" secondItem="haN-oa-3Vp" secondAttribute="top" constant="99" id="ym4-dX-KBz"/>
                                     <constraint firstItem="rWQ-nE-afc" firstAttribute="top" secondItem="haN-oa-3Vp" secondAttribute="top" constant="99" id="zZm-Ou-2PA"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.59999999999999998" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="haN-oa-3Vp" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="317" id="8nV-ci-JCq"/>
-                            <constraint firstItem="haN-oa-3Vp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="42" id="uZV-XN-Kul"/>
+                            <constraint firstItem="haN-oa-3Vp" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="nMc-Tv-M0E"/>
                         </constraints>
                     </view>
                     <connections>
