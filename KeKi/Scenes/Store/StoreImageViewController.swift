@@ -74,10 +74,10 @@ extension StoreImageViewController: UICollectionViewDelegateFlowLayout {
         guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
         
         feedViewController.feedData = self.feeds
+        feedViewController.focusingIdx = indexPath
         if let vc = self.next(ofType: UIViewController.self) {
             vc.tabBarController?.tabBar.isHidden = true
             vc.navigationController?.pushViewController(feedViewController, animated: true)
         }
-        // TODO: 선택된 피드가 상세 화면에서 포커싱되도록 수정 (현재 어떤 피드를 탭해도 0번째 피드부터 보임)
     }
 }
