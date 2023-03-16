@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Feed Delete View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="FeedDeleteViewController" id="Y6W-OH-hqX" customClass="FeedDeleteViewController" customModule="KeKi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="haN-oa-3Vp">
+                                <rect key="frame" x="42" y="376" width="288" height="171"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saJ-IG-UMp">
+                                        <rect key="frame" x="114" y="29" width="60" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="Af1-QA-HHo"/>
+                                            <constraint firstAttribute="height" constant="20" id="fwO-8X-8zT"/>
+                                        </constraints>
+                                        <attributedString key="attributedText">
+                                            <fragment content="피드삭제">
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="AppleSDGothicNeo-Bold"/>
+                                                    <font key="NSOriginalFont" size="16" name="SFPro-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSk-Qa-rDq">
+                                        <rect key="frame" x="130.66666666666666" y="66" width="27" height="13"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Label">
+                                                <attributes>
+                                                    <font key="NSFont" size="11" name="SFPro-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWQ-nE-afc">
+                                        <rect key="frame" x="29" y="99" width="109" height="36"/>
+                                        <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="109" id="2IJ-xJ-n3N"/>
+                                            <constraint firstAttribute="height" constant="36" id="tAd-JJ-h5m"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="취소">
+                                                    <attributes>
+                                                        <font key="NSFont" size="16" name="AppleSDGothicNeo-Regular"/>
+                                                        <font key="NSOriginalFont" size="16" name="SFPro-Regular"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="cancel:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="yxL-rb-eJ0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWa-pd-VYw">
+                                        <rect key="frame" x="153" y="99" width="109" height="36"/>
+                                        <color key="backgroundColor" red="0.94901960784313721" green="0.84313725490196079" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="109" id="DzE-fb-yq0"/>
+                                            <constraint firstAttribute="height" constant="36" id="fSp-dH-pzP"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="삭제하기">
+                                                    <attributes>
+                                                        <font key="NSFont" size="16" name="AppleSDGothicNeo-Regular"/>
+                                                        <font key="NSOriginalFont" size="16" name="SFPro-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="deleteFeed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FjS-8x-UYa"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="288" id="D8k-ah-ehn"/>
+                                    <constraint firstItem="SSk-Qa-rDq" firstAttribute="top" secondItem="saJ-IG-UMp" secondAttribute="bottom" constant="17" id="EED-Fq-4bf"/>
+                                    <constraint firstItem="saJ-IG-UMp" firstAttribute="centerX" secondItem="haN-oa-3Vp" secondAttribute="centerX" id="IN5-Se-gHc"/>
+                                    <constraint firstAttribute="trailing" secondItem="aWa-pd-VYw" secondAttribute="trailing" constant="26" id="Yjt-mm-AqP"/>
+                                    <constraint firstItem="SSk-Qa-rDq" firstAttribute="centerX" secondItem="haN-oa-3Vp" secondAttribute="centerX" id="jEk-pT-07s"/>
+                                    <constraint firstItem="saJ-IG-UMp" firstAttribute="top" secondItem="haN-oa-3Vp" secondAttribute="top" constant="29" id="lcb-hF-7nB"/>
+                                    <constraint firstAttribute="height" constant="171" id="wOt-HY-0nm"/>
+                                    <constraint firstItem="rWQ-nE-afc" firstAttribute="leading" secondItem="haN-oa-3Vp" secondAttribute="leading" constant="29" id="xGk-z9-ER5"/>
+                                    <constraint firstItem="aWa-pd-VYw" firstAttribute="top" secondItem="haN-oa-3Vp" secondAttribute="top" constant="99" id="ym4-dX-KBz"/>
+                                    <constraint firstItem="rWQ-nE-afc" firstAttribute="top" secondItem="haN-oa-3Vp" secondAttribute="top" constant="99" id="zZm-Ou-2PA"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="haN-oa-3Vp" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="317" id="8nV-ci-JCq"/>
+                            <constraint firstItem="haN-oa-3Vp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="42" id="uZV-XN-Kul"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="rWQ-nE-afc" id="CZu-Ef-hP9"/>
+                        <outlet property="deleteButton" destination="aWa-pd-VYw" id="9KS-JB-frP"/>
+                        <outlet property="deleteCheckLabel" destination="SSk-Qa-rDq" id="MhF-WH-xC6"/>
+                        <outlet property="deletePopView" destination="haN-oa-3Vp" id="NNA-jq-dxx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="118" y="-28"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
