@@ -90,7 +90,7 @@ extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
         let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
         guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
         
-        if storePostList.count == 0 {
+        if storePostList.count < 5 {
             let alert = UIAlertController(title: nil, message: "준비 중인 케이크입니다!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default))
             if let vc = self.next(ofType: UIViewController.self) { vc.present(alert, animated: true) }

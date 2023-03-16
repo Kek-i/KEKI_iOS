@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import JGProgressHUD
 
 class HeartViewController: UIViewController {
 
@@ -22,16 +23,38 @@ class HeartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setup()
-        setupNavigationBar()
-        getHeart(cursorDate: nil)
+
+        if let _ = UserDefaults.standard.object(forKey: "userInfo") {
+            setup()
+            setupNavigationBar()
+            getHeart(cursorDate: nil)
+        }
+        else { showAlert() }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getHeart(cursorDate: nil)
     }
     
+    func showAlert() {
+        let alert = UIAlertController(title: nil, message: "회원가입 후 사용 가능한 서비스입니다", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "홈으로 이동", style: .default) { [weak self] _ in
+            self?.navigationController?.popToRootViewController(animated: false)
+            let main = DefaultTabBarController()
+            main.modalPresentationStyle = .fullScreen
+            main.modalTransitionStyle = .crossDissolve
+            self?.present(main, animated: true)
+        }
+        let join = UIAlertAction(title: "가입하기", style: .default) { [weak self] _ in
+            let storyboard = UIStoryboard.init(name: "Login", bundle: nil)
+            guard let signupViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
+            signupViewController.modalPresentationStyle = .fullScreen
+            self?.present(signupViewController, animated: true)
+        }
+        alert.addAction(cancel)
+        alert.addAction(join)
+        present(alert, animated: true)
+    }
     
     func setup() {
         heartCV.dataSource = self
@@ -141,16 +164,27 @@ extension HeartViewController {
     }
     
     func fetchHeartList(queryParam: Parameters) {
-        APIManeger.shared.testGetData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, parameter: nil) { [weak self] response in
-            print(response)
+        DispatchQueue.main.async {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+            hud.style = .light
+            hud.textLabel.text = "Loading"
+            hud.show(in: self.view)
             
-            self?.feedList = response.result.feeds
-            
-            self?.hasNext = response.result.hasNext
-            self?.cursorDate = response.result.cursorDate
-            
-            self?.heartCV.reloadData()
+            APIManeger.shared.testGetData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, parameter: nil) { [weak self] response in
+                hud.dismiss(animated: true)
+                
+                print(response)
+                
+                self?.feedList = response.result.feeds
+                
+                self?.hasNext = response.result.hasNext
+                self?.cursorDate = response.result.cursorDate
+                
+                self?.heartCV.reloadData()
+            }
         }
+        
     }
 }
 
