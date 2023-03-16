@@ -13,6 +13,7 @@ protocol FeedDelegate {
     func showFeedDeclarationActionAlert()
     func showStoreMain(storeIdx: Int)
     func showProductDetail(dessertIdx: Int)
+    func showToastMessage(message: String)
 }
 
 class FeedCell: UITableViewCell {
@@ -59,8 +60,14 @@ class FeedCell: UITableViewCell {
     }
     
     @IBAction func didTapHeartButton(_ sender: UIButton) {
-        heartButton.isSelected = !heartButton.isSelected
-        postLikeFeed()
+        
+        if let _ = UserDefaults.standard.object(forKey: "userInfo") {
+            heartButton.isSelected = !heartButton.isSelected
+            postLikeFeed()
+        }
+        else {
+            feedDelegate.showToastMessage(message: "회원가입 후에 좋아요가 가능합니다")
+        }
     }
     
     @IBAction func didTapNicknameButton(_ sender: UIButton) {
