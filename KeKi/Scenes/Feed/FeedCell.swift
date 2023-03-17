@@ -43,8 +43,6 @@ class FeedCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         imgCollectionView.register(UINib(nibName: "FeedImgsCell", bundle: nil), forCellWithReuseIdentifier: "FeedImgsCell")
-        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        heartButton.setImage(UIImage(systemName: "heart.fill"), for: .selected)
         [tag1Button,tag2Button,tag3Button].forEach {
             $0?.layer.cornerRadius = 15
         }
@@ -63,11 +61,10 @@ class FeedCell: UITableViewCell {
         
         if let _ = UserDefaults.standard.object(forKey: "userInfo") {
             heartButton.isSelected = !heartButton.isSelected
+            setFeedLikeButton()
             postLikeFeed()
         }
-        else {
-            feedDelegate.showToastMessage(message: "회원가입 후에 좋아요가 가능합니다")
-        }
+        else { feedDelegate.showToastMessage(message: "회원가입 후에 좋아요가 가능합니다") }
     }
     
     @IBAction func didTapNicknameButton(_ sender: UIButton) {
@@ -79,6 +76,14 @@ class FeedCell: UITableViewCell {
     @IBAction func didTapDessertNameButon(_ sender: UIButton) {
         if let index = dessertIdx {
             feedDelegate.showProductDetail(dessertIdx: index)
+        }
+    }
+    private func setFeedLikeButton() {
+        // TODO: SF가 아닌 디자인 상의 아이콘으로 setImage
+        if heartButton.isSelected {
+            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
         }
     }
     
