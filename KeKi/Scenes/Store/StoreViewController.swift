@@ -118,7 +118,7 @@ extension StoreViewController{
     
     private func fetchData() {
         // 스토어 정보 fetch
-        APIManeger.shared.testGetData(urlEndpointString: "/stores/profile/\(storeIdx!)",
+        APIManeger.shared.testGetData(urlEndpointString: "/stores/profile/\(storeIdx ?? 0)",
                                       dataType: StoreResponse.self,
                                       parameter: nil,
                                       completionHandler: { [weak self] response in

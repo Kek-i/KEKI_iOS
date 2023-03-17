@@ -51,3 +51,28 @@ struct SellerInfoResponse: Codable {
 struct SellerInfo: Codable {
     let businessName, brandName, businessAddress, businessNumber: String
 }
+
+
+
+// MARK: - 판매자 프로필 조회
+struct SellerProfileResponse: Codable {
+    let isSuccess: Bool
+    let code: Int
+    let message: String
+    let result: SellerProfile
+}
+
+struct SellerProfile: Codable {
+    let storeIdx: Int
+    let storeImgURL, email, nickname: String?
+    let address, introduction, orderURL, businessName: String?
+    let brandName, businessAddress, businessNumber: String?
+
+    enum CodingKeys: String, CodingKey {
+        case storeIdx
+        case storeImgURL = "storeImgUrl"
+        case email, nickname, address, introduction
+        case orderURL = "orderUrl"
+        case businessName, brandName, businessAddress, businessNumber
+    }
+}
