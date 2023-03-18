@@ -15,10 +15,10 @@ struct StoreResponse: Codable {
 }
 
 struct Store: Codable {
-    var nickname: String
-    var storeImgUrl: String
-    var introduction: String
-    var orderUrl: String
+    var nickname: String?
+    var storeImgUrl: String?
+    var introduction: String?
+    var orderUrl: String?
 }
 
 struct ProductResponse: Codable {

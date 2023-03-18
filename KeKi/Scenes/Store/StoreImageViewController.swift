@@ -10,19 +10,15 @@ import UIKit
 class StoreImageViewController: UIViewController {
     var feeds: [Feed] = []
     
-    @IBOutlet weak var storeImageCV: UICollectionView! {
-        didSet{
-            storeImageCV.delegate = self
-            storeImageCV.dataSource = self
-            
-            // MARK: Xib파일이 없는 상태로 등록하려고 하자 오류가 나서 임시로 주석처리 해둠
-//            let cellNib = UINib(nibName: "StoreImageCell", bundle: nil)
-//            storeImageCV.register(cellNib, forCellWithReuseIdentifier: "StoreImageCell")
-        }
-    }
+    @IBOutlet weak var storeImageCV: UICollectionView!
+    
+    @IBOutlet weak var feedAddButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setup()
     }
     
     func setup() {
@@ -30,9 +26,35 @@ class StoreImageViewController: UIViewController {
         storeImageCV.dataSource = self
     }
 
+    func setupLayout() {
+        if APIManeger.shared.getUserInfo()?.role == "판매자" {
+            feedAddButton.layer.isHidden = false
+            feedAddButton.layer.cornerRadius = 100
+            
+            feedAddButton.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
+            feedAddButton.layer.shadowOffset = CGSize(width: 0, height: 3)
+            feedAddButton.layer.shadowRadius = 6
+            feedAddButton.layer.shadowOpacity = 1.0
+            
+        }else {
+            feedAddButton.layer.isHidden = true
+        }
+    }
+
     func configure(feeds: [Feed]) {
         self.feeds = feeds
         storeImageCV.reloadData()
+    }
+    
+
+    @IBAction func feedAdd(_ sender: Any) {
+        guard let feedAddView = UIStoryboard(name: "FeedAdd", bundle: nil).instantiateViewController(withIdentifier: "FeedAddViewController") as? FeedAddViewController else {return}
+        
+        
+        feedAddView.modalTransitionStyle = .coverVertical
+        feedAddView.modalPresentationStyle = .fullScreen
+        
+        self.navigationController?.pushViewController(feedAddView, animated: true)
     }
 }
 

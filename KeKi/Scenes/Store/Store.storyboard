@@ -68,17 +68,33 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HR3-14-jSH">
+                                <rect key="frame" x="337" y="792" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.39607843139999999" blue="0.5450980392" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="dbY-dl-sBC"/>
+                                    <constraint firstAttribute="width" constant="50" id="uYf-tW-fUd"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="buttonImage"/>
+                                <connections>
+                                    <action selector="productAdd:" destination="CEg-eL-36d" eventType="touchUpInside" id="NLf-7m-yHz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Frl-KI-m2L"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aHR-Vy-elP" firstAttribute="leading" secondItem="Frl-KI-m2L" secondAttribute="leading" constant="10" id="4og-rY-nDE"/>
+                            <constraint firstItem="Frl-KI-m2L" firstAttribute="bottom" secondItem="HR3-14-jSH" secondAttribute="bottom" constant="20" id="E4f-Nf-sCq"/>
                             <constraint firstItem="Frl-KI-m2L" firstAttribute="bottom" secondItem="aHR-Vy-elP" secondAttribute="bottom" id="HEx-Oe-QoH"/>
                             <constraint firstItem="aHR-Vy-elP" firstAttribute="top" secondItem="Frl-KI-m2L" secondAttribute="top" constant="15" id="MC9-WJ-dtA"/>
+                            <constraint firstItem="Frl-KI-m2L" firstAttribute="trailing" secondItem="HR3-14-jSH" secondAttribute="trailing" constant="27" id="a8e-bl-NPU"/>
                             <constraint firstItem="Frl-KI-m2L" firstAttribute="trailing" secondItem="aHR-Vy-elP" secondAttribute="trailing" constant="10" id="wXu-C5-YU9"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="productAddButton" destination="HR3-14-jSH" id="KEM-qz-Jxj"/>
                         <outlet property="storeProductCV" destination="aHR-Vy-elP" id="rOx-R5-sv1"/>
                     </connections>
                 </viewController>
@@ -411,17 +427,35 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WWL-U9-taA">
+                                <rect key="frame" x="337" y="792" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.8784313725490196" green="0.396078431372549" blue="0.54509803921568623" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="gdm-Su-t1Z"/>
+                                    <constraint firstAttribute="width" constant="50" id="yOb-4K-BTM"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="buttonImage">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="feedAdd:" destination="TNP-qg-UxL" eventType="touchUpInside" id="Xkh-us-UBu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fIn-hL-Vqi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="fIn-hL-Vqi" firstAttribute="trailing" secondItem="WWL-U9-taA" secondAttribute="trailing" constant="27" id="55o-wK-xnk"/>
                             <constraint firstItem="fIn-hL-Vqi" firstAttribute="bottom" secondItem="Kwz-qT-gfA" secondAttribute="bottom" id="W3i-Q0-cIt"/>
                             <constraint firstItem="fIn-hL-Vqi" firstAttribute="trailing" secondItem="Kwz-qT-gfA" secondAttribute="trailing" constant="10" id="WtG-tk-SsG"/>
+                            <constraint firstItem="fIn-hL-Vqi" firstAttribute="bottom" secondItem="WWL-U9-taA" secondAttribute="bottom" constant="20" id="Xjs-tD-WOH"/>
                             <constraint firstItem="Kwz-qT-gfA" firstAttribute="leading" secondItem="fIn-hL-Vqi" secondAttribute="leading" constant="10" id="ZJb-yB-bLA"/>
                             <constraint firstItem="Kwz-qT-gfA" firstAttribute="top" secondItem="fIn-hL-Vqi" secondAttribute="top" constant="15" id="erf-gb-Xag"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="feedAddButton" destination="WWL-U9-taA" id="gtt-Sc-Cix"/>
                         <outlet property="storeImageCV" destination="Kwz-qT-gfA" id="sh5-01-WbO"/>
                     </connections>
                 </viewController>
@@ -590,6 +624,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="buttonImage" width="25.5" height="25.5"/>
         <image name="keki-mascot" width="120" height="133.5"/>
         <image name="keki-mascot-arm" width="24" height="29.5"/>
         <image name="sellerIcon" width="107" height="107"/>

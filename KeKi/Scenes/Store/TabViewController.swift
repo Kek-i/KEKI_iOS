@@ -22,9 +22,8 @@ class TabViewController : TabmanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let storeViewController = UIStoryboard(name: "Store", bundle: nil).instantiateViewController(withIdentifier: "StoreViewController") as? StoreViewController else {return}
-        storeViewController.delegate = self
         setup()
+        setupLayout()
     }
     
     func setup(){
