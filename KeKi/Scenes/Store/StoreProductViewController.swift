@@ -36,12 +36,6 @@ class StoreProductViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if storeIdx != -1 {
-            setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
-        }
-    }
-    
     func setup() {
         storeProductCV.delegate = self
         storeProductCV.dataSource = self
@@ -129,10 +123,11 @@ extension StoreProductViewController: UICollectionViewDelegateFlowLayout {
         
         productViewController.dessertIdx = desserts[indexPath.row].dessertIdx
         
-        if let vc = self.next(ofType: UIViewController.self) {
-            vc.tabBarController?.tabBar.isHidden = true
-            vc.navigationController?.pushViewController(productViewController, animated: true)
-        }
+        productViewController.modalTransitionStyle = .coverVertical
+        productViewController.modalPresentationStyle = .fullScreen
+        
+        self.navigationController?.pushViewController(productViewController, animated: true)
+       
     }
 }
 
