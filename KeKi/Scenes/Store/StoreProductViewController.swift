@@ -6,18 +6,40 @@
 //
 
 import UIKit
+import Alamofire
 
 class StoreProductViewController: UIViewController {
-    var desserts: [Dessert] = []
 
     @IBOutlet weak var storeProductCV: UICollectionView!
-    
     @IBOutlet weak var productAddButton: UIButton!
+    
+    
+    var storeIdx: Int = -1
+    var desserts: Array<Dessert> = []
+    var queryParam: Parameters = [:]
+    
+    
+    var cursorIdx: Int?
+    var cursorPrice: Int?
+    var cursorPopularNum: Int?
+    var hasNext: Bool?
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
+        setupLayout()
+        
+        if storeIdx != -1 {
+            setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if storeIdx != -1 {
+            setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
+        }
     }
     
     func setup() {
@@ -26,17 +48,21 @@ class StoreProductViewController: UIViewController {
     }
     
     func setupLayout() {
-        if APIManeger.shared.getUserInfo()?.role == "판매자" {
-            productAddButton.layer.isHidden = false
-            productAddButton.layer.cornerRadius = 100
-            
-            productAddButton.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
-            productAddButton.layer.shadowOffset = CGSize(width: 0, height: 3)
-            productAddButton.layer.shadowRadius = 6
-            productAddButton.layer.shadowOpacity = 1.0
-            
-        }else {
+        if APIManeger.shared.getHeader() == nil {
             productAddButton.layer.isHidden = true
+            return
+        }else {
+            if APIManeger.shared.getUserInfo()?.role == "판매자" {
+                productAddButton.layer.cornerRadius = 25
+                
+                productAddButton.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
+                productAddButton.layer.shadowOffset = CGSize(width: 0, height: 3)
+                productAddButton.layer.shadowRadius = 6
+                productAddButton.layer.shadowOpacity = 1.0
+                
+            }else {
+                productAddButton.layer.isHidden = true
+            }
         }
     }
 
@@ -63,12 +89,18 @@ extension StoreProductViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreImageCell", for: indexPath) as? StoreImageCell else { return UICollectionViewCell() }
         
         let url = desserts[indexPath.row].dessertImgUrl
         cell.storeImageView.kf.setImage(with: URL(string: url))
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if storeProductCV.contentOffset.y > storeProductCV.contentSize.height-storeProductCV.bounds.size.height && self.hasNext == true{
+            setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx)
+            isLoading = true
+        }
     }
 }
 
@@ -95,13 +127,41 @@ extension StoreProductViewController: UICollectionViewDelegateFlowLayout {
         let storyboard = UIStoryboard.init(name: "ProductDetail", bundle: nil)
         guard let productViewController = storyboard.instantiateViewController(withIdentifier: "ProductViewController") as? ProductViewController else { return }
         
-        
-        
         productViewController.dessertIdx = desserts[indexPath.row].dessertIdx
         
         if let vc = self.next(ofType: UIViewController.self) {
             vc.tabBarController?.tabBar.isHidden = true
             vc.navigationController?.pushViewController(productViewController, animated: true)
+        }
+    }
+}
+
+extension StoreProductViewController {
+    func setQueryParam(storeIdx: Int?, cursorIdx: Int?) {
+        if isLoading == true {
+            return
+        }
+        
+        queryParam["storeIdx"] = storeIdx
+        queryParam["cursorIdx"] = cursorIdx
+        
+        getProductList(queryParam: queryParam)
+    }
+    
+    
+    func getProductList(queryParam: Parameters) {
+        APIManeger.shared.testGetData(urlEndpointString: "/desserts", dataType: ProductResponse.self, parameter: queryParam) { [weak self] response in
+            
+            self?.hasNext = response.result?.hasNext
+            self?.cursorIdx = response.result?.cursorIdx
+            
+            response.result?.desserts.forEach({ dessert in
+                self?.desserts.append(dessert)
+            })
+            
+            self?.storeProductCV.reloadData()
+            
+            self?.isLoading = false
         }
     }
 }

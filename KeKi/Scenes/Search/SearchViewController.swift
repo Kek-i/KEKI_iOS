@@ -464,7 +464,6 @@ extension SearchViewController {
         queryParam["cursorPopularNum"] = cursorPopularNum
         queryParam["cursorPrice"] = cursorPrice
         
-        print(queryParam)
         
         fetchSearchResult(queryParam: queryParam)
     }

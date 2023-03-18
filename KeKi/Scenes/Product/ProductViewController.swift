@@ -25,9 +25,10 @@ class ProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchData()
+        
         setupNavigationBar()
         setupCollectionView()
+        fetchData()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -85,7 +86,7 @@ extension ProductViewController: UICollectionViewDataSource {
         
         if dessertImg.count == 0 { return cell }
         else {
-            cell.imageView.kf.setImage(with: URL(string: dessertImg[indexPath.row].postImgUrl))
+            cell.imageView.kf.setImage(with: URL(string: dessertImg[indexPath.row].imgUrl))
             cell.imageView.contentMode = .scaleAspectFit
             return cell
         }

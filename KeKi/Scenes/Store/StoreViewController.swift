@@ -10,8 +10,7 @@ import Alamofire
 import Kingfisher
 
 protocol TabDelegate {
-    func configureFeedTab(storeIdx: Int)
-    func configureProductTab(storeIdx: Int)
+    func setStoreIdx(storeIdx: Int)
 }
 
 class StoreViewController: UIViewController {
@@ -21,10 +20,6 @@ class StoreViewController: UIViewController {
     var sellerInfo: SellerInfo?
     
     var delegate: TabDelegate!
-    
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var infoButton: UIButton!
-    @IBOutlet weak var messageButton: UIButton!
     
     @IBOutlet weak var storeImageView: UIImageView!
     
@@ -60,14 +55,17 @@ class StoreViewController: UIViewController {
         orderButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         orderButton.layer.shadowRadius = 13
         orderButton.layer.shadowOpacity = 1.0
-        if APIManeger.shared.getUserInfo()?.role == "판매자" {
-            orderButton.isHidden = true
-    
+        
+        
+        if APIManeger.shared.getHeader() != nil {
+            if APIManeger.shared.getUserInfo()?.role == "판매자" {
+                orderButton.isHidden = true
+            }
         }
     }
     
     func setupNavigationBar() {
-        if APIManeger.shared.getUserInfo()?.role == "판매자" {
+        if APIManeger.shared.getHeader() != nil && APIManeger.shared.getUserInfo()?.role == "판매자"{
             self.navigationController?.isNavigationBarHidden = true
         }else {
             self.navigationController?.isNavigationBarHidden = false
@@ -132,12 +130,8 @@ extension StoreViewController{
             
             self?.storeInfo = response.result
             self?.configureProfile()
-            self?.delegate.configureFeedTab(storeIdx: (self?.storeIdx)!)
-            self?.delegate.configureProductTab(storeIdx: (self?.storeIdx)!)
+            self?.delegate.setStoreIdx(storeIdx: (self?.storeIdx)!)
         })
-        
-        // 스토어 피드 & 상품 정보 fetch
-        
     }
 
     func fetchSellerInfo(completionHandler: @escaping () -> Void) {
