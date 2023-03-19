@@ -12,7 +12,6 @@ protocol TagDetailDelegate {
 }
 
 class HomeTableViewCell: UITableViewCell {
-    
     var tagDetailDelegate: TagDetailDelegate? = nil
     private var storePostList: [HomePostRes] = []
 
@@ -89,11 +88,15 @@ extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
         
         let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
         guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
-    
+
         feedViewController.postIdx = storePostList[indexPath.row].postIdx
         if let vc = self.next(ofType: UIViewController.self) {
             vc.tabBarController?.tabBar.isHidden = true
+            vc.navigationController?.navigationBar.isHidden = false
+            vc.navigationController?.isNavigationBarHidden = false
             vc.navigationController?.pushViewController(feedViewController, animated: true)
+
+
         }
 
     }

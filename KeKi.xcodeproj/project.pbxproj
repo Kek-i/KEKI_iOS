@@ -33,6 +33,8 @@
 		738F64982988A9BE006BB124 /* StoreImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64932988A9BE006BB124 /* StoreImageViewController.swift */; };
 		738F64992988A9BE006BB124 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738F64942988A9BE006BB124 /* TabViewController.swift */; };
 		73A3A42229AC460400724463 /* SellerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3A42129AC460400724463 /* SellerModel.swift */; };
+		73E3532A29C29B6700107816 /* FeedDelete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E3532929C29B6700107816 /* FeedDelete.storyboard */; };
+		73E3532C29C2A01900107816 /* FeedDeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E3532B29C2A01900107816 /* FeedDeleteViewController.swift */; };
 		73E985132995F1A300DC090A /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E985122995F1A300DC090A /* CalendarModel.swift */; };
 		73FE8B9D298FEDAE00264B44 /* RecentCakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8B8D298FEDAD00264B44 /* RecentCakeCell.swift */; };
 		73FE8BA4298FEDAE00264B44 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8B94298FEDAD00264B44 /* SearchViewController.swift */; };
@@ -150,6 +152,8 @@
 		738F64932988A9BE006BB124 /* StoreImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreImageViewController.swift; sourceTree = "<group>"; };
 		738F64942988A9BE006BB124 /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		73A3A42129AC460400724463 /* SellerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerModel.swift; sourceTree = "<group>"; };
+		73E3532929C29B6700107816 /* FeedDelete.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedDelete.storyboard; sourceTree = "<group>"; };
+		73E3532B29C2A01900107816 /* FeedDeleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDeleteViewController.swift; sourceTree = "<group>"; };
 		73E985122995F1A300DC090A /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
 		73FE8B8D298FEDAD00264B44 /* RecentCakeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentCakeCell.swift; sourceTree = "<group>"; };
 		73FE8B94298FEDAD00264B44 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -583,6 +587,8 @@
 				A2F6075429890F8C00F4F3DD /* FeedImgsCell.xib */,
 				A2B1CD7C2988EFE900D87570 /* FeedViewController.swift */,
 				A2B1CD7E2988EFFE00D87570 /* Feed.storyboard */,
+				73E3532929C29B6700107816 /* FeedDelete.storyboard */,
+				73E3532B29C2A01900107816 /* FeedDeleteViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -611,6 +617,7 @@
 				A2434AC3298651F500F60D1A /* Frameworks */,
 				A2434AC4298651F500F60D1A /* Resources */,
 				1B90B7F2C8B7B75310385F93 /* [CP] Embed Pods Frameworks */,
+				D8120C1246AF0D85A8F0061A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -714,6 +721,7 @@
 				73FE8BB0299251CB00264B44 /* DayAddViewController.storyboard in Resources */,
 				A2434B0A29865B8000F60D1A /* Store.storyboard in Resources */,
 				7381210B29BDE26B006E7113 /* Heart.storyboard in Resources */,
+				73E3532A29C29B6700107816 /* FeedDelete.storyboard in Resources */,
 				A2E0150C2992A2CB00EBACF0 /* HomeCollectionViewCell.xib in Resources */,
 				731AA6A4298D016D008A9A1B /* DayDetail.storyboard in Resources */,
 				73FE8BAA298FEDAE00264B44 /* Search.storyboard in Resources */,
@@ -739,6 +747,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KeKi/Pods-KeKi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8120C1246AF0D85A8F0061A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KeKi/Pods-KeKi-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KeKi/Pods-KeKi-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KeKi/Pods-KeKi-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DE60C26EFAE342A4F9F45506 /* [CP] Check Pods Manifest.lock */ = {
@@ -817,6 +842,7 @@
 				A2434AFC29865AD700F60D1A /* LoginViewController.swift in Sources */,
 				A2B1CD7129888D2800D87570 /* AnnouncementCell.swift in Sources */,
 				A236506529A7A0FC00744252 /* ProductModel.swift in Sources */,
+				73E3532C29C2A01900107816 /* FeedDeleteViewController.swift in Sources */,
 				A2E015102992A32B00EBACF0 /* HomeCollectionViewCell.swift in Sources */,
 				A2434B0229865B1A00F60D1A /* AnnouncementViewController.swift in Sources */,
 				A2B1CD742988A9FE00D87570 /* AnnouncementDetailViewController.swift in Sources */,
@@ -990,8 +1016,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = KeKi/KeKi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = J4X458RVHG;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 643M65W7HH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KeKi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "케키";
@@ -1002,6 +1028,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1026,8 +1053,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = KeKi/KeKi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = J4X458RVHG;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 643M65W7HH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KeKi/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "케키";
@@ -1038,6 +1065,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

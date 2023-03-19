@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NaverThirdPartyLogin
 
 private let LOGOUT_ENDPOINT_STR = "/users/logout"
 private let SIGNOUT_ENDPOINT_STR = "/users/signout"
@@ -40,9 +41,9 @@ class AlertViewController: UIViewController {
     @IBAction func didTapConfirmButton(_ sender: UIButton) {
         // TODO: 로그아웃/탈퇴 기능 구현
         switch todo {
-        case .logout: logout()
-        case .signout: signout()
-        default: return
+            case .logout: logout()
+            case .signout: signout()
+            default: return
         }
     }
     
@@ -74,41 +75,47 @@ class AlertViewController: UIViewController {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default))
     }
-
-}
-
-// MARK: - Extensions
-extension AlertViewController {
-    func logout() {
-        APIManeger.shared.testPatchData(urlEndpointString: LOGOUT_ENDPOINT_STR,
+    
+    private func logout() { requestAuth(urlString: LOGOUT_ENDPOINT_STR) }
+    private func signout() { requestAuth(urlString: SIGNOUT_ENDPOINT_STR) }
+    
+    private func requestAuth(urlString: String) {
+        // 로그아웃 or 회원탈퇴 처리 메소드
+        switch todo {
+        case .logout: logoutRequest(urlString: urlString)
+        case .signout: signoutRequest(urlString: urlString)
+        default: return 
+        }
+    }
+    
+    private func logoutRequest(urlString: String) {
+        APIManeger.shared.testPatchData(urlEndpointString: urlString,
                                         dataType: GeneralResponseModel.self,
                                         parameter: nil,
                                         completionHandler: { [weak self] response in
-            print(response)
+            let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+            instance?.requestDeleteToken()
             APIManeger.shared.resetHeader()
-            
-            self?.navigationController?.popToRootViewController(animated: false)
-            let main = DefaultTabBarController()
-            main.modalPresentationStyle = .fullScreen
-            main.modalTransitionStyle = .crossDissolve
-            self?.present(main, animated: true)
+            self?.showMain()
         })
     }
     
-    func signout() {
-        // TODO: 회원탈퇴 기능 구현 (탈퇴 후 응답X, 재로그인시 AF 오류 발생함)
-    
-        APIManeger.shared.testDeleteData(urlEndpointString: SIGNOUT_ENDPOINT_STR,
+    private func signoutRequest(urlString: String) {
+        APIManeger.shared.testDeleteData(urlEndpointString: urlString,
                                          completionHandler: { [weak self] response in
+            let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+            instance?.requestDeleteToken()
             APIManeger.shared.resetHeader()
-            switch response.isSuccess {
-            case true:
-                self?.dismiss(animated: true)
-            case false:
-                self?.dismiss(animated: true)
-            default:
-                return
-            }
+            self?.showMain()
         })
     }
+    
+    private func showMain() {
+        self.navigationController?.popToRootViewController(animated: false)
+        let main = DefaultTabBarController()
+        main.modalPresentationStyle = .fullScreen
+        main.modalTransitionStyle = .crossDissolve
+        self.present(main, animated: true)
+    }
+
 }

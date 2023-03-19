@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Toast
 
 enum UserKind: String {
     case buyer = "구매자"
@@ -132,7 +133,6 @@ class LoginMyPageViewController: UIViewController {
         let storyboard = UIStoryboard.init(name: "Alert", bundle: nil)
         guard let alertViewController = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as? AlertViewController else { return }
         alertViewController.config(todo: .logout)
-        tabBarController?.tabBar.isHidden = true
         alertViewController.modalPresentationStyle = .overCurrentContext
         present(alertViewController, animated: true)
     }

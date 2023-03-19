@@ -42,6 +42,40 @@ class FirebaseStorageManager {
             }
         }
     }
+    static func uploadImages(imageList: [UIImage], pathRoot: String, folderName: String, completion: @escaping ([String]) -> Void) {
+           var urlList: [String] = []
+           var idx = 0
+           imageList.forEach { image in
+               guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
+               let metaData = StorageMetadata()
+               metaData.contentType = "image/jpeg"
+
+               var imageName = ""
+               switch folderName {
+               case PROFILE_IMG_FOLDER_NAME:
+                   imageName = "ProfileImg" + pathRoot + (String(idx))
+               case PRODUCT_IMG_FOLDER_NAME:
+                   imageName = "ProductImg" + pathRoot + (String(idx))
+               default:
+                   imageName = pathRoot + (String(idx))
+               }
+               idx += 1
+
+               let firebaseReference = Storage.storage().reference().child(folderName + imageName)
+               firebaseReference.putData(imageData, metadata: metaData) { metaData, error in
+                   firebaseReference.downloadURL { url, _ in
+                       if let url = url {urlList.append(url.description)}
+                       if urlList.count == imageList.count { completion(urlList) }
+                   }
+
+               }
+           }
+       }
+    
+    
+    
+    
+    
     
     static func downloadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {
         var storageReference: StorageReference

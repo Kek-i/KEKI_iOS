@@ -23,6 +23,9 @@ struct Product: Codable {
 }
 
 struct Post: Codable {
-    var postIdx: Int
-    var postImgUrl: String
+    var imgIdx: Int
+    var imgUrl: String
 }
+
+
+

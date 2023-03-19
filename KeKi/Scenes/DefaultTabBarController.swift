@@ -13,7 +13,12 @@ class DefaultTabBarController: UITabBarController {
     private let calendarTab = UITabBarItem(title: nil, image: UIImage(named: "calendar"), selectedImage: UIImage(named: "calendar.fill"))
     private let searchTab = UITabBarItem(title: nil, image: UIImage(named: "search"), selectedImage: UIImage(named: "search.fill"))
     private let heartTab = UITabBarItem(title: nil, image: UIImage(named: "heart"), selectedImage: UIImage(named: "heart.fill"))
+    // 디자이너 선생님이 꽉찬 아이콘 보내줄시 고치기
+    private let storeTab = UITabBarItem(title: nil, image: UIImage(named: "store"), selectedImage: UIImage(named: "store"))
     private let mypageTab = UITabBarItem(title: nil, image: UIImage(named: "mypage"), selectedImage: UIImage(named: "mypage.fill"))
+    
+    
+    var storeIdx: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +63,12 @@ class DefaultTabBarController: UITabBarController {
         guard let heartViewController = UIStoryboard(name: "Heart", bundle: nil).instantiateViewController(withIdentifier: "HeartViewController") as? HeartViewController else {return}
         let heart = UINavigationController(rootViewController: heartViewController)
         heartViewController.tabBarItem = heartTab
+        
+        guard let storeViewController = UIStoryboard(name: "Store", bundle: nil).instantiateViewController(withIdentifier: "StoreViewController") as? StoreViewController else {return}
+        let store = UINavigationController(rootViewController: storeViewController)
+        storeViewController.tabBarItem = storeTab
+        
+        
 
         // TODO: 분기 처리 리팩토링 필요
         if APIManeger.shared.getHeader() != nil {
@@ -65,15 +76,26 @@ class DefaultTabBarController: UITabBarController {
             guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "LoginMyPageViewController") as? LoginMyPageViewController else { return }
             let mypage = UINavigationController(rootViewController: mypageViewController)
             mypage.tabBarItem = mypageTab
-
-            viewControllers = [
-                home,
-                calendar,
-                search,
-                heart,
-                mypage
-            ]
             
+            switch APIManeger.shared.getUserInfo()?.role {
+            case "판매자" :
+                getSellerProfile {
+                    storeViewController.storeIdx = self.storeIdx
+                    self.viewControllers = [
+                        store,
+                        mypage
+                    ]
+                }
+            default:
+                viewControllers = [
+                    home,
+                    calendar,
+                    search,
+                    heart,
+                    mypage
+                ]
+            }
+
         } else {
             storyboard = UIStoryboard.init(name: "UnLoginUserMypage", bundle: nil)
             guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "UnLoginMyPageViewController") as? UnLoginMyPageViewController else { return }
@@ -90,4 +112,15 @@ class DefaultTabBarController: UITabBarController {
         }
     }
 
+}
+
+extension DefaultTabBarController {
+    func getSellerProfile(completionHanlder: @escaping () -> Void) {
+        APIManeger.shared.testGetData(urlEndpointString: "/stores/profile", dataType: SellerProfileResponse.self, parameter: nil) { [weak self] response in
+            self?.storeIdx = response.result.storeIdx
+            completionHanlder()
+        }
+    }
+    
+    
 }

@@ -82,7 +82,7 @@
                                             <action selector="didTapNaverLoginButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="XSA-8E-9Wy"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIw-bP-OFN" customClass="ASAuthorizationAppleIDButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIw-bP-OFN">
                                         <rect key="frame" x="0.0" y="180" width="277" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>

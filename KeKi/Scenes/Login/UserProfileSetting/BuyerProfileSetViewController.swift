@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Toast
 
 private let NICKNAME_VALIDATION_ENDPOINT = "/users/nickname"
 private let SIGNUP_ENDPOINT = "/users/signup"
@@ -220,8 +221,7 @@ extension BuyerProfileSetViewController {
                 self?.present(main, animated: true)
                 
             default:
-                print("회원가입 실패 :: \(response.message)")
-                self?.showAlert(message: "네트워크 오류로 인해 회원가입에 실패하였습니다.")
+                self?.view.makeToast("회원가입 실패 (\(response.message)", duration: 1.0, position: .center)
             }
             
         })

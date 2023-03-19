@@ -10,8 +10,7 @@ import Alamofire
 import Kingfisher
 
 protocol TabDelegate {
-    func configureFeedTab(storeIdx: Int)
-    func configureProductTab(storeIdx: Int)
+    func setStoreIdx(storeIdx: Int)
 }
 
 class StoreViewController: UIViewController {
@@ -22,10 +21,6 @@ class StoreViewController: UIViewController {
     
     var delegate: TabDelegate!
     
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var infoButton: UIButton!
-    @IBOutlet weak var messageButton: UIButton!
-    
     @IBOutlet weak var storeImageView: UIImageView!
     
     @IBOutlet weak var storeNameLabel: UILabel!
@@ -34,10 +29,9 @@ class StoreViewController: UIViewController {
     @IBOutlet weak var orderButton: UIButton!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "embedContainer" {
-            let tabVC = segue.destination as! TabViewController
-            tabVC.setDelegate(storeVC: self)
-        }
+        let tabVC = segue.destination as! TabViewController
+        tabVC.setDelegate(storeVC: self)
+
     }
     
     override func viewDidLoad() {
@@ -50,6 +44,7 @@ class StoreViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchData()
     }
     
     func setupLayout() {
@@ -60,22 +55,33 @@ class StoreViewController: UIViewController {
         orderButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         orderButton.layer.shadowRadius = 13
         orderButton.layer.shadowOpacity = 1.0
+        
+        
+        if APIManeger.shared.getHeader() != nil {
+            if APIManeger.shared.getUserInfo()?.role == "판매자" {
+                orderButton.isHidden = true
+            }
+        }
     }
     
     func setupNavigationBar() {
-        self.navigationController?.isNavigationBarHidden = false
-
-        let backButton = UIBarButtonItem(image: UIImage(named: "chevron-right"), style: .done, target: self, action: #selector(didTapBackItem))
-        backButton.tintColor = .black
-        
-        let infoButton = UIBarButtonItem(image: UIImage(named: "info"), style: .done, target: self, action: #selector(showInfoPopUp))
-        infoButton.tintColor = .black
-        
-        let messageButton = UIBarButtonItem(image: UIImage(named: "icMessage"), style: .done, target: self, action: #selector(didTapOrderButton))
-        messageButton.tintColor = .black
-        
-        self.navigationItem.leftBarButtonItem = backButton
-        self.navigationItem.rightBarButtonItems = [messageButton, infoButton]
+        if APIManeger.shared.getHeader() != nil && APIManeger.shared.getUserInfo()?.role == "판매자"{
+            self.navigationController?.isNavigationBarHidden = true
+        }else {
+            self.navigationController?.isNavigationBarHidden = false
+            
+            let backButton = UIBarButtonItem(image: UIImage(named: "chevron-right"), style: .done, target: self, action: #selector(didTapBackItem))
+            backButton.tintColor = .black
+            
+            let infoButton = UIBarButtonItem(image: UIImage(named: "info"), style: .done, target: self, action: #selector(showInfoPopUp))
+            infoButton.tintColor = .black
+            
+            let messageButton = UIBarButtonItem(image: UIImage(named: "icMessage"), style: .done, target: self, action: #selector(didTapOrderButton))
+            messageButton.tintColor = .black
+            
+            self.navigationItem.leftBarButtonItem = backButton
+            self.navigationItem.rightBarButtonItems = [messageButton, infoButton]
+        }
     }
     
     @objc func didTapBackItem(_ sender: UIButton) {
@@ -115,26 +121,21 @@ class StoreViewController: UIViewController {
     
     
 extension StoreViewController{
-    
     private func fetchData() {
         // 스토어 정보 fetch
-        APIManeger.shared.testGetData(urlEndpointString: "/stores/profile/\(storeIdx!)",
+        APIManeger.shared.testGetData(urlEndpointString: "/stores/profile/\(storeIdx ?? 0)",
                                       dataType: StoreResponse.self,
                                       parameter: nil,
                                       completionHandler: { [weak self] response in
             
             self?.storeInfo = response.result
             self?.configureProfile()
+            self?.delegate.setStoreIdx(storeIdx: (self?.storeIdx)!)
         })
-        
-        // 스토어 피드 & 상품 정보 fetch
-        delegate.configureFeedTab(storeIdx: storeIdx!)
-        delegate.configureProductTab(storeIdx: storeIdx!)
     }
 
     func fetchSellerInfo(completionHandler: @escaping () -> Void) {
         APIManeger.shared.testGetData(urlEndpointString: "/stores/store-info/\(storeIdx!)", dataType: SellerInfoResponse.self, parameter: nil) { [weak self] response in
-            print(response)
             self?.sellerInfo = response.result
             completionHandler()
         }
