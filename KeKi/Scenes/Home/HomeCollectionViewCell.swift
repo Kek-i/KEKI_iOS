@@ -29,7 +29,17 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     func setData(storeData: HomePostRes) {
-        storeImageView.kf.setImage(with: URL(string: storeData.postImgUrl))
+        print("img url - \(storeData.postImgUrl)")
+        if storeData.postImgUrl.contains("https:") {
+            // https:...형태의 Url
+            storeImageView.kf.setImage(with: URL(string: storeData.postImgUrl))
+        } else {
+            // 디렉토리 형태의 Url
+            let _ = FirebaseStorageManager.downloadImage(urlString: storeData.postImgUrl, completion: { [weak self] img in
+                self?.storeImageView.image = img
+            })
+        }
+        
         storeNameLabel.text = storeData.storeTitle
     }
 }
