@@ -131,7 +131,16 @@ extension ProductViewController: UICollectionViewDataSource {
         
         if dessertImg.count == 0 { return cell }
         else {
-            cell.imageView.kf.setImage(with: URL(string: dessertImg[indexPath.row].imgUrl))
+            if dessertImg[indexPath.row].imgUrl.contains("https:") {
+                // https:...형태의 Url
+                cell.imageView.kf.setImage(with: URL(string: dessertImg[indexPath.row].imgUrl))
+            } else {
+                // 디렉토리 형태의 Url
+                let _ = FirebaseStorageManager.downloadImage(urlString: dessertImg[indexPath.row].imgUrl, completion: { img in
+                   cell.imageView.image = img
+                })
+            }
+            
             cell.imageView.contentMode = .scaleAspectFit
             return cell
         }
