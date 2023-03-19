@@ -12,7 +12,6 @@ protocol TagDetailDelegate {
 }
 
 class HomeTableViewCell: UITableViewCell {
-    
     var tagDetailDelegate: TagDetailDelegate? = nil
     private var storePostList: [HomePostRes] = []
 
