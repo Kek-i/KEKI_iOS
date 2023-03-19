@@ -28,7 +28,7 @@ class FeedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.isNavigationBarHidden = false
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -51,8 +51,9 @@ class FeedViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
+        navigationController?.isNavigationBarHidden = false
+        
         navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.isHidden = false
         navigationItem.title = "피드"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(didTapBackItem))
     }
@@ -69,7 +70,9 @@ class FeedViewController: UIViewController {
 
     }
     
-    @objc private func didTapBackItem() { self.navigationController?.popViewController(animated: true) }
+    @objc private func didTapBackItem() {
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.popViewController(animated: true) }
     
 }
 
@@ -121,19 +124,35 @@ extension FeedViewController: FeedDelegate {
         navigationController?.pushViewController(storeViewController, animated: true)
     }
     
-    func showFeedMainAlert() {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let declarationAction = UIAlertAction(title: "신고하기", style: .default) { [weak self] _ in
-            if let _ = UserDefaults.standard.object(forKey: "userInfo") {
-                self?.showFeedDeclarationActionAlert()
-            } else {
-                self?.view.makeToast("회원가입 후 피드 신고가 가능합니다", duration: 1.0, position: .center)
-            }
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    func showFeedMainAlert(postIdx: Int) {
+        self.postIdx = postIdx
         
-        alert.addAction(declarationAction)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        if APIManeger.shared.getHeader() != nil && APIManeger.shared.getUserInfo()?.role == "판매자" {
+            let changeAction = UIAlertAction(title: "피드 수정", style: .default) { _ in
+                self.editFeed()
+            }
+            let deleteAction = UIAlertAction(title: "피드 삭제", style: .default) { _ in
+                self.checkDeleteFeed()
+            }
+            [
+                changeAction,
+                deleteAction,
+            ].forEach { alert.addAction($0) }
+        }else {
+            let declarationAction = UIAlertAction(title: "신고하기", style: .default) { [weak self] _ in
+                if let _ = UserDefaults.standard.object(forKey: "userInfo") {
+                    self?.showFeedDeclarationActionAlert()
+                } else {
+                    self?.view.makeToast("회원가입 후 피드 신고가 가능합니다", duration: 1.0, position: .center)
+                }
+            }
+            alert.addAction(declarationAction)
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(cancelAction)
+        
         present(alert, animated: true)
     }
     
@@ -172,4 +191,26 @@ extension FeedViewController: FeedDelegate {
             }
         })
     }
+    
+    func editFeed() {
+        guard let feedAddVC = UIStoryboard(name: "FeedAdd", bundle: nil).instantiateViewController(withIdentifier: "FeedAddViewController") as? FeedAddViewController else {return}
+        feedAddVC.postIdx = self.postIdx
+        
+        feedAddVC.modalTransitionStyle = .coverVertical
+        feedAddVC.modalPresentationStyle = .fullScreen
+        
+        self.navigationController?.pushViewController(feedAddVC, animated: true)
+    }
+    
+    func checkDeleteFeed() {
+        guard let feedDeleteVC = UIStoryboard(name: "FeedDelete", bundle: nil).instantiateViewController(withIdentifier: "FeedDeleteViewController") as? FeedDeleteViewController else {return}
+        feedDeleteVC.postIdx = self.postIdx
+        
+        feedDeleteVC.modalTransitionStyle = .coverVertical
+        feedDeleteVC.modalPresentationStyle = .fullScreen
+        
+        self.present(feedDeleteVC, animated: true)
+        
+    }
+    
 }

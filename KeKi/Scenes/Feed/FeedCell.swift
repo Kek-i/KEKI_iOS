@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 protocol FeedDelegate {
-    func showFeedMainAlert()
+    func showFeedMainAlert(postIdx: Int)
     func showFeedDeclarationActionAlert()
     func showStoreMain(storeIdx: Int)
     func showProductDetail(dessertIdx: Int)
@@ -54,7 +54,7 @@ class FeedCell: UITableViewCell {
     
     
     @IBAction func didTapViewmoreButton(_ sender: UIButton) {
-        feedDelegate.showFeedMainAlert()
+        feedDelegate.showFeedMainAlert(postIdx: postIdx!)
     }
     
     @IBAction func didTapHeartButton(_ sender: UIButton) {
@@ -103,6 +103,7 @@ class FeedCell: UITableViewCell {
         postIdx = data.postIdx
         dessertIdx = data.dessertIdx
         storeIdx = data.storeIdx
+        
         
         // set store profile
         nicknameButton.setTitle(data.storeName, for: .normal)

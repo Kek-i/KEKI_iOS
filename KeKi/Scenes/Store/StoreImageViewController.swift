@@ -6,23 +6,37 @@
 //
 
 import UIKit
+import Alamofire
 
 class StoreImageViewController: UIViewController {
-    var feeds: [Feed] = []
     
-    @IBOutlet weak var storeImageCV: UICollectionView! {
-        didSet{
-            storeImageCV.delegate = self
-            storeImageCV.dataSource = self
-            
-            // MARK: Xib파일이 없는 상태로 등록하려고 하자 오류가 나서 임시로 주석처리 해둠
-//            let cellNib = UINib(nibName: "StoreImageCell", bundle: nil)
-//            storeImageCV.register(cellNib, forCellWithReuseIdentifier: "StoreImageCell")
-        }
-    }
+    @IBOutlet weak var storeImageCV: UICollectionView!
+    @IBOutlet weak var feedAddButton: UIButton!
+    
+    var storeIdx: Int = -1
+    var feeds: Array<Feed> = []
+    var queryParam: Parameters = [:]
+    
+    
+    var cursorIdx: Int?
+    var cursorPrice: Int?
+    var cursorPopularNum: Int?
+    var hasNext: Bool?
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setup()
+        setupLayout()
+        if storeIdx != -1 {
+            setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        feeds.removeAll()
+        setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
     }
     
     func setup() {
@@ -30,9 +44,34 @@ class StoreImageViewController: UIViewController {
         storeImageCV.dataSource = self
     }
 
-    func configure(feeds: [Feed]) {
-        self.feeds = feeds
-        storeImageCV.reloadData()
+    func setupLayout() {
+        if APIManeger.shared.getHeader() == nil {
+            feedAddButton.layer.isHidden = true
+            return
+        }else {
+            if APIManeger.shared.getUserInfo()?.role == "판매자"{
+                feedAddButton.layer.cornerRadius = 25
+                
+                feedAddButton.layer.shadowColor = CGColor(red: 152.0 / 255.0, green: 113.0 / 255.0, blue: 113.0 / 255.0, alpha: 0.15)
+                feedAddButton.layer.shadowOffset = CGSize(width: 0, height: 3)
+                feedAddButton.layer.shadowRadius = 6
+                feedAddButton.layer.shadowOpacity = 1.0
+                
+            }else {
+                feedAddButton.layer.isHidden = true
+            }
+        }
+        
+    }
+    
+    @IBAction func feedAdd(_ sender: Any) {
+        guard let feedAddView = UIStoryboard(name: "FeedAdd", bundle: nil).instantiateViewController(withIdentifier: "FeedAddViewController") as? FeedAddViewController else {return}
+        
+        
+        feedAddView.modalTransitionStyle = .coverVertical
+        feedAddView.modalPresentationStyle = .fullScreen
+        
+        self.navigationController?.pushViewController(feedAddView, animated: true)
     }
 }
 
@@ -48,6 +87,13 @@ extension StoreImageViewController: UICollectionViewDelegate, UICollectionViewDa
         let url = feeds[indexPath.row].postImgUrls[0]
         cell.storeImageView.kf.setImage(with: URL(string: url))
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.storeImageCV.contentOffset.y > storeImageCV.contentSize.height-storeImageCV.bounds.size.height && self.hasNext == true{
+            setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx)
+            isLoading = true
+        }
     }
 }
 
@@ -78,6 +124,37 @@ extension StoreImageViewController: UICollectionViewDelegateFlowLayout {
         if let vc = self.next(ofType: UIViewController.self) {
             vc.tabBarController?.tabBar.isHidden = true
             vc.navigationController?.pushViewController(feedViewController, animated: true)
+        }
+    }
+}
+
+
+extension StoreImageViewController {
+    func setQueryParam(storeIdx: Int?, cursorIdx: Int?) {
+        if isLoading == true {
+            return
+        }
+        
+        queryParam["storeIdx"] = storeIdx
+        queryParam["cursorIdx"] = cursorIdx
+        
+        getFeedList(queryParam: queryParam)
+    }
+    
+    
+    func getFeedList(queryParam: Parameters) {
+        APIManeger.shared.testGetData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, parameter: queryParam) { [weak self] response in
+            
+            self?.hasNext = response.result.hasNext
+            self?.cursorIdx = response.result.cursorIdx
+            
+            response.result.feeds?.forEach({ feed in
+                self?.feeds.append(feed)
+            })
+            
+            self?.storeImageCV.reloadData()
+            
+            self?.isLoading = false
         }
     }
 }

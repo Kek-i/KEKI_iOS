@@ -25,9 +25,13 @@ class ProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchData()
+        
         setupNavigationBar()
         setupCollectionView()
+        fetchData()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
     }
     
     // MARK: - Action Methods (IBAction, ...)
@@ -44,8 +48,15 @@ class ProductViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationController?.navigationBar.isHidden = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ellipsis.vertical"), style: .plain, target: self, action: #selector(didTapViewmoreButton))
+        self.navigationController?.isNavigationBarHidden = false
+        let menuButton =  UIBarButtonItem(image: UIImage(named: "ellipsis.vertical"), style: .plain, target: self, action: #selector(didTapViewmoreButton))
+        menuButton.tintColor = .black
+        
+        let backButton = UIBarButtonItem(image: UIImage(named: "chevron-right"), style: .plain, target: self, action: #selector(backToScreen))
+        backButton.tintColor = .black
+        
+        self.navigationItem.rightBarButtonItem = menuButton
+        self.navigationItem.leftBarButtonItem = backButton
     }
     
     private func checkImageNone() {
@@ -55,22 +66,57 @@ class ProductViewController: UIViewController {
     
     @objc private func didTapViewmoreButton() {
         // TODO: 판매자에게만 보이도록 수정 필요
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let changeAction = UIAlertAction(title: "상품 수정", style: .default)
-        let deleteAction = UIAlertAction(title: "상품 삭제", style: .default)
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-        [
-            changeAction,
-            deleteAction,
-            cancelAction
-        ].forEach { alert.addAction($0) }
-        
-        present(alert, animated: true)
+        if APIManeger.shared.getHeader() != nil && APIManeger.shared.getUserInfo()?.role == "판매자" {
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            let changeAction = UIAlertAction(title: "상품 수정", style: .default) { _ in
+                self.editProduct()
+            }
+            let deleteAction = UIAlertAction(title: "상품 삭제", style: .default) { _ in
+                self.deleteProduct()
+            }
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+            [
+                changeAction,
+                deleteAction,
+                cancelAction
+            ].forEach { alert.addAction($0) }
+            
+            present(alert, animated: true)
+        }
     }
+    
+    
+    @objc private func backToScreen() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     private func setupPageControl() {
         pageControl.numberOfPages = dessertImg.count
         pageControl.currentPage = 0
+    }
+    
+    
+    private func editProduct() {
+        guard let productAddVC = UIStoryboard(name: "ProductAdd", bundle: nil).instantiateViewController(withIdentifier: "ProductAddViewController") as? ProductAddViewController else {return}
+        productAddVC.dessertIdx = self.dessertIdx
+        
+        productAddVC.modalTransitionStyle = .coverVertical
+        productAddVC.modalPresentationStyle = .fullScreen
+        
+        self.navigationController?.pushViewController(productAddVC, animated: true)
+    }
+    
+    private func deleteProduct() {
+        APIManeger.shared.testDeleteData(urlEndpointString: "/desserts/\(dessertIdx!)") { [weak self] response in
+            if response.isSuccess == true {
+                let alert = UIAlertController(title: "삭제 완료", message: "정상적으로 상품이 삭제되었습니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }))
+                self?.present(alert, animated: true)
+            }
+        }
     }
 }
 
@@ -85,7 +131,7 @@ extension ProductViewController: UICollectionViewDataSource {
         
         if dessertImg.count == 0 { return cell }
         else {
-            cell.imageView.kf.setImage(with: URL(string: dessertImg[indexPath.row].postImgUrl))
+            cell.imageView.kf.setImage(with: URL(string: dessertImg[indexPath.row].imgUrl))
             cell.imageView.contentMode = .scaleAspectFit
             return cell
         }

@@ -32,12 +32,9 @@ class ProductAddViewController: UIViewController {
         setupNavigationBar()
         setupTextViewPlaceholder()
         
-        dessertIdx = 2
-        
         if dessertIdx != nil {
             fetchProductEdit(dessertIdx: dessertIdx!)
         }
-        
     }
     
     func setup() {

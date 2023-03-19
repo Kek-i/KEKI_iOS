@@ -15,7 +15,7 @@ class FeedDeleteViewController: UIViewController {
     @IBOutlet weak var deleteButton: UIButton!
     
     
-    var dessertIdx = -1
+    var postIdx = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class FeedDeleteViewController: UIViewController {
 
 extension FeedDeleteViewController {
     func requestDeleteFeed() {
-        APIManeger.shared.testDeleteData(urlEndpointString: "/desserts/\(dessertIdx)") { [weak self] response in
+        APIManeger.shared.testDeleteData(urlEndpointString: "/posts/\(postIdx)") { [weak self] response in
             if response.isSuccess! {
                 self?.dismiss(animated: true)
             }
