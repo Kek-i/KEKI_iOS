@@ -82,6 +82,7 @@ extension HomeTableViewCell: UICollectionViewDataSource {
 extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("tapped store post :: indexPath --> \(indexPath)")
+//        print("tapped store post :: url --> \(storePostList[indexPath.row].postImgUrl)")
         
         // TODO: 각 태그별 스토어 게시물 탭 이벤트 처리 메소드 정의 필요
         // 탭 이벤트가 발생한 게시물의 인덱스 정보 (postIdx)를 피드 상세를 보여주는 셀에 넘겨주고

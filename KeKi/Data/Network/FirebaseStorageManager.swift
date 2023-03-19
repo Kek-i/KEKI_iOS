@@ -44,7 +44,14 @@ class FirebaseStorageManager {
     }
     
     static func downloadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {
-        let storageReference = Storage.storage().reference(forURL: urlString)
+        var storageReference: StorageReference
+        if urlString.contains("https:") {
+            storageReference = Storage.storage().reference(forURL: urlString)
+        } else {
+            storageReference = Storage.storage().reference(withPath: urlString)
+
+        }
+
         let megaByte = Int64(1 * 1024 * 1024)
         
         storageReference.getData(maxSize: megaByte) { data, error in
