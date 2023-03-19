@@ -168,7 +168,16 @@ extension FeedCell: UICollectionViewDataSource {
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedImgsCell", for: indexPath) as? FeedImgsCell else { return UICollectionViewCell() }
         let imgURL = imageList[indexPath.row]
-        cell.imgView.kf.setImage(with: URL(string: imgURL))
+        if imgURL.contains("https:") {
+            // https:...형태의 Url
+            cell.imgView.kf.setImage(with: URL(string: imgURL))
+        } else {
+            // 디렉토리 형태의 Url
+            let _ = FirebaseStorageManager.downloadImage(urlString: imgURL, completion: { img in
+                cell.imgView.image = img
+            })
+        }
+        
         return cell
     }
     
