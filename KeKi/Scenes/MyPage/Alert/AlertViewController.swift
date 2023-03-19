@@ -81,11 +81,28 @@ class AlertViewController: UIViewController {
     
     private func requestAuth(urlString: String) {
         // 로그아웃 or 회원탈퇴 처리 메소드
+        switch todo {
+        case .logout: logoutRequest(urlString: urlString)
+        case .signout: signoutRequest(urlString: urlString)
+        default: return 
+        }
+    }
+    
+    private func logoutRequest(urlString: String) {
         APIManeger.shared.testPatchData(urlEndpointString: urlString,
                                         dataType: GeneralResponseModel.self,
                                         parameter: nil,
                                         completionHandler: { [weak self] response in
-            
+            let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+            instance?.requestDeleteToken()
+            APIManeger.shared.resetHeader()
+            self?.showMain()
+        })
+    }
+    
+    private func signoutRequest(urlString: String) {
+        APIManeger.shared.testDeleteData(urlEndpointString: urlString,
+                                         completionHandler: { [weak self] response in
             let instance = NaverThirdPartyLoginConnection.getSharedInstance()
             instance?.requestDeleteToken()
             APIManeger.shared.resetHeader()

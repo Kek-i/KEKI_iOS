@@ -77,15 +77,8 @@ class DefaultTabBarController: UITabBarController {
             let mypage = UINavigationController(rootViewController: mypageViewController)
             mypage.tabBarItem = mypageTab
             
-            if APIManeger.shared.getUserInfo()?.role == "구매자" {
-                viewControllers = [
-                    home,
-                    calendar,
-                    search,
-                    heart,
-                    mypage
-                ]
-            }else {
+            switch APIManeger.shared.getUserInfo()?.role {
+            case "판매자" :
                 getSellerProfile {
                     storeViewController.storeIdx = self.storeIdx
                     self.viewControllers = [
@@ -93,7 +86,16 @@ class DefaultTabBarController: UITabBarController {
                         mypage
                     ]
                 }
+            default:
+                viewControllers = [
+                    home,
+                    calendar,
+                    search,
+                    heart,
+                    mypage
+                ]
             }
+
         } else {
             storyboard = UIStoryboard.init(name: "UnLoginUserMypage", bundle: nil)
             guard let mypageViewController = storyboard.instantiateViewController(withIdentifier: "UnLoginMyPageViewController") as? UnLoginMyPageViewController else { return }
