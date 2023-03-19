@@ -175,22 +175,13 @@ class FeedAddViewController: UIViewController {
             }
         }
         
-        imageCount = 0
-        postImgUrls.removeAll()
-        
-        imageList.forEach { image in
-            DispatchQueue.global().async {
-                self.uploadImages(image: image) {
-                    if self.postIdx != nil {
-                        self.requestEditFeed(postIdx: self.postIdx!, desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
-                    }else {
-                        self.requestAddFeed(desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
-                    }
-                }
-                Thread.sleep(forTimeInterval: 1)
+        uploadImages() {
+            if self.postIdx != nil {
+                self.requestEditFeed(postIdx: self.postIdx!, desertIdx: self.selectDesertIdx , description: description, tags: selectTags)
+            }else {
+                self.requestAddFeed(desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
             }
         }
-        
     }
     
     func showAlert(title: String, message: String) {
@@ -494,22 +485,20 @@ extension FeedAddViewController {
     }
     
     
-    func uploadImages(image: UIImage, completionHanlder: @escaping () -> Void) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyMMdd_HHmmssss"
-        let pathRoot = dateFormatter.string(from: Date())
-        
-        FirebaseStorageManager.uploadImage(image: image, pathRoot: pathRoot,
-                                                    folderName: FirebaseStorageManager.productFolder
-                                                    ,completion: { [weak self] url in
-            self?.postImgUrls.append(url?.description ?? "")
-            
-            if self?.imageList.count == self?.postImgUrls.count {
+    func uploadImages(completionHanlder: @escaping () -> Void) {
+            postImgUrls.removeAll()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyMMdd_HHmmssss"
+            let pathRoot = dateFormatter.string(from: Date())
+            FirebaseStorageManager.uploadImages(imageList: imageList,
+                                                pathRoot: pathRoot,
+                                                folderName: FirebaseStorageManager.profileFolder,
+                                                completion: { [weak self] urls in
+                self?.postImgUrls = urls
+                self?.postImgUrls.reverse()
                 completionHanlder()
-            }
-            
-        })
-    }
+            })
+        }
 
     func requestAddFeed(desertIdx: Int, description: String, tags: [String]) {
         let param = FeedRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
