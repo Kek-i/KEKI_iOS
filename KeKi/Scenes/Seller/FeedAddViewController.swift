@@ -130,15 +130,16 @@ class FeedAddViewController: UIViewController {
     func setupNavigationBar() {
         self.navigationController?.isNavigationBarHidden = false
         
+        
+        self.navigationItem.title = ""
+        
         let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .done, target: self, action: #selector(backToScene))
         backButton.tintColor = .black
-        
         self.navigationItem.leftBarButtonItem = backButton
         
         // action에 addDay 추가 (서버 연결 후)
         let addButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(addFeed))
         addButton.tintColor = .black
-        
         self.navigationItem.rightBarButtonItem = addButton
     }
     
