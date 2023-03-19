@@ -70,7 +70,9 @@ class FeedViewController: UIViewController {
 
     }
     
-    @objc private func didTapBackItem() { self.navigationController?.popViewController(animated: true) }
+    @objc private func didTapBackItem() {
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.popViewController(animated: true) }
     
 }
 

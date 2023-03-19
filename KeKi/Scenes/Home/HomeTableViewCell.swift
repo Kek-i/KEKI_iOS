@@ -99,6 +99,8 @@ extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
             feedViewController.postIdx = storePostList[indexPath.row].postIdx
             if let vc = self.next(ofType: UIViewController.self) {
                 vc.tabBarController?.tabBar.isHidden = true
+                vc.navigationController?.navigationBar.isHidden = false
+                vc.navigationController?.isNavigationBarHidden = false
                 vc.navigationController?.pushViewController(feedViewController, animated: true)
             }
         }
