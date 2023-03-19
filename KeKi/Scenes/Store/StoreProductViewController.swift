@@ -36,6 +36,11 @@ class StoreProductViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        desserts.removeAll()
+        setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
+    }
+    
     func setup() {
         storeProductCV.delegate = self
         storeProductCV.dataSource = self

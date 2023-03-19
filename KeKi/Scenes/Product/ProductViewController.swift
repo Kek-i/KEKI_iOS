@@ -49,7 +49,14 @@ class ProductViewController: UIViewController {
     
     private func setupNavigationBar() {
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ellipsis.vertical"), style: .plain, target: self, action: #selector(didTapViewmoreButton))
+        let menuButton =  UIBarButtonItem(image: UIImage(named: "ellipsis.vertical"), style: .plain, target: self, action: #selector(didTapViewmoreButton))
+        menuButton.tintColor = .black
+        
+        let backButton = UIBarButtonItem(image: UIImage(named: "chevron-right"), style: .plain, target: self, action: #selector(backToScreen))
+        backButton.tintColor = .black
+        
+        self.navigationItem.rightBarButtonItem = menuButton
+        self.navigationItem.leftBarButtonItem = backButton
     }
     
     private func checkImageNone() {
@@ -78,6 +85,12 @@ class ProductViewController: UIViewController {
             present(alert, animated: true)
         }
     }
+    
+    
+    @objc private func backToScreen() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     private func setupPageControl() {
         pageControl.numberOfPages = dessertImg.count
         pageControl.currentPage = 0

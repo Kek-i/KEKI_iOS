@@ -34,6 +34,11 @@ class StoreImageViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        feeds.removeAll()
+        setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
+    }
+    
     func setup() {
         storeImageCV.delegate = self
         storeImageCV.dataSource = self
