@@ -125,22 +125,9 @@ extension FeedViewController: FeedDelegate {
     func showFeedMainAlert(postIdx: Int) {
         self.postIdx = postIdx
         
-        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-<<<<<<< HEAD
-=======
-        let declarationAction = UIAlertAction(title: "신고하기", style: .default) { [weak self] _ in
-            if let _ = UserDefaults.standard.object(forKey: "userInfo") {
-                self?.showFeedDeclarationActionAlert()
-            } else {
-                self?.view.makeToast("회원가입 후 피드 신고가 가능합니다", duration: 1.0, position: .center)
-            }
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
->>>>>>> develop
         
         if APIManeger.shared.getHeader() != nil && APIManeger.shared.getUserInfo()?.role == "판매자" {
-            
             let changeAction = UIAlertAction(title: "피드 수정", style: .default) { _ in
                 self.editFeed()
             }
@@ -153,7 +140,11 @@ extension FeedViewController: FeedDelegate {
             ].forEach { alert.addAction($0) }
         }else {
             let declarationAction = UIAlertAction(title: "신고하기", style: .default) { [weak self] _ in
-                self?.showFeedDeclarationActionAlert()
+                if let _ = UserDefaults.standard.object(forKey: "userInfo") {
+                    self?.showFeedDeclarationActionAlert()
+                } else {
+                    self?.view.makeToast("회원가입 후 피드 신고가 가능합니다", duration: 1.0, position: .center)
+                }
             }
             alert.addAction(declarationAction)
         }
