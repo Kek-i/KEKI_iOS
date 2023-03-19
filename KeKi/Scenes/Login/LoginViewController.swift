@@ -6,13 +6,14 @@
 //
 
 import UIKit
-
+import Toast
 import Alamofire
 
 import KakaoSDKAuth
 import KakaoSDKUser
 import NaverThirdPartyLogin
 import AuthenticationServices
+import GoogleSignIn
 
 enum Role: String {
     case notUser = "비회원"
@@ -31,7 +32,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var naverLoginButton: UIButton!
-    @IBOutlet weak var appleLoginButton: ASAuthorizationAppleIDButton!
+    @IBOutlet weak var appleLoginButton: UIButton!
     
     
     // MARK: - Methods of LifeCycle
@@ -43,6 +44,9 @@ class LoginViewController: UIViewController {
         
         // apple login button setup
         appleLoginButton.addTarget(self, action: #selector(didTapAppleLoginButton(_:)), for: .touchUpInside)
+        
+        // google login setup
+        setGoogleSignInButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,35 +55,21 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Action Methods (IBAction, ...)
-    @IBAction func didTapGoogleLoginButton(_ sender: UIButton) {
-        // TODO: 구글 로그인 기능 추가
-        print("didTapGoogleLoginButton")
-        
-        // 유저 정보 설정창으로 전환 처리 (임시 구현, 이후 삭제 예정)
-        guard let selectUserCategoryViewController = storyboard?.instantiateViewController(withIdentifier: "SelectUserCategoryViewController") as? SelectUserCategoryViewController else { return }
-        navigationController?.pushViewController(selectUserCategoryViewController, animated: true)
-    }
+    @IBAction func didTapGoogleLoginButton(_ sender: UIButton) { googleSocialLogin() }
     
-    @IBAction func didTapKakaoLoginButton(_ sender: UIButton) {
-        // TODO: 카카오 로그인 기능 추가
-        print("didTapKakaoLoginButton")
-        kakaoSocialLogin()
-    }
+    @IBAction func didTapKakaoLoginButton(_ sender: UIButton) { kakaoSocialLogin() }
     
-    @IBAction func didTapNaverLoginButton(_ sender: UIButton) {
-        // TODO: 네이버 로그인 기능 추가
-        print("didTapNaverLoginButton")
-        naverSocialLogin()
-    }
+    @IBAction func didTapNaverLoginButton(_ sender: UIButton) { naverSocialLogin() }
     
-    @IBAction func didTapAppleLoginButton(_ sender: UIButton) {
-        // TODO: 애플 로그인 기능 추가
-        print("didTapAppleLoginButton")
-        appleSocialLogin()
-    }
+    @IBAction func didTapAppleLoginButton(_ sender: UIButton) { appleSocialLogin() }
     
     
     // MARK: - Helper Methods (Setup Method, ...)
+    private func setGoogleSignInButton() {
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().delegate = self
+    }
+    
     private func setupButtonLayouts() {
         [
             googleLoginButton,
@@ -99,13 +89,13 @@ class LoginViewController: UIViewController {
         googleLoginButton.configuration?.imagePadding = 53
         kakaoLoginButton.configuration?.imagePadding = 53
         naverLoginButton.configuration?.imagePadding = 34
-//        appleLoginButton.configuration?.imagePadding = 48
+        appleLoginButton.configuration?.imagePadding = 48
     }
     
     private func setupAuthorityGuidanceViewController() {
         let storyboard = UIStoryboard.init(name: "AuthorityGuidance", bundle: nil)
         guard let authorityGuidanceViewController = storyboard.instantiateViewController(withIdentifier: "AuthorityGuidanceViewController") as? AuthorityGuidanceViewController else { return }
-        authorityGuidanceViewController.modalPresentationStyle = .fullScreen
+        authorityGuidanceViewController.modalPresentationStyle = .overCurrentContext
         present(authorityGuidanceViewController, animated: true)
         
     }
@@ -120,6 +110,33 @@ class LoginViewController: UIViewController {
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
+    }
+}
+
+// MARK: - GOOGLE Social Login Delegate
+extension LoginViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+                print("The user has not signed in before or they have since signed out.")
+            } else {
+                print("\(error.localizedDescription)")
+            }
+            return
+        }
+            
+        // 사용자 정보 가져오기
+        if let email = user.profile.email {
+            print("User Email : \(email)")
+            requestSocialLogin(email: email, provider: "구글")
+            
+        } else {
+            print("Error : User Data Not Found")
+        }
+    }
+    
+    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFinishAuthorizationWithResult receiveType: THIRDPARTYLOGIN_RECEIVE_TYPE) {
+        print("Google Login Disconnect")
     }
 }
 
@@ -140,8 +157,6 @@ extension LoginViewController : NaverThirdPartyLoginConnectionDelegate {
 extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-        print("Apple ID Credential Authorization User ID : \(appleIDCredential.user)")
-        print("Apple ID Credential Authorization User Email : \(appleIDCredential.email)")
         
         if let email = UserDefaults.standard.value(forKey: "appleEmail") {
             requestSocialLogin(email: email as! String, provider: "애플")
@@ -204,6 +219,10 @@ extension LoginViewController {
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
+    
+    private func googleSocialLogin() {
+        GIDSignIn.sharedInstance()?.signIn()
+    }
 }
 
 extension LoginViewController {
@@ -232,15 +251,13 @@ extension LoginViewController {
         let authorization = "\(tokenType) \(accessToken)"
         let req = AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
         
-        req.responseJSON { response in
-                guard let result = response.value as? [String: Any] else { return }
-//                guard let object = result["response"] as? [String: Any] else { return }
-//                guard let name = object["name"] as? String else { return }
-//                guard let email = object["email"] as? String else { return }
-//                guard let id = object["id"] as? String else {return}
-                
-                print(result)
-              }
+        req.responseJSON { [weak self] response in
+            guard let result = response.value as? [String: Any] else { return }
+            guard let object = result["response"] as? [String: Any] else { return }
+            guard let email = object["email"] as? String else { return }
+
+            self?.requestSocialLogin(email: email, provider: "네이버")
+        }
     }
     
     private func requestSocialLogin(email: String, provider: String) {
@@ -249,32 +266,36 @@ extension LoginViewController {
                                    dataType: SocialLoginRequest.self,
                                    parameter: param,
                                    completionHandler: { [weak self] result in
-
-            
-            if let result = result.result {
-                UserDefaults.standard.set(email, forKey: "socialEmail")
-                
-                let role = result.role
-                switch role {
-                case Role.notUser.rawValue:
-                    APIManeger.shared.setUserInfo(userInfo: result)
-                    self?.signup()
-                    
-                case Role.buyer.rawValue, Role.seller.rawValue:
-                    APIManeger.shared.setUserInfo(userInfo: result)
-                    
-                    let encoder = PropertyListEncoder()
-                    if let encoded = try? encoder.encode(result) {
-                        UserDefaults.standard.setValue(encoded, forKey: "userInfo")
-                        print("userInfo 저장됨")
+            if let isSuccess = result.isSuccess {
+                if isSuccess {
+                    if let result = result.result {
+                        UserDefaults.standard.set(email, forKey: "socialEmail")
+                        
+                        let role = result.role
+                        switch role {
+                        case Role.notUser.rawValue:
+                            APIManeger.shared.setUserInfo(userInfo: result)
+                            self?.signup()
+                            
+                        case Role.buyer.rawValue, Role.seller.rawValue:
+                            APIManeger.shared.setUserInfo(userInfo: result)
+                            
+                            let encoder = PropertyListEncoder()
+                            if let encoded = try? encoder.encode(result) {
+                                UserDefaults.standard.setValue(encoded, forKey: "userInfo")
+                            }
+                            self?.showMain()
+                            
+                        default:
+                            print("알 수 없는 유저")
+                        }
                     }
-                    self?.showMain()
                     
-                default:
-                    print("알 수 없는 유저")
+                } else {
+                    self?.view.makeToast(result.message, duration: 1.5, position: .center)
                 }
             }
-            
+
         })
     }
 
