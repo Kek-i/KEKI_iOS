@@ -166,7 +166,7 @@ extension HomeViewController: TagDetailDelegate {
                                           cursorIdx: nil,
                                           cursorPopularNum: nil,
                                           cursorPrice: nil)
-        searchResultViewController.setSearchText(text: tag)
+        searchResultViewController.setHashTag(text: tag)
         self.navigationController?.pushViewController(searchResultViewController, animated: true)
     }
 }

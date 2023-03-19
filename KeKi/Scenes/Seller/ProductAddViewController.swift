@@ -278,7 +278,7 @@ extension ProductAddViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyMMdd_HHmmssss"
         let pathRoot = dateFormatter.string(from: Date())
-
+        
         FirebaseStorageManager.uploadImage(image: selectedImage!, pathRoot: pathRoot,
                                                     folderName: FirebaseStorageManager.productFolder
                                                     ,completion: { [weak self] url in
@@ -290,18 +290,28 @@ extension ProductAddViewController {
     func requestAddProduct(dessertName: String, desertPrice: String, dessertDescription: String, dessertImg: String) {
         let param = ProductRequest(dessertName: dessertName, dessertPrice: desertPrice, dessertDescription: dessertDescription, dessertImg: dessertImg)
         APIManeger.shared.testPostData(urlEndpointString: "/desserts", dataType: ProductRequest.self, parameter: param) { [weak self] response in
-            // 나중에 화면 바뀌도록 바꾸기
-            print(response)
-            self?.showAlert(title: "성공", message: "상품 추가 성공")
+            if response.isSuccess == true {
+                let alert = UIAlertController(title: "상품 추가", message: "상품 추가에 성공하셨습니다.", preferredStyle: .alert)
+                let check = UIAlertAction(title: "확인", style: .default) { _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+                alert.addAction(check)
+                self?.present(alert, animated: true)
+            }
         }
     }
     
     func requestEditProduct(dessertIdx: Int, dessertName: String, desertPrice: String, dessertDescription: String, dessertImg: String) {
         let param = ProductRequest(dessertName: dessertName, dessertPrice: desertPrice, dessertDescription: dessertDescription, dessertImg: dessertImg)
         APIManeger.shared.testPatchData(urlEndpointString: "/desserts/\(dessertIdx)", dataType: ProductRequest.self, parameter: param) { [weak self] response in
-            // 나중에 화면 바뀌도록 바꾸기
-            print(response)
-            self?.showAlert(title: "성공", message: "상품 수정 성공")
+            if response.isSuccess == true {
+                let alert = UIAlertController(title: "상품 수정", message: "상품 수정에 성공하셨습니다.", preferredStyle: .alert)
+                let check = UIAlertAction(title: "확인", style: .default) { _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+                alert.addAction(check)
+                self?.present(alert, animated: true)
+            }
         }
     }
 }

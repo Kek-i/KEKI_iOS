@@ -111,7 +111,12 @@ class SearchViewController: UIViewController {
         
     func setup() {
         searchTextField.delegate = self
-        searchTextField.text = searchText ?? ""
+        
+        if hashTag != nil {
+            searchTextField.text = hashTag ?? ""
+        }else if searchText != nil {
+            searchTextField.text = searchText ?? ""
+        }
         
         var tag = 1
         
@@ -166,8 +171,8 @@ class SearchViewController: UIViewController {
         sortTypeButtonView.layer.masksToBounds = false
     }
     
-    func setSearchText(text: String) {
-        self.searchText = text
+    func setHashTag(text: String) {
+        self.hashTag = text
     }
     
     func setHideButtonTitle() {
@@ -275,6 +280,7 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField.text == nil || textField.text == ""{
             searchText = nil
+            hashTag = nil
             
             searchResultList.removeAll()
             

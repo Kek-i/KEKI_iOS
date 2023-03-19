@@ -41,6 +41,8 @@ class FeedAddViewController: UIViewController {
     var hashTagLastIdx = 0
     var selectHashTagCount = 0
     
+    var imageCount = 0
+    
     var isOpenSelectView = false
     
     let colorList: [UIColor] = [
@@ -173,17 +175,13 @@ class FeedAddViewController: UIViewController {
             }
         }
         
-        
-        uploadImages {
+        uploadImages() {
             if self.postIdx != nil {
-                self.requestEditFeed(postIdx: self.postIdx!, desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
+                self.requestEditFeed(postIdx: self.postIdx!, desertIdx: self.selectDesertIdx , description: description, tags: selectTags)
             }else {
                 self.requestAddFeed(desertIdx: self.selectDesertIdx, description: description, tags: selectTags)
             }
-            
         }
-        
-        
     }
     
     func showAlert(title: String, message: String) {
@@ -488,37 +486,45 @@ extension FeedAddViewController {
     
     
     func uploadImages(completionHanlder: @escaping () -> Void) {
-        postImgUrls.removeAll()
-        imageList.forEach { image in
+            postImgUrls.removeAll()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyMMdd_HHmmssss"
             let pathRoot = dateFormatter.string(from: Date())
-            
-            FirebaseStorageManager.uploadImage(image: image, pathRoot: pathRoot,
-                                                        folderName: FirebaseStorageManager.profileFolder
-                                                        ,completion: { [weak self] url in
-                self?.postImgUrls.append(url?.description ?? "")
-                
-                if self?.imageList.count == self?.postImgUrls.count {
-                    completionHanlder()
-                }
+            FirebaseStorageManager.uploadImages(imageList: imageList,
+                                                pathRoot: pathRoot,
+                                                folderName: FirebaseStorageManager.profileFolder,
+                                                completion: { [weak self] urls in
+                self?.postImgUrls = urls
+                self?.postImgUrls.reverse()
+                completionHanlder()
             })
         }
-    }
 
     func requestAddFeed(desertIdx: Int, description: String, tags: [String]) {
         let param = FeedRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
         APIManeger.shared.testPostData(urlEndpointString: "/posts", dataType: FeedRequest.self, parameter: param) { [weak self] response in
-            // 나중에 화면 바뀌도록 바꾸기
-            self?.showAlert(title: "성공", message: "피드 추가 성공")
+            if response.isSuccess == true {
+                let alert = UIAlertController(title: "피드 추가", message: "피드 추가에 성공하셨습니다.", preferredStyle: .alert)
+                let check = UIAlertAction(title: "확인", style: .default) { _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+                alert.addAction(check)
+                self?.present(alert, animated: true)
+            }
         }
     }
     
     func requestEditFeed(postIdx: Int, desertIdx: Int, description: String, tags: [String]) {
         let param = FeedRequest(dessertIdx: desertIdx, description: description, postImgUrls: postImgUrls, tags: tags)
         APIManeger.shared.testPatchData(urlEndpointString: "/posts/\(postIdx)", dataType: FeedRequest.self, parameter: param) { [weak self] response in
-            // 나중에 화면 바뀌도록 바꾸기
-            self?.showAlert(title: "성공", message: "성공")
+            if response.isSuccess == true {
+                let alert = UIAlertController(title: "피드 수정", message: "피드 수정에 성공하셨습니다.", preferredStyle: .alert)
+                let check = UIAlertAction(title: "확인", style: .default) { _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+                alert.addAction(check)
+                self?.present(alert, animated: true)
+            }
         }
     }
 }
