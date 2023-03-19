@@ -66,7 +66,7 @@ class HomeTableViewCell: UITableViewCell {
 extension HomeTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5 // default number
+        return storePostList.count 
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -82,7 +82,6 @@ extension HomeTableViewCell: UICollectionViewDataSource {
 extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("tapped store post :: indexPath --> \(indexPath)")
-//        print("tapped store post :: url --> \(storePostList[indexPath.row].postImgUrl)")
         
         // TODO: 각 태그별 스토어 게시물 탭 이벤트 처리 메소드 정의 필요
         // 탭 이벤트가 발생한 게시물의 인덱스 정보 (postIdx)를 피드 상세를 보여주는 셀에 넘겨주고
@@ -90,21 +89,13 @@ extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
         
         let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
         guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
-        
-        if storePostList.count < 5 {
-            let alert = UIAlertController(title: nil, message: "준비 중인 케이크입니다!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default))
-            if let vc = self.next(ofType: UIViewController.self) { vc.present(alert, animated: true) }
-            
-        } else {
-            feedViewController.postIdx = storePostList[indexPath.row].postIdx
-            if let vc = self.next(ofType: UIViewController.self) {
-                vc.tabBarController?.tabBar.isHidden = true
-                vc.navigationController?.pushViewController(feedViewController, animated: true)
-            }
+    
+        feedViewController.postIdx = storePostList[indexPath.row].postIdx
+        if let vc = self.next(ofType: UIViewController.self) {
+            vc.tabBarController?.tabBar.isHidden = true
+            vc.navigationController?.pushViewController(feedViewController, animated: true)
         }
-        
-        
+
     }
 }
 
