@@ -104,6 +104,10 @@ extension FeedViewController: UITableViewDelegate {
 }
 
 extension FeedViewController: FeedDelegate {
+    func showToastMessage(message: String) {
+        self.view.makeToast(message, duration: 1.0, position: .center)
+    }
+    
     func showProductDetail(dessertIdx: Int) {
         guard let productViewController = UIStoryboard(name: "ProductDetail", bundle: nil).instantiateViewController(withIdentifier: "ProductViewController") as? ProductViewController else {return}
         
@@ -123,6 +127,17 @@ extension FeedViewController: FeedDelegate {
         
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+<<<<<<< HEAD
+=======
+        let declarationAction = UIAlertAction(title: "신고하기", style: .default) { [weak self] _ in
+            if let _ = UserDefaults.standard.object(forKey: "userInfo") {
+                self?.showFeedDeclarationActionAlert()
+            } else {
+                self?.view.makeToast("회원가입 후 피드 신고가 가능합니다", duration: 1.0, position: .center)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+>>>>>>> develop
         
         if APIManeger.shared.getHeader() != nil && APIManeger.shared.getUserInfo()?.role == "판매자" {
             
