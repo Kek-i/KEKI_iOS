@@ -173,9 +173,6 @@ extension HeartViewController {
             
             APIManeger.shared.testGetData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, parameter: nil) { [weak self] response in
                 hud.dismiss(animated: true)
-                
-                print(response)
-                
                 self?.feedList = response.result.feeds
                 
                 self?.hasNext = response.result.hasNext
@@ -183,6 +180,9 @@ extension HeartViewController {
                 
                 self?.heartCV.reloadData()
             }
+            
+            Thread.sleep(forTimeInterval: 10)
+            hud.dismiss(animated: true)
         }
         
     }
