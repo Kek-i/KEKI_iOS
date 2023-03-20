@@ -20,8 +20,6 @@ class StoreProductViewController: UIViewController {
     
     
     var cursorIdx: Int?
-    var cursorPrice: Int?
-    var cursorPopularNum: Int?
     var hasNext: Bool?
     var isLoading = false
     
@@ -30,15 +28,6 @@ class StoreProductViewController: UIViewController {
         
         setup()
         setupLayout()
-        
-        if storeIdx != -1 {
-            setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        desserts.removeAll()
-        setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
     }
     
     func setup() {
@@ -65,11 +54,13 @@ class StoreProductViewController: UIViewController {
         }
     }
 
-    func configure(desserts: [Dessert]) {
+    func configure(desserts: [Dessert], storeIdx: Int, cursorIdx: Int, hasNext: Bool) {
         self.desserts = desserts
+        self.storeIdx = storeIdx
+        self.cursorIdx = cursorIdx
+        self.hasNext = hasNext
         storeProductCV?.reloadData()
     }
-    
     
     @IBAction func productAdd(_ sender: Any) {
         guard let productAddView = UIStoryboard(name: "ProductAdd", bundle: nil).instantiateViewController(withIdentifier: "ProductAddViewController") as? ProductAddViewController else {return}

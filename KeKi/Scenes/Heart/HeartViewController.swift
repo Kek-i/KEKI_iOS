@@ -92,20 +92,21 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeartCell", for: indexPath)
-        if let heatCell = cell as? HeartDetailCell {
-            heatCell.productTitleLabel.text = feedList[indexPath.row].dessertName
-            heatCell.productPriceLabel.text = feedList[indexPath.row].dessertPrice.description
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeartCell", for: indexPath) as! HeartDetailCell
+
+        if cell.isFirst() {
+            cell.productTitleLabel.text = feedList[indexPath.row].dessertName
+            cell.productPriceLabel.text = feedList[indexPath.row].dessertPrice.description
             
             if let imageUrl = URL(string: feedList[indexPath.row].postImgUrl) {
                 if let imageData = try? Data(contentsOf: imageUrl) {
-                    heatCell.productImageView.image = imageResize(image: UIImage(data: imageData)!, newWidth: 105, newHeight: 105)
+                    cell.productImageView.image = imageResize(image: UIImage(data: imageData)!, newWidth: 105, newHeight: 105)
                 }
             }
             
-            
+            cell.setHeartFeed(heartFeed: feedList[indexPath.row])
+            cell.setFirst(first: false)
         }
-        
         return cell
     }
     
@@ -124,8 +125,8 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
         guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
         feedViewController.postIdx = feedList[indexPath.row].postIdx
-        self.navigationController?.pushViewController(feedViewController, animated: true)
         
+        self.navigationController?.pushViewController(feedViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -181,7 +182,6 @@ extension HeartViewController {
                 self?.heartCV.reloadData()
             }
             
-            Thread.sleep(forTimeInterval: 10)
             hud.dismiss(animated: true)
         }
         

@@ -328,7 +328,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
         }else {
             if let searchDetailCell = cell as? SearchDetailCell {
-                guard let imageUrl = URL(string: searchResultList[indexPath.row].postImgUrls[0] ) else {return cell}
+                guard let imageUrl = URL(string: searchResultList[indexPath.row].postImgUrls![0] ) else {return cell}
                 guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
                 
                 guard let image = UIImage(data: imageData) else {return cell}
@@ -364,7 +364,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             hashTag = nil
             search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
         }else if collectionView.tag == 3 {
-           
+            let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
+            guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
+            feedViewController.postIdx = recentCakeList[indexPath.row].postIdx
+            self.navigationController?.pushViewController(feedViewController, animated: true)
         }else {
             let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
             guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }

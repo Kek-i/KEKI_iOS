@@ -9,11 +9,14 @@ import Foundation
 import Tabman
 import Pageboy
 import UIKit
+import Alamofire
 
 
 class TabViewController : TabmanViewController {
 
     private var viewControllers: Array<UIViewController> = []
+    
+    private var storeIdx: Int = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,12 +89,20 @@ extension TabViewController: PageboyViewControllerDataSource, TMBarDataSource {
 }
 
 extension TabViewController: TabDelegate {
-    func setStoreIdx(storeIdx: Int) {
-        guard let feedVC = viewControllers[0] as? StoreImageViewController else {return}
-        guard let productVC = viewControllers[1] as? StoreProductViewController else {return}
+    func initChildVC(storeIdx: Int) {
+        let queryParam: Parameters = ["storeIdx" : storeIdx]
         
-        feedVC.storeIdx = storeIdx
-        productVC.storeIdx = storeIdx
+        let storeImageCV = viewControllers[0] as! StoreImageViewController
+        let storeProductCV = viewControllers[1] as! StoreProductViewController
+        
+        
+        APIManeger.shared.testGetData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, parameter: queryParam) { response in
+            storeImageCV.configure(feeds: response.result.feeds!, storeIdx: storeIdx, cursorIdx: response.result.cursorIdx!, hasNext: response.result.hasNext)
+        }
+        
+        APIManeger.shared.testGetData(urlEndpointString: "/desserts", dataType: ProductResponse.self, parameter: queryParam) { response in
+            storeProductCV.configure(desserts: response.result!.desserts, storeIdx: storeIdx, cursorIdx: response.result!.cursorIdx, hasNext: response.result!.hasNext)
+        }
     }
 }
 

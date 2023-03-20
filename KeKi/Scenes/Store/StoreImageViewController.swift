@@ -29,14 +29,6 @@ class StoreImageViewController: UIViewController {
         
         setup()
         setupLayout()
-        if storeIdx != -1 {
-            setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        feeds.removeAll()
-        setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
     }
     
     func setup() {
@@ -64,6 +56,19 @@ class StoreImageViewController: UIViewController {
         
     }
     
+    func configure(feeds: [Feed], storeIdx: Int, cursorIdx: Int, hasNext: Bool) {
+        self.feeds = feeds
+        self.storeIdx = storeIdx
+        self.cursorIdx = cursorIdx
+        self.hasNext = hasNext
+        
+        storeImageCV?.reloadData()
+    }
+    
+    func setStoreIdx(storeIdx: Int) {
+        self.storeIdx = storeIdx
+    }
+    
     @IBAction func feedAdd(_ sender: Any) {
         guard let feedAddView = UIStoryboard(name: "FeedAdd", bundle: nil).instantiateViewController(withIdentifier: "FeedAddViewController") as? FeedAddViewController else {return}
         
@@ -84,7 +89,7 @@ extension StoreImageViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreImageCell", for: indexPath) as? StoreImageCell else { return UICollectionViewCell() }
         
-        let url = feeds[indexPath.row].postImgUrls[0]
+        let url = (feeds[indexPath.row].postImgUrls?[0])!
         cell.storeImageView.kf.setImage(with: URL(string: url))
         return cell
     }

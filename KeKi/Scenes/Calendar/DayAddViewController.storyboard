@@ -345,14 +345,23 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="46" id="ub0-Jh-MTW"/>
                                                         </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <color key="tintColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="162" maxY="0.0"/>
-                                                        <inset key="imageEdgeInsets" minX="100" minY="0.0" maxX="-62" maxY="0.0"/>
-                                                        <state key="normal" title=""/>
+                                                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="182" maxY="0.0"/>
+                                                        <state key="normal" title="">
+                                                            <color key="titleColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="openDatePickerView:" destination="g31-SZ-hHq" eventType="touchUpInside" id="Txu-nE-Ivi"/>
                                                         </connections>
                                                     </button>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendarPicker" translatesAutoresizingMaskIntoConstraints="NO" id="dCX-es-zax">
+                                                        <rect key="frame" x="311" y="11" width="24" height="24"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="24" id="CAG-r5-hcw"/>
+                                                            <constraint firstAttribute="width" constant="24" id="k2L-pn-jks"/>
+                                                        </constraints>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -360,10 +369,12 @@
                                                     <constraint firstItem="MBf-3A-2DD" firstAttribute="top" secondItem="ra7-yH-INn" secondAttribute="bottom" id="AF5-b3-nQ7"/>
                                                     <constraint firstItem="MBf-3A-2DD" firstAttribute="leading" secondItem="kXS-yq-tbJ" secondAttribute="leading" id="E4P-0Z-39x"/>
                                                     <constraint firstAttribute="bottom" secondItem="MBf-3A-2DD" secondAttribute="bottom" priority="250" id="GAt-Fe-SHP"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dCX-es-zax" secondAttribute="trailing" constant="20" id="NBt-zM-tzr"/>
                                                     <constraint firstItem="ra7-yH-INn" firstAttribute="top" secondItem="kXS-yq-tbJ" secondAttribute="top" id="Y6L-km-oPf"/>
                                                     <constraint firstAttribute="trailing" secondItem="ra7-yH-INn" secondAttribute="trailing" id="e2a-9z-Q7A"/>
                                                     <constraint firstItem="ra7-yH-INn" firstAttribute="leading" secondItem="kXS-yq-tbJ" secondAttribute="leading" id="qbv-55-32i"/>
                                                     <constraint firstAttribute="trailing" secondItem="MBf-3A-2DD" secondAttribute="trailing" id="wlZ-ih-hqN"/>
+                                                    <constraint firstItem="dCX-es-zax" firstAttribute="top" secondItem="kXS-yq-tbJ" secondAttribute="top" constant="11" id="zHV-nj-v2Z"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -455,6 +466,7 @@
     </scenes>
     <resources>
         <image name="cake" width="71" height="65"/>
+        <image name="calendarPicker" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

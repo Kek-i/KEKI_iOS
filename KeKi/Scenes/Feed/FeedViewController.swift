@@ -74,6 +74,10 @@ class FeedViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.popViewController(animated: true) }
     
+    
+    func setPostIdx(postIdx: Int) {
+        self.postIdx = postIdx
+    }
 }
 
 // MARK: - Extensions
