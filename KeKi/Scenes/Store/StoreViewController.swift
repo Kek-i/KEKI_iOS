@@ -10,7 +10,7 @@ import Alamofire
 import Kingfisher
 
 protocol TabDelegate {
-    func setStoreIdx(storeIdx: Int)
+    func initChildVC(storeIdx: Int)
 }
 
 class StoreViewController: UIViewController {
@@ -130,7 +130,7 @@ extension StoreViewController{
             
             self?.storeInfo = response.result
             self?.configureProfile()
-            self?.delegate.setStoreIdx(storeIdx: (self?.storeIdx)!)
+            self?.delegate.initChildVC(storeIdx: (self?.storeIdx)!)
         })
     }
 

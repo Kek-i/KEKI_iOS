@@ -29,14 +29,6 @@ class StoreImageViewController: UIViewController {
         
         setup()
         setupLayout()
-        if storeIdx != -1 {
-            setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        feeds.removeAll()
-        setQueryParam(storeIdx: storeIdx, cursorIdx: nil)
     }
     
     func setup() {
@@ -62,6 +54,19 @@ class StoreImageViewController: UIViewController {
             }
         }
         
+    }
+    
+    func configure(feeds: [Feed], storeIdx: Int, cursorIdx: Int, hasNext: Bool) {
+        self.feeds = feeds
+        self.storeIdx = storeIdx
+        self.cursorIdx = cursorIdx
+        self.hasNext = hasNext
+        
+        storeImageCV?.reloadData()
+    }
+    
+    func setStoreIdx(storeIdx: Int) {
+        self.storeIdx = storeIdx
     }
     
     @IBAction func feedAdd(_ sender: Any) {
