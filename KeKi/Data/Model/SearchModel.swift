@@ -74,11 +74,11 @@ struct SearchResult: Codable {
 
 struct Feed: Codable {
     let postIdx: Int
-    let dessertIdx: Int
+    let dessertIdx: Int?
     let dessertName: String
     let dessertPrice: Int
     let description: String
-    let postImgUrls: [String]
+    let postImgUrls: [String]?
     let tags: [String]
     let storeIdx: Int
     let storeName: String

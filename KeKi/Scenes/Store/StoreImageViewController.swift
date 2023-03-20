@@ -84,7 +84,7 @@ extension StoreImageViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreImageCell", for: indexPath) as? StoreImageCell else { return UICollectionViewCell() }
         
-        let url = feeds[indexPath.row].postImgUrls[0]
+        let url = (feeds[indexPath.row].postImgUrls?[0])!
         cell.storeImageView.kf.setImage(with: URL(string: url))
         return cell
     }

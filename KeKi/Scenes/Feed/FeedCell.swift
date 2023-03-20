@@ -117,7 +117,7 @@ class FeedCell: UITableViewCell {
         profileImgView.layer.borderColor = UIColor.lightGray.cgColor    // 정방형이 아닌 크기의 프로필 사진에 대한 임시처리
         
         // set dessert contents
-        imageList = data.postImgUrls
+        imageList = data.postImgUrls ?? [] 
         pageControl.numberOfPages = imageList.count
         pageControl.currentPage = 0
         
