@@ -137,9 +137,7 @@ class DayAddViewController: UIViewController {
         titleTextField.leftViewMode = .always
         titleTextField.addLeftPadding()
         
-        dateSelectButton.setImage(UIImage(named: "calendar"), for: .normal)
         dateSelectButton.titleLabel?.frame = CGRect(x: 40, y: 455, width: 256, height: 20)
-        dateSelectButton.imageView?.frame = CGRect(x: 312, y: 453, width: 24, height: 24)
         
         [dDayButton, dayNumButton, dayRepeatButton, dateSelectPicker].forEach {
             $0?.isHidden = true
