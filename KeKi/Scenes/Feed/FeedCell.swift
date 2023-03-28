@@ -14,6 +14,7 @@ protocol FeedDelegate {
     func showStoreMain(storeIdx: Int)
     func showProductDetail(dessertIdx: Int)
     func showToastMessage(message: String)
+    func didTapTagButton(tag: String)
 }
 
 class FeedCell: UITableViewCell {
@@ -78,6 +79,16 @@ class FeedCell: UITableViewCell {
             feedDelegate.showProductDetail(dessertIdx: index)
         }
     }
+    
+    
+    @IBAction func didTapTagButton(_ sender: UIButton) {
+        if let title = sender.title(for: .normal) {
+            let tag = title.trimmingCharacters(in: ["#"," "])
+            print(tag)
+            feedDelegate.didTapTagButton(tag: tag)
+        }
+    }
+    
     private func setFeedLikeButton() {
         // TODO: SF가 아닌 디자인 상의 아이콘으로 setImage
         if heartButton.isSelected {
