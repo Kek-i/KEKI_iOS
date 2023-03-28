@@ -163,6 +163,9 @@ extension BuyerProfileSetViewController {
                     self?.editProfileRequest(param: editedUserInfo)
                     print(editedUserInfo)
                 }
+            } else {
+                let editedUserInfo = Signup(nickname: nickname, profileImg: "")
+                editProfileRequest(param: editedUserInfo)
             }
             
         } else { showAlert(message: "닉네임을 입력해주세요") }
