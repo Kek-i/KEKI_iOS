@@ -97,7 +97,10 @@ extension TabViewController: TabDelegate {
         
         
         APIManeger.shared.testGetData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, parameter: queryParam) { response in
-            storeImageCV.configure(feeds: response.result.feeds!, storeIdx: storeIdx, cursorIdx: response.result.cursorIdx!, hasNext: response.result.hasNext)
+//            storeImageCV.configure(feeds: response.result.feeds!, storeIdx: storeIdx, cursorIdx: response.result.cursorIdx!, hasNext: response.result.hasNext)
+            if let _ = response.result.cursorIdx {
+                storeImageCV.configure(feeds: response.result.feeds!, storeIdx: storeIdx, cursorIdx: response.result.cursorIdx!, hasNext: response.result.hasNext)
+            }
         }
         
         APIManeger.shared.testGetData(urlEndpointString: "/desserts", dataType: ProductResponse.self, parameter: queryParam) { response in
