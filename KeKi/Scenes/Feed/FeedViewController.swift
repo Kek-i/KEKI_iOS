@@ -217,4 +217,18 @@ extension FeedViewController: FeedDelegate {
         
     }
     
+    func didTapTagButton(tag: String) {
+        let storyboard = UIStoryboard.init(name: "Search", bundle: nil)
+        guard let searchResultViewController = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
+
+//        let tag = tagTitle.trimmingCharacters(in: ["#"," "])
+        searchResultViewController.search(searchText: nil,
+                                          hashTag: tag,
+                                          sortType: SortType.Recent.rawValue,
+                                          cursorIdx: nil,
+                                          cursorPopularNum: nil,
+                                          cursorPrice: nil)
+        searchResultViewController.setHashTag(text: tag)
+        self.navigationController?.pushViewController(searchResultViewController, animated: true)
+    }
 }

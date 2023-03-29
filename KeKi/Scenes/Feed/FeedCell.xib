@@ -91,6 +91,9 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="# 친구"/>
+                                <connections>
+                                    <action selector="didTapTagButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="SMz-DO-SfD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uP2-Kn-N8M">
                                 <rect key="frame" x="58" y="0.0" width="50" height="30"/>
@@ -102,6 +105,9 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="# 친구"/>
+                                <connections>
+                                    <action selector="didTapTagButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="U5d-Sh-fVH"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgC-EV-uGu">
                                 <rect key="frame" x="116" y="0.0" width="50" height="30"/>
@@ -113,6 +119,9 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="# 친구"/>
+                                <connections>
+                                    <action selector="didTapTagButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eVN-r4-qGg"/>
+                                </connections>
                             </button>
                         </subviews>
                     </stackView>
