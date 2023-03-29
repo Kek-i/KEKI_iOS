@@ -410,7 +410,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
             let tabBarHeight = self.tabBarController?.tabBar.frame.height
             return UIEdgeInsets(top: 0, left: 20, bottom: tabBarHeight!/2, right: 19)
         }else {
-            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
+            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
         }
     }
 }
