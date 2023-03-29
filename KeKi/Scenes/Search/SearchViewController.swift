@@ -367,11 +367,12 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
             guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
             feedViewController.postIdx = recentCakeList[indexPath.row].postIdx
+            feedViewController.navigationController.navigationBar.isHidden = false
             self.navigationController?.pushViewController(feedViewController, animated: true)
         }else {
             let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
             guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
-            feedViewController.feedData = searchResultList
+            feedViewController.postIdx = searchResultList[indexPath.row].postIdx
             feedViewController.navigationController.navigationBar.isHidden = false
             self.navigationController?.pushViewController(feedViewController, animated: true)
         }
