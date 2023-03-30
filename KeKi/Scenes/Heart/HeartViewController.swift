@@ -92,17 +92,24 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeartCell", for: indexPath) as! HeartDetailCell
 
-        if cell.isFirst() {
-            cell.productTitleLabel.text = feedList[indexPath.row].dessertName
-            cell.productPriceLabel.text = feedList[indexPath.row].dessertPrice.description
-            
-            if let imageUrl = URL(string: feedList[indexPath.row].postImgUrl) {
-                cell.productImageView.kf.setImage(with: imageUrl)
-            }
-            
-            cell.setHeartFeed(heartFeed: feedList[indexPath.row])
-            cell.setFirst(first: false)
+        cell.productTitleLabel.text = feedList[indexPath.row].dessertName
+        cell.productPriceLabel.text = feedList[indexPath.row].dessertPrice.description
+        
+        
+        let imgUrl = feedList[indexPath.row].postImgUrl
+        
+        if imgUrl.contains("https:") {
+            // https:...형태의 Url
+            cell.productImageView.kf.setImage(with: URL(string: imgUrl))
+        } else {
+            // 디렉토리 형태의 Url
+            let _ = FirebaseStorageManager.downloadImage(urlString: imgUrl, completion: { img in
+                cell.productImageView.image = img
+            })
         }
+        
+        cell.setHeartFeed(heartFeed: feedList[indexPath.row])
+        cell.setFirst(first: false)
         return cell
     }
     

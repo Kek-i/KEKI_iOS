@@ -100,11 +100,6 @@ extension StoreImageViewController: UICollectionViewDelegate, UICollectionViewDa
                 })
             }
         }
-
-        
-        
-        
-        
         return cell
     }
     
