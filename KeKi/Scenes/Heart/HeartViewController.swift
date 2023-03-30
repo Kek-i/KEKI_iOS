@@ -59,6 +59,11 @@ class HeartViewController: UIViewController {
     func setup() {
         heartCV.dataSource = self
         heartCV.delegate = self
+        heartCV.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+        
+//        if let flowLayout = heartCV?.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//      }
     }
     
     func setupNavigationBar() {
@@ -73,16 +78,8 @@ class HeartViewController: UIViewController {
         let titleItem = UIBarButtonItem(customView: title)
     
         self.navigationItem.leftBarButtonItem = titleItem
-        
-        let menuButton = UIBarButtonItem(image: UIImage(named: "option"), style: .done, target: self, action: #selector(openMenu))
-        menuButton.tintColor = .black
-        
-        self.navigationItem.rightBarButtonItem = menuButton
     }
-    
-    @objc func openMenu() {
-        
-    }
+
 
 }
 
@@ -188,3 +185,26 @@ extension HeartViewController {
     }
 }
 
+
+
+class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
+    let cellSpacing: CGFloat = 10
+ 
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        self.minimumLineSpacing = 10.0
+        self.sectionInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 15.0, right: 10.0)
+        let attributes = super.layoutAttributesForElements(in: rect)
+ 
+        var leftMargin = sectionInset.left
+        var maxY: CGFloat = -1.0
+        attributes?.forEach { layoutAttribute in
+            if layoutAttribute.frame.origin.y >= maxY {
+                leftMargin = sectionInset.left
+            }
+            layoutAttribute.frame.origin.x = leftMargin
+            leftMargin += layoutAttribute.frame.width + cellSpacing
+            maxY = max(layoutAttribute.frame.maxY, maxY)
+        }
+        return attributes
+    }
+}
