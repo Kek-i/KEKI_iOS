@@ -94,11 +94,11 @@ extension StoreImageViewController: UICollectionViewDelegate, UICollectionViewDa
         return cell
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.storeImageCV.contentOffset.y > storeImageCV.contentSize.height-storeImageCV.bounds.size.height && self.hasNext == true{
-            setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx)
-            isLoading = true
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView.tag == 4 {
+            self.loadMoreFeed(index: indexPath.item)
         }
+        
     }
 }
 
@@ -129,6 +129,14 @@ extension StoreImageViewController: UICollectionViewDelegateFlowLayout {
         if let vc = self.next(ofType: UIViewController.self) {
             vc.tabBarController?.tabBar.isHidden = true
             vc.navigationController?.pushViewController(feedViewController, animated: true)
+        }
+    }
+}
+
+extension StoreImageViewController {
+    func loadMoreFeed (index: Int) {
+        if index != 0 && index % 11 == 0 && self.hasNext == true{
+            setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx)
         }
     }
 }
