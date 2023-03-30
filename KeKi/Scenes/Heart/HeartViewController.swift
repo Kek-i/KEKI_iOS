@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 import JGProgressHUD
 
 class HeartViewController: UIViewController {
@@ -96,9 +97,7 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
             cell.productPriceLabel.text = feedList[indexPath.row].dessertPrice.description
             
             if let imageUrl = URL(string: feedList[indexPath.row].postImgUrl) {
-                if let imageData = try? Data(contentsOf: imageUrl) {
-                    cell.productImageView.image = imageResize(image: UIImage(data: imageData)!, newWidth: 105, newHeight: 105)
-                }
+                cell.productImageView.kf.setImage(with: imageUrl)
             }
             
             cell.setHeartFeed(heartFeed: feedList[indexPath.row])

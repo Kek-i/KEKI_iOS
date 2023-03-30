@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 import JGProgressHUD
 
 enum SortType: String {
@@ -321,35 +322,20 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }else if collectionView.tag == 3 {
             if let recentCakeCell = cell as? RecentCakeCell {
                 guard let imageUrl = URL(string: recentCakeList[indexPath.row].postImgURL) else {return cell}
-                guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
-                guard let image = UIImage(data: imageData) else {return cell}
-                 
-                recentCakeCell.recentCakeImageView.image = imageResize(image: image, newWidth: 100, newHeight: 100)
+       
+                recentCakeCell.recentCakeImageView.kf.setImage(with: imageUrl)
             }
         }else {
             if let searchDetailCell = cell as? SearchDetailCell {
                 guard let imageUrl = URL(string: searchResultList[indexPath.row].postImgUrls![0] ) else {return cell}
-                guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
                 
-                guard let image = UIImage(data: imageData) else {return cell}
-                 
-                searchDetailCell.productImageView.image = imageResize(image: image, newWidth: 105, newHeight: 105)
+                searchDetailCell.productImageView.kf.setImage(with: imageUrl)
                 searchDetailCell.productTitleLabel.text = searchResultList[indexPath.row].dessertName
                 searchDetailCell.productPriceLabel.text = searchResultList[indexPath.row].dessertPrice.description
             }
         }
         
         return cell
-    }
-    
-    func imageResize(image: UIImage, newWidth: CGFloat, newHeight: CGFloat) -> UIImage {
-        let size = CGSize(width: newWidth, height: newHeight)
-        let render = UIGraphicsImageRenderer(size: size)
-        let renderImage = render.image { context in
-            image.draw(in: CGRect(origin: .zero, size: size))
-        }
-        
-        return renderImage
     }
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
