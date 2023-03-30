@@ -16,9 +16,10 @@ class HeartViewController: UIViewController {
     
     var feedList: Array<HeartFeed> = []
     
-    var hasNext: Bool?
+    var hasNext: Bool? = false
     var cursorDate: String?
     var queryParam: Parameters = [:]
+    var isInfiniteScroll = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,17 +27,11 @@ class HeartViewController: UIViewController {
         if let _ = UserDefaults.standard.object(forKey: "userInfo") {
             setup()
             setupNavigationBar()
-            getHeart(cursorDate: nil)
+            getHeart(cursorDate: nil){}
         }
         else { showAlert() }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if let _ = UserDefaults.standard.object(forKey: "userInfo") {
-            getHeart(cursorDate: nil)
-        }
-    }
-    
+        
     func showAlert() {
         let alert = UIAlertController(title: nil, message: "회원가입 후 사용 가능한 서비스입니다", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "홈으로 이동", style: .default) { [weak self] _ in
@@ -60,11 +55,11 @@ class HeartViewController: UIViewController {
     func setup() {
         heartCV.dataSource = self
         heartCV.delegate = self
-        heartCV.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
-        
-        if let flowLayout = heartCV?.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-      }
+//        heartCV.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+//
+//        if let flowLayout = heartCV?.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//      }
     }
     
     func setupNavigationBar() {
@@ -137,28 +132,37 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
         return CGSize(width: 105, height: 152)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self.loadMoreHeart(index: indexPath.item)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 11
     }
     
-}
-
-extension HeartViewController {
-    func loadMoreHeart (index: Int) {
-        if index != 0 && index % 11 == 0 && self.hasNext == true{
-            getHeart(cursorDate: self.cursorDate)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 20, bottom: 25, right: 19)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
+            if isInfiniteScroll && self.hasNext ?? false {
+                isInfiniteScroll = false
+                getHeart(cursorDate: self.cursorDate) {
+                    self.isInfiniteScroll = true
+                }
+            }
         }
     }
+    
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {}
+    
 }
 
 
 extension HeartViewController {
-    func getHeart(cursorDate: String?) {        
+    func getHeart(cursorDate: String?, completion: @escaping () -> Void) {
         queryParam["cursorDate"] = cursorDate
-        fetchHeartList(queryParam: queryParam)
+        fetchHeartList(queryParam: queryParam, completion: completion)
     }
     
-    func fetchHeartList(queryParam: Parameters) {
+    func fetchHeartList(queryParam: Parameters, completion: @escaping () -> Void) {
         DispatchQueue.main.async {
             let hud = JGProgressHUD()
             hud.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
@@ -168,12 +172,15 @@ extension HeartViewController {
             
             APIManeger.shared.testGetData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, parameter: nil) { [weak self] response in
                 hud.dismiss(animated: true)
-                self?.feedList = response.result.feeds
+                response.result.feeds.forEach { feed in
+                    self?.feedList.append(feed)
+                }
                 
                 self?.hasNext = response.result.hasNext
                 self?.cursorDate = response.result.cursorDate
                 
                 self?.heartCV.reloadData()
+                completion()
             }
             
             hud.dismiss(animated: true)
@@ -184,24 +191,24 @@ extension HeartViewController {
 
 
 
-class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
-    let cellSpacing: CGFloat = 25
- 
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        self.minimumLineSpacing = 10.0
-        self.sectionInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 15.0, right: 0.0)
-        let attributes = super.layoutAttributesForElements(in: rect)
- 
-        var leftMargin = sectionInset.left
-        var maxY: CGFloat = -1.0
-        attributes?.forEach { layoutAttribute in
-            if layoutAttribute.frame.origin.y >= maxY {
-                leftMargin = sectionInset.left
-            }
-            layoutAttribute.frame.origin.x = leftMargin
-            leftMargin += layoutAttribute.frame.width + cellSpacing
-            maxY = max(layoutAttribute.frame.maxY, maxY)
-        }
-        return attributes
-    }
-}
+//class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
+//    let cellSpacing: CGFloat = 25
+//
+//    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+//        self.minimumLineSpacing = 10.0
+//        self.sectionInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0, right: 0.0)
+//        let attributes = super.layoutAttributesForElements(in: rect)
+//
+//        var leftMargin = sectionInset.left
+//        var maxY: CGFloat = -1.0
+//        attributes?.forEach { layoutAttribute in
+//            if layoutAttribute.frame.origin.y >= maxY {
+//                leftMargin = sectionInset.left
+//            }
+//            layoutAttribute.frame.origin.x = leftMargin
+//            leftMargin += layoutAttribute.frame.width + cellSpacing
+//            maxY = max(layoutAttribute.frame.maxY, maxY)
+//        }
+//        return attributes
+//    }
+//}

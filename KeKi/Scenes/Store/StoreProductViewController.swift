@@ -21,6 +21,7 @@ class StoreProductViewController: UIViewController {
     
     var cursorIdx: Int?
     var hasNext: Bool?
+    var isInfiniteScroll = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,11 +96,15 @@ extension StoreProductViewController: UICollectionViewDelegate, UICollectionView
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if collectionView.tag == 4 {
-            self.loadMoreProduct(index: indexPath.item)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
+            if isInfiniteScroll && self.hasNext ?? false {
+                isInfiniteScroll = false
+                setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx) {
+                    self.isInfiniteScroll = true
+                }
+            }
         }
-        
     }
 }
 
@@ -132,29 +137,20 @@ extension StoreProductViewController: UICollectionViewDelegateFlowLayout {
         productViewController.modalPresentationStyle = .fullScreen
         
         self.navigationController?.pushViewController(productViewController, animated: true)
-       
-    }
-}
-
-extension StoreProductViewController {
-    func loadMoreProduct (index: Int) {
-        if index != 0 && index % 11 == 0 && self.hasNext == true{
-            setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx)
-        }
     }
 }
 
 
 extension StoreProductViewController {
-    func setQueryParam(storeIdx: Int?, cursorIdx: Int?) {
+    func setQueryParam(storeIdx: Int?, cursorIdx: Int?, completion: @escaping () -> Void) {
         queryParam["storeIdx"] = storeIdx
         queryParam["cursorIdx"] = cursorIdx
         
-        getProductList(queryParam: queryParam)
+        getProductList(queryParam: queryParam, completion: completion)
     }
     
     
-    func getProductList(queryParam: Parameters) {
+    func getProductList(queryParam: Parameters, completion: @escaping () -> Void) {
         APIManeger.shared.testGetData(urlEndpointString: "/desserts", dataType: ProductResponse.self, parameter: queryParam) { [weak self] response in
             
             self?.hasNext = response.result?.hasNext
@@ -165,6 +161,7 @@ extension StoreProductViewController {
             })
             
             self?.storeProductCV.reloadData()
+            completion()
         }
     }
 }

@@ -22,6 +22,7 @@ class StoreImageViewController: UIViewController {
     var cursorPrice: Int?
     var cursorPopularNum: Int?
     var hasNext: Bool?
+    var isInfiniteScroll = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,11 +103,15 @@ extension StoreImageViewController: UICollectionViewDelegate, UICollectionViewDa
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if collectionView.tag == 4 {
-            self.loadMoreFeed(index: indexPath.item)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
+            if isInfiniteScroll && self.hasNext ?? false {
+                isInfiniteScroll = false
+                setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx) {
+                    self.isInfiniteScroll = true
+                }
+            }
         }
-        
     }
 }
 
@@ -141,25 +146,17 @@ extension StoreImageViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension StoreImageViewController {
-    func loadMoreFeed (index: Int) {
-        if index != 0 && index % 11 == 0 && self.hasNext == true{
-            setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx)
-        }
-    }
-}
-
 
 extension StoreImageViewController {
-    func setQueryParam(storeIdx: Int?, cursorIdx: Int?) {
+    func setQueryParam(storeIdx: Int?, cursorIdx: Int?, completion: @escaping () -> Void) {
         queryParam["storeIdx"] = storeIdx
         queryParam["cursorIdx"] = cursorIdx
         
-        getFeedList(queryParam: queryParam)
+        getFeedList(queryParam: queryParam, completion: completion)
     }
     
     
-    func getFeedList(queryParam: Parameters) {
+    func getFeedList(queryParam: Parameters, completion: @escaping () -> Void) {
         APIManeger.shared.testGetData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, parameter: queryParam) { [weak self] response in
             
             self?.hasNext = response.result.hasNext
@@ -170,6 +167,7 @@ extension StoreImageViewController {
             })
             
             self?.storeImageCV.reloadData()
+            completion()
         }
     }
 }

@@ -85,6 +85,7 @@ class SearchViewController: UIViewController {
     var cursorPrice: Int?
     var cursorPopularNum: Int?
     var hasNext: Bool?
+    var isInfiniteScroll: Bool = true
     
     var popularColorList: Array<CGColor> = [CGColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
                                             CGColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
@@ -258,7 +259,8 @@ class SearchViewController: UIViewController {
         
         searchResultList.removeAll()
         
-        search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
+        search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil) {
+        }
 
         setHideButtonTitle()
     }
@@ -272,7 +274,8 @@ extension SearchViewController: UITextFieldDelegate {
         hashTag = nil
         searchResultList.removeAll()
         searchText = textField.text
-        search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
+        search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil){
+        }
         
         return true
     }
@@ -351,32 +354,37 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             searchText = recentTextList[indexPath.row].searchWord
             searchTextField.text = searchText
             hashTag = nil
-            search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
+            search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil){}
         }else if collectionView.tag == 2 {
             searchText = popularTextList[indexPath.row].searchWord
             searchTextField.text = searchText
             hashTag = nil
-            search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
+            search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil){}
         }else if collectionView.tag == 3 {
             let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
             guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
             feedViewController.postIdx = recentCakeList[indexPath.row].postIdx
-            feedViewController.navigationController?.navigationBar.isHidden = false
+            self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(feedViewController, animated: true)
         }else {
             let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
             guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
             feedViewController.postIdx = searchResultList[indexPath.row].postIdx
+            self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(feedViewController, animated: true)
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if collectionView.tag == 4 {
-            self.loadMoreSearch(index: indexPath.item)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
+                if isInfiniteScroll && self.hasNext ?? false {
+                    isInfiniteScroll = false
+                    search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: cursorIdx, cursorPopularNum: cursorPopularNum, cursorPrice: cursorPrice) {
+                        self.isInfiniteScroll = true
+                    }
+                }
+            }
         }
-        
-    }
     
     
 }
@@ -398,7 +406,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         }else if collectionView.tag == 2 {
             let tmpLabel = UILabel()
             tmpLabel.text = "# " + popularTextList[indexPath.row].searchWord
-            return CGSize(width: tmpLabel.intrinsicContentSize.width+20, height: 26)
+            return CGSize(width: tmpLabel.intrinsicContentSize.width+25, height: 26)
         }else if collectionView.tag == 3{
             return CGSize(width: 100, height: 100)
         }else {
@@ -408,22 +416,13 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView.tag == 4{
-            let tabBarHeight = self.tabBarController?.tabBar.frame.height
-            return UIEdgeInsets(top: 0, left: 20, bottom: tabBarHeight!/2, right: 19)
+            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 19)
         }else {
             return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
         }
     }
 }
 
-
-extension SearchViewController {
-    func loadMoreSearch (index: Int) {
-        if index != 0 && index % 11 == 0 && self.hasNext == true{
-            search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: cursorIdx, cursorPopularNum: cursorPopularNum, cursorPrice: cursorPrice)
-        }
-    }
-}
 
 // 서버 통신 api
 extension SearchViewController {
@@ -462,7 +461,7 @@ extension SearchViewController {
     }
     
     // MARK: 검색 파라미터 만든 후 검색
-    func search(searchText: String?, hashTag: String?, sortType: String, cursorIdx: Int?, cursorPopularNum: Int?, cursorPrice: Int?) {
+    func search(searchText: String?, hashTag: String?, sortType: String, cursorIdx: Int?, cursorPopularNum: Int?, cursorPrice: Int?, compeltion: @escaping ()-> Void) {
 
         queryParam["searchWord"] = searchText
         queryParam["searchTag"] = hashTag
@@ -472,11 +471,12 @@ extension SearchViewController {
         queryParam["cursorPrice"] = cursorPrice
         
         
-        fetchSearchResult(queryParam: queryParam)
+        fetchSearchResult(queryParam: queryParam, compeltion: compeltion)
     }
     
+    
     // MARK: 검색 - GET
-    func fetchSearchResult(queryParam: Parameters) {
+    func fetchSearchResult(queryParam: Parameters, compeltion: @escaping ()-> Void) {
 
         DispatchQueue.main.async {
             // Loading Animation Setting
@@ -505,6 +505,7 @@ extension SearchViewController {
                         self?.cursorPrice = response.result.cursorPrice
                     }
                     self?.showResultView()
+                    compeltion()
                 }else {
                     self?.showNoResultView()
                 }

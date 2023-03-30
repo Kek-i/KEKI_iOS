@@ -165,7 +165,7 @@ extension HomeViewController: TagDetailDelegate {
                                           sortType: SortType.Recent.rawValue,
                                           cursorIdx: nil,
                                           cursorPopularNum: nil,
-                                          cursorPrice: nil)
+                                          cursorPrice: nil){}
         searchResultViewController.setHashTag(text: tag)
         self.navigationController?.pushViewController(searchResultViewController, animated: true)
     }
