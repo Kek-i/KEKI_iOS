@@ -108,11 +108,16 @@ class StoreViewController: UIViewController {
     
     private func configureProfile() {
         storeNameLabel.text = storeInfo?.nickname
-        if let url = storeInfo?.storeImgUrl {
-            storeImageView.kf.setImage(with: URL(string: url))
-            storeImageView.backgroundColor = .clear
-            storeImageView.layer.borderColor = UIColor.lightGray.cgColor
-            storeImageView.layer.borderWidth = 0.5
+        if let imgUrl = storeInfo?.storeImgUrl {
+            if imgUrl.contains("https:") {
+                // https:...형태의 Url
+                storeImageView.kf.setImage(with: URL(string: imgUrl))
+            } else {
+                // 디렉토리 형태의 Url
+                let _ = FirebaseStorageManager.downloadImage(urlString: imgUrl, completion: { [weak self] img in
+                    self?.storeImageView.image = img
+                })
+            }
         }
         storeDescriptionLabel.text = storeInfo?.introduction
     }

@@ -89,8 +89,22 @@ extension StoreImageViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreImageCell", for: indexPath) as? StoreImageCell else { return UICollectionViewCell() }
         
-        let url = (feeds[indexPath.row].postImgUrls?[0])!
-        cell.storeImageView.kf.setImage(with: URL(string: url))
+        if let imgUrl = feeds[indexPath.row].postImgUrls?[0] {
+            if imgUrl.contains("https:") {
+                // https:...형태의 Url
+                cell.storeImageView.kf.setImage(with: URL(string: imgUrl))
+            } else {
+                // 디렉토리 형태의 Url
+                let _ = FirebaseStorageManager.downloadImage(urlString: imgUrl, completion: { img in
+                    cell.storeImageView.image = img
+                })
+            }
+        }
+
+        
+        
+        
+        
         return cell
     }
     

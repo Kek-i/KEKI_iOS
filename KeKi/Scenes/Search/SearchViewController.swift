@@ -326,9 +326,18 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
         }else {
             if let searchDetailCell = cell as? SearchDetailCell {
-                guard let imageUrl = URL(string: searchResultList[indexPath.row].postImgUrls![0] ) else {return cell}
+                if let imgUrl = searchResultList[indexPath.row].postImgUrls?[0]{
+                    if imgUrl.contains("https:") {
+                        // https:...형태의 Url
+                        searchDetailCell.productImageView.kf.setImage(with: URL(string:imgUrl))
+                    } else {
+                        // 디렉토리 형태의 Url
+                        let _ = FirebaseStorageManager.downloadImage(urlString: imgUrl, completion: {  img in
+                            searchDetailCell.productImageView.image = img
+                        })
+                    }
+                }
                 
-                searchDetailCell.productImageView.kf.setImage(with: imageUrl)
                 searchDetailCell.productTitleLabel.text = searchResultList[indexPath.row].dessertName
                 searchDetailCell.productPriceLabel.text = searchResultList[indexPath.row].dessertPrice.description
             }
