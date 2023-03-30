@@ -358,7 +358,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
             guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
             feedViewController.postIdx = searchResultList[indexPath.row].postIdx
-            feedViewController.navigationController?.navigationBar.isHidden = false
             self.navigationController?.pushViewController(feedViewController, animated: true)
         }
     }
@@ -411,7 +410,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 extension SearchViewController {
     func loadMoreSearch (index: Int) {
-        if index > searchResultList.count - 9 && self.hasNext == true{
+        if index != 0 && index % 11 == 0 && self.hasNext == true{
             search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: cursorIdx, cursorPopularNum: cursorPopularNum, cursorPrice: cursorPrice)
         }
     }

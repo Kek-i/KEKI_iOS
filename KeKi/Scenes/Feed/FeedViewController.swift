@@ -26,11 +26,6 @@ class FeedViewController: UIViewController {
         setupTableView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = false
-    }
-    
     // MARK: - Action Methods (IBAction, ...)
 
     
@@ -51,11 +46,12 @@ class FeedViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationController?.isNavigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.isHidden = false
         
-        navigationController?.navigationBar.tintColor = .black
-        navigationItem.title = "피드"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(didTapBackItem))
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.title = "피드"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(didTapBackItem))
     }
     
     private func setupTableView() {
