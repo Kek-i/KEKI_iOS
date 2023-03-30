@@ -119,8 +119,16 @@ class FeedCell: UITableViewCell {
         // set store profile
         nicknameButton.setTitle(data.storeName, for: .normal)
         
-        if let img = data.storeProfileImg {
-            profileImgView.kf.setImage(with: URL(string: img))
+        if let imgUrl = data.storeProfileImg {
+            if imgUrl.contains("https:") {
+                // https:...형태의 Url
+                profileImgView.kf.setImage(with: URL(string: imgUrl))
+            } else {
+                // 디렉토리 형태의 Url
+                let _ = FirebaseStorageManager.downloadImage(urlString: imgUrl, completion: { [weak self] img in
+                    self?.profileImgView.image = img
+                })
+            }
         }
         profileImgView.layer.cornerRadius = profileImgView.frame.width / 2
         

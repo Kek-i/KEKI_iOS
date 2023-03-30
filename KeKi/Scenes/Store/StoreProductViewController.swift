@@ -21,7 +21,7 @@ class StoreProductViewController: UIViewController {
     
     var cursorIdx: Int?
     var hasNext: Bool?
-    var isLoading = false
+    var isInfiniteScroll = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,16 +80,30 @@ extension StoreProductViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreImageCell", for: indexPath) as? StoreImageCell else { return UICollectionViewCell() }
+    
+        let imgUrl = desserts[indexPath.row].dessertImgUrl
         
-        let url = desserts[indexPath.row].dessertImgUrl
-        cell.storeImageView.kf.setImage(with: URL(string: url))
+        if imgUrl.contains("https:") {
+            // https:...형태의 Url
+            cell.storeImageView.kf.setImage(with: URL(string: imgUrl))
+        } else {
+            // 디렉토리 형태의 Url
+            let _ = FirebaseStorageManager.downloadImage(urlString: imgUrl, completion: { img in
+                cell.storeImageView.image = img
+            })
+        }
+        
         return cell
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if storeProductCV.contentOffset.y > storeProductCV.contentSize.height-storeProductCV.bounds.size.height && self.hasNext == true{
-            setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx)
-            isLoading = true
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
+            if isInfiniteScroll && self.hasNext ?? false {
+                isInfiniteScroll = false
+                setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx) {
+                    self.isInfiniteScroll = true
+                }
+            }
         }
     }
 }
@@ -123,24 +137,20 @@ extension StoreProductViewController: UICollectionViewDelegateFlowLayout {
         productViewController.modalPresentationStyle = .fullScreen
         
         self.navigationController?.pushViewController(productViewController, animated: true)
-       
     }
 }
 
+
 extension StoreProductViewController {
-    func setQueryParam(storeIdx: Int?, cursorIdx: Int?) {
-        if isLoading == true {
-            return
-        }
-        
+    func setQueryParam(storeIdx: Int?, cursorIdx: Int?, completion: @escaping () -> Void) {
         queryParam["storeIdx"] = storeIdx
         queryParam["cursorIdx"] = cursorIdx
         
-        getProductList(queryParam: queryParam)
+        getProductList(queryParam: queryParam, completion: completion)
     }
     
     
-    func getProductList(queryParam: Parameters) {
+    func getProductList(queryParam: Parameters, completion: @escaping () -> Void) {
         APIManeger.shared.testGetData(urlEndpointString: "/desserts", dataType: ProductResponse.self, parameter: queryParam) { [weak self] response in
             
             self?.hasNext = response.result?.hasNext
@@ -151,8 +161,7 @@ extension StoreProductViewController {
             })
             
             self?.storeProductCV.reloadData()
-            
-            self?.isLoading = false
+            completion()
         }
     }
 }

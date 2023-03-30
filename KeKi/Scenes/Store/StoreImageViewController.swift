@@ -22,7 +22,7 @@ class StoreImageViewController: UIViewController {
     var cursorPrice: Int?
     var cursorPopularNum: Int?
     var hasNext: Bool?
-    var isLoading = false
+    var isInfiniteScroll = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,15 +89,28 @@ extension StoreImageViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreImageCell", for: indexPath) as? StoreImageCell else { return UICollectionViewCell() }
         
-        let url = (feeds[indexPath.row].postImgUrls?[0])!
-        cell.storeImageView.kf.setImage(with: URL(string: url))
+        if let imgUrl = feeds[indexPath.row].postImgUrls?[0] {
+            if imgUrl.contains("https:") {
+                // https:...형태의 Url
+                cell.storeImageView.kf.setImage(with: URL(string: imgUrl))
+            } else {
+                // 디렉토리 형태의 Url
+                let _ = FirebaseStorageManager.downloadImage(urlString: imgUrl, completion: { img in
+                    cell.storeImageView.image = img
+                })
+            }
+        }
         return cell
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.storeImageCV.contentOffset.y > storeImageCV.contentSize.height-storeImageCV.bounds.size.height && self.hasNext == true{
-            setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx)
-            isLoading = true
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
+            if isInfiniteScroll && self.hasNext ?? false {
+                isInfiniteScroll = false
+                setQueryParam(storeIdx: self.storeIdx, cursorIdx: self.cursorIdx) {
+                    self.isInfiniteScroll = true
+                }
+            }
         }
     }
 }
@@ -135,19 +148,15 @@ extension StoreImageViewController: UICollectionViewDelegateFlowLayout {
 
 
 extension StoreImageViewController {
-    func setQueryParam(storeIdx: Int?, cursorIdx: Int?) {
-        if isLoading == true {
-            return
-        }
-        
+    func setQueryParam(storeIdx: Int?, cursorIdx: Int?, completion: @escaping () -> Void) {
         queryParam["storeIdx"] = storeIdx
         queryParam["cursorIdx"] = cursorIdx
         
-        getFeedList(queryParam: queryParam)
+        getFeedList(queryParam: queryParam, completion: completion)
     }
     
     
-    func getFeedList(queryParam: Parameters) {
+    func getFeedList(queryParam: Parameters, completion: @escaping () -> Void) {
         APIManeger.shared.testGetData(urlEndpointString: "/posts", dataType: SearchResultResponse.self, parameter: queryParam) { [weak self] response in
             
             self?.hasNext = response.result.hasNext
@@ -158,8 +167,7 @@ extension StoreImageViewController {
             })
             
             self?.storeImageCV.reloadData()
-
-            self?.isLoading = false
+            completion()
         }
     }
 }

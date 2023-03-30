@@ -95,8 +95,6 @@ extension HomeTableViewCell: UICollectionViewDelegateFlowLayout {
             vc.navigationController?.navigationBar.isHidden = false
             vc.navigationController?.isNavigationBarHidden = false
             vc.navigationController?.pushViewController(feedViewController, animated: true)
-
-
         }
 
     }

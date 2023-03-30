@@ -187,15 +187,37 @@ class DayAddViewController: UIViewController {
     }
     
     @objc func addDay() {
+        if dayType != .numDay {
+            if date! > Date() {
+                showAlert(title: "날짜 오류", message: "미래 날짜가 아닌 과거 날짜를 선택해주세요")
+                return
+            }
+        }else {
+            if date! < Date() {
+                showAlert(title: "날짜 오류", message: "과거 날짜가 아닌 미래 날짜를 선택해주세요")
+                return
+            }
+        }
+        
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
         let dateText = dateFormat.string(from: date ?? Date())
         var hashTags: [HashTagList] = []
+        
+        
         hashTagList.forEach {
             if $0.1 == true {
                 hashTags.append(HashTagList(calendarHashTag: $0.0))
             }
         }
+        
+        if hashTags.count == 0 {
+            showAlert(title: "태그 오류", message: "태그는 1개 이상 선택해주세요.")
+            return
+        }
+        
+        
+        
         let calendarRequest = CalendarRequest(kindOfCalendar: dayType.rawValue, title: titleTextField.text ?? "", date: dateText, hashTags: hashTags)
         
         if titleTextField.text == nil || titleTextField.text == "" {
@@ -271,6 +293,12 @@ class DayAddViewController: UIViewController {
         dayTypeSelectButton.setTitle(dayType.rawValue, for: .normal)
     }
     
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
+    }
     
     
     

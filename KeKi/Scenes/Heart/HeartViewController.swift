@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 import JGProgressHUD
 
 class HeartViewController: UIViewController {
@@ -15,11 +16,10 @@ class HeartViewController: UIViewController {
     
     var feedList: Array<HeartFeed> = []
     
-    var hasNext: Bool?
+    var hasNext: Bool? = false
     var cursorDate: String?
     var queryParam: Parameters = [:]
-    
-    var isLoading = false
+    var isInfiniteScroll = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,15 +27,11 @@ class HeartViewController: UIViewController {
         if let _ = UserDefaults.standard.object(forKey: "userInfo") {
             setup()
             setupNavigationBar()
-            getHeart(cursorDate: nil)
+            getHeart(cursorDate: nil){}
         }
         else { showAlert() }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        getHeart(cursorDate: nil)
-    }
-    
+        
     func showAlert() {
         let alert = UIAlertController(title: nil, message: "회원가입 후 사용 가능한 서비스입니다", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "홈으로 이동", style: .default) { [weak self] _ in
@@ -59,6 +55,11 @@ class HeartViewController: UIViewController {
     func setup() {
         heartCV.dataSource = self
         heartCV.delegate = self
+//        heartCV.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+//
+//        if let flowLayout = heartCV?.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//      }
     }
     
     func setupNavigationBar() {
@@ -73,16 +74,8 @@ class HeartViewController: UIViewController {
         let titleItem = UIBarButtonItem(customView: title)
     
         self.navigationItem.leftBarButtonItem = titleItem
-        
-        let menuButton = UIBarButtonItem(image: UIImage(named: "option"), style: .done, target: self, action: #selector(openMenu))
-        menuButton.tintColor = .black
-        
-        self.navigationItem.rightBarButtonItem = menuButton
     }
-    
-    @objc func openMenu() {
-        
-    }
+
 
 }
 
@@ -94,19 +87,24 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeartCell", for: indexPath) as! HeartDetailCell
 
-        if cell.isFirst() {
-            cell.productTitleLabel.text = feedList[indexPath.row].dessertName
-            cell.productPriceLabel.text = feedList[indexPath.row].dessertPrice.description
-            
-            if let imageUrl = URL(string: feedList[indexPath.row].postImgUrl) {
-                if let imageData = try? Data(contentsOf: imageUrl) {
-                    cell.productImageView.image = imageResize(image: UIImage(data: imageData)!, newWidth: 105, newHeight: 105)
-                }
-            }
-            
-            cell.setHeartFeed(heartFeed: feedList[indexPath.row])
-            cell.setFirst(first: false)
+        cell.productTitleLabel.text = feedList[indexPath.row].dessertName
+        cell.productPriceLabel.text = feedList[indexPath.row].dessertPrice.description
+        
+        
+        let imgUrl = feedList[indexPath.row].postImgUrl
+        
+        if imgUrl.contains("https:") {
+            // https:...형태의 Url
+            cell.productImageView.kf.setImage(with: URL(string: imgUrl))
+        } else {
+            // 디렉토리 형태의 Url
+            let _ = FirebaseStorageManager.downloadImage(urlString: imgUrl, completion: { img in
+                cell.productImageView.image = img
+            })
         }
+        
+        cell.setHeartFeed(heartFeed: feedList[indexPath.row])
+        cell.setFirst(first: false)
         return cell
     }
     
@@ -129,42 +127,42 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
         self.navigationController?.pushViewController(feedViewController, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 11
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 105, height: 152)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 11
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let tabBarHeight = self.tabBarController?.tabBar.frame.height
-        return UIEdgeInsets(top: 0, left: 20, bottom: tabBarHeight!/2, right: 19)
+        return UIEdgeInsets(top: 0, left: 20, bottom: 25, right: 19)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if heartCV.contentOffset.y > heartCV.contentSize.height-heartCV.bounds.size.height && self.hasNext == true{
-            getHeart(cursorDate: self.cursorDate)
-            isLoading = true
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
+            if isInfiniteScroll && self.hasNext ?? false {
+                isInfiniteScroll = false
+                getHeart(cursorDate: self.cursorDate) {
+                    self.isInfiniteScroll = true
+                }
+            }
         }
     }
     
-    
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {}
     
 }
 
 
 extension HeartViewController {
-    func getHeart(cursorDate: String?) {
-        if isLoading == true {
-            return
-        }
-        
+    func getHeart(cursorDate: String?, completion: @escaping () -> Void) {
         queryParam["cursorDate"] = cursorDate
-        fetchHeartList(queryParam: queryParam)
+        fetchHeartList(queryParam: queryParam, completion: completion)
     }
     
-    func fetchHeartList(queryParam: Parameters) {
+    func fetchHeartList(queryParam: Parameters, completion: @escaping () -> Void) {
         DispatchQueue.main.async {
             let hud = JGProgressHUD()
             hud.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
@@ -174,12 +172,15 @@ extension HeartViewController {
             
             APIManeger.shared.testGetData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, parameter: nil) { [weak self] response in
                 hud.dismiss(animated: true)
-                self?.feedList = response.result.feeds
+                response.result.feeds.forEach { feed in
+                    self?.feedList.append(feed)
+                }
                 
                 self?.hasNext = response.result.hasNext
                 self?.cursorDate = response.result.cursorDate
                 
                 self?.heartCV.reloadData()
+                completion()
             }
             
             hud.dismiss(animated: true)
@@ -188,3 +189,26 @@ extension HeartViewController {
     }
 }
 
+
+
+//class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
+//    let cellSpacing: CGFloat = 25
+//
+//    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+//        self.minimumLineSpacing = 10.0
+//        self.sectionInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0, right: 0.0)
+//        let attributes = super.layoutAttributesForElements(in: rect)
+//
+//        var leftMargin = sectionInset.left
+//        var maxY: CGFloat = -1.0
+//        attributes?.forEach { layoutAttribute in
+//            if layoutAttribute.frame.origin.y >= maxY {
+//                leftMargin = sectionInset.left
+//            }
+//            layoutAttribute.frame.origin.x = leftMargin
+//            leftMargin += layoutAttribute.frame.width + cellSpacing
+//            maxY = max(layoutAttribute.frame.maxY, maxY)
+//        }
+//        return attributes
+//    }
+//}

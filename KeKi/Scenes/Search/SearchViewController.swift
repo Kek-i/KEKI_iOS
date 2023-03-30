@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 import JGProgressHUD
 
 enum SortType: String {
@@ -73,7 +74,6 @@ class SearchViewController: UIViewController {
     private var sortType:SortType = .Recent
     
     private var sortOpen = false
-    private var isLoading = false
     
     var recentTextList: Array<Search> = []
     var popularTextList: Array<Search> = []
@@ -85,6 +85,7 @@ class SearchViewController: UIViewController {
     var cursorPrice: Int?
     var cursorPopularNum: Int?
     var hasNext: Bool?
+    var isInfiniteScroll: Bool = true
     
     var popularColorList: Array<CGColor> = [CGColor(red: 252.0 / 255.0, green: 244.0 / 255.0, blue: 223.0 / 255.0, alpha: 1),
                                             CGColor(red: 250.0 / 255.0, green: 236.0 / 255.0, blue: 236.0 / 255.0, alpha: 1),
@@ -258,7 +259,8 @@ class SearchViewController: UIViewController {
         
         searchResultList.removeAll()
         
-        search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
+        search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil) {
+        }
 
         setHideButtonTitle()
     }
@@ -272,7 +274,8 @@ extension SearchViewController: UITextFieldDelegate {
         hashTag = nil
         searchResultList.removeAll()
         searchText = textField.text
-        search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
+        search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil){
+        }
         
         return true
     }
@@ -321,19 +324,23 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }else if collectionView.tag == 3 {
             if let recentCakeCell = cell as? RecentCakeCell {
                 guard let imageUrl = URL(string: recentCakeList[indexPath.row].postImgURL) else {return cell}
-                guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
-                guard let image = UIImage(data: imageData) else {return cell}
-                 
-                recentCakeCell.recentCakeImageView.image = imageResize(image: image, newWidth: 100, newHeight: 100)
+       
+                recentCakeCell.recentCakeImageView.kf.setImage(with: imageUrl)
             }
         }else {
             if let searchDetailCell = cell as? SearchDetailCell {
-                guard let imageUrl = URL(string: searchResultList[indexPath.row].postImgUrls![0] ) else {return cell}
-                guard let imageData = try? Data(contentsOf: imageUrl) else {return cell}
+                if let imgUrl = searchResultList[indexPath.row].postImgUrls?[0]{
+                    if imgUrl.contains("https:") {
+                        // https:...형태의 Url
+                        searchDetailCell.productImageView.kf.setImage(with: URL(string:imgUrl))
+                    } else {
+                        // 디렉토리 형태의 Url
+                        let _ = FirebaseStorageManager.downloadImage(urlString: imgUrl, completion: {  img in
+                            searchDetailCell.productImageView.image = img
+                        })
+                    }
+                }
                 
-                guard let image = UIImage(data: imageData) else {return cell}
-                 
-                searchDetailCell.productImageView.image = imageResize(image: image, newWidth: 105, newHeight: 105)
                 searchDetailCell.productTitleLabel.text = searchResultList[indexPath.row].dessertName
                 searchDetailCell.productPriceLabel.text = searchResultList[indexPath.row].dessertPrice.description
             }
@@ -341,40 +348,43 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         return cell
     }
-    
-    func imageResize(image: UIImage, newWidth: CGFloat, newHeight: CGFloat) -> UIImage {
-        let size = CGSize(width: newWidth, height: newHeight)
-        let render = UIGraphicsImageRenderer(size: size)
-        let renderImage = render.image { context in
-            image.draw(in: CGRect(origin: .zero, size: size))
-        }
-        
-        return renderImage
-    }
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 1 {
             searchText = recentTextList[indexPath.row].searchWord
             searchTextField.text = searchText
             hashTag = nil
-            search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
+            search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil){}
         }else if collectionView.tag == 2 {
             searchText = popularTextList[indexPath.row].searchWord
             searchTextField.text = searchText
             hashTag = nil
-            search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil)
+            search(searchText: searchText, hashTag: nil, sortType: sortType.getRequestType(), cursorIdx: nil, cursorPopularNum: nil, cursorPrice: nil){}
         }else if collectionView.tag == 3 {
             let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
             guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
             feedViewController.postIdx = recentCakeList[indexPath.row].postIdx
+            self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(feedViewController, animated: true)
         }else {
             let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
             guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
-            feedViewController.feedData = searchResultList
+            feedViewController.postIdx = searchResultList[indexPath.row].postIdx
+            self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(feedViewController, animated: true)
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
+                if isInfiniteScroll && self.hasNext ?? false {
+                    isInfiniteScroll = false
+                    search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: cursorIdx, cursorPopularNum: cursorPopularNum, cursorPrice: cursorPrice) {
+                        self.isInfiniteScroll = true
+                    }
+                }
+            }
+        }
     
     
 }
@@ -396,7 +406,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         }else if collectionView.tag == 2 {
             let tmpLabel = UILabel()
             tmpLabel.text = "# " + popularTextList[indexPath.row].searchWord
-            return CGSize(width: tmpLabel.intrinsicContentSize.width+20, height: 26)
+            return CGSize(width: tmpLabel.intrinsicContentSize.width+25, height: 26)
         }else if collectionView.tag == 3{
             return CGSize(width: 100, height: 100)
         }else {
@@ -406,23 +416,13 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView.tag == 4{
-            let tabBarHeight = self.tabBarController?.tabBar.frame.height
-            return UIEdgeInsets(top: 0, left: 20, bottom: tabBarHeight!/2, right: 19)
+            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 19)
         }else {
-            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
+            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
         }
     }
 }
 
-
-extension SearchViewController {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.searchResultCV.contentOffset.y > searchResultCV.contentSize.height-searchResultCV.bounds.size.height && self.hasNext == true{
-            search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: cursorIdx, cursorPopularNum: cursorPopularNum, cursorPrice: cursorPrice)
-            isLoading = true
-        }
-    }
-}
 
 // 서버 통신 api
 extension SearchViewController {
@@ -461,11 +461,8 @@ extension SearchViewController {
     }
     
     // MARK: 검색 파라미터 만든 후 검색
-    func search(searchText: String?, hashTag: String?, sortType: String, cursorIdx: Int?, cursorPopularNum: Int?, cursorPrice: Int?) {
-        if isLoading == true {
-            return
-        }
-        
+    func search(searchText: String?, hashTag: String?, sortType: String, cursorIdx: Int?, cursorPopularNum: Int?, cursorPrice: Int?, compeltion: @escaping ()-> Void) {
+
         queryParam["searchWord"] = searchText
         queryParam["searchTag"] = hashTag
         queryParam["sortType"] = sortType
@@ -474,11 +471,12 @@ extension SearchViewController {
         queryParam["cursorPrice"] = cursorPrice
         
         
-        fetchSearchResult(queryParam: queryParam)
+        fetchSearchResult(queryParam: queryParam, compeltion: compeltion)
     }
     
+    
     // MARK: 검색 - GET
-    func fetchSearchResult(queryParam: Parameters) {
+    func fetchSearchResult(queryParam: Parameters, compeltion: @escaping ()-> Void) {
 
         DispatchQueue.main.async {
             // Loading Animation Setting
@@ -507,11 +505,11 @@ extension SearchViewController {
                         self?.cursorPrice = response.result.cursorPrice
                     }
                     self?.showResultView()
+                    compeltion()
                 }else {
                     self?.showNoResultView()
                 }
 
-                self?.isLoading = false
             })
         }
         
