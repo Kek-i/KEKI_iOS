@@ -22,7 +22,6 @@ class StoreImageViewController: UIViewController {
     var cursorPrice: Int?
     var cursorPopularNum: Int?
     var hasNext: Bool?
-    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,10 +152,6 @@ extension StoreImageViewController {
 
 extension StoreImageViewController {
     func setQueryParam(storeIdx: Int?, cursorIdx: Int?) {
-        if isLoading == true {
-            return
-        }
-        
         queryParam["storeIdx"] = storeIdx
         queryParam["cursorIdx"] = cursorIdx
         
@@ -175,8 +170,6 @@ extension StoreImageViewController {
             })
             
             self?.storeImageCV.reloadData()
-
-            self?.isLoading = false
         }
     }
 }

@@ -21,7 +21,6 @@ class StoreProductViewController: UIViewController {
     
     var cursorIdx: Int?
     var hasNext: Bool?
-    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,10 +147,6 @@ extension StoreProductViewController {
 
 extension StoreProductViewController {
     func setQueryParam(storeIdx: Int?, cursorIdx: Int?) {
-        if isLoading == true {
-            return
-        }
-        
         queryParam["storeIdx"] = storeIdx
         queryParam["cursorIdx"] = cursorIdx
         
@@ -170,8 +165,6 @@ extension StoreProductViewController {
             })
             
             self?.storeProductCV.reloadData()
-            
-            self?.isLoading = false
         }
     }
 }

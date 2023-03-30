@@ -20,8 +20,6 @@ class HeartViewController: UIViewController {
     var cursorDate: String?
     var queryParam: Parameters = [:]
     
-    var isLoading = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +32,9 @@ class HeartViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getHeart(cursorDate: nil)
+        if let _ = UserDefaults.standard.object(forKey: "userInfo") {
+            getHeart(cursorDate: nil)
+        }
     }
     
     func showAlert() {
@@ -62,9 +62,9 @@ class HeartViewController: UIViewController {
         heartCV.delegate = self
         heartCV.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         
-//        if let flowLayout = heartCV?.collectionViewLayout as? UICollectionViewFlowLayout {
-//            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-//      }
+        if let flowLayout = heartCV?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+      }
     }
     
     func setupNavigationBar() {
@@ -132,37 +132,28 @@ extension HeartViewController: UICollectionViewDelegate, UICollectionViewDataSou
         self.navigationController?.pushViewController(feedViewController, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 11
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 105, height: 152)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let tabBarHeight = self.tabBarController?.tabBar.frame.height
-        return UIEdgeInsets(top: 0, left: 20, bottom: tabBarHeight!/2, right: 19)
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.loadMoreHeart(index: indexPath.item)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if heartCV.contentOffset.y > heartCV.contentSize.height-heartCV.bounds.size.height && self.hasNext == true{
+}
+
+extension HeartViewController {
+    func loadMoreHeart (index: Int) {
+        if index != 0 && index % 11 == 0 && self.hasNext == true{
             getHeart(cursorDate: self.cursorDate)
-            isLoading = true
         }
     }
-    
-    
-    
 }
 
 
 extension HeartViewController {
-    func getHeart(cursorDate: String?) {
-        if isLoading == true {
-            return
-        }
-        
+    func getHeart(cursorDate: String?) {        
         queryParam["cursorDate"] = cursorDate
         fetchHeartList(queryParam: queryParam)
     }
@@ -194,11 +185,11 @@ extension HeartViewController {
 
 
 class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
-    let cellSpacing: CGFloat = 10
+    let cellSpacing: CGFloat = 25
  
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         self.minimumLineSpacing = 10.0
-        self.sectionInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 15.0, right: 10.0)
+        self.sectionInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 15.0, right: 0.0)
         let attributes = super.layoutAttributesForElements(in: rect)
  
         var leftMargin = sectionInset.left
