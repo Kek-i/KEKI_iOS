@@ -74,7 +74,6 @@ class SearchViewController: UIViewController {
     private var sortType:SortType = .Recent
     
     private var sortOpen = false
-    private var isLoading = false
     
     var recentTextList: Array<Search> = []
     var popularTextList: Array<Search> = []
@@ -364,6 +363,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView.tag == 4 {
+            self.loadMoreSearch(index: indexPath.item)
+        }
+        
+    }
+    
     
 }
 
@@ -404,10 +410,9 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 
 extension SearchViewController {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.searchResultCV.contentOffset.y > searchResultCV.contentSize.height-searchResultCV.bounds.size.height && self.hasNext == true{
+    func loadMoreSearch (index: Int) {
+        if index > searchResultList.count - 9 && self.hasNext == true{
             search(searchText: searchText, hashTag: hashTag, sortType: sortType.getRequestType(), cursorIdx: cursorIdx, cursorPopularNum: cursorPopularNum, cursorPrice: cursorPrice)
-            isLoading = true
         }
     }
 }
@@ -450,10 +455,7 @@ extension SearchViewController {
     
     // MARK: 검색 파라미터 만든 후 검색
     func search(searchText: String?, hashTag: String?, sortType: String, cursorIdx: Int?, cursorPopularNum: Int?, cursorPrice: Int?) {
-        if isLoading == true {
-            return
-        }
-        
+
         queryParam["searchWord"] = searchText
         queryParam["searchTag"] = hashTag
         queryParam["sortType"] = sortType
@@ -499,7 +501,6 @@ extension SearchViewController {
                     self?.showNoResultView()
                 }
 
-                self?.isLoading = false
             })
         }
         
