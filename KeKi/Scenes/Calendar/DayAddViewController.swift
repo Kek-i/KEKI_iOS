@@ -188,12 +188,12 @@ class DayAddViewController: UIViewController {
     
     @objc func addDay() {
         if dayType != .numDay {
-            if date > Date() {
+            if date! > Date() {
                 showAlert(title: "날짜 오류", message: "미래 날짜가 아닌 과거 날짜를 선택해주세요")
                 return
             }
         }else {
-            if date < Date() {
+            if date! < Date() {
                 showAlert(title: "날짜 오류", message: "과거 날짜가 아닌 미래 날짜를 선택해주세요")
                 return
             }
@@ -211,7 +211,7 @@ class DayAddViewController: UIViewController {
             }
         }
         
-        if hashTags.count() == 0 {
+        if hashTags.count == 0 {
             showAlert(title: "태그 오류", message: "태그는 1개 이상 선택해주세요.")
             return
         }

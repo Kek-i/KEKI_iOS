@@ -15,7 +15,7 @@ PODS:
   - GTMSessionFetcher/Core (1.7.2)
   - IQKeyboardManagerSwift (6.5.11)
   - JGProgressHUD (2.2)
-  - naveridlogin-sdk-ios (4.1.5)
+  - naveridlogin-sdk-ios (4.1.6)
 
 DEPENDENCIES:
   - GoogleSignIn (~> 5.0)
@@ -40,7 +40,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
   JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
-  naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
+  naveridlogin-sdk-ios: cdd34e3585a3d5aaf37c1d84c1f41faba4a25d1a
 
 PODFILE CHECKSUM: 9c54f882dc5ba1f159bbd41025044f1fc34fe4c0
 
