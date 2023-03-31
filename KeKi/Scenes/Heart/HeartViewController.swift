@@ -170,7 +170,7 @@ extension HeartViewController {
             hud.textLabel.text = "Loading"
             hud.show(in: self.view)
             
-            APIManeger.shared.testGetData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, parameter: nil) { [weak self] response in
+            APIManeger.shared.testGetData(urlEndpointString: "/posts/likes", dataType: HeartResponse.self, parameter: queryParam) { [weak self] response in
                 hud.dismiss(animated: true)
                 response.result.feeds.forEach { feed in
                     self?.feedList.append(feed)
