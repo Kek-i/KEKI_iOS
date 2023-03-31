@@ -46,6 +46,7 @@ class FeedViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
+        self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
         
         self.navigationController?.navigationBar.tintColor = .black

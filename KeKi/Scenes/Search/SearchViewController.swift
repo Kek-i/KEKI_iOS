@@ -370,7 +370,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let storyboard = UIStoryboard.init(name: "Feed", bundle: nil)
             guard let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController") as? FeedViewController else { return }
             feedViewController.postIdx = searchResultList[indexPath.row].postIdx
-            self.tabBarController?.tabBar.isHidden = true
+            tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(feedViewController, animated: true)
         }
     }
