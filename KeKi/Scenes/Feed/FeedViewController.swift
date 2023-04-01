@@ -46,7 +46,7 @@ class FeedViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
         
         self.navigationController?.navigationBar.tintColor = .black
@@ -68,7 +68,8 @@ class FeedViewController: UIViewController {
     
     @objc private func didTapBackItem() {
         self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.popViewController(animated: true) }
+        self.navigationController?.popViewController(animated: true)
+    }
     
     
     func setPostIdx(postIdx: Int) {
